@@ -81,7 +81,6 @@ Create a Vault
 
 ```bash
 ant beta:vaults create \
-  --api-key my-anthropic-api-key \
   --display-name 'Example vault'
 ```
 

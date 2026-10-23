@@ -242,7 +242,8 @@ Here's how to detect and handle streaming refusals in your application:
   $client = new Client();
   $messages = [];
 
-  function resetConversation(&$messages) {
+  function resetConversation(&$messages)
+  {
       $messages = [];
       echo "Conversation reset due to refusal\n";
   }
@@ -263,7 +264,7 @@ Here's how to detect and handle streaming refusals in your application:
           }
       }
   } catch (\Exception $e) {
-      echo "Error: " . $e->getMessage() . "\n";
+      echo 'Error: ' . $e->getMessage() . "\n";
   }
   ```
 

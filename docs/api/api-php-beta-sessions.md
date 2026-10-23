@@ -67,7 +67,7 @@ Create Session
 
 - `class BetaManagedAgentsSession`
 
-  - `Type type`
+  - `"session" type`
 
   - `string id`
 
@@ -440,7 +440,7 @@ List Sessions
 
 - `class BetaManagedAgentsSession`
 
-  - `Type type`
+  - `"session" type`
 
   - `string id`
 
@@ -759,7 +759,7 @@ Get Session
 
 - `class BetaManagedAgentsSession`
 
-  - `Type type`
+  - `"session" type`
 
   - `string id`
 
@@ -1080,7 +1080,7 @@ Update Session
 
 - `class BetaManagedAgentsSession`
 
-  - `Type type`
+  - `"session" type`
 
   - `string id`
 
@@ -1414,7 +1414,7 @@ Delete Session
 
 - `class BetaManagedAgentsDeletedSession`
 
-  - `Type type`
+  - `"session_deleted" type`
 
   - `string id`
 
@@ -1474,7 +1474,7 @@ Archive Session
 
 - `class BetaManagedAgentsSession`
 
-  - `Type type`
+  - `"session" type`
 
   - `string id`
 
@@ -1755,7 +1755,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsAdvisorParams`
 
-  - `Type type`
+  - `"advisor" type`
 
   - `string model`
 
@@ -1765,7 +1765,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsAgentMessagePreview`
 
-  - `Type type`
+  - `"agent.message" type`
 
   - `string id`
 
@@ -1775,7 +1775,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsAgentParams`
 
-  - `Type type`
+  - `"agent" type`
 
   - `string id`
 
@@ -1789,7 +1789,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsAgentThinkingPreview`
 
-  - `Type type`
+  - `"agent.thinking" type`
 
   - `string id`
 
@@ -1799,7 +1799,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsAgentWithOverridesParams`
 
-  - `Type type`
+  - `"agent_with_overrides" type`
 
   - `string id`
 
@@ -1833,7 +1833,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsBranchCheckout`
 
-  - `Type type`
+  - `"branch" type`
 
   - `string name`
 
@@ -1843,7 +1843,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsBudgetLimit`
 
-  - `Type type`
+  - `"limit" type`
 
   - `BetaMonetaryAmount maxListCost`
 
@@ -1865,7 +1865,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsCommitCheckout`
 
-  - `Type type`
+  - `"commit" type`
 
   - `string sha`
 
@@ -1875,7 +1875,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsDeletedSession`
 
-  - `Type type`
+  - `"session_deleted" type`
 
   - `string id`
 
@@ -1883,7 +1883,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsDeltaContent`
 
-  - `Type type`
+  - `"content_delta" type`
 
   - `ManagedAgentsTextBlock content`
 
@@ -1897,7 +1897,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsDeltaEvent`
 
-  - `Type type`
+  - `"event_delta" type`
 
   - `BetaManagedAgentsDeltaContent delta`
 
@@ -1919,7 +1919,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsFileResourceParams`
 
-  - `Type type`
+  - `"file" type`
 
   - `string fileID`
 
@@ -1933,7 +1933,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsGitHubRepositoryResourceParams`
 
-  - `Type type`
+  - `"github_repository" type`
 
   - `string url`
 
@@ -1955,7 +1955,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsMemoryStoreResourceParam`
 
-  - `Type type`
+  - `"memory_store" type`
 
   - `string memoryStoreID`
 
@@ -1975,7 +1975,7 @@ var_dump($betaManagedAgentsSession);
 
   - `class BetaManagedAgentsMultiagentCoordinator`
 
-    - `Type type`
+    - `"coordinator" type`
 
     - `list<Agent> agents`
 
@@ -2003,7 +2003,7 @@ var_dump($betaManagedAgentsSession);
 
   - `class BetaManagedAgentsMultiagentCoordinatorParams`
 
-    - `Type type`
+    - `"coordinator" type`
 
     - `list<BetaManagedAgentsMultiagentRosterEntryParams> agents`
 
@@ -2033,7 +2033,7 @@ var_dump($betaManagedAgentsSession);
 
   - `class BetaManagedAgentsAgentParams`
 
-    - `Type type`
+    - `"agent" type`
 
     - `string id`
 
@@ -2045,11 +2045,11 @@ var_dump($betaManagedAgentsSession);
 
   - `class BetaManagedAgentsMultiagentSelfParams`
 
-    - `Type type`
+    - `"self" type`
 
   - `class BetaManagedAgentsAdvisorParams`
 
-    - `Type type`
+    - `"advisor" type`
 
     - `string model`
 
@@ -2059,7 +2059,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsOutcomeEvaluationResource`
 
-  - `Type type`
+  - `"outcome_evaluation" type`
 
   - `?\Datetime completedAt`
 
@@ -2101,7 +2101,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsSession`
 
-  - `Type type`
+  - `"session" type`
 
   - `string id`
 
@@ -2159,7 +2159,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsSessionAgent`
 
-  - `Type type`
+  - `"agent" type`
 
   - `string id`
 
@@ -2207,7 +2207,7 @@ var_dump($betaManagedAgentsSession);
 
   - `class BetaManagedAgentsSessionMultiagentCoordinator`
 
-    - `Type type`
+    - `"coordinator" type`
 
     - `list<Agent> agents`
 
@@ -2233,7 +2233,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsSessionMultiagentCoordinator`
 
-  - `Type type`
+  - `"coordinator" type`
 
   - `list<Agent> agents`
 
@@ -2341,7 +2341,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsSessionUpdatedEvent`
 
-  - `Type type`
+  - `"session.updated" type`
 
   - `string id`
 
@@ -2403,7 +2403,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsSessionUsageEvent`
 
-  - `Type type`
+  - `"session.usage" type`
 
   - `string id`
 
@@ -2425,7 +2425,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsStartEvent`
 
-  - `Type type`
+  - `"event_start" type`
 
   - `BetaManagedAgentsStartEventPreview event`
 
@@ -2437,7 +2437,7 @@ var_dump($betaManagedAgentsSession);
 
   - `class BetaManagedAgentsAgentMessagePreview`
 
-    - `Type type`
+    - `"agent.message" type`
 
     - `string id`
 
@@ -2445,7 +2445,7 @@ var_dump($betaManagedAgentsSession);
 
   - `class BetaManagedAgentsAgentThinkingPreview`
 
-    - `Type type`
+    - `"agent.thinking" type`
 
     - `string id`
 
@@ -2455,7 +2455,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsSystemContentBlock`
 
-  - `Type type`
+  - `"text" type`
 
   - `string text`
 
@@ -2465,7 +2465,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsSystemMessageEvent`
 
-  - `Type type`
+  - `"system.message" type`
 
   - `string id`
 
@@ -2483,7 +2483,7 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsUserToolResultEvent`
 
-  - `Type type`
+  - `"user.tool_result" type`
 
   - `string id`
 
@@ -2569,7 +2569,7 @@ List Events
 
   - `class ManagedAgentsUserMessageEvent`
 
-    - `Type type`
+    - `"user.message" type`
 
     - `string id`
 
@@ -2585,7 +2585,7 @@ List Events
 
   - `class ManagedAgentsUserInterruptEvent`
 
-    - `Type type`
+    - `"user.interrupt" type`
 
     - `string id`
 
@@ -2601,7 +2601,7 @@ List Events
 
   - `class ManagedAgentsUserToolConfirmationEvent`
 
-    - `Type type`
+    - `"user.tool_confirmation" type`
 
     - `string id`
 
@@ -2629,7 +2629,7 @@ List Events
 
   - `class ManagedAgentsUserCustomToolResultEvent`
 
-    - `Type type`
+    - `"user.custom_tool_result" type`
 
     - `string id`
 
@@ -2657,7 +2657,7 @@ List Events
 
   - `class ManagedAgentsAgentCustomToolUseEvent`
 
-    - `Type type`
+    - `"agent.custom_tool_use" type`
 
     - `string id`
 
@@ -2681,7 +2681,7 @@ List Events
 
   - `class ManagedAgentsAgentMessageEvent`
 
-    - `Type type`
+    - `"agent.message" type`
 
     - `string id`
 
@@ -2697,7 +2697,7 @@ List Events
 
   - `class ManagedAgentsAgentThinkingEvent`
 
-    - `Type type`
+    - `"agent.thinking" type`
 
     - `string id`
 
@@ -2709,7 +2709,7 @@ List Events
 
   - `class ManagedAgentsAgentMCPToolUseEvent`
 
-    - `Type type`
+    - `"agent.mcp_tool_use" type`
 
     - `string id`
 
@@ -2745,7 +2745,7 @@ List Events
 
   - `class ManagedAgentsAgentMCPToolResultEvent`
 
-    - `Type type`
+    - `"agent.mcp_tool_result" type`
 
     - `string id`
 
@@ -2769,7 +2769,7 @@ List Events
 
   - `class ManagedAgentsAgentToolUseEvent`
 
-    - `Type type`
+    - `"agent.tool_use" type`
 
     - `string id`
 
@@ -2801,7 +2801,7 @@ List Events
 
   - `class ManagedAgentsAgentToolResultEvent`
 
-    - `Type type`
+    - `"agent.tool_result" type`
 
     - `string id`
 
@@ -2825,7 +2825,7 @@ List Events
 
   - `class ManagedAgentsAgentThreadMessageReceivedEvent`
 
-    - `Type type`
+    - `"agent.thread_message_received" type`
 
     - `string id`
 
@@ -2849,7 +2849,7 @@ List Events
 
   - `class ManagedAgentsAgentThreadMessageSentEvent`
 
-    - `Type type`
+    - `"agent.thread_message_sent" type`
 
     - `string id`
 
@@ -2873,7 +2873,7 @@ List Events
 
   - `class ManagedAgentsAgentThreadContextCompactedEvent`
 
-    - `Type type`
+    - `"agent.thread_context_compacted" type`
 
     - `string id`
 
@@ -2885,7 +2885,7 @@ List Events
 
   - `class ManagedAgentsSessionErrorEvent`
 
-    - `Type type`
+    - `"session.error" type`
 
     - `string id`
 
@@ -2899,7 +2899,7 @@ List Events
 
   - `class ManagedAgentsSessionStatusRescheduledEvent`
 
-    - `Type type`
+    - `"session.status_rescheduled" type`
 
     - `string id`
 
@@ -2911,7 +2911,7 @@ List Events
 
   - `class ManagedAgentsSessionStatusRunningEvent`
 
-    - `Type type`
+    - `"session.status_running" type`
 
     - `string id`
 
@@ -2923,7 +2923,7 @@ List Events
 
   - `class ManagedAgentsSessionStatusIdleEvent`
 
-    - `Type type`
+    - `"session.status_idle" type`
 
     - `string id`
 
@@ -2941,7 +2941,7 @@ List Events
 
   - `class ManagedAgentsSessionStatusTerminatedEvent`
 
-    - `Type type`
+    - `"session.status_terminated" type`
 
     - `string id`
 
@@ -2953,7 +2953,7 @@ List Events
 
   - `class ManagedAgentsSessionThreadCreatedEvent`
 
-    - `Type type`
+    - `"session.thread_created" type`
 
     - `string id`
 
@@ -2977,7 +2977,7 @@ List Events
 
   - `class ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
-    - `Type type`
+    - `"span.outcome_evaluation_start" type`
 
     - `string id`
 
@@ -2997,7 +2997,7 @@ List Events
 
   - `class ManagedAgentsSpanOutcomeEvaluationEndEvent`
 
-    - `Type type`
+    - `"span.outcome_evaluation_end" type`
 
     - `string id`
 
@@ -3033,7 +3033,7 @@ List Events
 
   - `class ManagedAgentsSpanModelRequestStartEvent`
 
-    - `Type type`
+    - `"span.model_request_start" type`
 
     - `string id`
 
@@ -3045,7 +3045,7 @@ List Events
 
   - `class ManagedAgentsSpanModelRequestEndEvent`
 
-    - `Type type`
+    - `"span.model_request_end" type`
 
     - `string id`
 
@@ -3069,7 +3069,7 @@ List Events
 
   - `class ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
-    - `Type type`
+    - `"span.outcome_evaluation_ongoing" type`
 
     - `string id`
 
@@ -3089,7 +3089,7 @@ List Events
 
   - `class ManagedAgentsUserDefineOutcomeEvent`
 
-    - `Type type`
+    - `"user.define_outcome" type`
 
     - `string id`
 
@@ -3117,7 +3117,7 @@ List Events
 
   - `class ManagedAgentsSessionDeletedEvent`
 
-    - `Type type`
+    - `"session.deleted" type`
 
     - `string id`
 
@@ -3129,7 +3129,7 @@ List Events
 
   - `class ManagedAgentsSessionThreadStatusRunningEvent`
 
-    - `Type type`
+    - `"session.thread_status_running" type`
 
     - `string id`
 
@@ -3149,7 +3149,7 @@ List Events
 
   - `class ManagedAgentsSessionThreadStatusIdleEvent`
 
-    - `Type type`
+    - `"session.thread_status_idle" type`
 
     - `string id`
 
@@ -3175,7 +3175,7 @@ List Events
 
   - `class ManagedAgentsSessionThreadStatusTerminatedEvent`
 
-    - `Type type`
+    - `"session.thread_status_terminated" type`
 
     - `string id`
 
@@ -3195,7 +3195,7 @@ List Events
 
   - `class BetaManagedAgentsUserToolResultEvent`
 
-    - `Type type`
+    - `"user.tool_result" type`
 
     - `string id`
 
@@ -3223,7 +3223,7 @@ List Events
 
   - `class ManagedAgentsSessionThreadStatusRescheduledEvent`
 
-    - `Type type`
+    - `"session.thread_status_rescheduled" type`
 
     - `string id`
 
@@ -3243,7 +3243,7 @@ List Events
 
   - `class BetaManagedAgentsSessionUpdatedEvent`
 
-    - `Type type`
+    - `"session.updated" type`
 
     - `string id`
 
@@ -3271,7 +3271,7 @@ List Events
 
   - `class BetaManagedAgentsSystemMessageEvent`
 
-    - `Type type`
+    - `"system.message" type`
 
     - `string id`
 
@@ -3287,7 +3287,7 @@ List Events
 
   - `class BetaManagedAgentsSessionUsageEvent`
 
-    - `Type type`
+    - `"session.usage" type`
 
     - `string id`
 
@@ -3624,7 +3624,7 @@ Stream Events
 
   - `class ManagedAgentsUserMessageEvent`
 
-    - `Type type`
+    - `"user.message" type`
 
     - `string id`
 
@@ -3640,7 +3640,7 @@ Stream Events
 
   - `class ManagedAgentsUserInterruptEvent`
 
-    - `Type type`
+    - `"user.interrupt" type`
 
     - `string id`
 
@@ -3656,7 +3656,7 @@ Stream Events
 
   - `class ManagedAgentsUserToolConfirmationEvent`
 
-    - `Type type`
+    - `"user.tool_confirmation" type`
 
     - `string id`
 
@@ -3684,7 +3684,7 @@ Stream Events
 
   - `class ManagedAgentsUserCustomToolResultEvent`
 
-    - `Type type`
+    - `"user.custom_tool_result" type`
 
     - `string id`
 
@@ -3712,7 +3712,7 @@ Stream Events
 
   - `class ManagedAgentsAgentCustomToolUseEvent`
 
-    - `Type type`
+    - `"agent.custom_tool_use" type`
 
     - `string id`
 
@@ -3736,7 +3736,7 @@ Stream Events
 
   - `class ManagedAgentsAgentMessageEvent`
 
-    - `Type type`
+    - `"agent.message" type`
 
     - `string id`
 
@@ -3752,7 +3752,7 @@ Stream Events
 
   - `class ManagedAgentsAgentThinkingEvent`
 
-    - `Type type`
+    - `"agent.thinking" type`
 
     - `string id`
 
@@ -3764,7 +3764,7 @@ Stream Events
 
   - `class ManagedAgentsAgentMCPToolUseEvent`
 
-    - `Type type`
+    - `"agent.mcp_tool_use" type`
 
     - `string id`
 
@@ -3800,7 +3800,7 @@ Stream Events
 
   - `class ManagedAgentsAgentMCPToolResultEvent`
 
-    - `Type type`
+    - `"agent.mcp_tool_result" type`
 
     - `string id`
 
@@ -3824,7 +3824,7 @@ Stream Events
 
   - `class ManagedAgentsAgentToolUseEvent`
 
-    - `Type type`
+    - `"agent.tool_use" type`
 
     - `string id`
 
@@ -3856,7 +3856,7 @@ Stream Events
 
   - `class ManagedAgentsAgentToolResultEvent`
 
-    - `Type type`
+    - `"agent.tool_result" type`
 
     - `string id`
 
@@ -3880,7 +3880,7 @@ Stream Events
 
   - `class ManagedAgentsAgentThreadMessageReceivedEvent`
 
-    - `Type type`
+    - `"agent.thread_message_received" type`
 
     - `string id`
 
@@ -3904,7 +3904,7 @@ Stream Events
 
   - `class ManagedAgentsAgentThreadMessageSentEvent`
 
-    - `Type type`
+    - `"agent.thread_message_sent" type`
 
     - `string id`
 
@@ -3928,7 +3928,7 @@ Stream Events
 
   - `class ManagedAgentsAgentThreadContextCompactedEvent`
 
-    - `Type type`
+    - `"agent.thread_context_compacted" type`
 
     - `string id`
 
@@ -3940,7 +3940,7 @@ Stream Events
 
   - `class ManagedAgentsSessionErrorEvent`
 
-    - `Type type`
+    - `"session.error" type`
 
     - `string id`
 
@@ -3954,7 +3954,7 @@ Stream Events
 
   - `class ManagedAgentsSessionStatusRescheduledEvent`
 
-    - `Type type`
+    - `"session.status_rescheduled" type`
 
     - `string id`
 
@@ -3966,7 +3966,7 @@ Stream Events
 
   - `class ManagedAgentsSessionStatusRunningEvent`
 
-    - `Type type`
+    - `"session.status_running" type`
 
     - `string id`
 
@@ -3978,7 +3978,7 @@ Stream Events
 
   - `class ManagedAgentsSessionStatusIdleEvent`
 
-    - `Type type`
+    - `"session.status_idle" type`
 
     - `string id`
 
@@ -3996,7 +3996,7 @@ Stream Events
 
   - `class ManagedAgentsSessionStatusTerminatedEvent`
 
-    - `Type type`
+    - `"session.status_terminated" type`
 
     - `string id`
 
@@ -4008,7 +4008,7 @@ Stream Events
 
   - `class ManagedAgentsSessionThreadCreatedEvent`
 
-    - `Type type`
+    - `"session.thread_created" type`
 
     - `string id`
 
@@ -4032,7 +4032,7 @@ Stream Events
 
   - `class ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
-    - `Type type`
+    - `"span.outcome_evaluation_start" type`
 
     - `string id`
 
@@ -4052,7 +4052,7 @@ Stream Events
 
   - `class ManagedAgentsSpanOutcomeEvaluationEndEvent`
 
-    - `Type type`
+    - `"span.outcome_evaluation_end" type`
 
     - `string id`
 
@@ -4088,7 +4088,7 @@ Stream Events
 
   - `class ManagedAgentsSpanModelRequestStartEvent`
 
-    - `Type type`
+    - `"span.model_request_start" type`
 
     - `string id`
 
@@ -4100,7 +4100,7 @@ Stream Events
 
   - `class ManagedAgentsSpanModelRequestEndEvent`
 
-    - `Type type`
+    - `"span.model_request_end" type`
 
     - `string id`
 
@@ -4124,7 +4124,7 @@ Stream Events
 
   - `class ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
-    - `Type type`
+    - `"span.outcome_evaluation_ongoing" type`
 
     - `string id`
 
@@ -4144,7 +4144,7 @@ Stream Events
 
   - `class ManagedAgentsUserDefineOutcomeEvent`
 
-    - `Type type`
+    - `"user.define_outcome" type`
 
     - `string id`
 
@@ -4172,7 +4172,7 @@ Stream Events
 
   - `class ManagedAgentsSessionDeletedEvent`
 
-    - `Type type`
+    - `"session.deleted" type`
 
     - `string id`
 
@@ -4184,7 +4184,7 @@ Stream Events
 
   - `class ManagedAgentsSessionThreadStatusRunningEvent`
 
-    - `Type type`
+    - `"session.thread_status_running" type`
 
     - `string id`
 
@@ -4204,7 +4204,7 @@ Stream Events
 
   - `class ManagedAgentsSessionThreadStatusIdleEvent`
 
-    - `Type type`
+    - `"session.thread_status_idle" type`
 
     - `string id`
 
@@ -4230,7 +4230,7 @@ Stream Events
 
   - `class ManagedAgentsSessionThreadStatusTerminatedEvent`
 
-    - `Type type`
+    - `"session.thread_status_terminated" type`
 
     - `string id`
 
@@ -4250,7 +4250,7 @@ Stream Events
 
   - `class BetaManagedAgentsUserToolResultEvent`
 
-    - `Type type`
+    - `"user.tool_result" type`
 
     - `string id`
 
@@ -4278,7 +4278,7 @@ Stream Events
 
   - `class ManagedAgentsSessionThreadStatusRescheduledEvent`
 
-    - `Type type`
+    - `"session.thread_status_rescheduled" type`
 
     - `string id`
 
@@ -4298,7 +4298,7 @@ Stream Events
 
   - `class BetaManagedAgentsSessionUpdatedEvent`
 
-    - `Type type`
+    - `"session.updated" type`
 
     - `string id`
 
@@ -4326,7 +4326,7 @@ Stream Events
 
   - `class BetaManagedAgentsStartEvent`
 
-    - `Type type`
+    - `"event_start" type`
 
     - `BetaManagedAgentsStartEventPreview event`
 
@@ -4334,7 +4334,7 @@ Stream Events
 
   - `class BetaManagedAgentsDeltaEvent`
 
-    - `Type type`
+    - `"event_delta" type`
 
     - `BetaManagedAgentsDeltaContent delta`
 
@@ -4346,7 +4346,7 @@ Stream Events
 
   - `class BetaManagedAgentsSystemMessageEvent`
 
-    - `Type type`
+    - `"system.message" type`
 
     - `string id`
 
@@ -4362,7 +4362,7 @@ Stream Events
 
   - `class BetaManagedAgentsSessionUsageEvent`
 
-    - `Type type`
+    - `"session.usage" type`
 
     - `string id`
 
@@ -4571,7 +4571,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Add Session Resource
 
-`$client->beta->sessions->resources->add(string sessionID, string fileID, Type type, ?string mountPath, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsFileResource`
+`$client->beta->sessions->resources->add(string sessionID, string fileID, "file" type, ?string mountPath, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsFileResource`
 
 **POST** `/v1/sessions/{session_id}/resources`
 
@@ -4585,7 +4585,7 @@ Add Session Resource
 
   ID of a previously uploaded file.
 
-- `type: Type`
+- `type: "file"`
 
 - `mountPath?:optional string`
 
@@ -4605,7 +4605,7 @@ Add Session Resource
 
 - `class ManagedAgentsFileResource`
 
-  - `Type type`
+  - `"file" type`
 
   - `string id`
 
@@ -4694,7 +4694,7 @@ List Session Resources
 
   - `class ManagedAgentsGitHubRepositoryResource`
 
-    - `Type type`
+    - `"github_repository" type`
 
     - `string id`
 
@@ -4714,7 +4714,7 @@ List Session Resources
 
   - `class ManagedAgentsFileResource`
 
-    - `Type type`
+    - `"file" type`
 
     - `string id`
 
@@ -4732,7 +4732,7 @@ List Session Resources
 
   - `class ManagedAgentsMemoryStoreResource`
 
-    - `Type type`
+    - `"memory_store" type`
 
     - `string memoryStoreID`
 
@@ -4841,7 +4841,7 @@ Get Session Resource
 
   - `class ManagedAgentsGitHubRepositoryResource`
 
-    - `Type type`
+    - `"github_repository" type`
 
     - `string id`
 
@@ -4861,7 +4861,7 @@ Get Session Resource
 
   - `class ManagedAgentsFileResource`
 
-    - `Type type`
+    - `"file" type`
 
     - `string id`
 
@@ -4879,7 +4879,7 @@ Get Session Resource
 
   - `class ManagedAgentsMemoryStoreResource`
 
-    - `Type type`
+    - `"memory_store" type`
 
     - `string memoryStoreID`
 
@@ -4978,7 +4978,7 @@ Update Session Resource
 
   - `class ManagedAgentsGitHubRepositoryResource`
 
-    - `Type type`
+    - `"github_repository" type`
 
     - `string id`
 
@@ -4998,7 +4998,7 @@ Update Session Resource
 
   - `class ManagedAgentsFileResource`
 
-    - `Type type`
+    - `"file" type`
 
     - `string id`
 
@@ -5016,7 +5016,7 @@ Update Session Resource
 
   - `class ManagedAgentsMemoryStoreResource`
 
-    - `Type type`
+    - `"memory_store" type`
 
     - `string memoryStoreID`
 
@@ -5110,7 +5110,7 @@ Delete Session Resource
 
 - `class ManagedAgentsDeleteSessionResource`
 
-  - `Type type`
+  - `"session_resource_deleted" type`
 
   - `string id`
 
@@ -5191,7 +5191,7 @@ List Session Threads
 
 - `class ManagedAgentsSessionThread`
 
-  - `Type type`
+  - `"session_thread" type`
 
   - `string id`
 
@@ -5388,7 +5388,7 @@ Get Session Thread
 
 - `class ManagedAgentsSessionThread`
 
-  - `Type type`
+  - `"session_thread" type`
 
   - `string id`
 
@@ -5577,7 +5577,7 @@ Archive Session Thread
 
 - `class ManagedAgentsSessionThread`
 
-  - `Type type`
+  - `"session_thread" type`
 
   - `string id`
 
@@ -5774,7 +5774,7 @@ List Session Thread Events
 
   - `class ManagedAgentsUserMessageEvent`
 
-    - `Type type`
+    - `"user.message" type`
 
     - `string id`
 
@@ -5790,7 +5790,7 @@ List Session Thread Events
 
   - `class ManagedAgentsUserInterruptEvent`
 
-    - `Type type`
+    - `"user.interrupt" type`
 
     - `string id`
 
@@ -5806,7 +5806,7 @@ List Session Thread Events
 
   - `class ManagedAgentsUserToolConfirmationEvent`
 
-    - `Type type`
+    - `"user.tool_confirmation" type`
 
     - `string id`
 
@@ -5834,7 +5834,7 @@ List Session Thread Events
 
   - `class ManagedAgentsUserCustomToolResultEvent`
 
-    - `Type type`
+    - `"user.custom_tool_result" type`
 
     - `string id`
 
@@ -5862,7 +5862,7 @@ List Session Thread Events
 
   - `class ManagedAgentsAgentCustomToolUseEvent`
 
-    - `Type type`
+    - `"agent.custom_tool_use" type`
 
     - `string id`
 
@@ -5886,7 +5886,7 @@ List Session Thread Events
 
   - `class ManagedAgentsAgentMessageEvent`
 
-    - `Type type`
+    - `"agent.message" type`
 
     - `string id`
 
@@ -5902,7 +5902,7 @@ List Session Thread Events
 
   - `class ManagedAgentsAgentThinkingEvent`
 
-    - `Type type`
+    - `"agent.thinking" type`
 
     - `string id`
 
@@ -5914,7 +5914,7 @@ List Session Thread Events
 
   - `class ManagedAgentsAgentMCPToolUseEvent`
 
-    - `Type type`
+    - `"agent.mcp_tool_use" type`
 
     - `string id`
 
@@ -5950,7 +5950,7 @@ List Session Thread Events
 
   - `class ManagedAgentsAgentMCPToolResultEvent`
 
-    - `Type type`
+    - `"agent.mcp_tool_result" type`
 
     - `string id`
 
@@ -5974,7 +5974,7 @@ List Session Thread Events
 
   - `class ManagedAgentsAgentToolUseEvent`
 
-    - `Type type`
+    - `"agent.tool_use" type`
 
     - `string id`
 
@@ -6006,7 +6006,7 @@ List Session Thread Events
 
   - `class ManagedAgentsAgentToolResultEvent`
 
-    - `Type type`
+    - `"agent.tool_result" type`
 
     - `string id`
 
@@ -6030,7 +6030,7 @@ List Session Thread Events
 
   - `class ManagedAgentsAgentThreadMessageReceivedEvent`
 
-    - `Type type`
+    - `"agent.thread_message_received" type`
 
     - `string id`
 
@@ -6054,7 +6054,7 @@ List Session Thread Events
 
   - `class ManagedAgentsAgentThreadMessageSentEvent`
 
-    - `Type type`
+    - `"agent.thread_message_sent" type`
 
     - `string id`
 
@@ -6078,7 +6078,7 @@ List Session Thread Events
 
   - `class ManagedAgentsAgentThreadContextCompactedEvent`
 
-    - `Type type`
+    - `"agent.thread_context_compacted" type`
 
     - `string id`
 
@@ -6090,7 +6090,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSessionErrorEvent`
 
-    - `Type type`
+    - `"session.error" type`
 
     - `string id`
 
@@ -6104,7 +6104,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSessionStatusRescheduledEvent`
 
-    - `Type type`
+    - `"session.status_rescheduled" type`
 
     - `string id`
 
@@ -6116,7 +6116,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSessionStatusRunningEvent`
 
-    - `Type type`
+    - `"session.status_running" type`
 
     - `string id`
 
@@ -6128,7 +6128,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSessionStatusIdleEvent`
 
-    - `Type type`
+    - `"session.status_idle" type`
 
     - `string id`
 
@@ -6146,7 +6146,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSessionStatusTerminatedEvent`
 
-    - `Type type`
+    - `"session.status_terminated" type`
 
     - `string id`
 
@@ -6158,7 +6158,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSessionThreadCreatedEvent`
 
-    - `Type type`
+    - `"session.thread_created" type`
 
     - `string id`
 
@@ -6182,7 +6182,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
-    - `Type type`
+    - `"span.outcome_evaluation_start" type`
 
     - `string id`
 
@@ -6202,7 +6202,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSpanOutcomeEvaluationEndEvent`
 
-    - `Type type`
+    - `"span.outcome_evaluation_end" type`
 
     - `string id`
 
@@ -6238,7 +6238,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSpanModelRequestStartEvent`
 
-    - `Type type`
+    - `"span.model_request_start" type`
 
     - `string id`
 
@@ -6250,7 +6250,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSpanModelRequestEndEvent`
 
-    - `Type type`
+    - `"span.model_request_end" type`
 
     - `string id`
 
@@ -6274,7 +6274,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
-    - `Type type`
+    - `"span.outcome_evaluation_ongoing" type`
 
     - `string id`
 
@@ -6294,7 +6294,7 @@ List Session Thread Events
 
   - `class ManagedAgentsUserDefineOutcomeEvent`
 
-    - `Type type`
+    - `"user.define_outcome" type`
 
     - `string id`
 
@@ -6322,7 +6322,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSessionDeletedEvent`
 
-    - `Type type`
+    - `"session.deleted" type`
 
     - `string id`
 
@@ -6334,7 +6334,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSessionThreadStatusRunningEvent`
 
-    - `Type type`
+    - `"session.thread_status_running" type`
 
     - `string id`
 
@@ -6354,7 +6354,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSessionThreadStatusIdleEvent`
 
-    - `Type type`
+    - `"session.thread_status_idle" type`
 
     - `string id`
 
@@ -6380,7 +6380,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSessionThreadStatusTerminatedEvent`
 
-    - `Type type`
+    - `"session.thread_status_terminated" type`
 
     - `string id`
 
@@ -6400,7 +6400,7 @@ List Session Thread Events
 
   - `class BetaManagedAgentsUserToolResultEvent`
 
-    - `Type type`
+    - `"user.tool_result" type`
 
     - `string id`
 
@@ -6428,7 +6428,7 @@ List Session Thread Events
 
   - `class ManagedAgentsSessionThreadStatusRescheduledEvent`
 
-    - `Type type`
+    - `"session.thread_status_rescheduled" type`
 
     - `string id`
 
@@ -6448,7 +6448,7 @@ List Session Thread Events
 
   - `class BetaManagedAgentsSessionUpdatedEvent`
 
-    - `Type type`
+    - `"session.updated" type`
 
     - `string id`
 
@@ -6476,7 +6476,7 @@ List Session Thread Events
 
   - `class BetaManagedAgentsSystemMessageEvent`
 
-    - `Type type`
+    - `"system.message" type`
 
     - `string id`
 
@@ -6492,7 +6492,7 @@ List Session Thread Events
 
   - `class BetaManagedAgentsSessionUsageEvent`
 
-    - `Type type`
+    - `"session.usage" type`
 
     - `string id`
 
@@ -6744,7 +6744,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsUserMessageEvent`
 
-    - `Type type`
+    - `"user.message" type`
 
     - `string id`
 
@@ -6760,7 +6760,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsUserInterruptEvent`
 
-    - `Type type`
+    - `"user.interrupt" type`
 
     - `string id`
 
@@ -6776,7 +6776,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsUserToolConfirmationEvent`
 
-    - `Type type`
+    - `"user.tool_confirmation" type`
 
     - `string id`
 
@@ -6804,7 +6804,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsUserCustomToolResultEvent`
 
-    - `Type type`
+    - `"user.custom_tool_result" type`
 
     - `string id`
 
@@ -6832,7 +6832,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsAgentCustomToolUseEvent`
 
-    - `Type type`
+    - `"agent.custom_tool_use" type`
 
     - `string id`
 
@@ -6856,7 +6856,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsAgentMessageEvent`
 
-    - `Type type`
+    - `"agent.message" type`
 
     - `string id`
 
@@ -6872,7 +6872,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsAgentThinkingEvent`
 
-    - `Type type`
+    - `"agent.thinking" type`
 
     - `string id`
 
@@ -6884,7 +6884,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsAgentMCPToolUseEvent`
 
-    - `Type type`
+    - `"agent.mcp_tool_use" type`
 
     - `string id`
 
@@ -6920,7 +6920,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsAgentMCPToolResultEvent`
 
-    - `Type type`
+    - `"agent.mcp_tool_result" type`
 
     - `string id`
 
@@ -6944,7 +6944,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsAgentToolUseEvent`
 
-    - `Type type`
+    - `"agent.tool_use" type`
 
     - `string id`
 
@@ -6976,7 +6976,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsAgentToolResultEvent`
 
-    - `Type type`
+    - `"agent.tool_result" type`
 
     - `string id`
 
@@ -7000,7 +7000,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsAgentThreadMessageReceivedEvent`
 
-    - `Type type`
+    - `"agent.thread_message_received" type`
 
     - `string id`
 
@@ -7024,7 +7024,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsAgentThreadMessageSentEvent`
 
-    - `Type type`
+    - `"agent.thread_message_sent" type`
 
     - `string id`
 
@@ -7048,7 +7048,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsAgentThreadContextCompactedEvent`
 
-    - `Type type`
+    - `"agent.thread_context_compacted" type`
 
     - `string id`
 
@@ -7060,7 +7060,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSessionErrorEvent`
 
-    - `Type type`
+    - `"session.error" type`
 
     - `string id`
 
@@ -7074,7 +7074,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSessionStatusRescheduledEvent`
 
-    - `Type type`
+    - `"session.status_rescheduled" type`
 
     - `string id`
 
@@ -7086,7 +7086,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSessionStatusRunningEvent`
 
-    - `Type type`
+    - `"session.status_running" type`
 
     - `string id`
 
@@ -7098,7 +7098,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSessionStatusIdleEvent`
 
-    - `Type type`
+    - `"session.status_idle" type`
 
     - `string id`
 
@@ -7116,7 +7116,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSessionStatusTerminatedEvent`
 
-    - `Type type`
+    - `"session.status_terminated" type`
 
     - `string id`
 
@@ -7128,7 +7128,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSessionThreadCreatedEvent`
 
-    - `Type type`
+    - `"session.thread_created" type`
 
     - `string id`
 
@@ -7152,7 +7152,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
-    - `Type type`
+    - `"span.outcome_evaluation_start" type`
 
     - `string id`
 
@@ -7172,7 +7172,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSpanOutcomeEvaluationEndEvent`
 
-    - `Type type`
+    - `"span.outcome_evaluation_end" type`
 
     - `string id`
 
@@ -7208,7 +7208,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSpanModelRequestStartEvent`
 
-    - `Type type`
+    - `"span.model_request_start" type`
 
     - `string id`
 
@@ -7220,7 +7220,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSpanModelRequestEndEvent`
 
-    - `Type type`
+    - `"span.model_request_end" type`
 
     - `string id`
 
@@ -7244,7 +7244,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
-    - `Type type`
+    - `"span.outcome_evaluation_ongoing" type`
 
     - `string id`
 
@@ -7264,7 +7264,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsUserDefineOutcomeEvent`
 
-    - `Type type`
+    - `"user.define_outcome" type`
 
     - `string id`
 
@@ -7292,7 +7292,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSessionDeletedEvent`
 
-    - `Type type`
+    - `"session.deleted" type`
 
     - `string id`
 
@@ -7304,7 +7304,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSessionThreadStatusRunningEvent`
 
-    - `Type type`
+    - `"session.thread_status_running" type`
 
     - `string id`
 
@@ -7324,7 +7324,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSessionThreadStatusIdleEvent`
 
-    - `Type type`
+    - `"session.thread_status_idle" type`
 
     - `string id`
 
@@ -7350,7 +7350,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSessionThreadStatusTerminatedEvent`
 
-    - `Type type`
+    - `"session.thread_status_terminated" type`
 
     - `string id`
 
@@ -7370,7 +7370,7 @@ Stream Session Thread Events
 
   - `class BetaManagedAgentsUserToolResultEvent`
 
-    - `Type type`
+    - `"user.tool_result" type`
 
     - `string id`
 
@@ -7398,7 +7398,7 @@ Stream Session Thread Events
 
   - `class ManagedAgentsSessionThreadStatusRescheduledEvent`
 
-    - `Type type`
+    - `"session.thread_status_rescheduled" type`
 
     - `string id`
 
@@ -7418,7 +7418,7 @@ Stream Session Thread Events
 
   - `class BetaManagedAgentsSessionUpdatedEvent`
 
-    - `Type type`
+    - `"session.updated" type`
 
     - `string id`
 
@@ -7446,7 +7446,7 @@ Stream Session Thread Events
 
   - `class BetaManagedAgentsStartEvent`
 
-    - `Type type`
+    - `"event_start" type`
 
     - `BetaManagedAgentsStartEventPreview event`
 
@@ -7454,7 +7454,7 @@ Stream Session Thread Events
 
   - `class BetaManagedAgentsDeltaEvent`
 
-    - `Type type`
+    - `"event_delta" type`
 
     - `BetaManagedAgentsDeltaContent delta`
 
@@ -7466,7 +7466,7 @@ Stream Session Thread Events
 
   - `class BetaManagedAgentsSystemMessageEvent`
 
-    - `Type type`
+    - `"system.message" type`
 
     - `string id`
 
@@ -7482,7 +7482,7 @@ Stream Session Thread Events
 
   - `class BetaManagedAgentsSessionUsageEvent`
 
-    - `Type type`
+    - `"session.usage" type`
 
     - `string id`
 

@@ -53,7 +53,7 @@ Create a Memory Store
 
 - `class BetaManagedAgentsMemoryStore`
 
-  - `Type type`
+  - `"memory_store" type`
 
   - `string id`
 
@@ -175,7 +175,7 @@ List Memory Stores
 
 - `class BetaManagedAgentsMemoryStore`
 
-  - `Type type`
+  - `"memory_store" type`
 
   - `string id`
 
@@ -286,7 +286,7 @@ Retrieve a Memory Store
 
 - `class BetaManagedAgentsMemoryStore`
 
-  - `Type type`
+  - `"memory_store" type`
 
   - `string id`
 
@@ -408,7 +408,7 @@ Update a Memory Store
 
 - `class BetaManagedAgentsMemoryStore`
 
-  - `Type type`
+  - `"memory_store" type`
 
   - `string id`
 
@@ -517,7 +517,7 @@ Delete a Memory Store
 
 - `class BetaManagedAgentsDeletedMemoryStore`
 
-  - `Type type`
+  - `"memory_store_deleted" type`
 
   - `string id`
 
@@ -583,7 +583,7 @@ Archive a Memory Store
 
 - `class BetaManagedAgentsMemoryStore`
 
-  - `Type type`
+  - `"memory_store" type`
 
   - `string id`
 
@@ -665,7 +665,7 @@ var_dump($betaManagedAgentsMemoryStore);
 
 - `class BetaManagedAgentsDeletedMemoryStore`
 
-  - `Type type`
+  - `"memory_store_deleted" type`
 
   - `string id`
 
@@ -675,7 +675,7 @@ var_dump($betaManagedAgentsMemoryStore);
 
 - `class BetaManagedAgentsMemoryStore`
 
-  - `Type type`
+  - `"memory_store" type`
 
   - `string id`
 
@@ -761,7 +761,7 @@ Create a Memory
 
 - `class ManagedAgentsMemory`
 
-  - `Type type`
+  - `"memory" type`
 
   - `string id`
 
@@ -909,7 +909,7 @@ List Memories
 
   - `class ManagedAgentsMemory`
 
-    - `Type type`
+    - `"memory" type`
 
     - `string id`
 
@@ -959,7 +959,7 @@ List Memories
 
   - `class ManagedAgentsMemoryPrefix`
 
-    - `Type type`
+    - `"memory_prefix" type`
 
     - `string path`
 
@@ -1052,7 +1052,7 @@ Retrieve a Memory
 
 - `class ManagedAgentsMemory`
 
-  - `Type type`
+  - `"memory" type`
 
   - `string id`
 
@@ -1195,7 +1195,7 @@ Update a Memory
 
 - `class ManagedAgentsMemory`
 
-  - `Type type`
+  - `"memory" type`
 
   - `string id`
 
@@ -1327,7 +1327,7 @@ Delete a Memory
 
 - `class ManagedAgentsDeletedMemory`
 
-  - `Type type`
+  - `"memory_deleted" type`
 
   - `string id`
 
@@ -1441,7 +1441,7 @@ List Memory Versions
 
 - `class ManagedAgentsMemoryVersion`
 
-  - `Type type`
+  - `"memory_version" type`
 
   - `string id`
 
@@ -1603,7 +1603,7 @@ Retrieve a Memory Version
 
 - `class ManagedAgentsMemoryVersion`
 
-  - `Type type`
+  - `"memory_version" type`
 
   - `string id`
 
@@ -1749,7 +1749,7 @@ Redact a Memory Version
 
 - `class ManagedAgentsMemoryVersion`
 
-  - `Type type`
+  - `"memory_version" type`
 
   - `string id`
 

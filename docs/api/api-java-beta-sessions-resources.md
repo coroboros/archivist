@@ -147,7 +147,7 @@ Add Session Resource
 
 - `class BetaManagedAgentsFileResource`
 
-  - `Type type`
+  - `JsonValue type = "file"`
 
   - `String id`
 
@@ -186,10 +186,7 @@ public final class Main {
 
         ResourceAddParams params = ResourceAddParams.builder()
             .sessionId("sesn_011CZkZAtmR3yMPDzynEDxu7")
-            .betaManagedAgentsFileResourceParams(BetaManagedAgentsFileResourceParams.builder()
-                .fileId("file_011CNha8iCJcU1wXNR6q4V8w")
-                .type(BetaManagedAgentsFileResourceParams.Type.FILE)
-                .build())
+            .betaManagedAgentsFileResourceParams(BetaManagedAgentsFileResourceParams.of("file_011CNha8iCJcU1wXNR6q4V8w"))
             .build();
         BetaManagedAgentsFileResource betaManagedAgentsFileResource = client.beta().sessions().resources().add(params);
     }
@@ -353,7 +350,7 @@ List Session Resources
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
-    - `Type type`
+    - `JsonValue type = "github_repository"`
 
     - `String id`
 
@@ -377,7 +374,7 @@ List Session Resources
 
       - `class BetaManagedAgentsBranchCheckout`
 
-        - `Type type`
+        - `JsonValue type = "branch"`
 
         - `String name`
 
@@ -387,7 +384,7 @@ List Session Resources
 
       - `class BetaManagedAgentsCommitCheckout`
 
-        - `Type type`
+        - `JsonValue type = "commit"`
 
         - `String sha`
 
@@ -397,7 +394,7 @@ List Session Resources
 
   - `class BetaManagedAgentsFileResource`
 
-    - `Type type`
+    - `JsonValue type = "file"`
 
     - `String id`
 
@@ -421,7 +418,7 @@ List Session Resources
 
     A memory store attached to an agent session.
 
-    - `Type type`
+    - `JsonValue type = "memory_store"`
 
     - `String memoryStoreId`
 
@@ -642,7 +639,7 @@ Get Session Resource
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
-    - `Type type`
+    - `JsonValue type = "github_repository"`
 
     - `String id`
 
@@ -666,7 +663,7 @@ Get Session Resource
 
       - `class BetaManagedAgentsBranchCheckout`
 
-        - `Type type`
+        - `JsonValue type = "branch"`
 
         - `String name`
 
@@ -676,7 +673,7 @@ Get Session Resource
 
       - `class BetaManagedAgentsCommitCheckout`
 
-        - `Type type`
+        - `JsonValue type = "commit"`
 
         - `String sha`
 
@@ -686,7 +683,7 @@ Get Session Resource
 
   - `class BetaManagedAgentsFileResource`
 
-    - `Type type`
+    - `JsonValue type = "file"`
 
     - `String id`
 
@@ -710,7 +707,7 @@ Get Session Resource
 
     A memory store attached to an agent session.
 
-    - `Type type`
+    - `JsonValue type = "memory_store"`
 
     - `String memoryStoreId`
 
@@ -928,7 +925,7 @@ Update Session Resource
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
-    - `Type type`
+    - `JsonValue type = "github_repository"`
 
     - `String id`
 
@@ -952,7 +949,7 @@ Update Session Resource
 
       - `class BetaManagedAgentsBranchCheckout`
 
-        - `Type type`
+        - `JsonValue type = "branch"`
 
         - `String name`
 
@@ -962,7 +959,7 @@ Update Session Resource
 
       - `class BetaManagedAgentsCommitCheckout`
 
-        - `Type type`
+        - `JsonValue type = "commit"`
 
         - `String sha`
 
@@ -972,7 +969,7 @@ Update Session Resource
 
   - `class BetaManagedAgentsFileResource`
 
-    - `Type type`
+    - `JsonValue type = "file"`
 
     - `String id`
 
@@ -996,7 +993,7 @@ Update Session Resource
 
     A memory store attached to an agent session.
 
-    - `Type type`
+    - `JsonValue type = "memory_store"`
 
     - `String memoryStoreId`
 
@@ -1207,7 +1204,7 @@ Delete Session Resource
 
   Confirmation of resource deletion.
 
-  - `Type type`
+  - `JsonValue type = "session_resource_deleted"`
 
   - `String id`
 
@@ -1253,7 +1250,7 @@ public final class Main {
 
   Confirmation of resource deletion.
 
-  - `Type type`
+  - `JsonValue type = "session_resource_deleted"`
 
   - `String id`
 
@@ -1261,7 +1258,7 @@ public final class Main {
 
 - `class BetaManagedAgentsFileResource`
 
-  - `Type type`
+  - `JsonValue type = "file"`
 
   - `String id`
 
@@ -1285,7 +1282,7 @@ public final class Main {
 
 - `class BetaManagedAgentsGitHubRepositoryResource`
 
-  - `Type type`
+  - `JsonValue type = "github_repository"`
 
   - `String id`
 
@@ -1309,7 +1306,7 @@ public final class Main {
 
     - `class BetaManagedAgentsBranchCheckout`
 
-      - `Type type`
+      - `JsonValue type = "branch"`
 
       - `String name`
 
@@ -1319,7 +1316,7 @@ public final class Main {
 
     - `class BetaManagedAgentsCommitCheckout`
 
-      - `Type type`
+      - `JsonValue type = "commit"`
 
       - `String sha`
 
@@ -1333,7 +1330,7 @@ public final class Main {
 
   A memory store attached to an agent session.
 
-  - `Type type`
+  - `JsonValue type = "memory_store"`
 
   - `String memoryStoreId`
 
@@ -1371,7 +1368,7 @@ public final class Main {
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
-    - `Type type`
+    - `JsonValue type = "github_repository"`
 
     - `String id`
 
@@ -1395,7 +1392,7 @@ public final class Main {
 
       - `class BetaManagedAgentsBranchCheckout`
 
-        - `Type type`
+        - `JsonValue type = "branch"`
 
         - `String name`
 
@@ -1405,7 +1402,7 @@ public final class Main {
 
       - `class BetaManagedAgentsCommitCheckout`
 
-        - `Type type`
+        - `JsonValue type = "commit"`
 
         - `String sha`
 
@@ -1415,7 +1412,7 @@ public final class Main {
 
   - `class BetaManagedAgentsFileResource`
 
-    - `Type type`
+    - `JsonValue type = "file"`
 
     - `String id`
 
@@ -1439,7 +1436,7 @@ public final class Main {
 
     A memory store attached to an agent session.
 
-    - `Type type`
+    - `JsonValue type = "memory_store"`
 
     - `String memoryStoreId`
 

@@ -171,7 +171,7 @@ Create a Memory
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `Type type`
+  - `JsonValue type = "memory"`
 
   - `String id`
 
@@ -444,7 +444,7 @@ List Memories
 
     See the [memory guide](../managed-agents/managed-agents-memory.md#view-and-edit-memories) to learn more about working with memories.
 
-    - `Type type`
+    - `JsonValue type = "memory"`
 
     - `String id`
 
@@ -504,7 +504,7 @@ List Memories
 
     It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
-    - `Type type`
+    - `JsonValue type = "memory_prefix"`
 
     - `String path`
 
@@ -703,7 +703,7 @@ Retrieve a Memory
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `Type type`
+  - `JsonValue type = "memory"`
 
   - `String id`
 
@@ -967,7 +967,7 @@ Update a Memory
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `Type type`
+  - `JsonValue type = "memory"`
 
   - `String id`
 
@@ -1213,7 +1213,7 @@ Delete a Memory
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
-  - `Type type`
+  - `JsonValue type = "memory_deleted"`
 
   - `String id`
 
@@ -1259,7 +1259,7 @@ public final class Main {
 
 - `class BetaManagedAgentsConflictError`
 
-  - `Type type`
+  - `JsonValue type = "conflict_error"`
 
   - `Optional<String> message`
 
@@ -1271,7 +1271,7 @@ public final class Main {
 
   If the hashes differ, the request fails with HTTP status 409. Retrieve the memory and retry. If the memory already has exactly the requested `content` and `path`, the request succeeds even though the hashes differ.
 
-  - `Type type`
+  - `JsonValue type = "content_sha256"`
 
   - `Optional<String> contentSha256`
 
@@ -1287,7 +1287,7 @@ public final class Main {
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
-  - `Type type`
+  - `JsonValue type = "memory_deleted"`
 
   - `String id`
 
@@ -1359,7 +1359,7 @@ public final class Main {
 
     See the [memory guide](../managed-agents/managed-agents-memory.md#safe-content-edits-optimistic-concurrency) to learn more about safe content edits with content hash preconditions.
 
-    - `Type type`
+    - `JsonValue type = "memory_precondition_failed_error"`
 
     - `Optional<String> message`
 
@@ -1371,7 +1371,7 @@ public final class Main {
 
     Two paths overlap when one is an ancestor of the other, such as `/notes` and `/notes/todo.md`. To free the path, rename or delete the memory that `conflicting_memory_id` references, then retry. To change that memory instead of creating a new one, update it.
 
-    - `Type type`
+    - `JsonValue type = "memory_path_conflict_error"`
 
     - `Optional<String> conflictingMemoryId`
 
@@ -1389,7 +1389,7 @@ public final class Main {
 
   - `class BetaManagedAgentsConflictError`
 
-    - `Type type`
+    - `JsonValue type = "conflict_error"`
 
     - `Optional<String> message`
 
@@ -1403,7 +1403,7 @@ public final class Main {
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `Type type`
+  - `JsonValue type = "memory"`
 
   - `String id`
 
@@ -1471,7 +1471,7 @@ public final class Main {
 
     See the [memory guide](../managed-agents/managed-agents-memory.md#view-and-edit-memories) to learn more about working with memories.
 
-    - `Type type`
+    - `JsonValue type = "memory"`
 
     - `String id`
 
@@ -1531,7 +1531,7 @@ public final class Main {
 
     It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
-    - `Type type`
+    - `JsonValue type = "memory_prefix"`
 
     - `String path`
 
@@ -1545,7 +1545,7 @@ public final class Main {
 
   Two paths overlap when one is an ancestor of the other, such as `/notes` and `/notes/todo.md`. To free the path, rename or delete the memory that `conflicting_memory_id` references, then retry. To change that memory instead of creating a new one, update it.
 
-  - `Type type`
+  - `JsonValue type = "memory_path_conflict_error"`
 
   - `Optional<String> conflictingMemoryId`
 
@@ -1571,7 +1571,7 @@ public final class Main {
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#safe-content-edits-optimistic-concurrency) to learn more about safe content edits with content hash preconditions.
 
-  - `Type type`
+  - `JsonValue type = "memory_precondition_failed_error"`
 
   - `Optional<String> message`
 
@@ -1585,7 +1585,7 @@ public final class Main {
 
   It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
-  - `Type type`
+  - `JsonValue type = "memory_prefix"`
 
   - `String path`
 
@@ -1613,7 +1613,7 @@ public final class Main {
 
   Optional condition that must hold for an update to apply. When omitted, the update is unconditional. Asserts the current state of the memory being updated. When an update changes `path`, the precondition still refers to the memory's current content, not the destination path. Currently the only supported variant is `content_sha256`.
 
-  - `Type type`
+  - `JsonValue type = "content_sha256"`
 
   - `Optional<String> contentSha256`
 

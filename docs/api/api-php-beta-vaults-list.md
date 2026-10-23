@@ -45,7 +45,7 @@ List Vaults
 
 - `class BetaManagedAgentsVault`
 
-  - `Type type`
+  - `"vault" type`
 
   - `string id`
 

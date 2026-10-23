@@ -153,7 +153,7 @@ Update Session Resource
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
-    - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
+    - `JsonElement Type = "github_repository"`
 
     - `required string ID`
 
@@ -177,7 +177,7 @@ Update Session Resource
 
       - `class BetaManagedAgentsBranchCheckout`
 
-        - `required Type Type`
+        - `JsonElement Type = "branch"`
 
         - `required string Name`
 
@@ -187,7 +187,7 @@ Update Session Resource
 
       - `class BetaManagedAgentsCommitCheckout`
 
-        - `required Type Type`
+        - `JsonElement Type = "commit"`
 
         - `required string Sha`
 
@@ -197,7 +197,7 @@ Update Session Resource
 
   - `class BetaManagedAgentsFileResource`
 
-    - `required BetaManagedAgentsFileResourceType Type`
+    - `JsonElement Type = "file"`
 
     - `required string ID`
 
@@ -221,7 +221,7 @@ Update Session Resource
 
     A memory store attached to an agent session.
 
-    - `required BetaManagedAgentsMemoryStoreResourceType Type`
+    - `JsonElement Type = "memory_store"`
 
     - `required string MemoryStoreID`
 

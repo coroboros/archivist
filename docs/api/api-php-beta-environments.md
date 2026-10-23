@@ -683,7 +683,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 - `class BetaEnvironmentDeleteResponse`
 
-  - `Type type`
+  - `"environment_deleted" type`
 
     The type of response
 
@@ -939,7 +939,7 @@ var_dump($betaEnvironment);
 
 - `class BetaEnvironmentDeleteResponse`
 
-  - `Type type`
+  - `"environment_deleted" type`
 
     The type of response
 

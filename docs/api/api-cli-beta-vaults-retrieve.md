@@ -75,7 +75,6 @@ Retrieve a Vault
 
 ```bash
 ant beta:vaults retrieve \
-  --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv
 ```
 

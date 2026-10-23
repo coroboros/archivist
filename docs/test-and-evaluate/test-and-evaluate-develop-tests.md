@@ -1124,7 +1124,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       // ROUGE-L measures the longest common subsequence (LCS) of words between the
       // candidate and reference summaries, reported here as an F1 score. Tokenization
-      // is simplified to whitespace words; scores may differ from the Python rouge library.
+      // is simplified to whitespace words; scores might differ from the Python rouge library.
       function rougeL(candidate: string, reference: string): number {
         const candidateWords = candidate.toLowerCase().trim().split(/\s+/);
         const referenceWords = reference.toLowerCase().trim().split(/\s+/);
@@ -1193,7 +1193,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       // ROUGE-L measures the longest common subsequence (LCS) of words between the
       // candidate and reference summaries, reported here as an F1 score. Tokenization
-      // is simplified to whitespace words; scores may differ from the Python rouge library.
+      // is simplified to whitespace words; scores might differ from the Python rouge library.
       double RougeL(string candidate, string reference)
       {
           var candidateWords = Regex.Split(candidate.ToLowerInvariant().Trim(), @"\s+");
@@ -1296,7 +1296,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       // ROUGE-L measures the longest common subsequence (LCS) of words between the
       // candidate and reference summaries, reported here as an F1 score. Tokenization
-      // is simplified to whitespace words; scores may differ from the Python rouge library.
+      // is simplified to whitespace words; scores might differ from the Python rouge library.
       func rougeL(candidate, reference string) float64 {
       	candidateWords := strings.Fields(strings.ToLower(candidate))
       	referenceWords := strings.Fields(strings.ToLower(reference))
@@ -1377,7 +1377,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       // ROUGE-L measures the longest common subsequence (LCS) of words between the
       // candidate and reference summaries, reported here as an F1 score. Tokenization
-      // is simplified to whitespace words; scores may differ from the Python rouge library.
+      // is simplified to whitespace words; scores might differ from the Python rouge library.
       double rougeL(String candidate, String reference) {
           var candidateWords = candidate.toLowerCase().strip().split("\\s+");
           var referenceWords = reference.toLowerCase().strip().split("\\s+");
@@ -1449,7 +1449,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       // ROUGE-L measures the longest common subsequence (LCS) of words between the
       // candidate and reference summaries, reported here as an F1 score. Tokenization
-      // is simplified to whitespace words; scores may differ from the Python rouge library.
+      // is simplified to whitespace words; scores might differ from the Python rouge library.
       function rougeL(string $candidate, string $reference): float
       {
           $candidateWords = preg_split('/\s+/', strtolower(trim($candidate)));
@@ -1533,7 +1533,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       # ROUGE-L measures the longest common subsequence (LCS) of words between the
       # candidate and reference summaries, reported here as an F1 score. Tokenization
-      # is simplified to whitespace words; scores may differ from the Python rouge library.
+      # is simplified to whitespace words; scores might differ from the Python rouge library.
       def rouge_l(candidate, reference)
         candidate_words = candidate.downcase.split
         reference_words = reference.downcase.split
@@ -1608,7 +1608,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           5: Perfectly {target_tone}
           Output only the number."""
 
-          # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           response = client.messages.create(
               model="claude-opus-5-5",
               max_tokens=1024,
@@ -1666,7 +1666,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       5: Perfectly ${targetTone}
       Output only the number.`;
 
-        // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+        // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
         const response = await client.messages.create({
           model: "claude-opus-5-5",
           max_tokens: 1024,
@@ -1727,7 +1727,7 @@ Most use cases need multidimensional evaluation along several success criteria.
               Output only the number.
               """;
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           var response = await client.Messages.Create(new MessageCreateParams
           {
               Model = Model.ClaudeOpus5_5,
@@ -1810,7 +1810,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       5: Perfectly %[1]s
       Output only the number.`, targetTone, modelOutput)
 
-      	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+      	// Generally best practice to evaluate with a different model from the one used to generate the evaluated output
       	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
       		Model:     anthropic.ModelClaudeOpus5_5,
       		MaxTokens: 1024,
@@ -1879,7 +1879,7 @@ Most use cases need multidimensional evaluation along several success criteria.
               5: Perfectly %1$s
               Output only the number.""".formatted(targetTone, modelOutput);
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           var params = MessageCreateParams.builder()
               .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(1024L)
@@ -1937,7 +1937,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           Output only the number.
           PROMPT;
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           $response = $client->messages->create(
               model: Model::CLAUDE_OPUS_5_5,
               maxTokens: 1024,
@@ -2014,7 +2014,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           Output only the number.
         PROMPT
 
-        # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+        # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
         response = client.messages.create(
           model: Anthropic::Model::CLAUDE_OPUS_5_5,
           max_tokens: 1024,
@@ -2088,7 +2088,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           <response>{model_output}</response>
           Output only 'yes' or 'no'."""
 
-          # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           response = client.messages.create(
               model="claude-opus-5-5",
               max_tokens=1024,
@@ -2165,7 +2165,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       <response>${modelOutput}</response>
       Output only 'yes' or 'no'.`;
 
-        // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+        // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
         const response = await client.messages.create({
           model: "claude-opus-5-5",
           max_tokens: 1024,
@@ -2233,7 +2233,7 @@ Most use cases need multidimensional evaluation along several success criteria.
               Output only 'yes' or 'no'.
               """;
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           var response = await client.Messages.Create(new MessageCreateParams
           {
               Model = Model.ClaudeOpus5_5,
@@ -2330,7 +2330,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       <response>%s</response>
       Output only 'yes' or 'no'.`, modelOutput)
 
-      	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+      	// Generally best practice to evaluate with a different model from the one used to generate the evaluated output
       	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
       		Model:     anthropic.ModelClaudeOpus5_5,
       		MaxTokens: 1024,
@@ -2407,7 +2407,7 @@ Most use cases need multidimensional evaluation along several success criteria.
               <response>%s</response>
               Output only 'yes' or 'no'.""".formatted(modelOutput);
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           var params = MessageCreateParams.builder()
               .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(1024L)
@@ -2478,7 +2478,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           Output only 'yes' or 'no'.
           PROMPT;
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           $response = $client->messages->create(
               model: Model::CLAUDE_OPUS_5_5,
               maxTokens: 1024,
@@ -2564,7 +2564,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           Output only 'yes' or 'no'.
         PROMPT
 
-        # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+        # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
         response = client.messages.create(
           model: Anthropic::Model::CLAUDE_OPUS_5_5,
           max_tokens: 1024,
@@ -2662,7 +2662,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           5: Perfectly utilizes context
           Output only the number and nothing else."""
 
-          # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           response = client.messages.create(
               model="claude-opus-5-5",
               max_tokens=1024,
@@ -2754,7 +2754,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       5: Perfectly utilizes context
       Output only the number and nothing else.`;
 
-        // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+        // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
         const response = await client.messages.create({
           model: "claude-opus-5-5",
           max_tokens: 1024,
@@ -2835,7 +2835,7 @@ Most use cases need multidimensional evaluation along several success criteria.
               Output only the number and nothing else.
               """;
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           var response = await client.Messages.Create(new MessageCreateParams
           {
               Model = Model.ClaudeOpus5_5,
@@ -2946,7 +2946,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       5: Perfectly utilizes context
       Output only the number and nothing else.`, conversationText.String(), modelOutput)
 
-      	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+      	// Generally best practice to evaluate with a different model from the one used to generate the evaluated output
       	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
       		Model:     anthropic.ModelClaudeOpus5_5,
       		MaxTokens: 1024,
@@ -3035,7 +3035,7 @@ Most use cases need multidimensional evaluation along several success criteria.
               5: Perfectly utilizes context
               Output only the number and nothing else.""".formatted(conversationText, modelOutput);
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           var params = MessageCreateParams.builder()
               .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(1024L)
@@ -3106,7 +3106,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           Output only the number and nothing else.
           PROMPT;
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           $response = $client->messages->create(
               model: Model::CLAUDE_OPUS_5_5,
               maxTokens: 1024,
@@ -3193,7 +3193,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           Output only the number and nothing else.
         PROMPT
 
-        # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+        # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
         response = client.messages.create(
           model: Anthropic::Model::CLAUDE_OPUS_5_5,
           max_tokens: 1024,

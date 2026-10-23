@@ -63,7 +63,7 @@ Update a Memory
 
 - `class ManagedAgentsMemory`
 
-  - `Type type`
+  - `"memory" type`
 
   - `string id`
 

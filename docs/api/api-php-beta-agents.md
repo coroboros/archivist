@@ -75,7 +75,7 @@ Create Agent
 
 - `class BetaManagedAgentsAgent`
 
-  - `Type type`
+  - `"agent" type`
 
   - `string id`
 
@@ -322,7 +322,7 @@ List Agents
 
 - `class BetaManagedAgentsAgent`
 
-  - `Type type`
+  - `"agent" type`
 
   - `string id`
 
@@ -532,7 +532,7 @@ Get Agent
 
 - `class BetaManagedAgentsAgent`
 
-  - `Type type`
+  - `"agent" type`
 
   - `string id`
 
@@ -774,7 +774,7 @@ Update Agent
 
 - `class BetaManagedAgentsAgent`
 
-  - `Type type`
+  - `"agent" type`
 
   - `string id`
 
@@ -1012,7 +1012,7 @@ Archive Agent
 
 - `class BetaManagedAgentsAgent`
 
-  - `Type type`
+  - `"agent" type`
 
   - `string id`
 
@@ -1187,7 +1187,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsAdvisor`
 
-  - `Type type`
+  - `"advisor" type`
 
   - `string model`
 
@@ -1197,7 +1197,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsAgent`
 
-  - `Type type`
+  - `"agent" type`
 
   - `string id`
 
@@ -1247,7 +1247,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsAgentReference`
 
-  - `Type type`
+  - `"agent" type`
 
   - `string id`
 
@@ -1557,7 +1557,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsAgentToolset20260401`
 
-  - `Type type`
+  - `"agent_toolset_20260401" type`
 
   - `list<BetaManagedAgentsAgentToolConfig> configs`
 
@@ -1637,7 +1637,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsAgentToolset20260401Params`
 
-  - `Type type`
+  - `"agent_toolset_20260401" type`
 
   - `?list<BetaManagedAgentsAgentToolConfigParams> configs`
 
@@ -1677,19 +1677,19 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsAlwaysAllowPolicy`
 
-  - `Type type`
+  - `"always_allow" type`
 
 ### Beta Managed Agents Always Ask Policy
 
 - `class BetaManagedAgentsAlwaysAskPolicy`
 
-  - `Type type`
+  - `"always_ask" type`
 
 ### Beta Managed Agents Anthropic Skill
 
 - `class BetaManagedAgentsAnthropicSkill`
 
-  - `Type type`
+  - `"anthropic" type`
 
   - `string skillID`
 
@@ -1699,7 +1699,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsAnthropicSkillParams`
 
-  - `Type type`
+  - `"anthropic" type`
 
   - `string skillID`
 
@@ -1771,7 +1771,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsCustomSkill`
 
-  - `Type type`
+  - `"custom" type`
 
   - `string skillID`
 
@@ -1781,7 +1781,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsCustomSkillParams`
 
-  - `Type type`
+  - `"custom" type`
 
   - `string skillID`
 
@@ -1795,7 +1795,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsCustomTool`
 
-  - `Type type`
+  - `"custom" type`
 
   - `string description`
 
@@ -1819,7 +1819,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsCustomToolParams`
 
-  - `Type type`
+  - `"custom" type`
 
   - `string description`
 
@@ -1869,31 +1869,31 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsEffortHigh`
 
-  - `Type type`
+  - `"high" type`
 
 ### Beta Managed Agents Effort Low
 
 - `class BetaManagedAgentsEffortLow`
 
-  - `Type type`
+  - `"low" type`
 
 ### Beta Managed Agents Effort Max
 
 - `class BetaManagedAgentsEffortMax`
 
-  - `Type type`
+  - `"max" type`
 
 ### Beta Managed Agents Effort Medium
 
 - `class BetaManagedAgentsEffortMedium`
 
-  - `Type type`
+  - `"medium" type`
 
 ### Beta Managed Agents Effort Xhigh
 
 - `class BetaManagedAgentsEffortXhigh`
 
-  - `Type type`
+  - `"xhigh" type`
 
 ### Beta Managed Agents Execution Identity
 
@@ -1995,7 +1995,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsMCPServerURLDefinition`
 
-  - `Type type`
+  - `"url" type`
 
   - `string name`
 
@@ -2033,7 +2033,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsMCPToolset`
 
-  - `Type type`
+  - `"mcp_toolset" type`
 
   - `list<BetaManagedAgentsMCPToolConfig> configs`
 
@@ -2069,7 +2069,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsMCPToolsetParams`
 
-  - `Type type`
+  - `"mcp_toolset" type`
 
   - `string mcpServerName`
 
@@ -2269,7 +2269,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsMultiagentCoordinator`
 
-  - `Type type`
+  - `"coordinator" type`
 
   - `list<Agent> agents`
 
@@ -2279,7 +2279,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsMultiagentCoordinatorParams`
 
-  - `Type type`
+  - `"coordinator" type`
 
   - `list<BetaManagedAgentsMultiagentRosterEntryParams> agents`
 
@@ -2341,7 +2341,7 @@ var_dump($betaManagedAgentsAgent);
 
   - `class BetaManagedAgentsAgentParams`
 
-    - `Type type`
+    - `"agent" type`
 
     - `string id`
 
@@ -2353,13 +2353,13 @@ var_dump($betaManagedAgentsAgent);
 
   - `class BetaManagedAgentsMultiagentSelfParams`
 
-    - `Type type`
+    - `"self" type`
 
 ### Beta Managed Agents Multiagent Self Params
 
 - `class BetaManagedAgentsMultiagentSelfParams`
 
-  - `Type type`
+  - `"self" type`
 
 ### Beta Managed Agents Multiagent Subagents
 
@@ -2605,7 +2605,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsSessionThreadAgent`
 
-  - `Type type`
+  - `"agent" type`
 
   - `string id`
 
@@ -2637,7 +2637,7 @@ var_dump($betaManagedAgentsAgent);
 
   - `class BetaManagedAgentsAnthropicSkillParams`
 
-    - `Type type`
+    - `"anthropic" type`
 
     - `string skillID`
 
@@ -2649,7 +2649,7 @@ var_dump($betaManagedAgentsAgent);
 
   - `class BetaManagedAgentsCustomSkillParams`
 
-    - `Type type`
+    - `"custom" type`
 
     - `string skillID`
 
@@ -2663,7 +2663,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsURLMCPServerParams`
 
-  - `Type type`
+  - `"url" type`
 
   - `string name`
 
@@ -3057,7 +3057,7 @@ List Agent Versions
 
 - `class BetaManagedAgentsAgent`
 
-  - `Type type`
+  - `"agent" type`
 
   - `string id`
 

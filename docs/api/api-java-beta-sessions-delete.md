@@ -143,7 +143,7 @@ Delete Session
 
   Confirmation that a `session` has been permanently deleted.
 
-  - `Type type`
+  - `JsonValue type = "session_deleted"`
 
   - `String id`
 

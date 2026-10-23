@@ -165,7 +165,7 @@ Create a Memory Store
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-  - `Type type`
+  - `JsonValue type = "memory_store"`
 
   - `String id`
 
@@ -408,7 +408,7 @@ List Memory Stores
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-  - `Type type`
+  - `JsonValue type = "memory_store"`
 
   - `String id`
 
@@ -629,7 +629,7 @@ Retrieve a Memory Store
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-  - `Type type`
+  - `JsonValue type = "memory_store"`
 
   - `String id`
 
@@ -869,7 +869,7 @@ Update a Memory Store
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-  - `Type type`
+  - `JsonValue type = "memory_store"`
 
   - `String id`
 
@@ -1089,7 +1089,7 @@ Delete a Memory Store
 
   Confirmation that a `memory_store` was deleted.
 
-  - `Type type`
+  - `JsonValue type = "memory_store_deleted"`
 
   - `String id`
 
@@ -1263,7 +1263,7 @@ Archive a Memory Store
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-  - `Type type`
+  - `JsonValue type = "memory_store"`
 
   - `String id`
 
@@ -1353,7 +1353,7 @@ public final class Main {
 
   Confirmation that a `memory_store` was deleted.
 
-  - `Type type`
+  - `JsonValue type = "memory_store_deleted"`
 
   - `String id`
 
@@ -1365,7 +1365,7 @@ public final class Main {
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-  - `Type type`
+  - `JsonValue type = "memory_store"`
 
   - `String id`
 
@@ -1571,7 +1571,7 @@ Create a Memory
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `Type type`
+  - `JsonValue type = "memory"`
 
   - `String id`
 
@@ -1844,7 +1844,7 @@ List Memories
 
     See the [memory guide](../managed-agents/managed-agents-memory.md#view-and-edit-memories) to learn more about working with memories.
 
-    - `Type type`
+    - `JsonValue type = "memory"`
 
     - `String id`
 
@@ -1904,7 +1904,7 @@ List Memories
 
     It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
-    - `Type type`
+    - `JsonValue type = "memory_prefix"`
 
     - `String path`
 
@@ -2103,7 +2103,7 @@ Retrieve a Memory
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `Type type`
+  - `JsonValue type = "memory"`
 
   - `String id`
 
@@ -2367,7 +2367,7 @@ Update a Memory
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `Type type`
+  - `JsonValue type = "memory"`
 
   - `String id`
 
@@ -2613,7 +2613,7 @@ Delete a Memory
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
-  - `Type type`
+  - `JsonValue type = "memory_deleted"`
 
   - `String id`
 
@@ -2849,7 +2849,7 @@ List Memory Versions
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about memory versions.
 
-  - `Type type`
+  - `JsonValue type = "memory_version"`
 
   - `String id`
 
@@ -2913,7 +2913,7 @@ List Memory Versions
 
       An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
-      - `Type type`
+      - `JsonValue type = "session_actor"`
 
       - `String sessionId`
 
@@ -2925,7 +2925,7 @@ List Memory Versions
 
       A direct caller of the public API, identified by the API key that authenticated the request.
 
-      - `Type type`
+      - `JsonValue type = "api_actor"`
 
       - `String apiKeyId`
 
@@ -2937,7 +2937,7 @@ List Memory Versions
 
       A human user, for example acting through the Anthropic Console.
 
-      - `Type type`
+      - `JsonValue type = "user_actor"`
 
       - `String userId`
 
@@ -3179,7 +3179,7 @@ Retrieve a Memory Version
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about memory versions.
 
-  - `Type type`
+  - `JsonValue type = "memory_version"`
 
   - `String id`
 
@@ -3243,7 +3243,7 @@ Retrieve a Memory Version
 
       An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
-      - `Type type`
+      - `JsonValue type = "session_actor"`
 
       - `String sessionId`
 
@@ -3255,7 +3255,7 @@ Retrieve a Memory Version
 
       A direct caller of the public API, identified by the API key that authenticated the request.
 
-      - `Type type`
+      - `JsonValue type = "api_actor"`
 
       - `String apiKeyId`
 
@@ -3267,7 +3267,7 @@ Retrieve a Memory Version
 
       A human user, for example acting through the Anthropic Console.
 
-      - `Type type`
+      - `JsonValue type = "user_actor"`
 
       - `String userId`
 
@@ -3502,7 +3502,7 @@ Redact a Memory Version
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about memory versions.
 
-  - `Type type`
+  - `JsonValue type = "memory_version"`
 
   - `String id`
 
@@ -3566,7 +3566,7 @@ Redact a Memory Version
 
       An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
-      - `Type type`
+      - `JsonValue type = "session_actor"`
 
       - `String sessionId`
 
@@ -3578,7 +3578,7 @@ Redact a Memory Version
 
       A direct caller of the public API, identified by the API key that authenticated the request.
 
-      - `Type type`
+      - `JsonValue type = "api_actor"`
 
       - `String apiKeyId`
 
@@ -3590,7 +3590,7 @@ Redact a Memory Version
 
       A human user, for example acting through the Anthropic Console.
 
-      - `Type type`
+      - `JsonValue type = "user_actor"`
 
       - `String userId`
 

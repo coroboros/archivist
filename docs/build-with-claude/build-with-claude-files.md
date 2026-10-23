@@ -613,7 +613,7 @@ The following examples read a text file and send its contents as plain text:
   $client = new Client();
 
   // Read the text file
-  $textContent = file_get_contents("document.txt");
+  $textContent = file_get_contents('document.txt');
 
   $message = $client->messages->create(
       maxTokens: 1024,
@@ -674,7 +674,7 @@ The following examples read a text file and send its contents as plain text:
 
 #### List files
 
-Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default, and at most 1,000), and the response's `next_page` cursor fetches the next page when passed back as the `page` parameter. Files are ordered newest first. See the [List Files API reference](../api/api-files-list.md). The SDK returns the first page and provides [auto-pagination](../api/api-overview.md#pagination) helpers. The CLI example bounds the total with `--max-items`:
+Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default, and at most 1,000), and the response's `next_page` cursor fetches the next page when passed back as the `page` parameter. Files are ordered newest first. See the [List Files API reference](../api/api-files-list.md). The SDK returns the first page and provides [auto-pagination](../api/api-overview.md#pagination) helpers.
 
 <CodeGroup>
   ```bash cURL
@@ -684,6 +684,7 @@ Retrieve a list of your uploaded files. The endpoint is paginated: each request 
   ```
 
   ```bash CLI
+  # List commands auto-paginate, so --max-items limits the total
   ant files list --max-items 10
   ```
 

@@ -75,7 +75,6 @@ Archive a Vault
 
 ```bash
 ant beta:vaults archive \
-  --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv
 ```
 

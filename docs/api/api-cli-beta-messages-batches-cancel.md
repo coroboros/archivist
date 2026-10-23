@@ -139,7 +139,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ```bash
 ant beta:messages:batches cancel \
-  --api-key my-anthropic-api-key \
   --message-batch-id message_batch_id
 ```
 

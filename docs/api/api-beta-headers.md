@@ -120,11 +120,11 @@ The following example sends a request with the [context editing](../build-with-c
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5_5)
-    .maxTokens(1024)
-    .addUserMessage("Hello, Claude")
-    .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
-    .build();
+      .model(Model.CLAUDE_OPUS_5_5)
+      .maxTokens(1024)
+      .addUserMessage("Hello, Claude")
+      .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
+      .build();
 
   BetaMessage message = client.beta().messages().create(params);
   System.out.println(message.content());
@@ -136,7 +136,7 @@ The following example sends a request with the [context editing](../build-with-c
   $message = $client->beta->messages->create(
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
       betas: ['context-management-2025-06-27'],
   );
 
@@ -186,7 +186,7 @@ With the SDK, list each feature (for example, `betas=["feature1", "feature2"]` (
 
 ### Beta features on other platforms
 
-Beta names are the same on every platform that accepts them, but not every platform accepts every beta. [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md), and [Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md) take beta names in the `anthropic-beta` header, as the Claude API does. To send several betas, put their names in one header, separated by commas: Google Cloud reads only one `anthropic-beta` header and ignores the rest, so betas in the others don't take effect.
+Beta names are the same on every platform that accepts them, but not every platform accepts every beta. [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/build-with-claude-claude-models-on-google-cloud-anthropic-managed.md), [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md), and [Claude Models on Google Cloud (Google managed)](../build-with-claude/build-with-claude-claude-models-on-google-cloud-google-managed.md) take beta names in the `anthropic-beta` header, as the Claude API does. To send several betas, put their names in one header, separated by commas: Claude Models on Google Cloud (Google managed) reads only one `anthropic-beta` header and ignores the rest, so betas in the others don't take effect.
 
 On Amazon Bedrock, where beta names go depends on the API you call:
 

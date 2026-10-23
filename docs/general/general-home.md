@@ -71,7 +71,7 @@ with Claude"
     ```
 
     ```go Go
-    import "github.com/anthropics/anthropic-sdk-go"
+    import "github.com/anthropics/anthropic-sdk-go/v2"
 
     client := anthropic.NewClient()
     msg, _ := client.Messages.New(
@@ -234,7 +234,7 @@ with Claude"
         Amazon Bedrock
       </HomeCloudPartnerLink>
 
-      <HomeCloudPartnerLink icon="cloud" href="../build-with-claude/build-with-claude-claude-on-vertex-ai.md">
+      <HomeCloudPartnerLink icon="cloud" href="../build-with-claude/build-with-claude-claude-models-on-google-cloud-overview.md">
         Google Cloud
       </HomeCloudPartnerLink>
 

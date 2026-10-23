@@ -51,7 +51,6 @@ Delete File
 
 ```bash
 ant beta:files delete \
-  --api-key my-anthropic-api-key \
   --file-id file_id
 ```
 

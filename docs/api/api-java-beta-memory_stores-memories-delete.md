@@ -159,7 +159,7 @@ Delete a Memory
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
-  - `Type type`
+  - `JsonValue type = "memory_deleted"`
 
   - `String id`
 

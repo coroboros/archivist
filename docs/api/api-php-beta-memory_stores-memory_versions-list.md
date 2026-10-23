@@ -83,7 +83,7 @@ List Memory Versions
 
 - `class ManagedAgentsMemoryVersion`
 
-  - `Type type`
+  - `"memory_version" type`
 
   - `string id`
 

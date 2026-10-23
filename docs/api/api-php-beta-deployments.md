@@ -75,7 +75,7 @@ Create Deployment
 
 - `class BetaManagedAgentsDeployment`
 
-  - `Type type`
+  - `"deployment" type`
 
   - `string id`
 
@@ -309,7 +309,7 @@ List Deployments
 
 - `class BetaManagedAgentsDeployment`
 
-  - `Type type`
+  - `"deployment" type`
 
   - `string id`
 
@@ -503,7 +503,7 @@ Get Deployment
 
 - `class BetaManagedAgentsDeployment`
 
-  - `Type type`
+  - `"deployment" type`
 
   - `string id`
 
@@ -725,7 +725,7 @@ Update Deployment
 
 - `class BetaManagedAgentsDeployment`
 
-  - `Type type`
+  - `"deployment" type`
 
   - `string id`
 
@@ -936,7 +936,7 @@ Archive Deployment
 
 - `class BetaManagedAgentsDeployment`
 
-  - `Type type`
+  - `"deployment" type`
 
   - `string id`
 
@@ -1118,7 +1118,7 @@ Run Deployment Now
 
 - `class BetaManagedAgentsDeploymentRun`
 
-  - `Type type`
+  - `"deployment_run" type`
 
   - `string id`
 
@@ -1222,7 +1222,7 @@ Pause Deployment
 
 - `class BetaManagedAgentsDeployment`
 
-  - `Type type`
+  - `"deployment" type`
 
   - `string id`
 
@@ -1404,7 +1404,7 @@ Unpause Deployment
 
 - `class BetaManagedAgentsDeployment`
 
-  - `Type type`
+  - `"deployment" type`
 
   - `string id`
 
@@ -1564,13 +1564,13 @@ var_dump($betaManagedAgentsDeployment);
 
 - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
-  - `Type type`
+  - `"agent_archived_error" type`
 
 ### Beta Managed Agents Cron Schedule
 
 - `class BetaManagedAgentsCronSchedule`
 
-  - `Type type`
+  - `"cron" type`
 
   - `string expression`
 
@@ -1592,7 +1592,7 @@ var_dump($betaManagedAgentsDeployment);
 
 - `class BetaManagedAgentsCronScheduleParams`
 
-  - `Type type`
+  - `"cron" type`
 
   - `string expression`
 
@@ -1606,7 +1606,7 @@ var_dump($betaManagedAgentsDeployment);
 
 - `class BetaManagedAgentsDeployment`
 
-  - `Type type`
+  - `"deployment" type`
 
   - `string id`
 
@@ -1678,7 +1678,7 @@ var_dump($betaManagedAgentsDeployment);
 
   - `class BetaManagedAgentsDeploymentUserMessageEvent`
 
-    - `Type type`
+    - `"user.message" type`
 
     - `list<Content> content`
 
@@ -1686,7 +1686,7 @@ var_dump($betaManagedAgentsDeployment);
 
   - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
-    - `Type type`
+    - `"user.define_outcome" type`
 
     - `string description`
 
@@ -1702,7 +1702,7 @@ var_dump($betaManagedAgentsDeployment);
 
   - `class BetaManagedAgentsDeploymentSystemMessageEvent`
 
-    - `Type type`
+    - `"system.message" type`
 
     - `list<BetaManagedAgentsSystemContentBlock> content`
 
@@ -1714,7 +1714,7 @@ var_dump($betaManagedAgentsDeployment);
 
   - `class ManagedAgentsUserMessageEventParams`
 
-    - `Type type`
+    - `"user.message" type`
 
     - `list<Content> content`
 
@@ -1722,7 +1722,7 @@ var_dump($betaManagedAgentsDeployment);
 
   - `class ManagedAgentsUserDefineOutcomeEventParams`
 
-    - `Type type`
+    - `"user.define_outcome" type`
 
     - `string description`
 
@@ -1738,7 +1738,7 @@ var_dump($betaManagedAgentsDeployment);
 
   - `class ManagedAgentsSystemMessageEventParams`
 
-    - `Type type`
+    - `"system.message" type`
 
     - `list<BetaManagedAgentsSystemContentBlock> content`
 
@@ -1750,11 +1750,11 @@ var_dump($betaManagedAgentsDeployment);
 
   - `class BetaManagedAgentsManualDeploymentPausedReason`
 
-    - `Type type`
+    - `"manual" type`
 
   - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
-    - `Type type`
+    - `"error" type`
 
     - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -1766,59 +1766,59 @@ var_dump($betaManagedAgentsDeployment);
 
   - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
 
-    - `Type type`
+    - `"environment_archived_error" type`
 
   - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
-    - `Type type`
+    - `"agent_archived_error" type`
 
   - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
-    - `Type type`
+    - `"environment_not_found_error" type`
 
   - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
-    - `Type type`
+    - `"vault_not_found_error" type`
 
   - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
-    - `Type type`
+    - `"file_not_found_error" type`
 
   - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
-    - `Type type`
+    - `"session_resource_not_found_error" type`
 
   - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
-    - `Type type`
+    - `"workspace_archived_error" type`
 
   - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
-    - `Type type`
+    - `"organization_disabled_error" type`
 
   - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
-    - `Type type`
+    - `"memory_store_archived_error" type`
 
   - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
-    - `Type type`
+    - `"skill_not_found_error" type`
 
   - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
-    - `Type type`
+    - `"vault_archived_error" type`
 
   - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
-    - `Type type`
+    - `"unknown_error" type`
 
   - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
-    - `Type type`
+    - `"self_hosted_resources_unsupported_error" type`
 
   - `class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
 
-    - `Type type`
+    - `"mcp_egress_blocked_error" type`
 
 ### Beta Managed Agents Deployment Status
 
@@ -1836,7 +1836,7 @@ var_dump($betaManagedAgentsDeployment);
 
 - `class BetaManagedAgentsDeploymentSystemMessageEvent`
 
-  - `Type type`
+  - `"system.message" type`
 
   - `list<BetaManagedAgentsSystemContentBlock> content`
 
@@ -1846,7 +1846,7 @@ var_dump($betaManagedAgentsDeployment);
 
 - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
-  - `Type type`
+  - `"user.define_outcome" type`
 
   - `string description`
 
@@ -1864,7 +1864,7 @@ var_dump($betaManagedAgentsDeployment);
 
 - `class BetaManagedAgentsDeploymentUserMessageEvent`
 
-  - `Type type`
+  - `"user.message" type`
 
   - `list<Content> content`
 
@@ -1874,19 +1874,19 @@ var_dump($betaManagedAgentsDeployment);
 
 - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
 
-  - `Type type`
+  - `"environment_archived_error" type`
 
 ### Beta Managed Agents Environment Not Found Deployment Paused Reason Error
 
 - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
-  - `Type type`
+  - `"environment_not_found_error" type`
 
 ### Beta Managed Agents Error Deployment Paused Reason
 
 - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
-  - `Type type`
+  - `"error" type`
 
   - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -1896,13 +1896,13 @@ var_dump($betaManagedAgentsDeployment);
 
 - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
-  - `Type type`
+  - `"file_not_found_error" type`
 
 ### Beta Managed Agents File Resource Config
 
 - `class BetaManagedAgentsFileResourceConfig`
 
-  - `Type type`
+  - `"file" type`
 
   - `string fileID`
 
@@ -1916,7 +1916,7 @@ var_dump($betaManagedAgentsDeployment);
 
 - `class BetaManagedAgentsGitHubRepositoryResourceConfig`
 
-  - `Type type`
+  - `"github_repository" type`
 
   - `string url`
 
@@ -1934,25 +1934,25 @@ var_dump($betaManagedAgentsDeployment);
 
 - `class BetaManagedAgentsManualDeploymentPausedReason`
 
-  - `Type type`
+  - `"manual" type`
 
 ### Beta Managed Agents MCP Egress Blocked Deployment Paused Reason Error
 
 - `class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
 
-  - `Type type`
+  - `"mcp_egress_blocked_error" type`
 
 ### Beta Managed Agents Memory Store Archived Deployment Paused Reason Error
 
 - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
-  - `Type type`
+  - `"memory_store_archived_error" type`
 
 ### Beta Managed Agents Memory Store Resource Config
 
 - `class BetaManagedAgentsMemoryStoreResourceConfig`
 
-  - `Type type`
+  - `"memory_store" type`
 
   - `string memoryStoreID`
 
@@ -1970,13 +1970,13 @@ var_dump($betaManagedAgentsDeployment);
 
 - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
-  - `Type type`
+  - `"organization_disabled_error" type`
 
 ### Beta Managed Agents Schedule
 
 - `class BetaManagedAgentsSchedule`
 
-  - `Type type`
+  - `"cron" type`
 
   - `string expression`
 
@@ -1998,7 +1998,7 @@ var_dump($betaManagedAgentsDeployment);
 
 - `class BetaManagedAgentsScheduleParams`
 
-  - `Type type`
+  - `"cron" type`
 
   - `string expression`
 
@@ -2012,7 +2012,7 @@ var_dump($betaManagedAgentsDeployment);
 
 - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
-  - `Type type`
+  - `"self_hosted_resources_unsupported_error" type`
 
 ### Beta Managed Agents Session Resource Config
 
@@ -2020,7 +2020,7 @@ var_dump($betaManagedAgentsDeployment);
 
   - `class BetaManagedAgentsGitHubRepositoryResourceConfig`
 
-    - `Type type`
+    - `"github_repository" type`
 
     - `string url`
 
@@ -2036,7 +2036,7 @@ var_dump($betaManagedAgentsDeployment);
 
   - `class BetaManagedAgentsFileResourceConfig`
 
-    - `Type type`
+    - `"file" type`
 
     - `string fileID`
 
@@ -2048,7 +2048,7 @@ var_dump($betaManagedAgentsDeployment);
 
   - `class BetaManagedAgentsMemoryStoreResourceConfig`
 
-    - `Type type`
+    - `"memory_store" type`
 
     - `string memoryStoreID`
 
@@ -2066,34 +2066,34 @@ var_dump($betaManagedAgentsDeployment);
 
 - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
-  - `Type type`
+  - `"session_resource_not_found_error" type`
 
 ### Beta Managed Agents Skill Not Found Deployment Paused Reason Error
 
 - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
-  - `Type type`
+  - `"skill_not_found_error" type`
 
 ### Beta Managed Agents Unknown Deployment Paused Reason Error
 
 - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
-  - `Type type`
+  - `"unknown_error" type`
 
 ### Beta Managed Agents Vault Archived Deployment Paused Reason Error
 
 - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
-  - `Type type`
+  - `"vault_archived_error" type`
 
 ### Beta Managed Agents Vault Not Found Deployment Paused Reason Error
 
 - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
-  - `Type type`
+  - `"vault_not_found_error" type`
 
 ### Beta Managed Agents Workspace Archived Deployment Paused Reason Error
 
 - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
-  - `Type type`
+  - `"workspace_archived_error" type`

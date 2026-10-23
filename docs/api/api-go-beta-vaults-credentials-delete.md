@@ -149,7 +149,7 @@ Delete a Credential
 
   Confirmation of a deleted credential.
 
-  - `Type BetaManagedAgentsDeletedCredentialType`
+  - `Type VaultCredentialDeletedResponseType`
 
   - `ID string`
 
@@ -164,8 +164,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {

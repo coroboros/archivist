@@ -67,7 +67,7 @@ List Memories
 
   - `class ManagedAgentsMemory`
 
-    - `Type type`
+    - `"memory" type`
 
     - `string id`
 
@@ -117,7 +117,7 @@ List Memories
 
   - `class ManagedAgentsMemoryPrefix`
 
-    - `Type type`
+    - `"memory_prefix" type`
 
     - `string path`
 

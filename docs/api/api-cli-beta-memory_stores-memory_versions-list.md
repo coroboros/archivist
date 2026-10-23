@@ -245,7 +245,6 @@ List Memory Versions
 
 ```bash
 ant beta:memory-stores:memory-versions list \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 

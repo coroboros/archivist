@@ -161,7 +161,7 @@ Retrieve a Memory Version
 
   See the [memory guide](../managed-agents/managed-agents-memory.md#audit-memory-changes) to learn more about memory versions.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_version"`
 
   - `required string ID`
 
@@ -225,7 +225,7 @@ Retrieve a Memory Version
 
       An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "session_actor"`
 
       - `required string SessionID`
 
@@ -237,7 +237,7 @@ Retrieve a Memory Version
 
       A direct caller of the public API, identified by the API key that authenticated the request.
 
-      - `required Type Type`
+      - `JsonElement Type = "api_actor"`
 
       - `required string ApiKeyID`
 
@@ -249,7 +249,7 @@ Retrieve a Memory Version
 
       A human user, for example acting through the Anthropic Console.
 
-      - `required Type Type`
+      - `JsonElement Type = "user_actor"`
 
       - `required string UserID`
 

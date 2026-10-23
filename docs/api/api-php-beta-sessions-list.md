@@ -85,7 +85,7 @@ List Sessions
 
 - `class BetaManagedAgentsSession`
 
-  - `Type type`
+  - `"session" type`
 
   - `string id`
 

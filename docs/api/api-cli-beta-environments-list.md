@@ -187,8 +187,7 @@ List environments with pagination support.
 ## Example
 
 ```bash
-ant beta:environments list \
-  --api-key my-anthropic-api-key
+ant beta:environments list
 ```
 
 ### Response (200)

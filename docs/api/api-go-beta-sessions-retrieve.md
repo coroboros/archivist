@@ -143,7 +143,7 @@ Get Session
 
   A Managed Agents `session`.
 
-  - `Type BetaManagedAgentsSessionType`
+  - `Type Session`
 
   - `ID string`
 
@@ -151,7 +151,7 @@ Get Session
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-    - `Type BetaManagedAgentsSessionAgentType`
+    - `Type Agent`
 
     - `ID string`
 
@@ -179,7 +179,7 @@ Get Session
 
     - `MCPServers []BetaManagedAgentsMCPServerURLDefinition`
 
-      - `Type BetaManagedAgentsMCPServerURLDefinitionType`
+      - `Type URL`
 
       - `Name string`
 
@@ -271,31 +271,31 @@ Get Session
 
           Low effort. Favors latency over reasoning depth.
 
-          - `Type BetaManagedAgentsEffortLowType`
+          - `Type Low`
 
         - `type BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `Type BetaManagedAgentsEffortMediumType`
+          - `Type Medium`
 
         - `type BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `Type BetaManagedAgentsEffortHighType`
+          - `Type High`
 
         - `type BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `Type BetaManagedAgentsEffortXhighType`
+          - `Type Xhigh`
 
         - `type BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `Type BetaManagedAgentsEffortMaxType`
+          - `Type Max`
 
       - `InferenceGeo string Optional`
 
@@ -317,7 +317,7 @@ Get Session
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
-        - `Type BetaManagedAgentsSessionMultiagentCoordinatorType`
+        - `Type Coordinator`
 
         - `Agents []BetaManagedAgentsSessionMultiagentCoordinatorAgentUnion`
 
@@ -327,7 +327,7 @@ Get Session
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-            - `Type BetaManagedAgentsSessionThreadAgentType`
+            - `Type Agent`
 
             - `ID string`
 
@@ -339,7 +339,7 @@ Get Session
 
             - `MCPServers []BetaManagedAgentsMCPServerURLDefinition`
 
-              - `Type BetaManagedAgentsMCPServerURLDefinitionType`
+              - `Type URL`
 
               - `Name string`
 
@@ -357,7 +357,7 @@ Get Session
 
                 A resolved Anthropic-managed skill.
 
-                - `Type BetaManagedAgentsAnthropicSkillType`
+                - `Type Anthropic`
 
                 - `SkillID string`
 
@@ -367,7 +367,7 @@ Get Session
 
                 A resolved user-created custom skill.
 
-                - `Type BetaManagedAgentsCustomSkillType`
+                - `Type Custom`
 
                 - `SkillID string`
 
@@ -379,7 +379,7 @@ Get Session
 
               - `type BetaManagedAgentsAgentToolset20260401`
 
-                - `Type BetaManagedAgentsAgentToolset20260401Type`
+                - `Type AgentToolset20260401`
 
                 - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
@@ -401,13 +401,13 @@ Get Session
 
                         Tool calls are automatically approved without user confirmation.
 
-                        - `Type BetaManagedAgentsAlwaysAllowPolicyType`
+                        - `Type AlwaysAllow`
 
                       - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                        - `Type BetaManagedAgentsAlwaysAskPolicyType`
+                        - `Type AlwaysAsk`
 
                       - `type BetaManagedAgentsAutoPolicy`
 
@@ -739,7 +739,7 @@ Get Session
 
               - `type BetaManagedAgentsMCPToolset`
 
-                - `Type BetaManagedAgentsMCPToolsetType`
+                - `Type MCPToolset`
 
                 - `Configs []BetaManagedAgentsMCPToolConfig`
 
@@ -791,7 +791,7 @@ Get Session
 
                 A custom tool as returned in API responses.
 
-                - `Type BetaManagedAgentsCustomToolType`
+                - `Type Custom`
 
                 - `Description string`
 
@@ -815,7 +815,7 @@ Get Session
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-            - `Type BetaManagedAgentsAdvisorType`
+            - `Type Advisor`
 
             - `Model string`
 
@@ -877,7 +877,7 @@ Get Session
 
               Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-              - `Type BetaManagedAgentsSessionThreadAgentType`
+              - `Type Agent`
 
               - `ID string`
 
@@ -929,7 +929,7 @@ Get Session
 
               Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-              - `Type BetaManagedAgentsSessionThreadAgentType`
+              - `Type Agent`
 
               - `ID string`
 
@@ -1001,7 +1001,7 @@ Get Session
 
     The session's enforced spend ceiling, or null when no budget is set.
 
-    - `Type BetaManagedAgentsBudgetLimitType`
+    - `Type Limit`
 
     - `MaxListCost BetaMonetaryAmount`
 
@@ -1029,7 +1029,7 @@ Get Session
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
 
-    - `Type BetaManagedAgentsOutcomeEvaluationResourceType`
+    - `Type OutcomeEvaluation`
 
     - `CompletedAt Time`
 
@@ -1063,7 +1063,7 @@ Get Session
 
     - `type BetaManagedAgentsGitHubRepositoryResource`
 
-      - `Type BetaManagedAgentsGitHubRepositoryResourceType`
+      - `Type GitHubRepository`
 
       - `ID string`
 
@@ -1087,7 +1087,7 @@ Get Session
 
         - `type BetaManagedAgentsBranchCheckout`
 
-          - `Type BetaManagedAgentsBranchCheckoutType`
+          - `Type Branch`
 
           - `Name string`
 
@@ -1097,7 +1097,7 @@ Get Session
 
         - `type BetaManagedAgentsCommitCheckout`
 
-          - `Type BetaManagedAgentsCommitCheckoutType`
+          - `Type Commit`
 
           - `Sha string`
 
@@ -1107,7 +1107,7 @@ Get Session
 
     - `type BetaManagedAgentsFileResource`
 
-      - `Type BetaManagedAgentsFileResourceType`
+      - `Type File`
 
       - `ID string`
 
@@ -1131,7 +1131,7 @@ Get Session
 
       A memory store attached to an agent session.
 
-      - `Type BetaManagedAgentsMemoryStoreResourceType`
+      - `Type MemoryStore`
 
       - `MemoryStoreID string`
 
@@ -1286,8 +1286,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {

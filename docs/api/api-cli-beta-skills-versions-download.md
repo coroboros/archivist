@@ -49,7 +49,6 @@ Download a skill version's content as a zip archive.
 
 ```bash
 ant beta:skills:versions download \
-  --api-key my-anthropic-api-key \
   --skill-id skill_id \
   --version version
 ```

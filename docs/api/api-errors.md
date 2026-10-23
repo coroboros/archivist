@@ -42,7 +42,7 @@ The API follows a predictable HTTP error code format:
     In rare cases, if your organization has a sharp increase in usage, you might see 429 errors because of acceleration limits on the API. To avoid hitting acceleration limits, increase your traffic gradually and maintain consistent usage patterns.
   </Warning>
 
-The official SDK automatically retries transient failures (such as connection errors, rate limits, and 5xx server errors) with exponential backoff, twice by default, honoring the `retry-after` header when present. The SDK client accepts `max_retries` (typescript, java, php: `maxRetries`; csharp: `MaxRetries`; go: `option.WithMaxRetries`) to configure or disable this behavior.
+The official SDK automatically retries transient failures (such as connection errors, rate limits, and 5xx server errors) with exponential backoff, twice by default, honoring the `retry-after` header when present. The SDK client accepts `max_retries` (typescript, php: `maxRetries`; java: `.maxRetries()`; csharp: `MaxRetries`; go: `option.WithMaxRetries()`) to configure or disable this behavior.
 
 When receiving a [streaming](../build-with-claude/build-with-claude-streaming.md) response over server-sent events (SSE), an error can occur after the API returns a 200 response. In that case, error handling doesn't follow these standard mechanisms. See [Error events](../build-with-claude/build-with-claude-streaming.md#error-events) for the shape of mid-stream errors.
 
@@ -88,7 +88,7 @@ Every API response includes a unique `request-id` header. This header contains a
 
 On [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), responses include two request IDs: the AWS request ID (`x-amzn-requestid`, primary, indexed in CloudTrail) and the Anthropic request ID (`request-id`, secondary). Use the AWS request ID for CloudTrail lookups and the Anthropic request ID for Anthropic support tickets.
 
-The Python and TypeScript SDKs expose the request ID as a `_request_id` property on top-level response objects. The C#, Go, Java, and PHP SDKs expose it through their raw-response accessors, and the Ruby SDK through [middleware](../general/general-cli-sdks-libraries-middleware.md). In every SDK except Ruby, use `with_raw_response` (typescript: `.withResponse()`; java: `.withRawResponse()`; csharp: `WithRawResponse`; go: `option.WithResponseInto`; php: `->raw`) to read any other [response header](./api-overview.md#response-headers), such as `anthropic-organization-id` and [`anthropic-workspace-id`](../manage-claude/manage-claude-workspaces.md#identify-the-workspace-behind-an-api-response). In Ruby, use the same middleware. On Claude Platform on AWS, use the raw-response accessor to read the AWS request ID (`x-amzn-requestid`) as well:
+The Python and TypeScript SDKs expose the request ID as a `_request_id` property on top-level response objects. The C#, Go, Java, and PHP SDKs expose it through their raw-response accessors, and the Ruby SDK through [middleware](../general/general-cli-sdks-libraries-middleware.md). In every SDK except Ruby, use `with_raw_response` (typescript: `.withResponse()`; java: `.withRawResponse()`; csharp: `WithRawResponse`; go: `option.WithResponseInto()`; php: `->raw`) to read any other [response header](./api-overview.md#response-headers), such as `anthropic-organization-id` and [`anthropic-workspace-id`](../manage-claude/manage-claude-workspaces.md#identify-the-workspace-behind-an-api-response). In Ruby, use the same middleware. On Claude Platform on AWS, use the raw-response accessor to read the AWS request ID (`x-amzn-requestid`) as well:
 
 <CodeGroup>
   ```bash cURL
@@ -389,10 +389,10 @@ If you don't need to process events incrementally, the SDK can consume the strea
 
       Message message = accumulator.message();
       message.content().stream()
-              .filter(ContentBlock::isText)
-              .findFirst()
-              .flatMap(ContentBlock::text)
-              .ifPresent(textBlock -> IO.println(textBlock.text()));
+          .filter(ContentBlock::isText)
+          .findFirst()
+          .flatMap(ContentBlock::text)
+          .ifPresent(textBlock -> IO.println(textBlock.text()));
   }
   ```
 
@@ -536,7 +536,7 @@ tool_choice: type "tool" and "any" are not supported for this model.
 
 ### Computer use tool version not supported
 
-On the Claude API and Google Cloud, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 support [computer use](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md) only as the `computer_toolset_20260801` toolset. On those platforms, sending any of these models a `tools` entry of the earlier `computer_20251124` or `computer_20250124` type, with that tool's beta header, returns a 400 `invalid_request_error`. The message names the rejected type, then lists the tool types the model does accept after `Did you mean one of`. For Claude Opus 5.5, it begins:
+On the Claude API and Claude Models on Google Cloud (Google managed), Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 support [computer use](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md) only as the `computer_toolset_20260801` toolset. On those platforms, sending any of these models a `tools` entry of the earlier `computer_20251124` or `computer_20250124` type, with that tool's beta header, returns a 400 `invalid_request_error`. The message names the rejected type, then lists the tool types the model does accept after `Did you mean one of`. For Claude Opus 5.5, it begins:
 
 ```text wrap
 'claude-opus-5-5' does not support tool types: computer_20251124.

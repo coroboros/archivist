@@ -364,8 +364,7 @@ The Models API response can be used to determine which models are available for 
 ### Example
 
 ```bash
-ant beta:models list \
-  --api-key my-anthropic-api-key
+ant beta:models list
 ```
 
 #### Response (200)
@@ -799,7 +798,6 @@ The Models API response can be used to determine information about a specific mo
 
 ```bash
 ant beta:models retrieve \
-  --api-key my-anthropic-api-key \
   --model-id model_id
 ```
 

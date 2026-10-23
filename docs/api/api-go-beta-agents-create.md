@@ -135,31 +135,31 @@ Create Agent
 
           Low effort. Favors latency over reasoning depth.
 
-          - `Type BetaManagedAgentsEffortLowType`
+          - `Type Low`
 
         - `type BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `Type BetaManagedAgentsEffortMediumType`
+          - `Type Medium`
 
         - `type BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `Type BetaManagedAgentsEffortHighType`
+          - `Type High`
 
         - `type BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `Type BetaManagedAgentsEffortXhighType`
+          - `Type Xhigh`
 
         - `type BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `Type BetaManagedAgentsEffortMaxType`
+          - `Type Max`
 
       - `InferenceGeo string Optional`
 
@@ -193,7 +193,7 @@ Create Agent
 
     MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](../managed-agents/managed-agents-mcp-connector.md).
 
-    - `Type BetaManagedAgentsURLMCPServerParamsType`
+    - `Type URL`
 
     - `Name string`
 
@@ -223,7 +223,7 @@ Create Agent
 
       An Anthropic-managed skill.
 
-      - `Type BetaManagedAgentsAnthropicSkillParamsType`
+      - `Type Anthropic`
 
       - `SkillID string`
 
@@ -241,7 +241,7 @@ Create Agent
 
       A user-created custom skill.
 
-      - `Type BetaManagedAgentsCustomSkillParamsType`
+      - `Type Custom`
 
       - `SkillID string`
 
@@ -269,7 +269,7 @@ Create Agent
 
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
-      - `Type BetaManagedAgentsAgentToolset20260401ParamsType`
+      - `Type AgentToolset20260401`
 
       - `Configs []BetaManagedAgentsAgentToolConfigParamsUnion Optional`
 
@@ -297,13 +297,13 @@ Create Agent
 
               Tool calls are automatically approved without user confirmation.
 
-              - `Type BetaManagedAgentsAlwaysAllowPolicyType`
+              - `Type AlwaysAllow`
 
             - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `Type BetaManagedAgentsAlwaysAskPolicyType`
+              - `Type AlwaysAsk`
 
             - `type BetaManagedAgentsAutoPolicy`
 
@@ -697,7 +697,7 @@ Create Agent
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
 
-      - `Type BetaManagedAgentsMCPToolsetParamsType`
+      - `Type MCPToolset`
 
       - `MCPServerName string`
 
@@ -763,7 +763,7 @@ Create Agent
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
-      - `Type BetaManagedAgentsCustomToolParamsType`
+      - `Type Custom`
 
       - `Description string`
 
@@ -907,7 +907,7 @@ Create Agent
 
   A Managed Agents `agent`.
 
-  - `Type BetaManagedAgentsAgentType`
+  - `Type Agent`
 
   - `ID string`
 
@@ -947,7 +947,7 @@ Create Agent
 
   - `MCPServers []BetaManagedAgentsMCPServerURLDefinition`
 
-    - `Type BetaManagedAgentsMCPServerURLDefinitionType`
+    - `Type URL`
 
     - `Name string`
 
@@ -1041,31 +1041,31 @@ Create Agent
 
         Low effort. Favors latency over reasoning depth.
 
-        - `Type BetaManagedAgentsEffortLowType`
+        - `Type Low`
 
       - `type BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
-        - `Type BetaManagedAgentsEffortMediumType`
+        - `Type Medium`
 
       - `type BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
-        - `Type BetaManagedAgentsEffortHighType`
+        - `Type High`
 
       - `type BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
-        - `Type BetaManagedAgentsEffortXhighType`
+        - `Type Xhigh`
 
       - `type BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
-        - `Type BetaManagedAgentsEffortMaxType`
+        - `Type Max`
 
     - `InferenceGeo string Optional`
 
@@ -1087,7 +1087,7 @@ Create Agent
 
       Resolved coordinator topology with a concrete agent roster.
 
-      - `Type BetaManagedAgentsMultiagentCoordinatorType`
+      - `Type Coordinator`
 
       - `Agents []BetaManagedAgentsMultiagentCoordinatorAgentUnion`
 
@@ -1097,7 +1097,7 @@ Create Agent
 
           A resolved agent reference with a concrete version.
 
-          - `Type BetaManagedAgentsAgentReferenceType`
+          - `Type Agent`
 
           - `ID string`
 
@@ -1109,7 +1109,7 @@ Create Agent
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-          - `Type BetaManagedAgentsAdvisorType`
+          - `Type Advisor`
 
           - `Model string`
 
@@ -1171,7 +1171,7 @@ Create Agent
 
             Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
 
-            - `Type BetaManagedAgentsAgentReferenceType`
+            - `Type Agent`
 
             - `ID string`
 
@@ -1203,7 +1203,7 @@ Create Agent
 
             Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
 
-            - `Type BetaManagedAgentsAgentReferenceType`
+            - `Type Agent`
 
             - `ID string`
 
@@ -1225,7 +1225,7 @@ Create Agent
 
       A resolved Anthropic-managed skill.
 
-      - `Type BetaManagedAgentsAnthropicSkillType`
+      - `Type Anthropic`
 
       - `SkillID string`
 
@@ -1235,7 +1235,7 @@ Create Agent
 
       A resolved user-created custom skill.
 
-      - `Type BetaManagedAgentsCustomSkillType`
+      - `Type Custom`
 
       - `SkillID string`
 
@@ -1247,7 +1247,7 @@ Create Agent
 
     - `type BetaManagedAgentsAgentToolset20260401`
 
-      - `Type BetaManagedAgentsAgentToolset20260401Type`
+      - `Type AgentToolset20260401`
 
       - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
@@ -1269,13 +1269,13 @@ Create Agent
 
               Tool calls are automatically approved without user confirmation.
 
-              - `Type BetaManagedAgentsAlwaysAllowPolicyType`
+              - `Type AlwaysAllow`
 
             - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `Type BetaManagedAgentsAlwaysAskPolicyType`
+              - `Type AlwaysAsk`
 
             - `type BetaManagedAgentsAutoPolicy`
 
@@ -1607,7 +1607,7 @@ Create Agent
 
     - `type BetaManagedAgentsMCPToolset`
 
-      - `Type BetaManagedAgentsMCPToolsetType`
+      - `Type MCPToolset`
 
       - `Configs []BetaManagedAgentsMCPToolConfig`
 
@@ -1659,7 +1659,7 @@ Create Agent
 
       A custom tool as returned in API responses.
 
-      - `Type BetaManagedAgentsCustomToolType`
+      - `Type Custom`
 
       - `Description string`
 
@@ -1696,8 +1696,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {

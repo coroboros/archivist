@@ -148,20 +148,16 @@ First, create an agent that declares the GitHub MCP server. The agent definition
   	System: anthropic.String("You are a code review assistant with access to GitHub."),
   	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{
   		{
-  			Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
   			Name: "github",
   			URL:  "https://api.githubcopilot.com/mcp/",
   		},
   	},
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{
   		{
-  			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-  				Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
-  			},
+  			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
   		},
   		{
   			OfMCPToolset: &anthropic.BetaManagedAgentsMCPToolsetParams{
-  				Type:          anthropic.BetaManagedAgentsMCPToolsetParamsTypeMCPToolset,
   				MCPServerName: "github",
   			},
   		},
@@ -324,7 +320,6 @@ Then create a session that mounts the GitHub repository. With a `limited` [envir
   	Resources: []anthropic.BetaSessionNewParamsResourceUnion{
   		{
   			OfGitHubRepository: &anthropic.BetaManagedAgentsGitHubRepositoryResourceParams{
-  				Type:               anthropic.BetaManagedAgentsGitHubRepositoryResourceParamsTypeGitHubRepository,
   				URL:                "https://github.com/org/repo",
   				MountPath:          anthropic.String("/workspace/repo"),
   				AuthorizationToken: "ghp_your_github_token",
@@ -512,7 +507,6 @@ Mount multiple repositories by adding entries to the `resources` (csharp, go: `R
   resources := []anthropic.BetaSessionNewParamsResourceUnion{
   	{
   		OfGitHubRepository: &anthropic.BetaManagedAgentsGitHubRepositoryResourceParams{
-  			Type:               anthropic.BetaManagedAgentsGitHubRepositoryResourceParamsTypeGitHubRepository,
   			URL:                "https://github.com/org/frontend",
   			MountPath:          anthropic.String("/workspace/frontend"),
   			AuthorizationToken: "ghp_your_github_token",
@@ -520,7 +514,6 @@ Mount multiple repositories by adding entries to the `resources` (csharp, go: `R
   	},
   	{
   		OfGitHubRepository: &anthropic.BetaManagedAgentsGitHubRepositoryResourceParams{
-  			Type:               anthropic.BetaManagedAgentsGitHubRepositoryResourceParamsTypeGitHubRepository,
   			URL:                "https://github.com/org/backend",
   			MountPath:          anthropic.String("/workspace/backend"),
   			AuthorizationToken: "ghp_your_github_token",
@@ -812,11 +805,9 @@ With the GitHub MCP server, the agent can create branches, commit changes, and p
   	Events: []anthropic.BetaManagedAgentsEventParamsUnion{
   		{
   			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-  				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
   				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{
   					{
   						OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-  							Type: anthropic.BetaManagedAgentsTextBlockTypeText,
   							Text: "Fix the type error in src/utils.ts, commit it to a new branch, and push it.",
   						},
   					},

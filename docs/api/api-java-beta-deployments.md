@@ -147,7 +147,7 @@ Create Deployment
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-      - `Type type`
+      - `JsonValue type = "agent"`
 
       - `String id`
 
@@ -175,7 +175,7 @@ Create Deployment
 
       Parameters for sending a user message to the session.
 
-      - `Type type`
+      - `JsonValue type = "user.message"`
 
       - `List<Content> content`
 
@@ -185,7 +185,7 @@ Create Deployment
 
           Regular text content.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String text`
 
@@ -197,7 +197,7 @@ Create Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "image"`
 
           - `Source source`
 
@@ -207,7 +207,7 @@ Create Deployment
 
               Base64-encoded image data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -225,7 +225,7 @@ Create Deployment
 
               Image referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -237,7 +237,7 @@ Create Deployment
 
               Image referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -249,7 +249,7 @@ Create Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "document"`
 
           - `Source source`
 
@@ -259,7 +259,7 @@ Create Deployment
 
               Base64-encoded document data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -277,7 +277,7 @@ Create Deployment
 
               Plain text document content.
 
-              - `Type type`
+              - `JsonValue type = "text"`
 
               - `String data`
 
@@ -285,7 +285,7 @@ Create Deployment
 
                 minLength: 1
 
-              - `MediaType mediaType`
+              - `JsonValue mediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -293,7 +293,7 @@ Create Deployment
 
               Document referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -305,7 +305,7 @@ Create Deployment
 
               Document referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -325,13 +325,13 @@ Create Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type type`
+          - `JsonValue type = "redacted"`
 
     - `class BetaManagedAgentsUserDefineOutcomeEventParams`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
-      - `Type type`
+      - `JsonValue type = "user.define_outcome"`
 
       - `String description`
 
@@ -345,7 +345,7 @@ Create Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type type`
+          - `JsonValue type = "file"`
 
           - `String fileId`
 
@@ -355,7 +355,7 @@ Create Deployment
 
           Rubric content provided inline as text.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String content`
 
@@ -373,13 +373,13 @@ Create Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
-      - `Type type`
+      - `JsonValue type = "system.message"`
 
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String text`
 
@@ -415,7 +415,7 @@ Create Deployment
 
       Mount a GitHub repository into the session's container.
 
-      - `Type type`
+      - `JsonValue type = "github_repository"`
 
       - `String url`
 
@@ -435,7 +435,7 @@ Create Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `Type type`
+          - `JsonValue type = "branch"`
 
           - `String name`
 
@@ -445,7 +445,7 @@ Create Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `Type type`
+          - `JsonValue type = "commit"`
 
           - `String sha`
 
@@ -463,7 +463,7 @@ Create Deployment
 
       Mount a file uploaded via the Files API into the session.
 
-      - `Type type`
+      - `JsonValue type = "file"`
 
       - `String fileId`
 
@@ -481,7 +481,7 @@ Create Deployment
 
       Parameters for attaching a memory store to an agent session.
 
-      - `Type type`
+      - `JsonValue type = "memory_store"`
 
       - `String memoryStoreId`
 
@@ -515,7 +515,7 @@ Create Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `Type type`
+  - `JsonValue type = "deployment"`
 
   - `String id`
 
@@ -525,7 +525,7 @@ Create Deployment
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `Type type`
+    - `JsonValue type = "agent"`
 
     - `String id`
 
@@ -561,7 +561,7 @@ Create Deployment
 
       A user message sent to the session.
 
-      - `Type type`
+      - `JsonValue type = "user.message"`
 
       - `List<Content> content`
 
@@ -571,7 +571,7 @@ Create Deployment
 
           Regular text content.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String text`
 
@@ -583,7 +583,7 @@ Create Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "image"`
 
           - `Source source`
 
@@ -593,7 +593,7 @@ Create Deployment
 
               Base64-encoded image data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -611,7 +611,7 @@ Create Deployment
 
               Image referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -623,7 +623,7 @@ Create Deployment
 
               Image referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -635,7 +635,7 @@ Create Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "document"`
 
           - `Source source`
 
@@ -645,7 +645,7 @@ Create Deployment
 
               Base64-encoded document data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -663,7 +663,7 @@ Create Deployment
 
               Plain text document content.
 
-              - `Type type`
+              - `JsonValue type = "text"`
 
               - `String data`
 
@@ -671,7 +671,7 @@ Create Deployment
 
                 minLength: 1
 
-              - `MediaType mediaType`
+              - `JsonValue mediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -679,7 +679,7 @@ Create Deployment
 
               Document referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -691,7 +691,7 @@ Create Deployment
 
               Document referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -711,13 +711,13 @@ Create Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type type`
+          - `JsonValue type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `Type type`
+      - `JsonValue type = "user.define_outcome"`
 
       - `String description`
 
@@ -731,7 +731,7 @@ Create Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type type`
+          - `JsonValue type = "file"`
 
           - `String fileId`
 
@@ -741,7 +741,7 @@ Create Deployment
 
           Rubric content provided inline as text.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String content`
 
@@ -757,13 +757,13 @@ Create Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `Type type`
+      - `JsonValue type = "system.message"`
 
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String text`
 
@@ -787,13 +787,13 @@ Create Deployment
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `Type type`
+      - `JsonValue type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `Type type`
+      - `JsonValue type = "error"`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -803,85 +803,85 @@ Create Deployment
 
           The deployment's environment was archived.
 
-          - `Type type`
+          - `JsonValue type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `Type type`
+          - `JsonValue type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `Type type`
+          - `JsonValue type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `Type type`
+          - `JsonValue type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `Type type`
+          - `JsonValue type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `Type type`
+          - `JsonValue type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `Type type`
+          - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `Type type`
+          - `JsonValue type = "mcp_egress_blocked_error"`
 
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
@@ -891,7 +891,7 @@ Create Deployment
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `Type type`
+      - `JsonValue type = "github_repository"`
 
       - `String url`
 
@@ -903,7 +903,7 @@ Create Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `Type type`
+          - `JsonValue type = "branch"`
 
           - `String name`
 
@@ -913,7 +913,7 @@ Create Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `Type type`
+          - `JsonValue type = "commit"`
 
           - `String sha`
 
@@ -929,7 +929,7 @@ Create Deployment
 
       A file mounted into each session's container.
 
-      - `Type type`
+      - `JsonValue type = "file"`
 
       - `String fileId`
 
@@ -943,7 +943,7 @@ Create Deployment
 
       A memory store attached to each session created from this deployment.
 
-      - `Type type`
+      - `JsonValue type = "memory_store"`
 
       - `String memoryStoreId`
 
@@ -965,7 +965,7 @@ Create Deployment
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `Type type`
+    - `JsonValue type = "cron"`
 
     - `String expression`
 
@@ -1015,7 +1015,7 @@ Create Deployment
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `Type type`
+    - `JsonValue type = "limit"`
 
     - `BetaMonetaryAmount maxListCost`
 
@@ -1038,7 +1038,6 @@ import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.deployments.BetaManagedAgentsDeployment;
 import com.anthropic.models.beta.deployments.DeploymentCreateParams;
-import com.anthropic.models.beta.sessions.events.BetaManagedAgentsTextBlock;
 import com.anthropic.models.beta.sessions.events.BetaManagedAgentsUserMessageEventParams;
 import java.util.List;
 
@@ -1051,10 +1050,7 @@ public final class Main {
         DeploymentCreateParams params = DeploymentCreateParams.builder()
             .agent("string")
             .environmentId("x")
-            .addUserMessageInitialEvent(List.of(BetaManagedAgentsUserMessageEventParams.Content.ofText(BetaManagedAgentsTextBlock.builder()
-                .text("Where is my order #1234?")
-                .type(BetaManagedAgentsTextBlock.Type.TEXT)
-                .build())))
+            .addUserMessageInitialEvent(List.of(BetaManagedAgentsUserMessageEventParams.Content.ofText("Where is my order #1234?")))
             .name("x")
             .build();
         BetaManagedAgentsDeployment betaManagedAgentsDeployment = client.beta().deployments().create(params);
@@ -1295,7 +1291,7 @@ List Deployments
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `Type type`
+  - `JsonValue type = "deployment"`
 
   - `String id`
 
@@ -1305,7 +1301,7 @@ List Deployments
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `Type type`
+    - `JsonValue type = "agent"`
 
     - `String id`
 
@@ -1341,7 +1337,7 @@ List Deployments
 
       A user message sent to the session.
 
-      - `Type type`
+      - `JsonValue type = "user.message"`
 
       - `List<Content> content`
 
@@ -1351,7 +1347,7 @@ List Deployments
 
           Regular text content.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String text`
 
@@ -1363,7 +1359,7 @@ List Deployments
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "image"`
 
           - `Source source`
 
@@ -1373,7 +1369,7 @@ List Deployments
 
               Base64-encoded image data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -1391,7 +1387,7 @@ List Deployments
 
               Image referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -1403,7 +1399,7 @@ List Deployments
 
               Image referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -1415,7 +1411,7 @@ List Deployments
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "document"`
 
           - `Source source`
 
@@ -1425,7 +1421,7 @@ List Deployments
 
               Base64-encoded document data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -1443,7 +1439,7 @@ List Deployments
 
               Plain text document content.
 
-              - `Type type`
+              - `JsonValue type = "text"`
 
               - `String data`
 
@@ -1451,7 +1447,7 @@ List Deployments
 
                 minLength: 1
 
-              - `MediaType mediaType`
+              - `JsonValue mediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -1459,7 +1455,7 @@ List Deployments
 
               Document referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -1471,7 +1467,7 @@ List Deployments
 
               Document referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -1491,13 +1487,13 @@ List Deployments
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type type`
+          - `JsonValue type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `Type type`
+      - `JsonValue type = "user.define_outcome"`
 
       - `String description`
 
@@ -1511,7 +1507,7 @@ List Deployments
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type type`
+          - `JsonValue type = "file"`
 
           - `String fileId`
 
@@ -1521,7 +1517,7 @@ List Deployments
 
           Rubric content provided inline as text.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String content`
 
@@ -1537,13 +1533,13 @@ List Deployments
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `Type type`
+      - `JsonValue type = "system.message"`
 
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String text`
 
@@ -1567,13 +1563,13 @@ List Deployments
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `Type type`
+      - `JsonValue type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `Type type`
+      - `JsonValue type = "error"`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -1583,85 +1579,85 @@ List Deployments
 
           The deployment's environment was archived.
 
-          - `Type type`
+          - `JsonValue type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `Type type`
+          - `JsonValue type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `Type type`
+          - `JsonValue type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `Type type`
+          - `JsonValue type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `Type type`
+          - `JsonValue type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `Type type`
+          - `JsonValue type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `Type type`
+          - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `Type type`
+          - `JsonValue type = "mcp_egress_blocked_error"`
 
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
@@ -1671,7 +1667,7 @@ List Deployments
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `Type type`
+      - `JsonValue type = "github_repository"`
 
       - `String url`
 
@@ -1683,7 +1679,7 @@ List Deployments
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `Type type`
+          - `JsonValue type = "branch"`
 
           - `String name`
 
@@ -1693,7 +1689,7 @@ List Deployments
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `Type type`
+          - `JsonValue type = "commit"`
 
           - `String sha`
 
@@ -1709,7 +1705,7 @@ List Deployments
 
       A file mounted into each session's container.
 
-      - `Type type`
+      - `JsonValue type = "file"`
 
       - `String fileId`
 
@@ -1723,7 +1719,7 @@ List Deployments
 
       A memory store attached to each session created from this deployment.
 
-      - `Type type`
+      - `JsonValue type = "memory_store"`
 
       - `String memoryStoreId`
 
@@ -1745,7 +1741,7 @@ List Deployments
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `Type type`
+    - `JsonValue type = "cron"`
 
     - `String expression`
 
@@ -1795,7 +1791,7 @@ List Deployments
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `Type type`
+    - `JsonValue type = "limit"`
 
     - `BetaMonetaryAmount maxListCost`
 
@@ -2038,7 +2034,7 @@ Get Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `Type type`
+  - `JsonValue type = "deployment"`
 
   - `String id`
 
@@ -2048,7 +2044,7 @@ Get Deployment
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `Type type`
+    - `JsonValue type = "agent"`
 
     - `String id`
 
@@ -2084,7 +2080,7 @@ Get Deployment
 
       A user message sent to the session.
 
-      - `Type type`
+      - `JsonValue type = "user.message"`
 
       - `List<Content> content`
 
@@ -2094,7 +2090,7 @@ Get Deployment
 
           Regular text content.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String text`
 
@@ -2106,7 +2102,7 @@ Get Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "image"`
 
           - `Source source`
 
@@ -2116,7 +2112,7 @@ Get Deployment
 
               Base64-encoded image data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -2134,7 +2130,7 @@ Get Deployment
 
               Image referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -2146,7 +2142,7 @@ Get Deployment
 
               Image referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -2158,7 +2154,7 @@ Get Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "document"`
 
           - `Source source`
 
@@ -2168,7 +2164,7 @@ Get Deployment
 
               Base64-encoded document data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -2186,7 +2182,7 @@ Get Deployment
 
               Plain text document content.
 
-              - `Type type`
+              - `JsonValue type = "text"`
 
               - `String data`
 
@@ -2194,7 +2190,7 @@ Get Deployment
 
                 minLength: 1
 
-              - `MediaType mediaType`
+              - `JsonValue mediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -2202,7 +2198,7 @@ Get Deployment
 
               Document referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -2214,7 +2210,7 @@ Get Deployment
 
               Document referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -2234,13 +2230,13 @@ Get Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type type`
+          - `JsonValue type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `Type type`
+      - `JsonValue type = "user.define_outcome"`
 
       - `String description`
 
@@ -2254,7 +2250,7 @@ Get Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type type`
+          - `JsonValue type = "file"`
 
           - `String fileId`
 
@@ -2264,7 +2260,7 @@ Get Deployment
 
           Rubric content provided inline as text.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String content`
 
@@ -2280,13 +2276,13 @@ Get Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `Type type`
+      - `JsonValue type = "system.message"`
 
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String text`
 
@@ -2310,13 +2306,13 @@ Get Deployment
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `Type type`
+      - `JsonValue type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `Type type`
+      - `JsonValue type = "error"`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -2326,85 +2322,85 @@ Get Deployment
 
           The deployment's environment was archived.
 
-          - `Type type`
+          - `JsonValue type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `Type type`
+          - `JsonValue type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `Type type`
+          - `JsonValue type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `Type type`
+          - `JsonValue type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `Type type`
+          - `JsonValue type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `Type type`
+          - `JsonValue type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `Type type`
+          - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `Type type`
+          - `JsonValue type = "mcp_egress_blocked_error"`
 
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
@@ -2414,7 +2410,7 @@ Get Deployment
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `Type type`
+      - `JsonValue type = "github_repository"`
 
       - `String url`
 
@@ -2426,7 +2422,7 @@ Get Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `Type type`
+          - `JsonValue type = "branch"`
 
           - `String name`
 
@@ -2436,7 +2432,7 @@ Get Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `Type type`
+          - `JsonValue type = "commit"`
 
           - `String sha`
 
@@ -2452,7 +2448,7 @@ Get Deployment
 
       A file mounted into each session's container.
 
-      - `Type type`
+      - `JsonValue type = "file"`
 
       - `String fileId`
 
@@ -2466,7 +2462,7 @@ Get Deployment
 
       A memory store attached to each session created from this deployment.
 
-      - `Type type`
+      - `JsonValue type = "memory_store"`
 
       - `String memoryStoreId`
 
@@ -2488,7 +2484,7 @@ Get Deployment
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `Type type`
+    - `JsonValue type = "cron"`
 
     - `String expression`
 
@@ -2538,7 +2534,7 @@ Get Deployment
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `Type type`
+    - `JsonValue type = "limit"`
 
     - `BetaMonetaryAmount maxListCost`
 
@@ -2780,7 +2776,7 @@ Update Deployment
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-      - `Type type`
+      - `JsonValue type = "agent"`
 
       - `String id`
 
@@ -2818,7 +2814,7 @@ Update Deployment
 
       Parameters for sending a user message to the session.
 
-      - `Type type`
+      - `JsonValue type = "user.message"`
 
       - `List<Content> content`
 
@@ -2828,7 +2824,7 @@ Update Deployment
 
           Regular text content.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String text`
 
@@ -2840,7 +2836,7 @@ Update Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "image"`
 
           - `Source source`
 
@@ -2850,7 +2846,7 @@ Update Deployment
 
               Base64-encoded image data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -2868,7 +2864,7 @@ Update Deployment
 
               Image referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -2880,7 +2876,7 @@ Update Deployment
 
               Image referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -2892,7 +2888,7 @@ Update Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "document"`
 
           - `Source source`
 
@@ -2902,7 +2898,7 @@ Update Deployment
 
               Base64-encoded document data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -2920,7 +2916,7 @@ Update Deployment
 
               Plain text document content.
 
-              - `Type type`
+              - `JsonValue type = "text"`
 
               - `String data`
 
@@ -2928,7 +2924,7 @@ Update Deployment
 
                 minLength: 1
 
-              - `MediaType mediaType`
+              - `JsonValue mediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -2936,7 +2932,7 @@ Update Deployment
 
               Document referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -2948,7 +2944,7 @@ Update Deployment
 
               Document referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -2968,13 +2964,13 @@ Update Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type type`
+          - `JsonValue type = "redacted"`
 
     - `class BetaManagedAgentsUserDefineOutcomeEventParams`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
-      - `Type type`
+      - `JsonValue type = "user.define_outcome"`
 
       - `String description`
 
@@ -2988,7 +2984,7 @@ Update Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type type`
+          - `JsonValue type = "file"`
 
           - `String fileId`
 
@@ -2998,7 +2994,7 @@ Update Deployment
 
           Rubric content provided inline as text.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String content`
 
@@ -3016,13 +3012,13 @@ Update Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
-      - `Type type`
+      - `JsonValue type = "system.message"`
 
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String text`
 
@@ -3048,7 +3044,7 @@ Update Deployment
 
       Mount a GitHub repository into the session's container.
 
-      - `Type type`
+      - `JsonValue type = "github_repository"`
 
       - `String url`
 
@@ -3068,7 +3064,7 @@ Update Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `Type type`
+          - `JsonValue type = "branch"`
 
           - `String name`
 
@@ -3078,7 +3074,7 @@ Update Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `Type type`
+          - `JsonValue type = "commit"`
 
           - `String sha`
 
@@ -3096,7 +3092,7 @@ Update Deployment
 
       Mount a file uploaded via the Files API into the session.
 
-      - `Type type`
+      - `JsonValue type = "file"`
 
       - `String fileId`
 
@@ -3114,7 +3110,7 @@ Update Deployment
 
       Parameters for attaching a memory store to an agent session.
 
-      - `Type type`
+      - `JsonValue type = "memory_store"`
 
       - `String memoryStoreId`
 
@@ -3148,7 +3144,7 @@ Update Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `Type type`
+  - `JsonValue type = "deployment"`
 
   - `String id`
 
@@ -3158,7 +3154,7 @@ Update Deployment
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `Type type`
+    - `JsonValue type = "agent"`
 
     - `String id`
 
@@ -3194,7 +3190,7 @@ Update Deployment
 
       A user message sent to the session.
 
-      - `Type type`
+      - `JsonValue type = "user.message"`
 
       - `List<Content> content`
 
@@ -3204,7 +3200,7 @@ Update Deployment
 
           Regular text content.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String text`
 
@@ -3216,7 +3212,7 @@ Update Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "image"`
 
           - `Source source`
 
@@ -3226,7 +3222,7 @@ Update Deployment
 
               Base64-encoded image data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -3244,7 +3240,7 @@ Update Deployment
 
               Image referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -3256,7 +3252,7 @@ Update Deployment
 
               Image referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -3268,7 +3264,7 @@ Update Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "document"`
 
           - `Source source`
 
@@ -3278,7 +3274,7 @@ Update Deployment
 
               Base64-encoded document data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -3296,7 +3292,7 @@ Update Deployment
 
               Plain text document content.
 
-              - `Type type`
+              - `JsonValue type = "text"`
 
               - `String data`
 
@@ -3304,7 +3300,7 @@ Update Deployment
 
                 minLength: 1
 
-              - `MediaType mediaType`
+              - `JsonValue mediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -3312,7 +3308,7 @@ Update Deployment
 
               Document referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -3324,7 +3320,7 @@ Update Deployment
 
               Document referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -3344,13 +3340,13 @@ Update Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type type`
+          - `JsonValue type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `Type type`
+      - `JsonValue type = "user.define_outcome"`
 
       - `String description`
 
@@ -3364,7 +3360,7 @@ Update Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type type`
+          - `JsonValue type = "file"`
 
           - `String fileId`
 
@@ -3374,7 +3370,7 @@ Update Deployment
 
           Rubric content provided inline as text.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String content`
 
@@ -3390,13 +3386,13 @@ Update Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `Type type`
+      - `JsonValue type = "system.message"`
 
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String text`
 
@@ -3420,13 +3416,13 @@ Update Deployment
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `Type type`
+      - `JsonValue type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `Type type`
+      - `JsonValue type = "error"`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -3436,85 +3432,85 @@ Update Deployment
 
           The deployment's environment was archived.
 
-          - `Type type`
+          - `JsonValue type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `Type type`
+          - `JsonValue type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `Type type`
+          - `JsonValue type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `Type type`
+          - `JsonValue type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `Type type`
+          - `JsonValue type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `Type type`
+          - `JsonValue type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `Type type`
+          - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `Type type`
+          - `JsonValue type = "mcp_egress_blocked_error"`
 
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
@@ -3524,7 +3520,7 @@ Update Deployment
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `Type type`
+      - `JsonValue type = "github_repository"`
 
       - `String url`
 
@@ -3536,7 +3532,7 @@ Update Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `Type type`
+          - `JsonValue type = "branch"`
 
           - `String name`
 
@@ -3546,7 +3542,7 @@ Update Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `Type type`
+          - `JsonValue type = "commit"`
 
           - `String sha`
 
@@ -3562,7 +3558,7 @@ Update Deployment
 
       A file mounted into each session's container.
 
-      - `Type type`
+      - `JsonValue type = "file"`
 
       - `String fileId`
 
@@ -3576,7 +3572,7 @@ Update Deployment
 
       A memory store attached to each session created from this deployment.
 
-      - `Type type`
+      - `JsonValue type = "memory_store"`
 
       - `String memoryStoreId`
 
@@ -3598,7 +3594,7 @@ Update Deployment
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `Type type`
+    - `JsonValue type = "cron"`
 
     - `String expression`
 
@@ -3648,7 +3644,7 @@ Update Deployment
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `Type type`
+    - `JsonValue type = "limit"`
 
     - `BetaMonetaryAmount maxListCost`
 
@@ -3886,7 +3882,7 @@ Archive Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `Type type`
+  - `JsonValue type = "deployment"`
 
   - `String id`
 
@@ -3896,7 +3892,7 @@ Archive Deployment
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `Type type`
+    - `JsonValue type = "agent"`
 
     - `String id`
 
@@ -3932,7 +3928,7 @@ Archive Deployment
 
       A user message sent to the session.
 
-      - `Type type`
+      - `JsonValue type = "user.message"`
 
       - `List<Content> content`
 
@@ -3942,7 +3938,7 @@ Archive Deployment
 
           Regular text content.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String text`
 
@@ -3954,7 +3950,7 @@ Archive Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "image"`
 
           - `Source source`
 
@@ -3964,7 +3960,7 @@ Archive Deployment
 
               Base64-encoded image data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -3982,7 +3978,7 @@ Archive Deployment
 
               Image referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -3994,7 +3990,7 @@ Archive Deployment
 
               Image referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -4006,7 +4002,7 @@ Archive Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "document"`
 
           - `Source source`
 
@@ -4016,7 +4012,7 @@ Archive Deployment
 
               Base64-encoded document data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -4034,7 +4030,7 @@ Archive Deployment
 
               Plain text document content.
 
-              - `Type type`
+              - `JsonValue type = "text"`
 
               - `String data`
 
@@ -4042,7 +4038,7 @@ Archive Deployment
 
                 minLength: 1
 
-              - `MediaType mediaType`
+              - `JsonValue mediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -4050,7 +4046,7 @@ Archive Deployment
 
               Document referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -4062,7 +4058,7 @@ Archive Deployment
 
               Document referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -4082,13 +4078,13 @@ Archive Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type type`
+          - `JsonValue type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `Type type`
+      - `JsonValue type = "user.define_outcome"`
 
       - `String description`
 
@@ -4102,7 +4098,7 @@ Archive Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type type`
+          - `JsonValue type = "file"`
 
           - `String fileId`
 
@@ -4112,7 +4108,7 @@ Archive Deployment
 
           Rubric content provided inline as text.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String content`
 
@@ -4128,13 +4124,13 @@ Archive Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `Type type`
+      - `JsonValue type = "system.message"`
 
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String text`
 
@@ -4158,13 +4154,13 @@ Archive Deployment
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `Type type`
+      - `JsonValue type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `Type type`
+      - `JsonValue type = "error"`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -4174,85 +4170,85 @@ Archive Deployment
 
           The deployment's environment was archived.
 
-          - `Type type`
+          - `JsonValue type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `Type type`
+          - `JsonValue type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `Type type`
+          - `JsonValue type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `Type type`
+          - `JsonValue type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `Type type`
+          - `JsonValue type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `Type type`
+          - `JsonValue type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `Type type`
+          - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `Type type`
+          - `JsonValue type = "mcp_egress_blocked_error"`
 
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
@@ -4262,7 +4258,7 @@ Archive Deployment
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `Type type`
+      - `JsonValue type = "github_repository"`
 
       - `String url`
 
@@ -4274,7 +4270,7 @@ Archive Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `Type type`
+          - `JsonValue type = "branch"`
 
           - `String name`
 
@@ -4284,7 +4280,7 @@ Archive Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `Type type`
+          - `JsonValue type = "commit"`
 
           - `String sha`
 
@@ -4300,7 +4296,7 @@ Archive Deployment
 
       A file mounted into each session's container.
 
-      - `Type type`
+      - `JsonValue type = "file"`
 
       - `String fileId`
 
@@ -4314,7 +4310,7 @@ Archive Deployment
 
       A memory store attached to each session created from this deployment.
 
-      - `Type type`
+      - `JsonValue type = "memory_store"`
 
       - `String memoryStoreId`
 
@@ -4336,7 +4332,7 @@ Archive Deployment
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `Type type`
+    - `JsonValue type = "cron"`
 
     - `String expression`
 
@@ -4386,7 +4382,7 @@ Archive Deployment
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `Type type`
+    - `JsonValue type = "limit"`
 
     - `BetaMonetaryAmount maxListCost`
 
@@ -4624,7 +4620,7 @@ Run Deployment Now
 
   A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
 
-  - `Type type`
+  - `JsonValue type = "deployment_run"`
 
   - `String id`
 
@@ -4634,7 +4630,7 @@ Run Deployment Now
 
     Snapshot of the agent at fire time. Always fully resolved — deployments pin agent + version.
 
-    - `Type type`
+    - `JsonValue type = "agent"`
 
     - `String id`
 
@@ -4660,7 +4656,7 @@ Run Deployment Now
 
       The deployment's environment was archived.
 
-      - `Type type`
+      - `JsonValue type = "environment_archived_error"`
 
       - `String message`
 
@@ -4670,7 +4666,7 @@ Run Deployment Now
 
       The deployment's agent was archived.
 
-      - `Type type`
+      - `JsonValue type = "agent_archived_error"`
 
       - `String message`
 
@@ -4680,7 +4676,7 @@ Run Deployment Now
 
       The deployment's environment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "environment_not_found_error"`
 
       - `String message`
 
@@ -4690,7 +4686,7 @@ Run Deployment Now
 
       A vault referenced by the deployment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "vault_not_found_error"`
 
       - `String message`
 
@@ -4700,7 +4696,7 @@ Run Deployment Now
 
       A vault referenced by the deployment is archived.
 
-      - `Type type`
+      - `JsonValue type = "vault_archived_error"`
 
       - `String message`
 
@@ -4710,7 +4706,7 @@ Run Deployment Now
 
       A file resource referenced by the deployment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "file_not_found_error"`
 
       - `String message`
 
@@ -4720,7 +4716,7 @@ Run Deployment Now
 
       A memory store referenced by the deployment is archived.
 
-      - `Type type`
+      - `JsonValue type = "memory_store_archived_error"`
 
       - `String message`
 
@@ -4730,7 +4726,7 @@ Run Deployment Now
 
       A skill referenced by the deployment's agent no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "skill_not_found_error"`
 
       - `String message`
 
@@ -4740,7 +4736,7 @@ Run Deployment Now
 
       A referenced resource no longer exists and its kind was not reported.
 
-      - `Type type`
+      - `JsonValue type = "session_resource_not_found_error"`
 
       - `String message`
 
@@ -4750,7 +4746,7 @@ Run Deployment Now
 
       The deployment's workspace was archived.
 
-      - `Type type`
+      - `JsonValue type = "workspace_archived_error"`
 
       - `String message`
 
@@ -4760,7 +4756,7 @@ Run Deployment Now
 
       The deployment's organization is disabled.
 
-      - `Type type`
+      - `JsonValue type = "organization_disabled_error"`
 
       - `String message`
 
@@ -4770,7 +4766,7 @@ Run Deployment Now
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
-      - `Type type`
+      - `JsonValue type = "session_rate_limited_error"`
 
       - `String message`
 
@@ -4780,7 +4776,7 @@ Run Deployment Now
 
       The session create request was rejected with a non-retryable validation error.
 
-      - `Type type`
+      - `JsonValue type = "session_creation_rejected_error"`
 
       - `String message`
 
@@ -4790,7 +4786,7 @@ Run Deployment Now
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
-      - `Type type`
+      - `JsonValue type = "unknown_error"`
 
       - `String message`
 
@@ -4800,7 +4796,7 @@ Run Deployment Now
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-      - `Type type`
+      - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
       - `String message`
 
@@ -4810,7 +4806,7 @@ Run Deployment Now
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-      - `Type type`
+      - `JsonValue type = "mcp_egress_blocked_error"`
 
       - `String message`
 
@@ -4828,7 +4824,7 @@ Run Deployment Now
 
       The run was fired by the deployment's cron schedule.
 
-      - `Type type`
+      - `JsonValue type = "schedule"`
 
       - `LocalDateTime scheduledAt`
 
@@ -4840,7 +4836,7 @@ Run Deployment Now
 
       The run was started manually by creating a session directly against the deployment.
 
-      - `Type type`
+      - `JsonValue type = "manual"`
 
 ### Example
 
@@ -5024,7 +5020,7 @@ Pause Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `Type type`
+  - `JsonValue type = "deployment"`
 
   - `String id`
 
@@ -5034,7 +5030,7 @@ Pause Deployment
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `Type type`
+    - `JsonValue type = "agent"`
 
     - `String id`
 
@@ -5070,7 +5066,7 @@ Pause Deployment
 
       A user message sent to the session.
 
-      - `Type type`
+      - `JsonValue type = "user.message"`
 
       - `List<Content> content`
 
@@ -5080,7 +5076,7 @@ Pause Deployment
 
           Regular text content.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String text`
 
@@ -5092,7 +5088,7 @@ Pause Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "image"`
 
           - `Source source`
 
@@ -5102,7 +5098,7 @@ Pause Deployment
 
               Base64-encoded image data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -5120,7 +5116,7 @@ Pause Deployment
 
               Image referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -5132,7 +5128,7 @@ Pause Deployment
 
               Image referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -5144,7 +5140,7 @@ Pause Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "document"`
 
           - `Source source`
 
@@ -5154,7 +5150,7 @@ Pause Deployment
 
               Base64-encoded document data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -5172,7 +5168,7 @@ Pause Deployment
 
               Plain text document content.
 
-              - `Type type`
+              - `JsonValue type = "text"`
 
               - `String data`
 
@@ -5180,7 +5176,7 @@ Pause Deployment
 
                 minLength: 1
 
-              - `MediaType mediaType`
+              - `JsonValue mediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -5188,7 +5184,7 @@ Pause Deployment
 
               Document referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -5200,7 +5196,7 @@ Pause Deployment
 
               Document referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -5220,13 +5216,13 @@ Pause Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type type`
+          - `JsonValue type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `Type type`
+      - `JsonValue type = "user.define_outcome"`
 
       - `String description`
 
@@ -5240,7 +5236,7 @@ Pause Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type type`
+          - `JsonValue type = "file"`
 
           - `String fileId`
 
@@ -5250,7 +5246,7 @@ Pause Deployment
 
           Rubric content provided inline as text.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String content`
 
@@ -5266,13 +5262,13 @@ Pause Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `Type type`
+      - `JsonValue type = "system.message"`
 
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String text`
 
@@ -5296,13 +5292,13 @@ Pause Deployment
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `Type type`
+      - `JsonValue type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `Type type`
+      - `JsonValue type = "error"`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -5312,85 +5308,85 @@ Pause Deployment
 
           The deployment's environment was archived.
 
-          - `Type type`
+          - `JsonValue type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `Type type`
+          - `JsonValue type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `Type type`
+          - `JsonValue type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `Type type`
+          - `JsonValue type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `Type type`
+          - `JsonValue type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `Type type`
+          - `JsonValue type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `Type type`
+          - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `Type type`
+          - `JsonValue type = "mcp_egress_blocked_error"`
 
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
@@ -5400,7 +5396,7 @@ Pause Deployment
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `Type type`
+      - `JsonValue type = "github_repository"`
 
       - `String url`
 
@@ -5412,7 +5408,7 @@ Pause Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `Type type`
+          - `JsonValue type = "branch"`
 
           - `String name`
 
@@ -5422,7 +5418,7 @@ Pause Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `Type type`
+          - `JsonValue type = "commit"`
 
           - `String sha`
 
@@ -5438,7 +5434,7 @@ Pause Deployment
 
       A file mounted into each session's container.
 
-      - `Type type`
+      - `JsonValue type = "file"`
 
       - `String fileId`
 
@@ -5452,7 +5448,7 @@ Pause Deployment
 
       A memory store attached to each session created from this deployment.
 
-      - `Type type`
+      - `JsonValue type = "memory_store"`
 
       - `String memoryStoreId`
 
@@ -5474,7 +5470,7 @@ Pause Deployment
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `Type type`
+    - `JsonValue type = "cron"`
 
     - `String expression`
 
@@ -5524,7 +5520,7 @@ Pause Deployment
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `Type type`
+    - `JsonValue type = "limit"`
 
     - `BetaMonetaryAmount maxListCost`
 
@@ -5762,7 +5758,7 @@ Unpause Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `Type type`
+  - `JsonValue type = "deployment"`
 
   - `String id`
 
@@ -5772,7 +5768,7 @@ Unpause Deployment
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `Type type`
+    - `JsonValue type = "agent"`
 
     - `String id`
 
@@ -5808,7 +5804,7 @@ Unpause Deployment
 
       A user message sent to the session.
 
-      - `Type type`
+      - `JsonValue type = "user.message"`
 
       - `List<Content> content`
 
@@ -5818,7 +5814,7 @@ Unpause Deployment
 
           Regular text content.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String text`
 
@@ -5830,7 +5826,7 @@ Unpause Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "image"`
 
           - `Source source`
 
@@ -5840,7 +5836,7 @@ Unpause Deployment
 
               Base64-encoded image data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -5858,7 +5854,7 @@ Unpause Deployment
 
               Image referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -5870,7 +5866,7 @@ Unpause Deployment
 
               Image referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -5882,7 +5878,7 @@ Unpause Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "document"`
 
           - `Source source`
 
@@ -5892,7 +5888,7 @@ Unpause Deployment
 
               Base64-encoded document data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -5910,7 +5906,7 @@ Unpause Deployment
 
               Plain text document content.
 
-              - `Type type`
+              - `JsonValue type = "text"`
 
               - `String data`
 
@@ -5918,7 +5914,7 @@ Unpause Deployment
 
                 minLength: 1
 
-              - `MediaType mediaType`
+              - `JsonValue mediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -5926,7 +5922,7 @@ Unpause Deployment
 
               Document referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -5938,7 +5934,7 @@ Unpause Deployment
 
               Document referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -5958,13 +5954,13 @@ Unpause Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type type`
+          - `JsonValue type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `Type type`
+      - `JsonValue type = "user.define_outcome"`
 
       - `String description`
 
@@ -5978,7 +5974,7 @@ Unpause Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type type`
+          - `JsonValue type = "file"`
 
           - `String fileId`
 
@@ -5988,7 +5984,7 @@ Unpause Deployment
 
           Rubric content provided inline as text.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String content`
 
@@ -6004,13 +6000,13 @@ Unpause Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `Type type`
+      - `JsonValue type = "system.message"`
 
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String text`
 
@@ -6034,13 +6030,13 @@ Unpause Deployment
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `Type type`
+      - `JsonValue type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `Type type`
+      - `JsonValue type = "error"`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -6050,85 +6046,85 @@ Unpause Deployment
 
           The deployment's environment was archived.
 
-          - `Type type`
+          - `JsonValue type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `Type type`
+          - `JsonValue type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `Type type`
+          - `JsonValue type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `Type type`
+          - `JsonValue type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `Type type`
+          - `JsonValue type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `Type type`
+          - `JsonValue type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `Type type`
+          - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `Type type`
+          - `JsonValue type = "mcp_egress_blocked_error"`
 
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
@@ -6138,7 +6134,7 @@ Unpause Deployment
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `Type type`
+      - `JsonValue type = "github_repository"`
 
       - `String url`
 
@@ -6150,7 +6146,7 @@ Unpause Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `Type type`
+          - `JsonValue type = "branch"`
 
           - `String name`
 
@@ -6160,7 +6156,7 @@ Unpause Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `Type type`
+          - `JsonValue type = "commit"`
 
           - `String sha`
 
@@ -6176,7 +6172,7 @@ Unpause Deployment
 
       A file mounted into each session's container.
 
-      - `Type type`
+      - `JsonValue type = "file"`
 
       - `String fileId`
 
@@ -6190,7 +6186,7 @@ Unpause Deployment
 
       A memory store attached to each session created from this deployment.
 
-      - `Type type`
+      - `JsonValue type = "memory_store"`
 
       - `String memoryStoreId`
 
@@ -6212,7 +6208,7 @@ Unpause Deployment
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `Type type`
+    - `JsonValue type = "cron"`
 
     - `String expression`
 
@@ -6262,7 +6258,7 @@ Unpause Deployment
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `Type type`
+    - `JsonValue type = "limit"`
 
     - `BetaMonetaryAmount maxListCost`
 
@@ -6372,7 +6368,7 @@ public final class Main {
 
   The deployment's agent was archived.
 
-  - `Type type`
+  - `JsonValue type = "agent_archived_error"`
 
 ### Beta Managed Agents Cron Schedule
 
@@ -6380,7 +6376,7 @@ public final class Main {
 
   5-field POSIX cron schedule with computed runtime timestamps.
 
-  - `Type type`
+  - `JsonValue type = "cron"`
 
   - `String expression`
 
@@ -6410,7 +6406,7 @@ public final class Main {
 
   5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
-  - `Type type`
+  - `JsonValue type = "cron"`
 
   - `String expression`
 
@@ -6430,7 +6426,7 @@ public final class Main {
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `Type type`
+  - `JsonValue type = "deployment"`
 
   - `String id`
 
@@ -6440,7 +6436,7 @@ public final class Main {
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `Type type`
+    - `JsonValue type = "agent"`
 
     - `String id`
 
@@ -6476,7 +6472,7 @@ public final class Main {
 
       A user message sent to the session.
 
-      - `Type type`
+      - `JsonValue type = "user.message"`
 
       - `List<Content> content`
 
@@ -6486,7 +6482,7 @@ public final class Main {
 
           Regular text content.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String text`
 
@@ -6498,7 +6494,7 @@ public final class Main {
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "image"`
 
           - `Source source`
 
@@ -6508,7 +6504,7 @@ public final class Main {
 
               Base64-encoded image data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -6526,7 +6522,7 @@ public final class Main {
 
               Image referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -6538,7 +6534,7 @@ public final class Main {
 
               Image referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -6550,7 +6546,7 @@ public final class Main {
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "document"`
 
           - `Source source`
 
@@ -6560,7 +6556,7 @@ public final class Main {
 
               Base64-encoded document data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -6578,7 +6574,7 @@ public final class Main {
 
               Plain text document content.
 
-              - `Type type`
+              - `JsonValue type = "text"`
 
               - `String data`
 
@@ -6586,7 +6582,7 @@ public final class Main {
 
                 minLength: 1
 
-              - `MediaType mediaType`
+              - `JsonValue mediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -6594,7 +6590,7 @@ public final class Main {
 
               Document referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -6606,7 +6602,7 @@ public final class Main {
 
               Document referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -6626,13 +6622,13 @@ public final class Main {
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type type`
+          - `JsonValue type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `Type type`
+      - `JsonValue type = "user.define_outcome"`
 
       - `String description`
 
@@ -6646,7 +6642,7 @@ public final class Main {
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type type`
+          - `JsonValue type = "file"`
 
           - `String fileId`
 
@@ -6656,7 +6652,7 @@ public final class Main {
 
           Rubric content provided inline as text.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String content`
 
@@ -6672,13 +6668,13 @@ public final class Main {
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `Type type`
+      - `JsonValue type = "system.message"`
 
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String text`
 
@@ -6702,13 +6698,13 @@ public final class Main {
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `Type type`
+      - `JsonValue type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `Type type`
+      - `JsonValue type = "error"`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -6718,85 +6714,85 @@ public final class Main {
 
           The deployment's environment was archived.
 
-          - `Type type`
+          - `JsonValue type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `Type type`
+          - `JsonValue type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `Type type`
+          - `JsonValue type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `Type type`
+          - `JsonValue type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `Type type`
+          - `JsonValue type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `Type type`
+          - `JsonValue type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `Type type`
+          - `JsonValue type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `Type type`
+          - `JsonValue type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `Type type`
+          - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `Type type`
+          - `JsonValue type = "mcp_egress_blocked_error"`
 
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
@@ -6806,7 +6802,7 @@ public final class Main {
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `Type type`
+      - `JsonValue type = "github_repository"`
 
       - `String url`
 
@@ -6818,7 +6814,7 @@ public final class Main {
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `Type type`
+          - `JsonValue type = "branch"`
 
           - `String name`
 
@@ -6828,7 +6824,7 @@ public final class Main {
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `Type type`
+          - `JsonValue type = "commit"`
 
           - `String sha`
 
@@ -6844,7 +6840,7 @@ public final class Main {
 
       A file mounted into each session's container.
 
-      - `Type type`
+      - `JsonValue type = "file"`
 
       - `String fileId`
 
@@ -6858,7 +6854,7 @@ public final class Main {
 
       A memory store attached to each session created from this deployment.
 
-      - `Type type`
+      - `JsonValue type = "memory_store"`
 
       - `String memoryStoreId`
 
@@ -6880,7 +6876,7 @@ public final class Main {
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `Type type`
+    - `JsonValue type = "cron"`
 
     - `String expression`
 
@@ -6930,7 +6926,7 @@ public final class Main {
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `Type type`
+    - `JsonValue type = "limit"`
 
     - `BetaMonetaryAmount maxListCost`
 
@@ -6954,7 +6950,7 @@ public final class Main {
 
     A user message sent to the session.
 
-    - `Type type`
+    - `JsonValue type = "user.message"`
 
     - `List<Content> content`
 
@@ -6964,7 +6960,7 @@ public final class Main {
 
         Regular text content.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String text`
 
@@ -6976,7 +6972,7 @@ public final class Main {
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Type type`
+        - `JsonValue type = "image"`
 
         - `Source source`
 
@@ -6986,7 +6982,7 @@ public final class Main {
 
             Base64-encoded image data.
 
-            - `Type type`
+            - `JsonValue type = "base64"`
 
             - `String data`
 
@@ -7004,7 +7000,7 @@ public final class Main {
 
             Image referenced by URL.
 
-            - `Type type`
+            - `JsonValue type = "url"`
 
             - `String url`
 
@@ -7016,7 +7012,7 @@ public final class Main {
 
             Image referenced by file ID.
 
-            - `Type type`
+            - `JsonValue type = "file"`
 
             - `String fileId`
 
@@ -7028,7 +7024,7 @@ public final class Main {
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Type type`
+        - `JsonValue type = "document"`
 
         - `Source source`
 
@@ -7038,7 +7034,7 @@ public final class Main {
 
             Base64-encoded document data.
 
-            - `Type type`
+            - `JsonValue type = "base64"`
 
             - `String data`
 
@@ -7056,7 +7052,7 @@ public final class Main {
 
             Plain text document content.
 
-            - `Type type`
+            - `JsonValue type = "text"`
 
             - `String data`
 
@@ -7064,7 +7060,7 @@ public final class Main {
 
               minLength: 1
 
-            - `MediaType mediaType`
+            - `JsonValue mediaType = "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
@@ -7072,7 +7068,7 @@ public final class Main {
 
             Document referenced by URL.
 
-            - `Type type`
+            - `JsonValue type = "url"`
 
             - `String url`
 
@@ -7084,7 +7080,7 @@ public final class Main {
 
             Document referenced by file ID.
 
-            - `Type type`
+            - `JsonValue type = "file"`
 
             - `String fileId`
 
@@ -7104,13 +7100,13 @@ public final class Main {
 
         Placeholder for content withheld by Anthropic model policy.
 
-        - `Type type`
+        - `JsonValue type = "redacted"`
 
   - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
     An outcome the agent should work toward. The agent begins work on receipt.
 
-    - `Type type`
+    - `JsonValue type = "user.define_outcome"`
 
     - `String description`
 
@@ -7124,7 +7120,7 @@ public final class Main {
 
         Rubric referenced by a file uploaded via the Files API.
 
-        - `Type type`
+        - `JsonValue type = "file"`
 
         - `String fileId`
 
@@ -7134,7 +7130,7 @@ public final class Main {
 
         Rubric content provided inline as text.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String content`
 
@@ -7150,13 +7146,13 @@ public final class Main {
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-    - `Type type`
+    - `JsonValue type = "system.message"`
 
     - `List<BetaManagedAgentsSystemContentBlock> content`
 
       System content blocks to append. Text-only.
 
-      - `Type type`
+      - `JsonValue type = "text"`
 
       - `String text`
 
@@ -7174,7 +7170,7 @@ public final class Main {
 
     Parameters for sending a user message to the session.
 
-    - `Type type`
+    - `JsonValue type = "user.message"`
 
     - `List<Content> content`
 
@@ -7184,7 +7180,7 @@ public final class Main {
 
         Regular text content.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String text`
 
@@ -7196,7 +7192,7 @@ public final class Main {
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `Type type`
+        - `JsonValue type = "image"`
 
         - `Source source`
 
@@ -7206,7 +7202,7 @@ public final class Main {
 
             Base64-encoded image data.
 
-            - `Type type`
+            - `JsonValue type = "base64"`
 
             - `String data`
 
@@ -7224,7 +7220,7 @@ public final class Main {
 
             Image referenced by URL.
 
-            - `Type type`
+            - `JsonValue type = "url"`
 
             - `String url`
 
@@ -7236,7 +7232,7 @@ public final class Main {
 
             Image referenced by file ID.
 
-            - `Type type`
+            - `JsonValue type = "file"`
 
             - `String fileId`
 
@@ -7248,7 +7244,7 @@ public final class Main {
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `Type type`
+        - `JsonValue type = "document"`
 
         - `Source source`
 
@@ -7258,7 +7254,7 @@ public final class Main {
 
             Base64-encoded document data.
 
-            - `Type type`
+            - `JsonValue type = "base64"`
 
             - `String data`
 
@@ -7276,7 +7272,7 @@ public final class Main {
 
             Plain text document content.
 
-            - `Type type`
+            - `JsonValue type = "text"`
 
             - `String data`
 
@@ -7284,7 +7280,7 @@ public final class Main {
 
               minLength: 1
 
-            - `MediaType mediaType`
+            - `JsonValue mediaType = "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
@@ -7292,7 +7288,7 @@ public final class Main {
 
             Document referenced by URL.
 
-            - `Type type`
+            - `JsonValue type = "url"`
 
             - `String url`
 
@@ -7304,7 +7300,7 @@ public final class Main {
 
             Document referenced by file ID.
 
-            - `Type type`
+            - `JsonValue type = "file"`
 
             - `String fileId`
 
@@ -7324,13 +7320,13 @@ public final class Main {
 
         Placeholder for content withheld by Anthropic model policy.
 
-        - `Type type`
+        - `JsonValue type = "redacted"`
 
   - `class BetaManagedAgentsUserDefineOutcomeEventParams`
 
     Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
-    - `Type type`
+    - `JsonValue type = "user.define_outcome"`
 
     - `String description`
 
@@ -7344,7 +7340,7 @@ public final class Main {
 
         Rubric referenced by a file uploaded via the Files API.
 
-        - `Type type`
+        - `JsonValue type = "file"`
 
         - `String fileId`
 
@@ -7354,7 +7350,7 @@ public final class Main {
 
         Rubric content provided inline as text.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String content`
 
@@ -7372,13 +7368,13 @@ public final class Main {
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
-    - `Type type`
+    - `JsonValue type = "system.message"`
 
     - `List<BetaManagedAgentsSystemContentBlock> content`
 
       System content blocks to append. Text-only.
 
-      - `Type type`
+      - `JsonValue type = "text"`
 
       - `String text`
 
@@ -7396,13 +7392,13 @@ public final class Main {
 
     The caller invoked the pause endpoint on the deployment.
 
-    - `Type type`
+    - `JsonValue type = "manual"`
 
   - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
     A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-    - `Type type`
+    - `JsonValue type = "error"`
 
     - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -7412,85 +7408,85 @@ public final class Main {
 
         The deployment's environment was archived.
 
-        - `Type type`
+        - `JsonValue type = "environment_archived_error"`
 
       - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
         The deployment's agent was archived.
 
-        - `Type type`
+        - `JsonValue type = "agent_archived_error"`
 
       - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
         The deployment's environment no longer exists.
 
-        - `Type type`
+        - `JsonValue type = "environment_not_found_error"`
 
       - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
         A vault referenced by the deployment no longer exists.
 
-        - `Type type`
+        - `JsonValue type = "vault_not_found_error"`
 
       - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
         A file resource referenced by the deployment no longer exists.
 
-        - `Type type`
+        - `JsonValue type = "file_not_found_error"`
 
       - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
         A referenced resource no longer exists and its kind was not reported.
 
-        - `Type type`
+        - `JsonValue type = "session_resource_not_found_error"`
 
       - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
         The deployment's workspace was archived.
 
-        - `Type type`
+        - `JsonValue type = "workspace_archived_error"`
 
       - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
         The deployment's organization is disabled.
 
-        - `Type type`
+        - `JsonValue type = "organization_disabled_error"`
 
       - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
         A memory store referenced by the deployment is archived.
 
-        - `Type type`
+        - `JsonValue type = "memory_store_archived_error"`
 
       - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
         A skill referenced by the deployment's agent no longer exists.
 
-        - `Type type`
+        - `JsonValue type = "skill_not_found_error"`
 
       - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
         A vault referenced by the deployment is archived.
 
-        - `Type type`
+        - `JsonValue type = "vault_archived_error"`
 
       - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
         An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-        - `Type type`
+        - `JsonValue type = "unknown_error"`
 
       - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
         The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-        - `Type type`
+        - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
       - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
         An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-        - `Type type`
+        - `JsonValue type = "mcp_egress_blocked_error"`
 
 ### Beta Managed Agents Deployment Paused Reason Error
 
@@ -7502,85 +7498,85 @@ public final class Main {
 
     The deployment's environment was archived.
 
-    - `Type type`
+    - `JsonValue type = "environment_archived_error"`
 
   - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
     The deployment's agent was archived.
 
-    - `Type type`
+    - `JsonValue type = "agent_archived_error"`
 
   - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
     The deployment's environment no longer exists.
 
-    - `Type type`
+    - `JsonValue type = "environment_not_found_error"`
 
   - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
     A vault referenced by the deployment no longer exists.
 
-    - `Type type`
+    - `JsonValue type = "vault_not_found_error"`
 
   - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
     A file resource referenced by the deployment no longer exists.
 
-    - `Type type`
+    - `JsonValue type = "file_not_found_error"`
 
   - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
     A referenced resource no longer exists and its kind was not reported.
 
-    - `Type type`
+    - `JsonValue type = "session_resource_not_found_error"`
 
   - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
     The deployment's workspace was archived.
 
-    - `Type type`
+    - `JsonValue type = "workspace_archived_error"`
 
   - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
     The deployment's organization is disabled.
 
-    - `Type type`
+    - `JsonValue type = "organization_disabled_error"`
 
   - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
     A memory store referenced by the deployment is archived.
 
-    - `Type type`
+    - `JsonValue type = "memory_store_archived_error"`
 
   - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
     A skill referenced by the deployment's agent no longer exists.
 
-    - `Type type`
+    - `JsonValue type = "skill_not_found_error"`
 
   - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
     A vault referenced by the deployment is archived.
 
-    - `Type type`
+    - `JsonValue type = "vault_archived_error"`
 
   - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
     An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-    - `Type type`
+    - `JsonValue type = "unknown_error"`
 
   - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
     The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-    - `Type type`
+    - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
   - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
     An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-    - `Type type`
+    - `JsonValue type = "mcp_egress_blocked_error"`
 
 ### Beta Managed Agents Deployment Status
 
@@ -7602,13 +7598,13 @@ public final class Main {
 
   Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-  - `Type type`
+  - `JsonValue type = "system.message"`
 
   - `List<BetaManagedAgentsSystemContentBlock> content`
 
     System content blocks to append. Text-only.
 
-    - `Type type`
+    - `JsonValue type = "text"`
 
     - `String text`
 
@@ -7622,7 +7618,7 @@ public final class Main {
 
   An outcome the agent should work toward. The agent begins work on receipt.
 
-  - `Type type`
+  - `JsonValue type = "user.define_outcome"`
 
   - `String description`
 
@@ -7636,7 +7632,7 @@ public final class Main {
 
       Rubric referenced by a file uploaded via the Files API.
 
-      - `Type type`
+      - `JsonValue type = "file"`
 
       - `String fileId`
 
@@ -7646,7 +7642,7 @@ public final class Main {
 
       Rubric content provided inline as text.
 
-      - `Type type`
+      - `JsonValue type = "text"`
 
       - `String content`
 
@@ -7664,7 +7660,7 @@ public final class Main {
 
   A user message sent to the session.
 
-  - `Type type`
+  - `JsonValue type = "user.message"`
 
   - `List<Content> content`
 
@@ -7674,7 +7670,7 @@ public final class Main {
 
       Regular text content.
 
-      - `Type type`
+      - `JsonValue type = "text"`
 
       - `String text`
 
@@ -7686,7 +7682,7 @@ public final class Main {
 
       Image content specified directly as base64 data or as a reference via a URL.
 
-      - `Type type`
+      - `JsonValue type = "image"`
 
       - `Source source`
 
@@ -7696,7 +7692,7 @@ public final class Main {
 
           Base64-encoded image data.
 
-          - `Type type`
+          - `JsonValue type = "base64"`
 
           - `String data`
 
@@ -7714,7 +7710,7 @@ public final class Main {
 
           Image referenced by URL.
 
-          - `Type type`
+          - `JsonValue type = "url"`
 
           - `String url`
 
@@ -7726,7 +7722,7 @@ public final class Main {
 
           Image referenced by file ID.
 
-          - `Type type`
+          - `JsonValue type = "file"`
 
           - `String fileId`
 
@@ -7738,7 +7734,7 @@ public final class Main {
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `Type type`
+      - `JsonValue type = "document"`
 
       - `Source source`
 
@@ -7748,7 +7744,7 @@ public final class Main {
 
           Base64-encoded document data.
 
-          - `Type type`
+          - `JsonValue type = "base64"`
 
           - `String data`
 
@@ -7766,7 +7762,7 @@ public final class Main {
 
           Plain text document content.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String data`
 
@@ -7774,7 +7770,7 @@ public final class Main {
 
             minLength: 1
 
-          - `MediaType mediaType`
+          - `JsonValue mediaType = "text/plain"`
 
             MIME type of the text content. Must be "text/plain".
 
@@ -7782,7 +7778,7 @@ public final class Main {
 
           Document referenced by URL.
 
-          - `Type type`
+          - `JsonValue type = "url"`
 
           - `String url`
 
@@ -7794,7 +7790,7 @@ public final class Main {
 
           Document referenced by file ID.
 
-          - `Type type`
+          - `JsonValue type = "file"`
 
           - `String fileId`
 
@@ -7814,7 +7810,7 @@ public final class Main {
 
       Placeholder for content withheld by Anthropic model policy.
 
-      - `Type type`
+      - `JsonValue type = "redacted"`
 
 ### Beta Managed Agents Environment Archived Deployment Paused Reason Error
 
@@ -7822,7 +7818,7 @@ public final class Main {
 
   The deployment's environment was archived.
 
-  - `Type type`
+  - `JsonValue type = "environment_archived_error"`
 
 ### Beta Managed Agents Environment Not Found Deployment Paused Reason Error
 
@@ -7830,7 +7826,7 @@ public final class Main {
 
   The deployment's environment no longer exists.
 
-  - `Type type`
+  - `JsonValue type = "environment_not_found_error"`
 
 ### Beta Managed Agents Error Deployment Paused Reason
 
@@ -7838,7 +7834,7 @@ public final class Main {
 
   A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-  - `Type type`
+  - `JsonValue type = "error"`
 
   - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -7848,85 +7844,85 @@ public final class Main {
 
       The deployment's environment was archived.
 
-      - `Type type`
+      - `JsonValue type = "environment_archived_error"`
 
     - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
       The deployment's agent was archived.
 
-      - `Type type`
+      - `JsonValue type = "agent_archived_error"`
 
     - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
       The deployment's environment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "environment_not_found_error"`
 
     - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
       A vault referenced by the deployment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "vault_not_found_error"`
 
     - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
       A file resource referenced by the deployment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "file_not_found_error"`
 
     - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
       A referenced resource no longer exists and its kind was not reported.
 
-      - `Type type`
+      - `JsonValue type = "session_resource_not_found_error"`
 
     - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
       The deployment's workspace was archived.
 
-      - `Type type`
+      - `JsonValue type = "workspace_archived_error"`
 
     - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
       The deployment's organization is disabled.
 
-      - `Type type`
+      - `JsonValue type = "organization_disabled_error"`
 
     - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
       A memory store referenced by the deployment is archived.
 
-      - `Type type`
+      - `JsonValue type = "memory_store_archived_error"`
 
     - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
       A skill referenced by the deployment's agent no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "skill_not_found_error"`
 
     - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
       A vault referenced by the deployment is archived.
 
-      - `Type type`
+      - `JsonValue type = "vault_archived_error"`
 
     - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
       An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-      - `Type type`
+      - `JsonValue type = "unknown_error"`
 
     - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-      - `Type type`
+      - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
     - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-      - `Type type`
+      - `JsonValue type = "mcp_egress_blocked_error"`
 
 ### Beta Managed Agents File Not Found Deployment Paused Reason Error
 
@@ -7934,7 +7930,7 @@ public final class Main {
 
   A file resource referenced by the deployment no longer exists.
 
-  - `Type type`
+  - `JsonValue type = "file_not_found_error"`
 
 ### Beta Managed Agents File Resource Config
 
@@ -7942,7 +7938,7 @@ public final class Main {
 
   A file mounted into each session's container.
 
-  - `Type type`
+  - `JsonValue type = "file"`
 
   - `String fileId`
 
@@ -7958,7 +7954,7 @@ public final class Main {
 
   A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-  - `Type type`
+  - `JsonValue type = "github_repository"`
 
   - `String url`
 
@@ -7970,7 +7966,7 @@ public final class Main {
 
     - `class BetaManagedAgentsBranchCheckout`
 
-      - `Type type`
+      - `JsonValue type = "branch"`
 
       - `String name`
 
@@ -7980,7 +7976,7 @@ public final class Main {
 
     - `class BetaManagedAgentsCommitCheckout`
 
-      - `Type type`
+      - `JsonValue type = "commit"`
 
       - `String sha`
 
@@ -7998,7 +7994,7 @@ public final class Main {
 
   The caller invoked the pause endpoint on the deployment.
 
-  - `Type type`
+  - `JsonValue type = "manual"`
 
 ### Beta Managed Agents MCP Egress Blocked Deployment Paused Reason Error
 
@@ -8006,7 +8002,7 @@ public final class Main {
 
   An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-  - `Type type`
+  - `JsonValue type = "mcp_egress_blocked_error"`
 
 ### Beta Managed Agents Memory Store Archived Deployment Paused Reason Error
 
@@ -8014,7 +8010,7 @@ public final class Main {
 
   A memory store referenced by the deployment is archived.
 
-  - `Type type`
+  - `JsonValue type = "memory_store_archived_error"`
 
 ### Beta Managed Agents Memory Store Resource Config
 
@@ -8022,7 +8018,7 @@ public final class Main {
 
   A memory store attached to each session created from this deployment.
 
-  - `Type type`
+  - `JsonValue type = "memory_store"`
 
   - `String memoryStoreId`
 
@@ -8046,7 +8042,7 @@ public final class Main {
 
   The deployment's organization is disabled.
 
-  - `Type type`
+  - `JsonValue type = "organization_disabled_error"`
 
 ### Beta Managed Agents Schedule
 
@@ -8054,7 +8050,7 @@ public final class Main {
 
   A recurring schedule with computed runtime timestamps. Discriminated union — only cron is supported currently.
 
-  - `Type type`
+  - `JsonValue type = "cron"`
 
   - `String expression`
 
@@ -8084,7 +8080,7 @@ public final class Main {
 
   A recurring schedule. Discriminated union — only cron is supported currently.
 
-  - `Type type`
+  - `JsonValue type = "cron"`
 
   - `String expression`
 
@@ -8104,7 +8100,7 @@ public final class Main {
 
   The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-  - `Type type`
+  - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
 ### Beta Managed Agents Session Resource Config
 
@@ -8116,7 +8112,7 @@ public final class Main {
 
     A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-    - `Type type`
+    - `JsonValue type = "github_repository"`
 
     - `String url`
 
@@ -8128,7 +8124,7 @@ public final class Main {
 
       - `class BetaManagedAgentsBranchCheckout`
 
-        - `Type type`
+        - `JsonValue type = "branch"`
 
         - `String name`
 
@@ -8138,7 +8134,7 @@ public final class Main {
 
       - `class BetaManagedAgentsCommitCheckout`
 
-        - `Type type`
+        - `JsonValue type = "commit"`
 
         - `String sha`
 
@@ -8154,7 +8150,7 @@ public final class Main {
 
     A file mounted into each session's container.
 
-    - `Type type`
+    - `JsonValue type = "file"`
 
     - `String fileId`
 
@@ -8168,7 +8164,7 @@ public final class Main {
 
     A memory store attached to each session created from this deployment.
 
-    - `Type type`
+    - `JsonValue type = "memory_store"`
 
     - `String memoryStoreId`
 
@@ -8192,7 +8188,7 @@ public final class Main {
 
   A referenced resource no longer exists and its kind was not reported.
 
-  - `Type type`
+  - `JsonValue type = "session_resource_not_found_error"`
 
 ### Beta Managed Agents Skill Not Found Deployment Paused Reason Error
 
@@ -8200,7 +8196,7 @@ public final class Main {
 
   A skill referenced by the deployment's agent no longer exists.
 
-  - `Type type`
+  - `JsonValue type = "skill_not_found_error"`
 
 ### Beta Managed Agents Unknown Deployment Paused Reason Error
 
@@ -8208,7 +8204,7 @@ public final class Main {
 
   An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-  - `Type type`
+  - `JsonValue type = "unknown_error"`
 
 ### Beta Managed Agents Vault Archived Deployment Paused Reason Error
 
@@ -8216,7 +8212,7 @@ public final class Main {
 
   A vault referenced by the deployment is archived.
 
-  - `Type type`
+  - `JsonValue type = "vault_archived_error"`
 
 ### Beta Managed Agents Vault Not Found Deployment Paused Reason Error
 
@@ -8224,7 +8220,7 @@ public final class Main {
 
   A vault referenced by the deployment no longer exists.
 
-  - `Type type`
+  - `JsonValue type = "vault_not_found_error"`
 
 ### Beta Managed Agents Workspace Archived Deployment Paused Reason Error
 
@@ -8232,4 +8228,4 @@ public final class Main {
 
   The deployment's workspace was archived.
 
-  - `Type type`
+  - `JsonValue type = "workspace_archived_error"`

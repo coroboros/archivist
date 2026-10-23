@@ -85,7 +85,7 @@ List Memory Versions
 
 - `class ManagedAgentsMemoryVersion`
 
-  - `Type type`
+  - `"memory_version" type`
 
   - `string id`
 
@@ -247,7 +247,7 @@ Retrieve a Memory Version
 
 - `class ManagedAgentsMemoryVersion`
 
-  - `Type type`
+  - `"memory_version" type`
 
   - `string id`
 
@@ -393,7 +393,7 @@ Redact a Memory Version
 
 - `class ManagedAgentsMemoryVersion`
 
-  - `Type type`
+  - `"memory_version" type`
 
   - `string id`
 
@@ -513,7 +513,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
   - `class ManagedAgentsSessionActor`
 
-    - `Type type`
+    - `"session_actor" type`
 
     - `string sessionID`
 
@@ -521,7 +521,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
   - `class ManagedAgentsAPIActor`
 
-    - `Type type`
+    - `"api_actor" type`
 
     - `string apiKeyID`
 
@@ -529,7 +529,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
   - `class ManagedAgentsUserActor`
 
-    - `Type type`
+    - `"user_actor" type`
 
     - `string userID`
 
@@ -547,7 +547,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
 - `class ManagedAgentsAPIActor`
 
-  - `Type type`
+  - `"api_actor" type`
 
   - `string apiKeyID`
 
@@ -557,7 +557,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
 - `class ManagedAgentsMemoryVersion`
 
-  - `Type type`
+  - `"memory_version" type`
 
   - `string id`
 
@@ -647,7 +647,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
 - `class ManagedAgentsSessionActor`
 
-  - `Type type`
+  - `"session_actor" type`
 
   - `string sessionID`
 
@@ -657,7 +657,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
 - `class ManagedAgentsUserActor`
 
-  - `Type type`
+  - `"user_actor" type`
 
   - `string userID`
 

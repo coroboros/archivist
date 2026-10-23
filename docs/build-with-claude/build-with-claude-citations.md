@@ -17,7 +17,7 @@ featureMetadata:
     Claude API: ga
     Claude Platform on AWS: ga
     Amazon Bedrock: ga
-    Google Cloud: ga
+    Claude Models on Google Cloud (Google managed): ga
     Microsoft Foundry: ga
 ---
 
@@ -223,7 +223,9 @@ The following example shows how to enable citations on a plain text document wit
       .source(source)
       .title("My Document")
       .context("This is a trustworthy document.")
-      .citations(CitationsConfigParam.builder().enabled(true).build())
+      .citations(CitationsConfigParam.builder()
+          .enabled(true)
+          .build())
       .build();
 
   TextBlockParam textBlockParam = TextBlockParam.builder()
@@ -272,7 +274,7 @@ The following example shows how to enable citations on a plain text document wit
               ],
           ],
       ],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
   );
 
   echo json_encode($response, JSON_PRETTY_PRINT);
@@ -602,8 +604,12 @@ The citation blocks generated in responses cannot be cached directly, but the so
           + " ... ".repeat(1000); // Minimum cacheable length
 
   DocumentBlockParam documentParam = DocumentBlockParam.builder()
-      .source(PlainTextSource.builder().data(longDocument).build())
-      .citations(CitationsConfigParam.builder().enabled(true).build())
+      .source(PlainTextSource.builder()
+          .data(longDocument)
+          .build())
+      .citations(CitationsConfigParam.builder()
+          .enabled(true)
+          .build())
       .cacheControl(CacheControlEphemeral.builder().build()) // Cache the document content
       .build();
 
@@ -657,7 +663,7 @@ The citation blocks generated in responses cannot be cached directly, but the so
               ],
           ],
       ],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
   );
 
   echo json_encode($response, JSON_PRETTY_PRINT);
@@ -913,7 +919,9 @@ Plain text documents are automatically chunked into sentences. You can provide t
                   .fileSource(fileId)
                   .title("Document Title")
                   .context("Context about the document that will not be cited from")
-                  .citations(CitationsConfigParam.builder().enabled(true).build())
+                  .citations(CitationsConfigParam.builder()
+                      .enabled(true)
+                      .build())
                   .build()),
               ContentBlockParam.ofText(TextBlockParam.builder()
                   .text("Summarize this document.")
@@ -1199,10 +1207,14 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
       String pdfBase64 = Base64.getEncoder().encodeToString(pdfBytes);
 
       DocumentBlockParam documentParam = DocumentBlockParam.builder()
-          .source(Base64PdfSource.builder().data(pdfBase64).build())
+          .source(Base64PdfSource.builder()
+              .data(pdfBase64)
+              .build())
           .title("Document Title")
           .context("Context about the document that will not be cited from")
-          .citations(CitationsConfigParam.builder().enabled(true).build())
+          .citations(CitationsConfigParam.builder()
+              .enabled(true)
+              .build())
           .build();
 
       MessageCreateParams params = MessageCreateParams.builder()
@@ -1211,7 +1223,9 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
           .addUserMessageOfContentBlockParams(
               List.of(
                   ContentBlockParam.ofDocument(documentParam),
-                  ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+                  ContentBlockParam.ofText(TextBlockParam.builder()
+                      .text("Summarize this document.")
+                      .build())
               )
           )
           .build();
@@ -1479,7 +1493,9 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
               .build())
           .title("Document Title")
           .context("Context about the document that will not be cited from")
-          .citations(CitationsConfigParam.builder().enabled(true).build())
+          .citations(CitationsConfigParam.builder()
+              .enabled(true)
+              .build())
           .build();
 
       MessageCreateParams params = MessageCreateParams.builder()
@@ -1488,7 +1504,9 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
           .addUserMessageOfContentBlockParams(
               List.of(
                   ContentBlockParam.ofDocument(documentParam),
-                  ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+                  ContentBlockParam.ofText(TextBlockParam.builder()
+                      .text("Summarize this document.")
+                      .build())
               )
           )
           .build();
@@ -1729,7 +1747,9 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
                   .fileSource(fileId)
                   .title("Document Title")
                   .context("Context about the document that will not be cited from")
-                  .citations(CitationsConfigParam.builder().enabled(true).build())
+                  .citations(CitationsConfigParam.builder()
+                      .enabled(true)
+                      .build())
                   .build()),
               ContentBlockParam.ofText(TextBlockParam.builder()
                   .text("Summarize this document.")
@@ -2018,14 +2038,20 @@ Custom content documents give you control over citation granularity. No addition
       .source(ContentBlockSource.builder()
           .contentOfBlockSource(
               List.of(
-                  ContentBlockSourceContent.ofText(TextBlockParam.builder().text("First chunk").build()),
-                  ContentBlockSourceContent.ofText(TextBlockParam.builder().text("Second chunk").build())
+                  ContentBlockSourceContent.ofText(TextBlockParam.builder()
+                      .text("First chunk")
+                      .build()),
+                  ContentBlockSourceContent.ofText(TextBlockParam.builder()
+                      .text("Second chunk")
+                      .build())
               )
           )
           .build())
       .title("Document Title")
       .context("Context about the document that will not be cited from")
-      .citations(CitationsConfigParam.builder().enabled(true).build())
+      .citations(CitationsConfigParam.builder()
+          .enabled(true)
+          .build())
       .build();
 
   MessageCreateParams params = MessageCreateParams.builder()
@@ -2034,7 +2060,9 @@ Custom content documents give you control over citation granularity. No addition
       .addUserMessageOfContentBlockParams(
           List.of(
               ContentBlockParam.ofDocument(documentParam),
-              ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+              ContentBlockParam.ofText(TextBlockParam.builder()
+                  .text("Summarize this document.")
+                  .build())
           )
       )
       .build();
@@ -2072,7 +2100,7 @@ Custom content documents give you control over citation granularity. No addition
               ],
           ],
       ],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
   );
 
   echo json_encode($response, JSON_PRETTY_PRINT);

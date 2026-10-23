@@ -145,7 +145,7 @@ Get Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `Type BetaManagedAgentsDeploymentType`
+  - `Type Deployment`
 
   - `ID string`
 
@@ -155,7 +155,7 @@ Get Deployment
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `Type BetaManagedAgentsAgentReferenceType`
+    - `Type Agent`
 
     - `ID string`
 
@@ -191,7 +191,7 @@ Get Deployment
 
       A user message sent to the session.
 
-      - `Type BetaManagedAgentsDeploymentUserMessageEventType`
+      - `Type UserMessage`
 
       - `Content []BetaManagedAgentsDeploymentUserMessageEventContentUnion`
 
@@ -201,7 +201,7 @@ Get Deployment
 
           Regular text content.
 
-          - `Type BetaManagedAgentsTextBlockType`
+          - `Type Text`
 
           - `Text string`
 
@@ -213,7 +213,7 @@ Get Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type BetaManagedAgentsImageBlockType`
+          - `Type Image`
 
           - `Source BetaManagedAgentsImageBlockSourceUnion`
 
@@ -223,7 +223,7 @@ Get Deployment
 
               Base64-encoded image data.
 
-              - `Type BetaManagedAgentsBase64ImageSourceType`
+              - `Type Base64`
 
               - `Data string`
 
@@ -241,7 +241,7 @@ Get Deployment
 
               Image referenced by URL.
 
-              - `Type BetaManagedAgentsURLImageSourceType`
+              - `Type URL`
 
               - `URL string`
 
@@ -253,7 +253,7 @@ Get Deployment
 
               Image referenced by file ID.
 
-              - `Type BetaManagedAgentsFileImageSourceType`
+              - `Type File`
 
               - `FileID string`
 
@@ -265,7 +265,7 @@ Get Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type BetaManagedAgentsDocumentBlockType`
+          - `Type Document`
 
           - `Source BetaManagedAgentsDocumentBlockSourceUnion`
 
@@ -275,7 +275,7 @@ Get Deployment
 
               Base64-encoded document data.
 
-              - `Type BetaManagedAgentsBase64DocumentSourceType`
+              - `Type Base64`
 
               - `Data string`
 
@@ -293,7 +293,7 @@ Get Deployment
 
               Plain text document content.
 
-              - `Type BetaManagedAgentsPlainTextDocumentSourceType`
+              - `Type Text`
 
               - `Data string`
 
@@ -301,7 +301,7 @@ Get Deployment
 
                 minLength: 1
 
-              - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
+              - `MediaType TextPlain`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -309,7 +309,7 @@ Get Deployment
 
               Document referenced by URL.
 
-              - `Type BetaManagedAgentsURLDocumentSourceType`
+              - `Type URL`
 
               - `URL string`
 
@@ -321,7 +321,7 @@ Get Deployment
 
               Document referenced by file ID.
 
-              - `Type BetaManagedAgentsFileDocumentSourceType`
+              - `Type File`
 
               - `FileID string`
 
@@ -341,13 +341,13 @@ Get Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type BetaManagedAgentsRedactedBlockType`
+          - `Type Redacted`
 
     - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `Type BetaManagedAgentsDeploymentUserDefineOutcomeEventType`
+      - `Type UserDefineOutcome`
 
       - `Description string`
 
@@ -361,7 +361,7 @@ Get Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type BetaManagedAgentsFileRubricType`
+          - `Type File`
 
           - `FileID string`
 
@@ -371,7 +371,7 @@ Get Deployment
 
           Rubric content provided inline as text.
 
-          - `Type BetaManagedAgentsTextRubricType`
+          - `Type Text`
 
           - `Content string`
 
@@ -387,13 +387,13 @@ Get Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `Type BetaManagedAgentsDeploymentSystemMessageEventType`
+      - `Type SystemMessage`
 
       - `Content []BetaManagedAgentsSystemContentBlock`
 
         System content blocks to append. Text-only.
 
-        - `Type BetaManagedAgentsSystemContentBlockType`
+        - `Type Text`
 
         - `Text string`
 
@@ -417,13 +417,13 @@ Get Deployment
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `Type BetaManagedAgentsManualDeploymentPausedReasonType`
+      - `Type Manual`
 
     - `type BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `Type BetaManagedAgentsErrorDeploymentPausedReasonType`
+      - `Type Error`
 
       - `Error BetaManagedAgentsDeploymentPausedReasonErrorUnion`
 
@@ -433,85 +433,85 @@ Get Deployment
 
           The deployment's environment was archived.
 
-          - `Type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorType`
+          - `Type EnvironmentArchivedError`
 
         - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `Type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorType`
+          - `Type AgentArchivedError`
 
         - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `Type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorType`
+          - `Type EnvironmentNotFoundError`
 
         - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `Type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorType`
+          - `Type VaultNotFoundError`
 
         - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `Type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorType`
+          - `Type FileNotFoundError`
 
         - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `Type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorType`
+          - `Type SessionResourceNotFoundError`
 
         - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `Type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorType`
+          - `Type WorkspaceArchivedError`
 
         - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `Type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorType`
+          - `Type OrganizationDisabledError`
 
         - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `Type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorType`
+          - `Type MemoryStoreArchivedError`
 
         - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `Type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorType`
+          - `Type SkillNotFoundError`
 
         - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `Type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorType`
+          - `Type VaultArchivedError`
 
         - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `Type BetaManagedAgentsUnknownDeploymentPausedReasonErrorType`
+          - `Type UnknownError`
 
         - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `Type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorType`
+          - `Type SelfHostedResourcesUnsupportedError`
 
         - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `Type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorType`
+          - `Type MCPEgressBlockedError`
 
   - `Resources []BetaManagedAgentsSessionResourceConfigUnion`
 
@@ -521,7 +521,7 @@ Get Deployment
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `Type BetaManagedAgentsGitHubRepositoryResourceConfigType`
+      - `Type GitHubRepository`
 
       - `URL string`
 
@@ -533,7 +533,7 @@ Get Deployment
 
         - `type BetaManagedAgentsBranchCheckout`
 
-          - `Type BetaManagedAgentsBranchCheckoutType`
+          - `Type Branch`
 
           - `Name string`
 
@@ -543,7 +543,7 @@ Get Deployment
 
         - `type BetaManagedAgentsCommitCheckout`
 
-          - `Type BetaManagedAgentsCommitCheckoutType`
+          - `Type Commit`
 
           - `Sha string`
 
@@ -559,7 +559,7 @@ Get Deployment
 
       A file mounted into each session's container.
 
-      - `Type BetaManagedAgentsFileResourceConfigType`
+      - `Type File`
 
       - `FileID string`
 
@@ -573,7 +573,7 @@ Get Deployment
 
       A memory store attached to each session created from this deployment.
 
-      - `Type BetaManagedAgentsMemoryStoreResourceConfigType`
+      - `Type MemoryStore`
 
       - `MemoryStoreID string`
 
@@ -595,7 +595,7 @@ Get Deployment
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `Type BetaManagedAgentsScheduleType`
+    - `Type Cron`
 
     - `Expression string`
 
@@ -645,7 +645,7 @@ Get Deployment
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `Type BetaManagedAgentsBudgetLimitType`
+    - `Type Limit`
 
     - `MaxListCost BetaMonetaryAmount`
 
@@ -668,8 +668,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {

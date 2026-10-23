@@ -145,7 +145,7 @@ Delete Session Resource
 
   Confirmation of resource deletion.
 
-  - `Type BetaManagedAgentsDeleteSessionResourceType`
+  - `Type SessionResourceDeleted`
 
   - `ID string`
 
@@ -158,8 +158,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {

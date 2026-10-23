@@ -41,7 +41,7 @@ Validate an MCP OAuth Credential
 
 - `class ManagedAgentsCredentialValidation`
 
-  - `Type type`
+  - `"vault_credential_validation" type`
 
   - `string credentialID`
 

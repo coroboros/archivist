@@ -61,7 +61,7 @@ Update User Profile
 
 - `class BetaUserProfile`
 
-  - `Type type`
+  - `"user_profile" type`
 
     Object type. Always `user_profile`.
 

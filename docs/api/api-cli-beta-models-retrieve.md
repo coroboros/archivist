@@ -331,7 +331,6 @@ The Models API response can be used to determine information about a specific mo
 
 ```bash
 ant beta:models retrieve \
-  --api-key my-anthropic-api-key \
   --model-id model_id
 ```
 

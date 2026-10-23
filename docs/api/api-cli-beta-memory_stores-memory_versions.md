@@ -247,7 +247,6 @@ List Memory Versions
 
 ```bash
 ant beta:memory-stores:memory-versions list \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 
@@ -474,7 +473,6 @@ Retrieve a Memory Version
 
 ```bash
 ant beta:memory-stores:memory-versions retrieve \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-version-id memory_version_id
 ```
@@ -691,7 +689,6 @@ Redact a Memory Version
 
 ```bash
 ant beta:memory-stores:memory-versions redact \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-version-id memory_version_id
 ```

@@ -91,7 +91,6 @@ Pass the optional `budget` (csharp, go: `Budget`) field when you create the sess
   	},
   	EnvironmentID: environment.ID,
   	Budget: anthropic.BetaManagedAgentsBudgetLimitParam{
-  		Type: anthropic.BetaManagedAgentsBudgetLimitTypeLimit,
   		MaxListCost: anthropic.BetaMonetaryAmountParam{
   			Amount:   "125",
   			Currency: anthropic.BetaCurrencyUsd,
@@ -257,7 +256,6 @@ Update the session with a new `max_list_cost` (java, php: `maxListCost`; csharp,
   ```go Go
   updatedSession, err := client.Beta.Sessions.Update(ctx, session.ID, anthropic.BetaSessionUpdateParams{
   	Budget: anthropic.BetaManagedAgentsBudgetLimitParam{
-  		Type: anthropic.BetaManagedAgentsBudgetLimitTypeLimit,
   		MaxListCost: anthropic.BetaMonetaryAmountParam{
   			Amount:   "500",
   			Currency: anthropic.BetaCurrencyUsd,
@@ -341,7 +339,7 @@ Pass `"budget": null` (python: `budget=None`; typescript: `budget: null`; ruby: 
 
   ```go Go
   // A zero-value Budget is omitted from the request; param.NullStruct (from
-  // github.com/anthropics/anthropic-sdk-go/packages/param) sends an explicit null.
+  // github.com/anthropics/anthropic-sdk-go/v2/packages/param) sends an explicit null.
   unbudgetedSession, err := client.Beta.Sessions.Update(ctx, session.ID, anthropic.BetaSessionUpdateParams{
   	Budget: param.NullStruct[anthropic.BetaManagedAgentsBudgetLimitParam](),
   })

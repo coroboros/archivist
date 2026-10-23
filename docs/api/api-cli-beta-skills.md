@@ -115,7 +115,6 @@ Create Skill
 
 ```bash
 ant beta:skills create \
-  --api-key my-anthropic-api-key \
   --file 'Example data'
 ```
 
@@ -259,8 +258,7 @@ List Skills
 ### Example
 
 ```bash
-ant beta:skills list \
-  --api-key my-anthropic-api-key
+ant beta:skills list
 ```
 
 #### Response (200)
@@ -382,7 +380,6 @@ Get Skill
 
 ```bash
 ant beta:skills retrieve \
-  --api-key my-anthropic-api-key \
   --skill-id skill_id
 ```
 
@@ -448,7 +445,6 @@ Delete Skill
 
 ```bash
 ant beta:skills delete \
-  --api-key my-anthropic-api-key \
   --skill-id skill_id
 ```
 
@@ -648,7 +644,6 @@ Create Skill Version
 
 ```bash
 ant beta:skills:versions create \
-  --api-key my-anthropic-api-key \
   --skill-id skill_id \
   --file 'Example data'
 ```
@@ -758,7 +753,6 @@ List Skill Versions
 
 ```bash
 ant beta:skills:versions list \
-  --api-key my-anthropic-api-key \
   --skill-id skill_id
 ```
 
@@ -820,7 +814,6 @@ Download a skill version's content as a zip archive.
 
 ```bash
 ant beta:skills:versions download \
-  --api-key my-anthropic-api-key \
   --skill-id skill_id \
   --version version
 ```
@@ -901,7 +894,6 @@ Get Skill Version
 
 ```bash
 ant beta:skills:versions retrieve \
-  --api-key my-anthropic-api-key \
   --skill-id skill_id \
   --version version
 ```
@@ -970,7 +962,6 @@ Delete Skill Version
 
 ```bash
 ant beta:skills:versions delete \
-  --api-key my-anthropic-api-key \
   --skill-id skill_id \
   --version version
 ```

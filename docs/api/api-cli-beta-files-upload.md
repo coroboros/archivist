@@ -107,7 +107,6 @@ Upload File
 
 ```bash
 ant beta:files upload \
-  --api-key my-anthropic-api-key \
   --file 'Example data'
 ```
 

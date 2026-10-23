@@ -149,7 +149,7 @@ Archive a Credential
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
-  - `Type type`
+  - `JsonValue type = "vault_credential"`
 
   - `String id`
 
@@ -169,7 +169,7 @@ Archive a Credential
 
       OAuth credential details for an MCP server.
 
-      - `Type type`
+      - `JsonValue type = "mcp_oauth"`
 
       - `String mcpServerUrl`
 
@@ -199,19 +199,19 @@ Archive a Credential
 
             Token endpoint requires no client authentication.
 
-            - `Type type`
+            - `JsonValue type = "none"`
 
           - `class BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
-            - `Type type`
+            - `JsonValue type = "client_secret_basic"`
 
           - `class BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
-            - `Type type`
+            - `JsonValue type = "client_secret_post"`
 
         - `Optional<String> resource`
 
@@ -225,7 +225,7 @@ Archive a Credential
 
       Static bearer token credential details for an MCP server.
 
-      - `Type type`
+      - `JsonValue type = "static_bearer"`
 
       - `String mcpServerUrl`
 
@@ -235,7 +235,7 @@ Archive a Credential
 
       Environment variable credential details. The secret value is never returned.
 
-      - `Type type`
+      - `JsonValue type = "environment_variable"`
 
       - `BetaManagedAgentsInjectionLocationResponse injectionLocation`
 
@@ -257,13 +257,13 @@ Archive a Credential
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
-          - `Type type`
+          - `JsonValue type = "unrestricted"`
 
         - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
-          - `Type type`
+          - `JsonValue type = "limited"`
 
           - `List<String> allowedHosts`
 

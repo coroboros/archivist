@@ -33,7 +33,7 @@ Create Deployment
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -61,7 +61,7 @@ Create Deployment
 
       Parameters for sending a user message to the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.message"`
 
       - `required IReadOnlyList<Content> Content`
 
@@ -71,7 +71,7 @@ Create Deployment
 
           Regular text content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -83,7 +83,7 @@ Create Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "image"`
 
           - `required Source Source`
 
@@ -93,7 +93,7 @@ Create Deployment
 
               Base64-encoded image data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -111,7 +111,7 @@ Create Deployment
 
               Image referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -123,7 +123,7 @@ Create Deployment
 
               Image referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -135,7 +135,7 @@ Create Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "document"`
 
           - `required Source Source`
 
@@ -145,7 +145,7 @@ Create Deployment
 
               Base64-encoded document data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -163,7 +163,7 @@ Create Deployment
 
               Plain text document content.
 
-              - `required Type Type`
+              - `JsonElement Type = "text"`
 
               - `required string Data`
 
@@ -171,7 +171,7 @@ Create Deployment
 
                 minLength: 1
 
-              - `required MediaType MediaType`
+              - `JsonElement MediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -179,7 +179,7 @@ Create Deployment
 
               Document referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -191,7 +191,7 @@ Create Deployment
 
               Document referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -211,13 +211,13 @@ Create Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "redacted"`
 
     - `class BetaManagedAgentsUserDefineOutcomeEventParams`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.define_outcome"`
 
       - `required string Description`
 
@@ -231,7 +231,7 @@ Create Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -241,7 +241,7 @@ Create Deployment
 
           Rubric content provided inline as text.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Content`
 
@@ -259,13 +259,13 @@ Create Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
-      - `required Type Type`
+      - `JsonElement Type = "system.message"`
 
       - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
 
         System content blocks to append. Text-only.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -301,7 +301,7 @@ Create Deployment
 
       Mount a GitHub repository into the session's container.
 
-      - `required Type Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string Url`
 
@@ -321,7 +321,7 @@ Create Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -331,7 +331,7 @@ Create Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -349,7 +349,7 @@ Create Deployment
 
       Mount a file uploaded via the Files API into the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "file"`
 
       - `required string FileID`
 
@@ -367,7 +367,7 @@ Create Deployment
 
       Parameters for attaching a memory store to an agent session.
 
-      - `required Type Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -515,7 +515,7 @@ Create Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `required Type Type`
+  - `JsonElement Type = "deployment"`
 
   - `required string ID`
 
@@ -525,7 +525,7 @@ Create Deployment
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -561,7 +561,7 @@ Create Deployment
 
       A user message sent to the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.message"`
 
       - `required IReadOnlyList<Content> Content`
 
@@ -571,7 +571,7 @@ Create Deployment
 
           Regular text content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -583,7 +583,7 @@ Create Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "image"`
 
           - `required Source Source`
 
@@ -593,7 +593,7 @@ Create Deployment
 
               Base64-encoded image data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -611,7 +611,7 @@ Create Deployment
 
               Image referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -623,7 +623,7 @@ Create Deployment
 
               Image referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -635,7 +635,7 @@ Create Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "document"`
 
           - `required Source Source`
 
@@ -645,7 +645,7 @@ Create Deployment
 
               Base64-encoded document data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -663,7 +663,7 @@ Create Deployment
 
               Plain text document content.
 
-              - `required Type Type`
+              - `JsonElement Type = "text"`
 
               - `required string Data`
 
@@ -671,7 +671,7 @@ Create Deployment
 
                 minLength: 1
 
-              - `required MediaType MediaType`
+              - `JsonElement MediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -679,7 +679,7 @@ Create Deployment
 
               Document referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -691,7 +691,7 @@ Create Deployment
 
               Document referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -711,13 +711,13 @@ Create Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.define_outcome"`
 
       - `required string Description`
 
@@ -731,7 +731,7 @@ Create Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -741,7 +741,7 @@ Create Deployment
 
           Rubric content provided inline as text.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Content`
 
@@ -757,13 +757,13 @@ Create Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `required Type Type`
+      - `JsonElement Type = "system.message"`
 
       - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
 
         System content blocks to append. Text-only.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -787,13 +787,13 @@ Create Deployment
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "error"`
 
       - `required BetaManagedAgentsDeploymentPausedReasonError Error`
 
@@ -803,85 +803,85 @@ Create Deployment
 
           The deployment's environment was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `required Type Type`
+          - `JsonElement Type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `required Type Type`
+          - `JsonElement Type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `required Type Type`
+          - `JsonElement Type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `required Type Type`
+          - `JsonElement Type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_egress_blocked_error"`
 
   - `required IReadOnlyList<BetaManagedAgentsSessionResourceConfig> Resources`
 
@@ -891,7 +891,7 @@ Create Deployment
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `required Type Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string Url`
 
@@ -903,7 +903,7 @@ Create Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -913,7 +913,7 @@ Create Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -929,7 +929,7 @@ Create Deployment
 
       A file mounted into each session's container.
 
-      - `required Type Type`
+      - `JsonElement Type = "file"`
 
       - `required string FileID`
 
@@ -943,7 +943,7 @@ Create Deployment
 
       A memory store attached to each session created from this deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -965,7 +965,7 @@ Create Deployment
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `required Type Type`
+    - `JsonElement Type = "cron"`
 
     - `required string Expression`
 
@@ -1015,7 +1015,7 @@ Create Deployment
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -1042,18 +1042,12 @@ DeploymentCreateParams parameters = new()
     EnvironmentID = "x",
     InitialEvents =
     [
-        new BetaManagedAgentsUserMessageEventParams()
-        {
-            Content =
+        new BetaManagedAgentsUserMessageEventParams(
+
             [
-                new BetaManagedAgentsTextBlock()
-                {
-                    Text = "Where is my order #1234?",
-                    Type = BetaManagedAgentsTextBlockType.Text,
-                },
-            ],
-            Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
-        },
+                new BetaManagedAgentsTextBlock("Where is my order #1234?")
+            ]
+        ),
     ],
     Name = "x",
 };
@@ -1296,7 +1290,7 @@ List Deployments
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `required Type Type`
+  - `JsonElement Type = "deployment"`
 
   - `required string ID`
 
@@ -1306,7 +1300,7 @@ List Deployments
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -1342,7 +1336,7 @@ List Deployments
 
       A user message sent to the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.message"`
 
       - `required IReadOnlyList<Content> Content`
 
@@ -1352,7 +1346,7 @@ List Deployments
 
           Regular text content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -1364,7 +1358,7 @@ List Deployments
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "image"`
 
           - `required Source Source`
 
@@ -1374,7 +1368,7 @@ List Deployments
 
               Base64-encoded image data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -1392,7 +1386,7 @@ List Deployments
 
               Image referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -1404,7 +1398,7 @@ List Deployments
 
               Image referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -1416,7 +1410,7 @@ List Deployments
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "document"`
 
           - `required Source Source`
 
@@ -1426,7 +1420,7 @@ List Deployments
 
               Base64-encoded document data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -1444,7 +1438,7 @@ List Deployments
 
               Plain text document content.
 
-              - `required Type Type`
+              - `JsonElement Type = "text"`
 
               - `required string Data`
 
@@ -1452,7 +1446,7 @@ List Deployments
 
                 minLength: 1
 
-              - `required MediaType MediaType`
+              - `JsonElement MediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -1460,7 +1454,7 @@ List Deployments
 
               Document referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -1472,7 +1466,7 @@ List Deployments
 
               Document referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -1492,13 +1486,13 @@ List Deployments
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.define_outcome"`
 
       - `required string Description`
 
@@ -1512,7 +1506,7 @@ List Deployments
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -1522,7 +1516,7 @@ List Deployments
 
           Rubric content provided inline as text.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Content`
 
@@ -1538,13 +1532,13 @@ List Deployments
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `required Type Type`
+      - `JsonElement Type = "system.message"`
 
       - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
 
         System content blocks to append. Text-only.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -1568,13 +1562,13 @@ List Deployments
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "error"`
 
       - `required BetaManagedAgentsDeploymentPausedReasonError Error`
 
@@ -1584,85 +1578,85 @@ List Deployments
 
           The deployment's environment was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `required Type Type`
+          - `JsonElement Type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `required Type Type`
+          - `JsonElement Type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `required Type Type`
+          - `JsonElement Type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `required Type Type`
+          - `JsonElement Type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_egress_blocked_error"`
 
   - `required IReadOnlyList<BetaManagedAgentsSessionResourceConfig> Resources`
 
@@ -1672,7 +1666,7 @@ List Deployments
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `required Type Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string Url`
 
@@ -1684,7 +1678,7 @@ List Deployments
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -1694,7 +1688,7 @@ List Deployments
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -1710,7 +1704,7 @@ List Deployments
 
       A file mounted into each session's container.
 
-      - `required Type Type`
+      - `JsonElement Type = "file"`
 
       - `required string FileID`
 
@@ -1724,7 +1718,7 @@ List Deployments
 
       A memory store attached to each session created from this deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -1746,7 +1740,7 @@ List Deployments
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `required Type Type`
+    - `JsonElement Type = "cron"`
 
     - `required string Expression`
 
@@ -1796,7 +1790,7 @@ List Deployments
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -2033,7 +2027,7 @@ Get Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `required Type Type`
+  - `JsonElement Type = "deployment"`
 
   - `required string ID`
 
@@ -2043,7 +2037,7 @@ Get Deployment
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -2079,7 +2073,7 @@ Get Deployment
 
       A user message sent to the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.message"`
 
       - `required IReadOnlyList<Content> Content`
 
@@ -2089,7 +2083,7 @@ Get Deployment
 
           Regular text content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -2101,7 +2095,7 @@ Get Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "image"`
 
           - `required Source Source`
 
@@ -2111,7 +2105,7 @@ Get Deployment
 
               Base64-encoded image data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -2129,7 +2123,7 @@ Get Deployment
 
               Image referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -2141,7 +2135,7 @@ Get Deployment
 
               Image referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -2153,7 +2147,7 @@ Get Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "document"`
 
           - `required Source Source`
 
@@ -2163,7 +2157,7 @@ Get Deployment
 
               Base64-encoded document data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -2181,7 +2175,7 @@ Get Deployment
 
               Plain text document content.
 
-              - `required Type Type`
+              - `JsonElement Type = "text"`
 
               - `required string Data`
 
@@ -2189,7 +2183,7 @@ Get Deployment
 
                 minLength: 1
 
-              - `required MediaType MediaType`
+              - `JsonElement MediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -2197,7 +2191,7 @@ Get Deployment
 
               Document referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -2209,7 +2203,7 @@ Get Deployment
 
               Document referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -2229,13 +2223,13 @@ Get Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.define_outcome"`
 
       - `required string Description`
 
@@ -2249,7 +2243,7 @@ Get Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -2259,7 +2253,7 @@ Get Deployment
 
           Rubric content provided inline as text.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Content`
 
@@ -2275,13 +2269,13 @@ Get Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `required Type Type`
+      - `JsonElement Type = "system.message"`
 
       - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
 
         System content blocks to append. Text-only.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -2305,13 +2299,13 @@ Get Deployment
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "error"`
 
       - `required BetaManagedAgentsDeploymentPausedReasonError Error`
 
@@ -2321,85 +2315,85 @@ Get Deployment
 
           The deployment's environment was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `required Type Type`
+          - `JsonElement Type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `required Type Type`
+          - `JsonElement Type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `required Type Type`
+          - `JsonElement Type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `required Type Type`
+          - `JsonElement Type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_egress_blocked_error"`
 
   - `required IReadOnlyList<BetaManagedAgentsSessionResourceConfig> Resources`
 
@@ -2409,7 +2403,7 @@ Get Deployment
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `required Type Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string Url`
 
@@ -2421,7 +2415,7 @@ Get Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -2431,7 +2425,7 @@ Get Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -2447,7 +2441,7 @@ Get Deployment
 
       A file mounted into each session's container.
 
-      - `required Type Type`
+      - `JsonElement Type = "file"`
 
       - `required string FileID`
 
@@ -2461,7 +2455,7 @@ Get Deployment
 
       A memory store attached to each session created from this deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -2483,7 +2477,7 @@ Get Deployment
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `required Type Type`
+    - `JsonElement Type = "cron"`
 
     - `required string Expression`
 
@@ -2533,7 +2527,7 @@ Get Deployment
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -2656,7 +2650,7 @@ Update Deployment
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -2694,7 +2688,7 @@ Update Deployment
 
       Parameters for sending a user message to the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.message"`
 
       - `required IReadOnlyList<Content> Content`
 
@@ -2704,7 +2698,7 @@ Update Deployment
 
           Regular text content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -2716,7 +2710,7 @@ Update Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "image"`
 
           - `required Source Source`
 
@@ -2726,7 +2720,7 @@ Update Deployment
 
               Base64-encoded image data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -2744,7 +2738,7 @@ Update Deployment
 
               Image referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -2756,7 +2750,7 @@ Update Deployment
 
               Image referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -2768,7 +2762,7 @@ Update Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "document"`
 
           - `required Source Source`
 
@@ -2778,7 +2772,7 @@ Update Deployment
 
               Base64-encoded document data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -2796,7 +2790,7 @@ Update Deployment
 
               Plain text document content.
 
-              - `required Type Type`
+              - `JsonElement Type = "text"`
 
               - `required string Data`
 
@@ -2804,7 +2798,7 @@ Update Deployment
 
                 minLength: 1
 
-              - `required MediaType MediaType`
+              - `JsonElement MediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -2812,7 +2806,7 @@ Update Deployment
 
               Document referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -2824,7 +2818,7 @@ Update Deployment
 
               Document referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -2844,13 +2838,13 @@ Update Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "redacted"`
 
     - `class BetaManagedAgentsUserDefineOutcomeEventParams`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.define_outcome"`
 
       - `required string Description`
 
@@ -2864,7 +2858,7 @@ Update Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -2874,7 +2868,7 @@ Update Deployment
 
           Rubric content provided inline as text.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Content`
 
@@ -2892,13 +2886,13 @@ Update Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
-      - `required Type Type`
+      - `JsonElement Type = "system.message"`
 
       - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
 
         System content blocks to append. Text-only.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -2924,7 +2918,7 @@ Update Deployment
 
       Mount a GitHub repository into the session's container.
 
-      - `required Type Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string Url`
 
@@ -2944,7 +2938,7 @@ Update Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -2954,7 +2948,7 @@ Update Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -2972,7 +2966,7 @@ Update Deployment
 
       Mount a file uploaded via the Files API into the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "file"`
 
       - `required string FileID`
 
@@ -2990,7 +2984,7 @@ Update Deployment
 
       Parameters for attaching a memory store to an agent session.
 
-      - `required Type Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -3138,7 +3132,7 @@ Update Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `required Type Type`
+  - `JsonElement Type = "deployment"`
 
   - `required string ID`
 
@@ -3148,7 +3142,7 @@ Update Deployment
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -3184,7 +3178,7 @@ Update Deployment
 
       A user message sent to the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.message"`
 
       - `required IReadOnlyList<Content> Content`
 
@@ -3194,7 +3188,7 @@ Update Deployment
 
           Regular text content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -3206,7 +3200,7 @@ Update Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "image"`
 
           - `required Source Source`
 
@@ -3216,7 +3210,7 @@ Update Deployment
 
               Base64-encoded image data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -3234,7 +3228,7 @@ Update Deployment
 
               Image referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -3246,7 +3240,7 @@ Update Deployment
 
               Image referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -3258,7 +3252,7 @@ Update Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "document"`
 
           - `required Source Source`
 
@@ -3268,7 +3262,7 @@ Update Deployment
 
               Base64-encoded document data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -3286,7 +3280,7 @@ Update Deployment
 
               Plain text document content.
 
-              - `required Type Type`
+              - `JsonElement Type = "text"`
 
               - `required string Data`
 
@@ -3294,7 +3288,7 @@ Update Deployment
 
                 minLength: 1
 
-              - `required MediaType MediaType`
+              - `JsonElement MediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -3302,7 +3296,7 @@ Update Deployment
 
               Document referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -3314,7 +3308,7 @@ Update Deployment
 
               Document referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -3334,13 +3328,13 @@ Update Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.define_outcome"`
 
       - `required string Description`
 
@@ -3354,7 +3348,7 @@ Update Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -3364,7 +3358,7 @@ Update Deployment
 
           Rubric content provided inline as text.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Content`
 
@@ -3380,13 +3374,13 @@ Update Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `required Type Type`
+      - `JsonElement Type = "system.message"`
 
       - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
 
         System content blocks to append. Text-only.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -3410,13 +3404,13 @@ Update Deployment
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "error"`
 
       - `required BetaManagedAgentsDeploymentPausedReasonError Error`
 
@@ -3426,85 +3420,85 @@ Update Deployment
 
           The deployment's environment was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `required Type Type`
+          - `JsonElement Type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `required Type Type`
+          - `JsonElement Type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `required Type Type`
+          - `JsonElement Type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `required Type Type`
+          - `JsonElement Type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_egress_blocked_error"`
 
   - `required IReadOnlyList<BetaManagedAgentsSessionResourceConfig> Resources`
 
@@ -3514,7 +3508,7 @@ Update Deployment
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `required Type Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string Url`
 
@@ -3526,7 +3520,7 @@ Update Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -3536,7 +3530,7 @@ Update Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -3552,7 +3546,7 @@ Update Deployment
 
       A file mounted into each session's container.
 
-      - `required Type Type`
+      - `JsonElement Type = "file"`
 
       - `required string FileID`
 
@@ -3566,7 +3560,7 @@ Update Deployment
 
       A memory store attached to each session created from this deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -3588,7 +3582,7 @@ Update Deployment
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `required Type Type`
+    - `JsonElement Type = "cron"`
 
     - `required string Expression`
 
@@ -3638,7 +3632,7 @@ Update Deployment
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -3871,7 +3865,7 @@ Archive Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `required Type Type`
+  - `JsonElement Type = "deployment"`
 
   - `required string ID`
 
@@ -3881,7 +3875,7 @@ Archive Deployment
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -3917,7 +3911,7 @@ Archive Deployment
 
       A user message sent to the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.message"`
 
       - `required IReadOnlyList<Content> Content`
 
@@ -3927,7 +3921,7 @@ Archive Deployment
 
           Regular text content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -3939,7 +3933,7 @@ Archive Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "image"`
 
           - `required Source Source`
 
@@ -3949,7 +3943,7 @@ Archive Deployment
 
               Base64-encoded image data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -3967,7 +3961,7 @@ Archive Deployment
 
               Image referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -3979,7 +3973,7 @@ Archive Deployment
 
               Image referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -3991,7 +3985,7 @@ Archive Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "document"`
 
           - `required Source Source`
 
@@ -4001,7 +3995,7 @@ Archive Deployment
 
               Base64-encoded document data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -4019,7 +4013,7 @@ Archive Deployment
 
               Plain text document content.
 
-              - `required Type Type`
+              - `JsonElement Type = "text"`
 
               - `required string Data`
 
@@ -4027,7 +4021,7 @@ Archive Deployment
 
                 minLength: 1
 
-              - `required MediaType MediaType`
+              - `JsonElement MediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -4035,7 +4029,7 @@ Archive Deployment
 
               Document referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -4047,7 +4041,7 @@ Archive Deployment
 
               Document referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -4067,13 +4061,13 @@ Archive Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.define_outcome"`
 
       - `required string Description`
 
@@ -4087,7 +4081,7 @@ Archive Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -4097,7 +4091,7 @@ Archive Deployment
 
           Rubric content provided inline as text.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Content`
 
@@ -4113,13 +4107,13 @@ Archive Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `required Type Type`
+      - `JsonElement Type = "system.message"`
 
       - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
 
         System content blocks to append. Text-only.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -4143,13 +4137,13 @@ Archive Deployment
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "error"`
 
       - `required BetaManagedAgentsDeploymentPausedReasonError Error`
 
@@ -4159,85 +4153,85 @@ Archive Deployment
 
           The deployment's environment was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `required Type Type`
+          - `JsonElement Type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `required Type Type`
+          - `JsonElement Type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `required Type Type`
+          - `JsonElement Type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `required Type Type`
+          - `JsonElement Type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_egress_blocked_error"`
 
   - `required IReadOnlyList<BetaManagedAgentsSessionResourceConfig> Resources`
 
@@ -4247,7 +4241,7 @@ Archive Deployment
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `required Type Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string Url`
 
@@ -4259,7 +4253,7 @@ Archive Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -4269,7 +4263,7 @@ Archive Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -4285,7 +4279,7 @@ Archive Deployment
 
       A file mounted into each session's container.
 
-      - `required Type Type`
+      - `JsonElement Type = "file"`
 
       - `required string FileID`
 
@@ -4299,7 +4293,7 @@ Archive Deployment
 
       A memory store attached to each session created from this deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -4321,7 +4315,7 @@ Archive Deployment
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `required Type Type`
+    - `JsonElement Type = "cron"`
 
     - `required string Expression`
 
@@ -4371,7 +4365,7 @@ Archive Deployment
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -4604,7 +4598,7 @@ Run Deployment Now
 
   A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
 
-  - `required Type Type`
+  - `JsonElement Type = "deployment_run"`
 
   - `required string ID`
 
@@ -4614,7 +4608,7 @@ Run Deployment Now
 
     Snapshot of the agent at fire time. Always fully resolved — deployments pin agent + version.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -4640,7 +4634,7 @@ Run Deployment Now
 
       The deployment's environment was archived.
 
-      - `required Type Type`
+      - `JsonElement Type = "environment_archived_error"`
 
       - `required string Message`
 
@@ -4650,7 +4644,7 @@ Run Deployment Now
 
       The deployment's agent was archived.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_archived_error"`
 
       - `required string Message`
 
@@ -4660,7 +4654,7 @@ Run Deployment Now
 
       The deployment's environment no longer exists.
 
-      - `required Type Type`
+      - `JsonElement Type = "environment_not_found_error"`
 
       - `required string Message`
 
@@ -4670,7 +4664,7 @@ Run Deployment Now
 
       A vault referenced by the deployment no longer exists.
 
-      - `required Type Type`
+      - `JsonElement Type = "vault_not_found_error"`
 
       - `required string Message`
 
@@ -4680,7 +4674,7 @@ Run Deployment Now
 
       A vault referenced by the deployment is archived.
 
-      - `required Type Type`
+      - `JsonElement Type = "vault_archived_error"`
 
       - `required string Message`
 
@@ -4690,7 +4684,7 @@ Run Deployment Now
 
       A file resource referenced by the deployment no longer exists.
 
-      - `required Type Type`
+      - `JsonElement Type = "file_not_found_error"`
 
       - `required string Message`
 
@@ -4700,7 +4694,7 @@ Run Deployment Now
 
       A memory store referenced by the deployment is archived.
 
-      - `required Type Type`
+      - `JsonElement Type = "memory_store_archived_error"`
 
       - `required string Message`
 
@@ -4710,7 +4704,7 @@ Run Deployment Now
 
       A skill referenced by the deployment's agent no longer exists.
 
-      - `required Type Type`
+      - `JsonElement Type = "skill_not_found_error"`
 
       - `required string Message`
 
@@ -4720,7 +4714,7 @@ Run Deployment Now
 
       A referenced resource no longer exists and its kind was not reported.
 
-      - `required Type Type`
+      - `JsonElement Type = "session_resource_not_found_error"`
 
       - `required string Message`
 
@@ -4730,7 +4724,7 @@ Run Deployment Now
 
       The deployment's workspace was archived.
 
-      - `required Type Type`
+      - `JsonElement Type = "workspace_archived_error"`
 
       - `required string Message`
 
@@ -4740,7 +4734,7 @@ Run Deployment Now
 
       The deployment's organization is disabled.
 
-      - `required Type Type`
+      - `JsonElement Type = "organization_disabled_error"`
 
       - `required string Message`
 
@@ -4750,7 +4744,7 @@ Run Deployment Now
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
-      - `required Type Type`
+      - `JsonElement Type = "session_rate_limited_error"`
 
       - `required string Message`
 
@@ -4760,7 +4754,7 @@ Run Deployment Now
 
       The session create request was rejected with a non-retryable validation error.
 
-      - `required Type Type`
+      - `JsonElement Type = "session_creation_rejected_error"`
 
       - `required string Message`
 
@@ -4770,7 +4764,7 @@ Run Deployment Now
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
-      - `required Type Type`
+      - `JsonElement Type = "unknown_error"`
 
       - `required string Message`
 
@@ -4780,7 +4774,7 @@ Run Deployment Now
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-      - `required Type Type`
+      - `JsonElement Type = "self_hosted_resources_unsupported_error"`
 
       - `required string Message`
 
@@ -4790,7 +4784,7 @@ Run Deployment Now
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_egress_blocked_error"`
 
       - `required string Message`
 
@@ -4808,7 +4802,7 @@ Run Deployment Now
 
       The run was fired by the deployment's cron schedule.
 
-      - `required Type Type`
+      - `JsonElement Type = "schedule"`
 
       - `required DateTimeOffset ScheduledAt`
 
@@ -4820,7 +4814,7 @@ Run Deployment Now
 
       The run was started manually by creating a session directly against the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "manual"`
 
 ### Example
 
@@ -4999,7 +4993,7 @@ Pause Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `required Type Type`
+  - `JsonElement Type = "deployment"`
 
   - `required string ID`
 
@@ -5009,7 +5003,7 @@ Pause Deployment
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -5045,7 +5039,7 @@ Pause Deployment
 
       A user message sent to the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.message"`
 
       - `required IReadOnlyList<Content> Content`
 
@@ -5055,7 +5049,7 @@ Pause Deployment
 
           Regular text content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -5067,7 +5061,7 @@ Pause Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "image"`
 
           - `required Source Source`
 
@@ -5077,7 +5071,7 @@ Pause Deployment
 
               Base64-encoded image data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -5095,7 +5089,7 @@ Pause Deployment
 
               Image referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -5107,7 +5101,7 @@ Pause Deployment
 
               Image referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -5119,7 +5113,7 @@ Pause Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "document"`
 
           - `required Source Source`
 
@@ -5129,7 +5123,7 @@ Pause Deployment
 
               Base64-encoded document data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -5147,7 +5141,7 @@ Pause Deployment
 
               Plain text document content.
 
-              - `required Type Type`
+              - `JsonElement Type = "text"`
 
               - `required string Data`
 
@@ -5155,7 +5149,7 @@ Pause Deployment
 
                 minLength: 1
 
-              - `required MediaType MediaType`
+              - `JsonElement MediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -5163,7 +5157,7 @@ Pause Deployment
 
               Document referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -5175,7 +5169,7 @@ Pause Deployment
 
               Document referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -5195,13 +5189,13 @@ Pause Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.define_outcome"`
 
       - `required string Description`
 
@@ -5215,7 +5209,7 @@ Pause Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -5225,7 +5219,7 @@ Pause Deployment
 
           Rubric content provided inline as text.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Content`
 
@@ -5241,13 +5235,13 @@ Pause Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `required Type Type`
+      - `JsonElement Type = "system.message"`
 
       - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
 
         System content blocks to append. Text-only.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -5271,13 +5265,13 @@ Pause Deployment
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "error"`
 
       - `required BetaManagedAgentsDeploymentPausedReasonError Error`
 
@@ -5287,85 +5281,85 @@ Pause Deployment
 
           The deployment's environment was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `required Type Type`
+          - `JsonElement Type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `required Type Type`
+          - `JsonElement Type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `required Type Type`
+          - `JsonElement Type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `required Type Type`
+          - `JsonElement Type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_egress_blocked_error"`
 
   - `required IReadOnlyList<BetaManagedAgentsSessionResourceConfig> Resources`
 
@@ -5375,7 +5369,7 @@ Pause Deployment
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `required Type Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string Url`
 
@@ -5387,7 +5381,7 @@ Pause Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -5397,7 +5391,7 @@ Pause Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -5413,7 +5407,7 @@ Pause Deployment
 
       A file mounted into each session's container.
 
-      - `required Type Type`
+      - `JsonElement Type = "file"`
 
       - `required string FileID`
 
@@ -5427,7 +5421,7 @@ Pause Deployment
 
       A memory store attached to each session created from this deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -5449,7 +5443,7 @@ Pause Deployment
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `required Type Type`
+    - `JsonElement Type = "cron"`
 
     - `required string Expression`
 
@@ -5499,7 +5493,7 @@ Pause Deployment
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -5732,7 +5726,7 @@ Unpause Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `required Type Type`
+  - `JsonElement Type = "deployment"`
 
   - `required string ID`
 
@@ -5742,7 +5736,7 @@ Unpause Deployment
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -5778,7 +5772,7 @@ Unpause Deployment
 
       A user message sent to the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.message"`
 
       - `required IReadOnlyList<Content> Content`
 
@@ -5788,7 +5782,7 @@ Unpause Deployment
 
           Regular text content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -5800,7 +5794,7 @@ Unpause Deployment
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "image"`
 
           - `required Source Source`
 
@@ -5810,7 +5804,7 @@ Unpause Deployment
 
               Base64-encoded image data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -5828,7 +5822,7 @@ Unpause Deployment
 
               Image referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -5840,7 +5834,7 @@ Unpause Deployment
 
               Image referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -5852,7 +5846,7 @@ Unpause Deployment
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "document"`
 
           - `required Source Source`
 
@@ -5862,7 +5856,7 @@ Unpause Deployment
 
               Base64-encoded document data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -5880,7 +5874,7 @@ Unpause Deployment
 
               Plain text document content.
 
-              - `required Type Type`
+              - `JsonElement Type = "text"`
 
               - `required string Data`
 
@@ -5888,7 +5882,7 @@ Unpause Deployment
 
                 minLength: 1
 
-              - `required MediaType MediaType`
+              - `JsonElement MediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -5896,7 +5890,7 @@ Unpause Deployment
 
               Document referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -5908,7 +5902,7 @@ Unpause Deployment
 
               Document referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -5928,13 +5922,13 @@ Unpause Deployment
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.define_outcome"`
 
       - `required string Description`
 
@@ -5948,7 +5942,7 @@ Unpause Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -5958,7 +5952,7 @@ Unpause Deployment
 
           Rubric content provided inline as text.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Content`
 
@@ -5974,13 +5968,13 @@ Unpause Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `required Type Type`
+      - `JsonElement Type = "system.message"`
 
       - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
 
         System content blocks to append. Text-only.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -6004,13 +5998,13 @@ Unpause Deployment
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "error"`
 
       - `required BetaManagedAgentsDeploymentPausedReasonError Error`
 
@@ -6020,85 +6014,85 @@ Unpause Deployment
 
           The deployment's environment was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `required Type Type`
+          - `JsonElement Type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `required Type Type`
+          - `JsonElement Type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `required Type Type`
+          - `JsonElement Type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `required Type Type`
+          - `JsonElement Type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_egress_blocked_error"`
 
   - `required IReadOnlyList<BetaManagedAgentsSessionResourceConfig> Resources`
 
@@ -6108,7 +6102,7 @@ Unpause Deployment
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `required Type Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string Url`
 
@@ -6120,7 +6114,7 @@ Unpause Deployment
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -6130,7 +6124,7 @@ Unpause Deployment
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -6146,7 +6140,7 @@ Unpause Deployment
 
       A file mounted into each session's container.
 
-      - `required Type Type`
+      - `JsonElement Type = "file"`
 
       - `required string FileID`
 
@@ -6160,7 +6154,7 @@ Unpause Deployment
 
       A memory store attached to each session created from this deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -6182,7 +6176,7 @@ Unpause Deployment
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `required Type Type`
+    - `JsonElement Type = "cron"`
 
     - `required string Expression`
 
@@ -6232,7 +6226,7 @@ Unpause Deployment
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -6337,7 +6331,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   The deployment's agent was archived.
 
-  - `required Type Type`
+  - `JsonElement Type = "agent_archived_error"`
 
 ### Beta Managed Agents Cron Schedule
 
@@ -6345,7 +6339,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   5-field POSIX cron schedule with computed runtime timestamps.
 
-  - `required Type Type`
+  - `JsonElement Type = "cron"`
 
   - `required string Expression`
 
@@ -6375,7 +6369,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
-  - `required Type Type`
+  - `JsonElement Type = "cron"`
 
   - `required string Expression`
 
@@ -6395,7 +6389,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
-  - `required Type Type`
+  - `JsonElement Type = "deployment"`
 
   - `required string ID`
 
@@ -6405,7 +6399,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     Reference to the agent this deployment runs, resolved to a concrete version.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -6441,7 +6435,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       A user message sent to the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.message"`
 
       - `required IReadOnlyList<Content> Content`
 
@@ -6451,7 +6445,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
           Regular text content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -6463,7 +6457,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "image"`
 
           - `required Source Source`
 
@@ -6473,7 +6467,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
               Base64-encoded image data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -6491,7 +6485,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
               Image referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -6503,7 +6497,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
               Image referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -6515,7 +6509,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "document"`
 
           - `required Source Source`
 
@@ -6525,7 +6519,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
               Base64-encoded document data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -6543,7 +6537,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
               Plain text document content.
 
-              - `required Type Type`
+              - `JsonElement Type = "text"`
 
               - `required string Data`
 
@@ -6551,7 +6545,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
                 minLength: 1
 
-              - `required MediaType MediaType`
+              - `JsonElement MediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -6559,7 +6553,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
               Document referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -6571,7 +6565,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
               Document referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -6591,13 +6585,13 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "redacted"`
 
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.define_outcome"`
 
       - `required string Description`
 
@@ -6611,7 +6605,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -6621,7 +6615,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
           Rubric content provided inline as text.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Content`
 
@@ -6637,13 +6631,13 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-      - `required Type Type`
+      - `JsonElement Type = "system.message"`
 
       - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
 
         System content blocks to append. Text-only.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -6667,13 +6661,13 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       The caller invoked the pause endpoint on the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "manual"`
 
     - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "error"`
 
       - `required BetaManagedAgentsDeploymentPausedReasonError Error`
 
@@ -6683,85 +6677,85 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
           The deployment's environment was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_archived_error"`
 
         - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_archived_error"`
 
         - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "environment_not_found_error"`
 
         - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_not_found_error"`
 
         - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "file_not_found_error"`
 
         - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
-          - `required Type Type`
+          - `JsonElement Type = "session_resource_not_found_error"`
 
         - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "workspace_archived_error"`
 
         - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
-          - `required Type Type`
+          - `JsonElement Type = "organization_disabled_error"`
 
         - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "memory_store_archived_error"`
 
         - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
-          - `required Type Type`
+          - `JsonElement Type = "skill_not_found_error"`
 
         - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
-          - `required Type Type`
+          - `JsonElement Type = "vault_archived_error"`
 
         - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-          - `required Type Type`
+          - `JsonElement Type = "unknown_error"`
 
         - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-          - `required Type Type`
+          - `JsonElement Type = "self_hosted_resources_unsupported_error"`
 
         - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_egress_blocked_error"`
 
   - `required IReadOnlyList<BetaManagedAgentsSessionResourceConfig> Resources`
 
@@ -6771,7 +6765,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-      - `required Type Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string Url`
 
@@ -6783,7 +6777,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -6793,7 +6787,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -6809,7 +6803,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       A file mounted into each session's container.
 
-      - `required Type Type`
+      - `JsonElement Type = "file"`
 
       - `required string FileID`
 
@@ -6823,7 +6817,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       A memory store attached to each session created from this deployment.
 
-      - `required Type Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -6845,7 +6839,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
-    - `required Type Type`
+    - `JsonElement Type = "cron"`
 
     - `required string Expression`
 
@@ -6895,7 +6889,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -6919,7 +6913,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     A user message sent to the session.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.message"`
 
     - `required IReadOnlyList<Content> Content`
 
@@ -6929,7 +6923,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         Regular text content.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -6941,7 +6935,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `required Type Type`
+        - `JsonElement Type = "image"`
 
         - `required Source Source`
 
@@ -6951,7 +6945,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             Base64-encoded image data.
 
-            - `required Type Type`
+            - `JsonElement Type = "base64"`
 
             - `required string Data`
 
@@ -6969,7 +6963,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             Image referenced by URL.
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Url`
 
@@ -6981,7 +6975,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             Image referenced by file ID.
 
-            - `required Type Type`
+            - `JsonElement Type = "file"`
 
             - `required string FileID`
 
@@ -6993,7 +6987,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `required Type Type`
+        - `JsonElement Type = "document"`
 
         - `required Source Source`
 
@@ -7003,7 +6997,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             Base64-encoded document data.
 
-            - `required Type Type`
+            - `JsonElement Type = "base64"`
 
             - `required string Data`
 
@@ -7021,7 +7015,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             Plain text document content.
 
-            - `required Type Type`
+            - `JsonElement Type = "text"`
 
             - `required string Data`
 
@@ -7029,7 +7023,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
               minLength: 1
 
-            - `required MediaType MediaType`
+            - `JsonElement MediaType = "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
@@ -7037,7 +7031,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             Document referenced by URL.
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Url`
 
@@ -7049,7 +7043,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             Document referenced by file ID.
 
-            - `required Type Type`
+            - `JsonElement Type = "file"`
 
             - `required string FileID`
 
@@ -7069,13 +7063,13 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         Placeholder for content withheld by Anthropic model policy.
 
-        - `required Type Type`
+        - `JsonElement Type = "redacted"`
 
   - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
     An outcome the agent should work toward. The agent begins work on receipt.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.define_outcome"`
 
     - `required string Description`
 
@@ -7089,7 +7083,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         Rubric referenced by a file uploaded via the Files API.
 
-        - `required Type Type`
+        - `JsonElement Type = "file"`
 
         - `required string FileID`
 
@@ -7099,7 +7093,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         Rubric content provided inline as text.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Content`
 
@@ -7115,13 +7109,13 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-    - `required Type Type`
+    - `JsonElement Type = "system.message"`
 
     - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
 
       System content blocks to append. Text-only.
 
-      - `required Type Type`
+      - `JsonElement Type = "text"`
 
       - `required string Text`
 
@@ -7139,7 +7133,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     Parameters for sending a user message to the session.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.message"`
 
     - `required IReadOnlyList<Content> Content`
 
@@ -7149,7 +7143,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         Regular text content.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -7161,7 +7155,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `required Type Type`
+        - `JsonElement Type = "image"`
 
         - `required Source Source`
 
@@ -7171,7 +7165,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             Base64-encoded image data.
 
-            - `required Type Type`
+            - `JsonElement Type = "base64"`
 
             - `required string Data`
 
@@ -7189,7 +7183,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             Image referenced by URL.
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Url`
 
@@ -7201,7 +7195,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             Image referenced by file ID.
 
-            - `required Type Type`
+            - `JsonElement Type = "file"`
 
             - `required string FileID`
 
@@ -7213,7 +7207,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `required Type Type`
+        - `JsonElement Type = "document"`
 
         - `required Source Source`
 
@@ -7223,7 +7217,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             Base64-encoded document data.
 
-            - `required Type Type`
+            - `JsonElement Type = "base64"`
 
             - `required string Data`
 
@@ -7241,7 +7235,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             Plain text document content.
 
-            - `required Type Type`
+            - `JsonElement Type = "text"`
 
             - `required string Data`
 
@@ -7249,7 +7243,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
               minLength: 1
 
-            - `required MediaType MediaType`
+            - `JsonElement MediaType = "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
@@ -7257,7 +7251,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             Document referenced by URL.
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Url`
 
@@ -7269,7 +7263,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             Document referenced by file ID.
 
-            - `required Type Type`
+            - `JsonElement Type = "file"`
 
             - `required string FileID`
 
@@ -7289,13 +7283,13 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         Placeholder for content withheld by Anthropic model policy.
 
-        - `required Type Type`
+        - `JsonElement Type = "redacted"`
 
   - `class BetaManagedAgentsUserDefineOutcomeEventParams`
 
     Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.define_outcome"`
 
     - `required string Description`
 
@@ -7309,7 +7303,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         Rubric referenced by a file uploaded via the Files API.
 
-        - `required Type Type`
+        - `JsonElement Type = "file"`
 
         - `required string FileID`
 
@@ -7319,7 +7313,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         Rubric content provided inline as text.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Content`
 
@@ -7337,13 +7331,13 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
-    - `required Type Type`
+    - `JsonElement Type = "system.message"`
 
     - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
 
       System content blocks to append. Text-only.
 
-      - `required Type Type`
+      - `JsonElement Type = "text"`
 
       - `required string Text`
 
@@ -7361,13 +7355,13 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     The caller invoked the pause endpoint on the deployment.
 
-    - `required Type Type`
+    - `JsonElement Type = "manual"`
 
   - `class BetaManagedAgentsErrorDeploymentPausedReason`
 
     A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-    - `required Type Type`
+    - `JsonElement Type = "error"`
 
     - `required BetaManagedAgentsDeploymentPausedReasonError Error`
 
@@ -7377,85 +7371,85 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
         The deployment's environment was archived.
 
-        - `required Type Type`
+        - `JsonElement Type = "environment_archived_error"`
 
       - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
         The deployment's agent was archived.
 
-        - `required Type Type`
+        - `JsonElement Type = "agent_archived_error"`
 
       - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
         The deployment's environment no longer exists.
 
-        - `required Type Type`
+        - `JsonElement Type = "environment_not_found_error"`
 
       - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
         A vault referenced by the deployment no longer exists.
 
-        - `required Type Type`
+        - `JsonElement Type = "vault_not_found_error"`
 
       - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
         A file resource referenced by the deployment no longer exists.
 
-        - `required Type Type`
+        - `JsonElement Type = "file_not_found_error"`
 
       - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
         A referenced resource no longer exists and its kind was not reported.
 
-        - `required Type Type`
+        - `JsonElement Type = "session_resource_not_found_error"`
 
       - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
         The deployment's workspace was archived.
 
-        - `required Type Type`
+        - `JsonElement Type = "workspace_archived_error"`
 
       - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
         The deployment's organization is disabled.
 
-        - `required Type Type`
+        - `JsonElement Type = "organization_disabled_error"`
 
       - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
         A memory store referenced by the deployment is archived.
 
-        - `required Type Type`
+        - `JsonElement Type = "memory_store_archived_error"`
 
       - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
         A skill referenced by the deployment's agent no longer exists.
 
-        - `required Type Type`
+        - `JsonElement Type = "skill_not_found_error"`
 
       - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
         A vault referenced by the deployment is archived.
 
-        - `required Type Type`
+        - `JsonElement Type = "vault_archived_error"`
 
       - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
         An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-        - `required Type Type`
+        - `JsonElement Type = "unknown_error"`
 
       - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
         The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-        - `required Type Type`
+        - `JsonElement Type = "self_hosted_resources_unsupported_error"`
 
       - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
         An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-        - `required Type Type`
+        - `JsonElement Type = "mcp_egress_blocked_error"`
 
 ### Beta Managed Agents Deployment Paused Reason Error
 
@@ -7467,85 +7461,85 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     The deployment's environment was archived.
 
-    - `required Type Type`
+    - `JsonElement Type = "environment_archived_error"`
 
   - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
     The deployment's agent was archived.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent_archived_error"`
 
   - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
     The deployment's environment no longer exists.
 
-    - `required Type Type`
+    - `JsonElement Type = "environment_not_found_error"`
 
   - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
     A vault referenced by the deployment no longer exists.
 
-    - `required Type Type`
+    - `JsonElement Type = "vault_not_found_error"`
 
   - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
     A file resource referenced by the deployment no longer exists.
 
-    - `required Type Type`
+    - `JsonElement Type = "file_not_found_error"`
 
   - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
     A referenced resource no longer exists and its kind was not reported.
 
-    - `required Type Type`
+    - `JsonElement Type = "session_resource_not_found_error"`
 
   - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
     The deployment's workspace was archived.
 
-    - `required Type Type`
+    - `JsonElement Type = "workspace_archived_error"`
 
   - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
     The deployment's organization is disabled.
 
-    - `required Type Type`
+    - `JsonElement Type = "organization_disabled_error"`
 
   - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
     A memory store referenced by the deployment is archived.
 
-    - `required Type Type`
+    - `JsonElement Type = "memory_store_archived_error"`
 
   - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
     A skill referenced by the deployment's agent no longer exists.
 
-    - `required Type Type`
+    - `JsonElement Type = "skill_not_found_error"`
 
   - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
     A vault referenced by the deployment is archived.
 
-    - `required Type Type`
+    - `JsonElement Type = "vault_archived_error"`
 
   - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
     An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-    - `required Type Type`
+    - `JsonElement Type = "unknown_error"`
 
   - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
     The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-    - `required Type Type`
+    - `JsonElement Type = "self_hosted_resources_unsupported_error"`
 
   - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
     An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-    - `required Type Type`
+    - `JsonElement Type = "mcp_egress_blocked_error"`
 
 ### Beta Managed Agents Deployment Status
 
@@ -7567,13 +7561,13 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
-  - `required Type Type`
+  - `JsonElement Type = "system.message"`
 
   - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
 
     System content blocks to append. Text-only.
 
-    - `required Type Type`
+    - `JsonElement Type = "text"`
 
     - `required string Text`
 
@@ -7587,7 +7581,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   An outcome the agent should work toward. The agent begins work on receipt.
 
-  - `required Type Type`
+  - `JsonElement Type = "user.define_outcome"`
 
   - `required string Description`
 
@@ -7601,7 +7595,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       Rubric referenced by a file uploaded via the Files API.
 
-      - `required Type Type`
+      - `JsonElement Type = "file"`
 
       - `required string FileID`
 
@@ -7611,7 +7605,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       Rubric content provided inline as text.
 
-      - `required Type Type`
+      - `JsonElement Type = "text"`
 
       - `required string Content`
 
@@ -7629,7 +7623,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   A user message sent to the session.
 
-  - `required Type Type`
+  - `JsonElement Type = "user.message"`
 
   - `required IReadOnlyList<Content> Content`
 
@@ -7639,7 +7633,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       Regular text content.
 
-      - `required Type Type`
+      - `JsonElement Type = "text"`
 
       - `required string Text`
 
@@ -7651,7 +7645,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       Image content specified directly as base64 data or as a reference via a URL.
 
-      - `required Type Type`
+      - `JsonElement Type = "image"`
 
       - `required Source Source`
 
@@ -7661,7 +7655,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
           Base64-encoded image data.
 
-          - `required Type Type`
+          - `JsonElement Type = "base64"`
 
           - `required string Data`
 
@@ -7679,7 +7673,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
           Image referenced by URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "url"`
 
           - `required string Url`
 
@@ -7691,7 +7685,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
           Image referenced by file ID.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -7703,7 +7697,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `required Type Type`
+      - `JsonElement Type = "document"`
 
       - `required Source Source`
 
@@ -7713,7 +7707,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
           Base64-encoded document data.
 
-          - `required Type Type`
+          - `JsonElement Type = "base64"`
 
           - `required string Data`
 
@@ -7731,7 +7725,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
           Plain text document content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Data`
 
@@ -7739,7 +7733,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
             minLength: 1
 
-          - `required MediaType MediaType`
+          - `JsonElement MediaType = "text/plain"`
 
             MIME type of the text content. Must be "text/plain".
 
@@ -7747,7 +7741,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
           Document referenced by URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "url"`
 
           - `required string Url`
 
@@ -7759,7 +7753,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
           Document referenced by file ID.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -7779,7 +7773,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       Placeholder for content withheld by Anthropic model policy.
 
-      - `required Type Type`
+      - `JsonElement Type = "redacted"`
 
 ### Beta Managed Agents Environment Archived Deployment Paused Reason Error
 
@@ -7787,7 +7781,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   The deployment's environment was archived.
 
-  - `required Type Type`
+  - `JsonElement Type = "environment_archived_error"`
 
 ### Beta Managed Agents Environment Not Found Deployment Paused Reason Error
 
@@ -7795,7 +7789,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   The deployment's environment no longer exists.
 
-  - `required Type Type`
+  - `JsonElement Type = "environment_not_found_error"`
 
 ### Beta Managed Agents Error Deployment Paused Reason
 
@@ -7803,7 +7797,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
-  - `required Type Type`
+  - `JsonElement Type = "error"`
 
   - `required BetaManagedAgentsDeploymentPausedReasonError Error`
 
@@ -7813,85 +7807,85 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       The deployment's environment was archived.
 
-      - `required Type Type`
+      - `JsonElement Type = "environment_archived_error"`
 
     - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
       The deployment's agent was archived.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_archived_error"`
 
     - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
       The deployment's environment no longer exists.
 
-      - `required Type Type`
+      - `JsonElement Type = "environment_not_found_error"`
 
     - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
       A vault referenced by the deployment no longer exists.
 
-      - `required Type Type`
+      - `JsonElement Type = "vault_not_found_error"`
 
     - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
       A file resource referenced by the deployment no longer exists.
 
-      - `required Type Type`
+      - `JsonElement Type = "file_not_found_error"`
 
     - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
       A referenced resource no longer exists and its kind was not reported.
 
-      - `required Type Type`
+      - `JsonElement Type = "session_resource_not_found_error"`
 
     - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
       The deployment's workspace was archived.
 
-      - `required Type Type`
+      - `JsonElement Type = "workspace_archived_error"`
 
     - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
       The deployment's organization is disabled.
 
-      - `required Type Type`
+      - `JsonElement Type = "organization_disabled_error"`
 
     - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
       A memory store referenced by the deployment is archived.
 
-      - `required Type Type`
+      - `JsonElement Type = "memory_store_archived_error"`
 
     - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
       A skill referenced by the deployment's agent no longer exists.
 
-      - `required Type Type`
+      - `JsonElement Type = "skill_not_found_error"`
 
     - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
       A vault referenced by the deployment is archived.
 
-      - `required Type Type`
+      - `JsonElement Type = "vault_archived_error"`
 
     - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
       An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-      - `required Type Type`
+      - `JsonElement Type = "unknown_error"`
 
     - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-      - `required Type Type`
+      - `JsonElement Type = "self_hosted_resources_unsupported_error"`
 
     - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_egress_blocked_error"`
 
 ### Beta Managed Agents File Not Found Deployment Paused Reason Error
 
@@ -7899,7 +7893,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   A file resource referenced by the deployment no longer exists.
 
-  - `required Type Type`
+  - `JsonElement Type = "file_not_found_error"`
 
 ### Beta Managed Agents File Resource Config
 
@@ -7907,7 +7901,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   A file mounted into each session's container.
 
-  - `required Type Type`
+  - `JsonElement Type = "file"`
 
   - `required string FileID`
 
@@ -7923,7 +7917,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-  - `required Type Type`
+  - `JsonElement Type = "github_repository"`
 
   - `required string Url`
 
@@ -7935,7 +7929,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     - `class BetaManagedAgentsBranchCheckout`
 
-      - `required Type Type`
+      - `JsonElement Type = "branch"`
 
       - `required string Name`
 
@@ -7945,7 +7939,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     - `class BetaManagedAgentsCommitCheckout`
 
-      - `required Type Type`
+      - `JsonElement Type = "commit"`
 
       - `required string Sha`
 
@@ -7963,7 +7957,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   The caller invoked the pause endpoint on the deployment.
 
-  - `required Type Type`
+  - `JsonElement Type = "manual"`
 
 ### Beta Managed Agents MCP Egress Blocked Deployment Paused Reason Error
 
@@ -7971,7 +7965,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-  - `required Type Type`
+  - `JsonElement Type = "mcp_egress_blocked_error"`
 
 ### Beta Managed Agents Memory Store Archived Deployment Paused Reason Error
 
@@ -7979,7 +7973,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   A memory store referenced by the deployment is archived.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_store_archived_error"`
 
 ### Beta Managed Agents Memory Store Resource Config
 
@@ -7987,7 +7981,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   A memory store attached to each session created from this deployment.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_store"`
 
   - `required string MemoryStoreID`
 
@@ -8011,7 +8005,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   The deployment's organization is disabled.
 
-  - `required Type Type`
+  - `JsonElement Type = "organization_disabled_error"`
 
 ### Beta Managed Agents Schedule
 
@@ -8019,7 +8013,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   A recurring schedule with computed runtime timestamps. Discriminated union — only cron is supported currently.
 
-  - `required Type Type`
+  - `JsonElement Type = "cron"`
 
   - `required string Expression`
 
@@ -8049,7 +8043,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   A recurring schedule. Discriminated union — only cron is supported currently.
 
-  - `required Type Type`
+  - `JsonElement Type = "cron"`
 
   - `required string Expression`
 
@@ -8069,7 +8063,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-  - `required Type Type`
+  - `JsonElement Type = "self_hosted_resources_unsupported_error"`
 
 ### Beta Managed Agents Session Resource Config
 
@@ -8081,7 +8075,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
-    - `required Type Type`
+    - `JsonElement Type = "github_repository"`
 
     - `required string Url`
 
@@ -8093,7 +8087,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       - `class BetaManagedAgentsBranchCheckout`
 
-        - `required Type Type`
+        - `JsonElement Type = "branch"`
 
         - `required string Name`
 
@@ -8103,7 +8097,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
       - `class BetaManagedAgentsCommitCheckout`
 
-        - `required Type Type`
+        - `JsonElement Type = "commit"`
 
         - `required string Sha`
 
@@ -8119,7 +8113,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     A file mounted into each session's container.
 
-    - `required Type Type`
+    - `JsonElement Type = "file"`
 
     - `required string FileID`
 
@@ -8133,7 +8127,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
     A memory store attached to each session created from this deployment.
 
-    - `required Type Type`
+    - `JsonElement Type = "memory_store"`
 
     - `required string MemoryStoreID`
 
@@ -8157,7 +8151,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   A referenced resource no longer exists and its kind was not reported.
 
-  - `required Type Type`
+  - `JsonElement Type = "session_resource_not_found_error"`
 
 ### Beta Managed Agents Skill Not Found Deployment Paused Reason Error
 
@@ -8165,7 +8159,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   A skill referenced by the deployment's agent no longer exists.
 
-  - `required Type Type`
+  - `JsonElement Type = "skill_not_found_error"`
 
 ### Beta Managed Agents Unknown Deployment Paused Reason Error
 
@@ -8173,7 +8167,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
-  - `required Type Type`
+  - `JsonElement Type = "unknown_error"`
 
 ### Beta Managed Agents Vault Archived Deployment Paused Reason Error
 
@@ -8181,7 +8175,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   A vault referenced by the deployment is archived.
 
-  - `required Type Type`
+  - `JsonElement Type = "vault_archived_error"`
 
 ### Beta Managed Agents Vault Not Found Deployment Paused Reason Error
 
@@ -8189,7 +8183,7 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   A vault referenced by the deployment no longer exists.
 
-  - `required Type Type`
+  - `JsonElement Type = "vault_not_found_error"`
 
 ### Beta Managed Agents Workspace Archived Deployment Paused Reason Error
 
@@ -8197,4 +8191,4 @@ Console.WriteLine(betaManagedAgentsDeployment);
 
   The deployment's workspace was archived.
 
-  - `required Type Type`
+  - `JsonElement Type = "workspace_archived_error"`

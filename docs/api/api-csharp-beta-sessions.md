@@ -33,7 +33,7 @@ Create Session
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -51,7 +51,7 @@ Create Session
 
       Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_with_overrides"`
 
       - `required string ID`
 
@@ -63,7 +63,7 @@ Create Session
 
         Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -265,31 +265,31 @@ Create Session
 
               Low effort. Favors latency over reasoning depth.
 
-              - `required Type Type`
+              - `JsonElement Type = "low"`
 
             - `class BetaManagedAgentsEffortMedium`
 
               Medium effort. Balances latency and reasoning depth.
 
-              - `required Type Type`
+              - `JsonElement Type = "medium"`
 
             - `class BetaManagedAgentsEffortHigh`
 
               High effort. Favors reasoning depth.
 
-              - `required Type Type`
+              - `JsonElement Type = "high"`
 
             - `class BetaManagedAgentsEffortXhigh`
 
               Extra-high effort. Not all models accept this level.
 
-              - `required Type Type`
+              - `JsonElement Type = "xhigh"`
 
             - `class BetaManagedAgentsEffortMax`
 
               Maximum effort. Favors reasoning depth over latency.
 
-              - `required Type Type`
+              - `JsonElement Type = "max"`
 
           - `string? InferenceGeo`
 
@@ -311,7 +311,7 @@ Create Session
 
           An Anthropic-managed skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "anthropic"`
 
           - `required string SkillID`
 
@@ -329,7 +329,7 @@ Create Session
 
           A user-created custom skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string SkillID`
 
@@ -357,7 +357,7 @@ Create Session
 
           Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_toolset_20260401"`
 
           - `IReadOnlyList<BetaManagedAgentsAgentToolConfigParams> Configs`
 
@@ -385,13 +385,13 @@ Create Session
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_allow"`
 
                 - `class BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_ask"`
 
                 - `class BetaManagedAgentsAutoPolicy`
 
@@ -785,7 +785,7 @@ Create Session
 
           Configuration for tools from an MCP server defined in `mcp_servers`.
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_toolset"`
 
           - `required string McpServerName`
 
@@ -851,7 +851,7 @@ Create Session
 
           A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string Description`
 
@@ -899,7 +899,7 @@ Create Session
 
       Parameters for sending a user message to the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.message"`
 
       - `required IReadOnlyList<Content> Content`
 
@@ -909,7 +909,7 @@ Create Session
 
           Regular text content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -921,7 +921,7 @@ Create Session
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "image"`
 
           - `required Source Source`
 
@@ -931,7 +931,7 @@ Create Session
 
               Base64-encoded image data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -949,7 +949,7 @@ Create Session
 
               Image referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -961,7 +961,7 @@ Create Session
 
               Image referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -973,7 +973,7 @@ Create Session
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "document"`
 
           - `required Source Source`
 
@@ -983,7 +983,7 @@ Create Session
 
               Base64-encoded document data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -1001,7 +1001,7 @@ Create Session
 
               Plain text document content.
 
-              - `required Type Type`
+              - `JsonElement Type = "text"`
 
               - `required string Data`
 
@@ -1009,7 +1009,7 @@ Create Session
 
                 minLength: 1
 
-              - `required MediaType MediaType`
+              - `JsonElement MediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -1017,7 +1017,7 @@ Create Session
 
               Document referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -1029,7 +1029,7 @@ Create Session
 
               Document referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -1049,13 +1049,13 @@ Create Session
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "redacted"`
 
     - `class BetaManagedAgentsUserDefineOutcomeEventParams`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.define_outcome"`
 
       - `required string Description`
 
@@ -1069,7 +1069,7 @@ Create Session
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -1079,7 +1079,7 @@ Create Session
 
           Rubric content provided inline as text.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Content`
 
@@ -1105,7 +1105,7 @@ Create Session
 
       Mount a GitHub repository into the session's container.
 
-      - `required Type Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string Url`
 
@@ -1125,7 +1125,7 @@ Create Session
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -1135,7 +1135,7 @@ Create Session
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -1153,7 +1153,7 @@ Create Session
 
       Mount a file uploaded via the Files API into the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "file"`
 
       - `required string FileID`
 
@@ -1171,7 +1171,7 @@ Create Session
 
       Parameters for attaching a memory store to an agent session.
 
-      - `required Type Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -1321,7 +1321,7 @@ Create Session
 
   A Managed Agents `session`.
 
-  - `required Type Type`
+  - `JsonElement Type = "session"`
 
   - `required string ID`
 
@@ -1329,7 +1329,7 @@ Create Session
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -1357,7 +1357,7 @@ Create Session
 
     - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-      - `required Type Type`
+      - `JsonElement Type = "url"`
 
       - `required string Name`
 
@@ -1449,31 +1449,31 @@ Create Session
 
           Low effort. Favors latency over reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "low"`
 
         - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "medium"`
 
         - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "high"`
 
         - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `required Type Type`
+          - `JsonElement Type = "xhigh"`
 
         - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `required Type Type`
+          - `JsonElement Type = "max"`
 
       - `string InferenceGeo`
 
@@ -1495,7 +1495,7 @@ Create Session
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
-        - `required Type Type`
+        - `JsonElement Type = "coordinator"`
 
         - `required IReadOnlyList<Agent> Agents`
 
@@ -1505,7 +1505,7 @@ Create Session
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -1517,7 +1517,7 @@ Create Session
 
             - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Name`
 
@@ -1535,7 +1535,7 @@ Create Session
 
                 A resolved Anthropic-managed skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "anthropic"`
 
                 - `required string SkillID`
 
@@ -1545,7 +1545,7 @@ Create Session
 
                 A resolved user-created custom skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string SkillID`
 
@@ -1557,7 +1557,7 @@ Create Session
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
-                - `required Type Type`
+                - `JsonElement Type = "agent_toolset_20260401"`
 
                 - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -1579,13 +1579,13 @@ Create Session
 
                         Tool calls are automatically approved without user confirmation.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_allow"`
 
                       - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_ask"`
 
                       - `class BetaManagedAgentsAutoPolicy`
 
@@ -1917,7 +1917,7 @@ Create Session
 
               - `class BetaManagedAgentsMcpToolset`
 
-                - `required Type Type`
+                - `JsonElement Type = "mcp_toolset"`
 
                 - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -1969,7 +1969,7 @@ Create Session
 
                 A custom tool as returned in API responses.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string Description`
 
@@ -1993,7 +1993,7 @@ Create Session
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-            - `required Type Type`
+            - `JsonElement Type = "advisor"`
 
             - `required string Model`
 
@@ -2055,7 +2055,7 @@ Create Session
 
               Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -2107,7 +2107,7 @@ Create Session
 
               Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -2179,7 +2179,7 @@ Create Session
 
     The session's enforced spend ceiling, or null when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -2207,7 +2207,7 @@ Create Session
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
 
-    - `required Type Type`
+    - `JsonElement Type = "outcome_evaluation"`
 
     - `required DateTimeOffset? CompletedAt`
 
@@ -2241,7 +2241,7 @@ Create Session
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
 
-      - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string ID`
 
@@ -2265,7 +2265,7 @@ Create Session
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -2275,7 +2275,7 @@ Create Session
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -2285,7 +2285,7 @@ Create Session
 
     - `class BetaManagedAgentsFileResource`
 
-      - `required BetaManagedAgentsFileResourceType Type`
+      - `JsonElement Type = "file"`
 
       - `required string ID`
 
@@ -2309,7 +2309,7 @@ Create Session
 
       A memory store attached to an agent session.
 
-      - `required BetaManagedAgentsMemoryStoreResourceType Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -2888,7 +2888,7 @@ List Sessions
 
   A Managed Agents `session`.
 
-  - `required Type Type`
+  - `JsonElement Type = "session"`
 
   - `required string ID`
 
@@ -2896,7 +2896,7 @@ List Sessions
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -2924,7 +2924,7 @@ List Sessions
 
     - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-      - `required Type Type`
+      - `JsonElement Type = "url"`
 
       - `required string Name`
 
@@ -3016,31 +3016,31 @@ List Sessions
 
           Low effort. Favors latency over reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "low"`
 
         - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "medium"`
 
         - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "high"`
 
         - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `required Type Type`
+          - `JsonElement Type = "xhigh"`
 
         - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `required Type Type`
+          - `JsonElement Type = "max"`
 
       - `string InferenceGeo`
 
@@ -3062,7 +3062,7 @@ List Sessions
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
-        - `required Type Type`
+        - `JsonElement Type = "coordinator"`
 
         - `required IReadOnlyList<Agent> Agents`
 
@@ -3072,7 +3072,7 @@ List Sessions
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -3084,7 +3084,7 @@ List Sessions
 
             - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Name`
 
@@ -3102,7 +3102,7 @@ List Sessions
 
                 A resolved Anthropic-managed skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "anthropic"`
 
                 - `required string SkillID`
 
@@ -3112,7 +3112,7 @@ List Sessions
 
                 A resolved user-created custom skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string SkillID`
 
@@ -3124,7 +3124,7 @@ List Sessions
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
-                - `required Type Type`
+                - `JsonElement Type = "agent_toolset_20260401"`
 
                 - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -3146,13 +3146,13 @@ List Sessions
 
                         Tool calls are automatically approved without user confirmation.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_allow"`
 
                       - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_ask"`
 
                       - `class BetaManagedAgentsAutoPolicy`
 
@@ -3484,7 +3484,7 @@ List Sessions
 
               - `class BetaManagedAgentsMcpToolset`
 
-                - `required Type Type`
+                - `JsonElement Type = "mcp_toolset"`
 
                 - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -3536,7 +3536,7 @@ List Sessions
 
                 A custom tool as returned in API responses.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string Description`
 
@@ -3560,7 +3560,7 @@ List Sessions
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-            - `required Type Type`
+            - `JsonElement Type = "advisor"`
 
             - `required string Model`
 
@@ -3622,7 +3622,7 @@ List Sessions
 
               Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -3674,7 +3674,7 @@ List Sessions
 
               Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -3746,7 +3746,7 @@ List Sessions
 
     The session's enforced spend ceiling, or null when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -3774,7 +3774,7 @@ List Sessions
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
 
-    - `required Type Type`
+    - `JsonElement Type = "outcome_evaluation"`
 
     - `required DateTimeOffset? CompletedAt`
 
@@ -3808,7 +3808,7 @@ List Sessions
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
 
-      - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string ID`
 
@@ -3832,7 +3832,7 @@ List Sessions
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -3842,7 +3842,7 @@ List Sessions
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -3852,7 +3852,7 @@ List Sessions
 
     - `class BetaManagedAgentsFileResource`
 
-      - `required BetaManagedAgentsFileResourceType Type`
+      - `JsonElement Type = "file"`
 
       - `required string ID`
 
@@ -3876,7 +3876,7 @@ List Sessions
 
       A memory store attached to an agent session.
 
-      - `required BetaManagedAgentsMemoryStoreResourceType Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -4377,7 +4377,7 @@ Get Session
 
   A Managed Agents `session`.
 
-  - `required Type Type`
+  - `JsonElement Type = "session"`
 
   - `required string ID`
 
@@ -4385,7 +4385,7 @@ Get Session
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -4413,7 +4413,7 @@ Get Session
 
     - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-      - `required Type Type`
+      - `JsonElement Type = "url"`
 
       - `required string Name`
 
@@ -4505,31 +4505,31 @@ Get Session
 
           Low effort. Favors latency over reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "low"`
 
         - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "medium"`
 
         - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "high"`
 
         - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `required Type Type`
+          - `JsonElement Type = "xhigh"`
 
         - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `required Type Type`
+          - `JsonElement Type = "max"`
 
       - `string InferenceGeo`
 
@@ -4551,7 +4551,7 @@ Get Session
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
-        - `required Type Type`
+        - `JsonElement Type = "coordinator"`
 
         - `required IReadOnlyList<Agent> Agents`
 
@@ -4561,7 +4561,7 @@ Get Session
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -4573,7 +4573,7 @@ Get Session
 
             - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Name`
 
@@ -4591,7 +4591,7 @@ Get Session
 
                 A resolved Anthropic-managed skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "anthropic"`
 
                 - `required string SkillID`
 
@@ -4601,7 +4601,7 @@ Get Session
 
                 A resolved user-created custom skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string SkillID`
 
@@ -4613,7 +4613,7 @@ Get Session
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
-                - `required Type Type`
+                - `JsonElement Type = "agent_toolset_20260401"`
 
                 - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -4635,13 +4635,13 @@ Get Session
 
                         Tool calls are automatically approved without user confirmation.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_allow"`
 
                       - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_ask"`
 
                       - `class BetaManagedAgentsAutoPolicy`
 
@@ -4973,7 +4973,7 @@ Get Session
 
               - `class BetaManagedAgentsMcpToolset`
 
-                - `required Type Type`
+                - `JsonElement Type = "mcp_toolset"`
 
                 - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -5025,7 +5025,7 @@ Get Session
 
                 A custom tool as returned in API responses.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string Description`
 
@@ -5049,7 +5049,7 @@ Get Session
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-            - `required Type Type`
+            - `JsonElement Type = "advisor"`
 
             - `required string Model`
 
@@ -5111,7 +5111,7 @@ Get Session
 
               Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -5163,7 +5163,7 @@ Get Session
 
               Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -5235,7 +5235,7 @@ Get Session
 
     The session's enforced spend ceiling, or null when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -5263,7 +5263,7 @@ Get Session
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
 
-    - `required Type Type`
+    - `JsonElement Type = "outcome_evaluation"`
 
     - `required DateTimeOffset? CompletedAt`
 
@@ -5297,7 +5297,7 @@ Get Session
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
 
-      - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string ID`
 
@@ -5321,7 +5321,7 @@ Get Session
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -5331,7 +5331,7 @@ Get Session
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -5341,7 +5341,7 @@ Get Session
 
     - `class BetaManagedAgentsFileResource`
 
-      - `required BetaManagedAgentsFileResourceType Type`
+      - `JsonElement Type = "file"`
 
       - `required string ID`
 
@@ -5365,7 +5365,7 @@ Get Session
 
       A memory store attached to an agent session.
 
-      - `required BetaManagedAgentsMemoryStoreResourceType Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -5883,7 +5883,7 @@ Update Session
 
   A Managed Agents `session`.
 
-  - `required Type Type`
+  - `JsonElement Type = "session"`
 
   - `required string ID`
 
@@ -5891,7 +5891,7 @@ Update Session
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -5919,7 +5919,7 @@ Update Session
 
     - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-      - `required Type Type`
+      - `JsonElement Type = "url"`
 
       - `required string Name`
 
@@ -6011,31 +6011,31 @@ Update Session
 
           Low effort. Favors latency over reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "low"`
 
         - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "medium"`
 
         - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "high"`
 
         - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `required Type Type`
+          - `JsonElement Type = "xhigh"`
 
         - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `required Type Type`
+          - `JsonElement Type = "max"`
 
       - `string InferenceGeo`
 
@@ -6057,7 +6057,7 @@ Update Session
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
-        - `required Type Type`
+        - `JsonElement Type = "coordinator"`
 
         - `required IReadOnlyList<Agent> Agents`
 
@@ -6067,7 +6067,7 @@ Update Session
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -6079,7 +6079,7 @@ Update Session
 
             - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Name`
 
@@ -6097,7 +6097,7 @@ Update Session
 
                 A resolved Anthropic-managed skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "anthropic"`
 
                 - `required string SkillID`
 
@@ -6107,7 +6107,7 @@ Update Session
 
                 A resolved user-created custom skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string SkillID`
 
@@ -6119,7 +6119,7 @@ Update Session
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
-                - `required Type Type`
+                - `JsonElement Type = "agent_toolset_20260401"`
 
                 - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -6141,13 +6141,13 @@ Update Session
 
                         Tool calls are automatically approved without user confirmation.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_allow"`
 
                       - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_ask"`
 
                       - `class BetaManagedAgentsAutoPolicy`
 
@@ -6479,7 +6479,7 @@ Update Session
 
               - `class BetaManagedAgentsMcpToolset`
 
-                - `required Type Type`
+                - `JsonElement Type = "mcp_toolset"`
 
                 - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -6531,7 +6531,7 @@ Update Session
 
                 A custom tool as returned in API responses.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string Description`
 
@@ -6555,7 +6555,7 @@ Update Session
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-            - `required Type Type`
+            - `JsonElement Type = "advisor"`
 
             - `required string Model`
 
@@ -6617,7 +6617,7 @@ Update Session
 
               Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -6669,7 +6669,7 @@ Update Session
 
               Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -6741,7 +6741,7 @@ Update Session
 
     The session's enforced spend ceiling, or null when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -6769,7 +6769,7 @@ Update Session
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
 
-    - `required Type Type`
+    - `JsonElement Type = "outcome_evaluation"`
 
     - `required DateTimeOffset? CompletedAt`
 
@@ -6803,7 +6803,7 @@ Update Session
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
 
-      - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string ID`
 
@@ -6827,7 +6827,7 @@ Update Session
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -6837,7 +6837,7 @@ Update Session
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -6847,7 +6847,7 @@ Update Session
 
     - `class BetaManagedAgentsFileResource`
 
-      - `required BetaManagedAgentsFileResourceType Type`
+      - `JsonElement Type = "file"`
 
       - `required string ID`
 
@@ -6871,7 +6871,7 @@ Update Session
 
       A memory store attached to an agent session.
 
-      - `required BetaManagedAgentsMemoryStoreResourceType Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -7367,7 +7367,7 @@ Delete Session
 
   Confirmation that a `session` has been permanently deleted.
 
-  - `required Type Type`
+  - `JsonElement Type = "session_deleted"`
 
   - `required string ID`
 
@@ -7530,7 +7530,7 @@ Archive Session
 
   A Managed Agents `session`.
 
-  - `required Type Type`
+  - `JsonElement Type = "session"`
 
   - `required string ID`
 
@@ -7538,7 +7538,7 @@ Archive Session
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -7566,7 +7566,7 @@ Archive Session
 
     - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-      - `required Type Type`
+      - `JsonElement Type = "url"`
 
       - `required string Name`
 
@@ -7658,31 +7658,31 @@ Archive Session
 
           Low effort. Favors latency over reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "low"`
 
         - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "medium"`
 
         - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "high"`
 
         - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `required Type Type`
+          - `JsonElement Type = "xhigh"`
 
         - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `required Type Type`
+          - `JsonElement Type = "max"`
 
       - `string InferenceGeo`
 
@@ -7704,7 +7704,7 @@ Archive Session
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
-        - `required Type Type`
+        - `JsonElement Type = "coordinator"`
 
         - `required IReadOnlyList<Agent> Agents`
 
@@ -7714,7 +7714,7 @@ Archive Session
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -7726,7 +7726,7 @@ Archive Session
 
             - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Name`
 
@@ -7744,7 +7744,7 @@ Archive Session
 
                 A resolved Anthropic-managed skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "anthropic"`
 
                 - `required string SkillID`
 
@@ -7754,7 +7754,7 @@ Archive Session
 
                 A resolved user-created custom skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string SkillID`
 
@@ -7766,7 +7766,7 @@ Archive Session
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
-                - `required Type Type`
+                - `JsonElement Type = "agent_toolset_20260401"`
 
                 - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -7788,13 +7788,13 @@ Archive Session
 
                         Tool calls are automatically approved without user confirmation.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_allow"`
 
                       - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_ask"`
 
                       - `class BetaManagedAgentsAutoPolicy`
 
@@ -8126,7 +8126,7 @@ Archive Session
 
               - `class BetaManagedAgentsMcpToolset`
 
-                - `required Type Type`
+                - `JsonElement Type = "mcp_toolset"`
 
                 - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -8178,7 +8178,7 @@ Archive Session
 
                 A custom tool as returned in API responses.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string Description`
 
@@ -8202,7 +8202,7 @@ Archive Session
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-            - `required Type Type`
+            - `JsonElement Type = "advisor"`
 
             - `required string Model`
 
@@ -8264,7 +8264,7 @@ Archive Session
 
               Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -8316,7 +8316,7 @@ Archive Session
 
               Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -8388,7 +8388,7 @@ Archive Session
 
     The session's enforced spend ceiling, or null when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -8416,7 +8416,7 @@ Archive Session
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
 
-    - `required Type Type`
+    - `JsonElement Type = "outcome_evaluation"`
 
     - `required DateTimeOffset? CompletedAt`
 
@@ -8450,7 +8450,7 @@ Archive Session
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
 
-      - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string ID`
 
@@ -8474,7 +8474,7 @@ Archive Session
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -8484,7 +8484,7 @@ Archive Session
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -8494,7 +8494,7 @@ Archive Session
 
     - `class BetaManagedAgentsFileResource`
 
-      - `required BetaManagedAgentsFileResourceType Type`
+      - `JsonElement Type = "file"`
 
       - `required string ID`
 
@@ -8518,7 +8518,7 @@ Archive Session
 
       A memory store attached to an agent session.
 
-      - `required BetaManagedAgentsMemoryStoreResourceType Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -8888,7 +8888,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
 
-  - `required Type Type`
+  - `JsonElement Type = "advisor"`
 
   - `required string Model`
 
@@ -8900,7 +8900,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
 - `class BetaManagedAgentsAgentMessagePreview`
 
-  - `required Type Type`
+  - `JsonElement Type = "agent.message"`
 
   - `required string ID`
 
@@ -8912,7 +8912,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-  - `required Type Type`
+  - `JsonElement Type = "agent"`
 
   - `required string ID`
 
@@ -8930,7 +8930,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
 - `class BetaManagedAgentsAgentThinkingPreview`
 
-  - `required Type Type`
+  - `JsonElement Type = "agent.thinking"`
 
   - `required string ID`
 
@@ -8942,7 +8942,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
 
-  - `required Type Type`
+  - `JsonElement Type = "agent_with_overrides"`
 
   - `required string ID`
 
@@ -8954,7 +8954,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -9156,31 +9156,31 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Low effort. Favors latency over reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "low"`
 
         - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "medium"`
 
         - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "high"`
 
         - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `required Type Type`
+          - `JsonElement Type = "xhigh"`
 
         - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `required Type Type`
+          - `JsonElement Type = "max"`
 
       - `string? InferenceGeo`
 
@@ -9202,7 +9202,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       An Anthropic-managed skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "anthropic"`
 
       - `required string SkillID`
 
@@ -9220,7 +9220,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       A user-created custom skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string SkillID`
 
@@ -9248,7 +9248,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_toolset_20260401"`
 
       - `IReadOnlyList<BetaManagedAgentsAgentToolConfigParams> Configs`
 
@@ -9276,13 +9276,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -9676,7 +9676,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `required string McpServerName`
 
@@ -9742,7 +9742,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string Description`
 
@@ -9776,7 +9776,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
 - `class BetaManagedAgentsBranchCheckout`
 
-  - `required Type Type`
+  - `JsonElement Type = "branch"`
 
   - `required string Name`
 
@@ -9790,7 +9790,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-  - `required Type Type`
+  - `JsonElement Type = "limit"`
 
   - `required BetaMonetaryAmount MaxListCost`
 
@@ -9826,7 +9826,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
 - `class BetaManagedAgentsCommitCheckout`
 
-  - `required Type Type`
+  - `JsonElement Type = "commit"`
 
   - `required string Sha`
 
@@ -9840,7 +9840,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Confirmation that a `session` has been permanently deleted.
 
-  - `required Type Type`
+  - `JsonElement Type = "session_deleted"`
 
   - `required string ID`
 
@@ -9848,13 +9848,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
 - `class BetaManagedAgentsDeltaContent`
 
-  - `required Type Type`
+  - `JsonElement Type = "content_delta"`
 
   - `required BetaManagedAgentsTextBlock Content`
 
     A partial element of the content array at index, typed like the element itself — the same shape the buffered agent.message carries in content.
 
-    - `required Type Type`
+    - `JsonElement Type = "text"`
 
     - `required string Text`
 
@@ -9872,19 +9872,19 @@ Console.WriteLine(betaManagedAgentsSession);
 
   An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
-  - `required Type Type`
+  - `JsonElement Type = "event_delta"`
 
   - `required BetaManagedAgentsDeltaContent Delta`
 
     One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
 
-    - `required Type Type`
+    - `JsonElement Type = "content_delta"`
 
     - `required BetaManagedAgentsTextBlock Content`
 
       A partial element of the content array at index, typed like the element itself — the same shape the buffered agent.message carries in content.
 
-      - `required Type Type`
+      - `JsonElement Type = "text"`
 
       - `required string Text`
 
@@ -9914,7 +9914,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Mount a file uploaded via the Files API into the session.
 
-  - `required Type Type`
+  - `JsonElement Type = "file"`
 
   - `required string FileID`
 
@@ -9934,7 +9934,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Mount a GitHub repository into the session's container.
 
-  - `required Type Type`
+  - `JsonElement Type = "github_repository"`
 
   - `required string Url`
 
@@ -9954,7 +9954,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     - `class BetaManagedAgentsBranchCheckout`
 
-      - `required Type Type`
+      - `JsonElement Type = "branch"`
 
       - `required string Name`
 
@@ -9964,7 +9964,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     - `class BetaManagedAgentsCommitCheckout`
 
-      - `required Type Type`
+      - `JsonElement Type = "commit"`
 
       - `required string Sha`
 
@@ -9984,7 +9984,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Parameters for attaching a memory store to an agent session.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_store"`
 
   - `required string MemoryStoreID`
 
@@ -10014,7 +10014,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `required Type Type`
+    - `JsonElement Type = "coordinator"`
 
     - `required IReadOnlyList<Agent> Agents`
 
@@ -10024,7 +10024,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         A resolved agent reference with a concrete version.
 
-        - `required Type Type`
+        - `JsonElement Type = "agent"`
 
         - `required string ID`
 
@@ -10036,7 +10036,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-        - `required Type Type`
+        - `JsonElement Type = "advisor"`
 
         - `required string Model`
 
@@ -10098,7 +10098,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent"`
 
           - `required string ID`
 
@@ -10130,7 +10130,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent"`
 
           - `required string ID`
 
@@ -10154,7 +10154,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
-    - `required Type Type`
+    - `JsonElement Type = "coordinator"`
 
     - `required IReadOnlyList<BetaManagedAgentsMultiagentRosterEntryParams> Agents`
 
@@ -10166,7 +10166,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-        - `required Type Type`
+        - `JsonElement Type = "agent"`
 
         - `required string ID`
 
@@ -10184,13 +10184,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
         Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
-        - `required Type Type`
+        - `JsonElement Type = "self"`
 
       - `class BetaManagedAgentsAdvisorParams`
 
         Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
 
-        - `required Type Type`
+        - `JsonElement Type = "advisor"`
 
         - `required string Model`
 
@@ -10318,7 +10318,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -10336,13 +10336,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
     Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
-    - `required Type Type`
+    - `JsonElement Type = "self"`
 
   - `class BetaManagedAgentsAdvisorParams`
 
     Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
 
-    - `required Type Type`
+    - `JsonElement Type = "advisor"`
 
     - `required string Model`
 
@@ -10356,7 +10356,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Evaluation state for a single outcome defined via a `define_outcome` event.
 
-  - `required Type Type`
+  - `JsonElement Type = "outcome_evaluation"`
 
   - `required DateTimeOffset? CompletedAt`
 
@@ -10410,7 +10410,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   A Managed Agents `session`.
 
-  - `required Type Type`
+  - `JsonElement Type = "session"`
 
   - `required string ID`
 
@@ -10418,7 +10418,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -10446,7 +10446,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-      - `required Type Type`
+      - `JsonElement Type = "url"`
 
       - `required string Name`
 
@@ -10538,31 +10538,31 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Low effort. Favors latency over reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "low"`
 
         - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "medium"`
 
         - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "high"`
 
         - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `required Type Type`
+          - `JsonElement Type = "xhigh"`
 
         - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `required Type Type`
+          - `JsonElement Type = "max"`
 
       - `string InferenceGeo`
 
@@ -10584,7 +10584,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
-        - `required Type Type`
+        - `JsonElement Type = "coordinator"`
 
         - `required IReadOnlyList<Agent> Agents`
 
@@ -10594,7 +10594,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -10606,7 +10606,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Name`
 
@@ -10624,7 +10624,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
                 A resolved Anthropic-managed skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "anthropic"`
 
                 - `required string SkillID`
 
@@ -10634,7 +10634,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
                 A resolved user-created custom skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string SkillID`
 
@@ -10646,7 +10646,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
-                - `required Type Type`
+                - `JsonElement Type = "agent_toolset_20260401"`
 
                 - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -10668,13 +10668,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
                         Tool calls are automatically approved without user confirmation.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_allow"`
 
                       - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_ask"`
 
                       - `class BetaManagedAgentsAutoPolicy`
 
@@ -11006,7 +11006,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
               - `class BetaManagedAgentsMcpToolset`
 
-                - `required Type Type`
+                - `JsonElement Type = "mcp_toolset"`
 
                 - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -11058,7 +11058,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
                 A custom tool as returned in API responses.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string Description`
 
@@ -11082,7 +11082,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-            - `required Type Type`
+            - `JsonElement Type = "advisor"`
 
             - `required string Model`
 
@@ -11144,7 +11144,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
               Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -11196,7 +11196,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
               Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -11268,7 +11268,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     The session's enforced spend ceiling, or null when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -11296,7 +11296,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
 
-    - `required Type Type`
+    - `JsonElement Type = "outcome_evaluation"`
 
     - `required DateTimeOffset? CompletedAt`
 
@@ -11330,7 +11330,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
 
-      - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string ID`
 
@@ -11354,7 +11354,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -11364,7 +11364,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -11374,7 +11374,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     - `class BetaManagedAgentsFileResource`
 
-      - `required BetaManagedAgentsFileResourceType Type`
+      - `JsonElement Type = "file"`
 
       - `required string ID`
 
@@ -11398,7 +11398,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       A memory store attached to an agent session.
 
-      - `required BetaManagedAgentsMemoryStoreResourceType Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 
@@ -11550,7 +11550,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-  - `required Type Type`
+  - `JsonElement Type = "agent"`
 
   - `required string ID`
 
@@ -11578,7 +11578,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -11670,31 +11670,31 @@ Console.WriteLine(betaManagedAgentsSession);
 
         Low effort. Favors latency over reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "low"`
 
       - `class BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "medium"`
 
       - `class BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "high"`
 
       - `class BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
-        - `required Type Type`
+        - `JsonElement Type = "xhigh"`
 
       - `class BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
-        - `required Type Type`
+        - `JsonElement Type = "max"`
 
     - `string InferenceGeo`
 
@@ -11716,7 +11716,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
-      - `required Type Type`
+      - `JsonElement Type = "coordinator"`
 
       - `required IReadOnlyList<Agent> Agents`
 
@@ -11726,7 +11726,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent"`
 
           - `required string ID`
 
@@ -11738,7 +11738,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Name`
 
@@ -11756,7 +11756,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
               A resolved Anthropic-managed skill.
 
-              - `required Type Type`
+              - `JsonElement Type = "anthropic"`
 
               - `required string SkillID`
 
@@ -11766,7 +11766,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
               A resolved user-created custom skill.
 
-              - `required Type Type`
+              - `JsonElement Type = "custom"`
 
               - `required string SkillID`
 
@@ -11778,7 +11778,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             - `class BetaManagedAgentsAgentToolset20260401`
 
-              - `required Type Type`
+              - `JsonElement Type = "agent_toolset_20260401"`
 
               - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -11800,13 +11800,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
                       Tool calls are automatically approved without user confirmation.
 
-                      - `required Type Type`
+                      - `JsonElement Type = "always_allow"`
 
                     - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                      - `required Type Type`
+                      - `JsonElement Type = "always_ask"`
 
                     - `class BetaManagedAgentsAutoPolicy`
 
@@ -12138,7 +12138,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             - `class BetaManagedAgentsMcpToolset`
 
-              - `required Type Type`
+              - `JsonElement Type = "mcp_toolset"`
 
               - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -12190,7 +12190,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
               A custom tool as returned in API responses.
 
-              - `required Type Type`
+              - `JsonElement Type = "custom"`
 
               - `required string Description`
 
@@ -12214,7 +12214,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-          - `required Type Type`
+          - `JsonElement Type = "advisor"`
 
           - `required string Model`
 
@@ -12276,7 +12276,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -12328,7 +12328,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -12400,7 +12400,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     Replacement MCP server list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -12422,7 +12422,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_toolset_20260401"`
 
       - `IReadOnlyList<BetaManagedAgentsAgentToolConfigParams> Configs`
 
@@ -12450,13 +12450,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -12850,7 +12850,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `required string McpServerName`
 
@@ -12916,7 +12916,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string Description`
 
@@ -12950,7 +12950,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     Resolved coordinator topology with full agent definitions for each roster member.
 
-    - `required Type Type`
+    - `JsonElement Type = "coordinator"`
 
     - `required IReadOnlyList<Agent> Agents`
 
@@ -12960,7 +12960,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-        - `required Type Type`
+        - `JsonElement Type = "agent"`
 
         - `required string ID`
 
@@ -12988,7 +12988,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-          - `required Type Type`
+          - `JsonElement Type = "url"`
 
           - `required string Name`
 
@@ -13080,31 +13080,31 @@ Console.WriteLine(betaManagedAgentsSession);
 
               Low effort. Favors latency over reasoning depth.
 
-              - `required Type Type`
+              - `JsonElement Type = "low"`
 
             - `class BetaManagedAgentsEffortMedium`
 
               Medium effort. Balances latency and reasoning depth.
 
-              - `required Type Type`
+              - `JsonElement Type = "medium"`
 
             - `class BetaManagedAgentsEffortHigh`
 
               High effort. Favors reasoning depth.
 
-              - `required Type Type`
+              - `JsonElement Type = "high"`
 
             - `class BetaManagedAgentsEffortXhigh`
 
               Extra-high effort. Not all models accept this level.
 
-              - `required Type Type`
+              - `JsonElement Type = "xhigh"`
 
             - `class BetaManagedAgentsEffortMax`
 
               Maximum effort. Favors reasoning depth over latency.
 
-              - `required Type Type`
+              - `JsonElement Type = "max"`
 
           - `string InferenceGeo`
 
@@ -13126,7 +13126,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             A resolved Anthropic-managed skill.
 
-            - `required Type Type`
+            - `JsonElement Type = "anthropic"`
 
             - `required string SkillID`
 
@@ -13136,7 +13136,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             A resolved user-created custom skill.
 
-            - `required Type Type`
+            - `JsonElement Type = "custom"`
 
             - `required string SkillID`
 
@@ -13148,7 +13148,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           - `class BetaManagedAgentsAgentToolset20260401`
 
-            - `required Type Type`
+            - `JsonElement Type = "agent_toolset_20260401"`
 
             - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -13170,13 +13170,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `required Type Type`
+                    - `JsonElement Type = "always_allow"`
 
                   - `class BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                    - `required Type Type`
+                    - `JsonElement Type = "always_ask"`
 
                   - `class BetaManagedAgentsAutoPolicy`
 
@@ -13508,7 +13508,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           - `class BetaManagedAgentsMcpToolset`
 
-            - `required Type Type`
+            - `JsonElement Type = "mcp_toolset"`
 
             - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -13560,7 +13560,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             A custom tool as returned in API responses.
 
-            - `required Type Type`
+            - `JsonElement Type = "custom"`
 
             - `required string Description`
 
@@ -13584,7 +13584,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-        - `required Type Type`
+        - `JsonElement Type = "advisor"`
 
         - `required string Model`
 
@@ -13646,7 +13646,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent"`
 
           - `required string ID`
 
@@ -13698,7 +13698,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent"`
 
           - `required string ID`
 
@@ -13738,7 +13738,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Resolved coordinator topology with full agent definitions for each roster member.
 
-  - `required Type Type`
+  - `JsonElement Type = "coordinator"`
 
   - `required IReadOnlyList<Agent> Agents`
 
@@ -13748,7 +13748,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -13776,7 +13776,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -13868,31 +13868,31 @@ Console.WriteLine(betaManagedAgentsSession);
 
             Low effort. Favors latency over reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "low"`
 
           - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "medium"`
 
           - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "high"`
 
           - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
-            - `required Type Type`
+            - `JsonElement Type = "xhigh"`
 
           - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
-            - `required Type Type`
+            - `JsonElement Type = "max"`
 
         - `string InferenceGeo`
 
@@ -13914,7 +13914,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           A resolved Anthropic-managed skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "anthropic"`
 
           - `required string SkillID`
 
@@ -13924,7 +13924,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           A resolved user-created custom skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string SkillID`
 
@@ -13936,7 +13936,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_toolset_20260401"`
 
           - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -13958,13 +13958,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_allow"`
 
                 - `class BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_ask"`
 
                 - `class BetaManagedAgentsAutoPolicy`
 
@@ -14296,7 +14296,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         - `class BetaManagedAgentsMcpToolset`
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_toolset"`
 
           - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -14348,7 +14348,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           A custom tool as returned in API responses.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string Description`
 
@@ -14372,7 +14372,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-      - `required Type Type`
+      - `JsonElement Type = "advisor"`
 
       - `required string Model`
 
@@ -14410,7 +14410,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -14438,7 +14438,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -14530,31 +14530,31 @@ Console.WriteLine(betaManagedAgentsSession);
 
             Low effort. Favors latency over reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "low"`
 
           - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "medium"`
 
           - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "high"`
 
           - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
-            - `required Type Type`
+            - `JsonElement Type = "xhigh"`
 
           - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
-            - `required Type Type`
+            - `JsonElement Type = "max"`
 
         - `string InferenceGeo`
 
@@ -14576,7 +14576,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           A resolved Anthropic-managed skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "anthropic"`
 
           - `required string SkillID`
 
@@ -14586,7 +14586,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           A resolved user-created custom skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string SkillID`
 
@@ -14598,7 +14598,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_toolset_20260401"`
 
           - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -14620,13 +14620,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_allow"`
 
                 - `class BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_ask"`
 
                 - `class BetaManagedAgentsAutoPolicy`
 
@@ -14958,7 +14958,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         - `class BetaManagedAgentsMcpToolset`
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_toolset"`
 
           - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -15010,7 +15010,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           A custom tool as returned in API responses.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string Description`
 
@@ -15064,7 +15064,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -15092,7 +15092,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-      - `required Type Type`
+      - `JsonElement Type = "url"`
 
       - `required string Name`
 
@@ -15184,31 +15184,31 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Low effort. Favors latency over reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "low"`
 
         - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "medium"`
 
         - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "high"`
 
         - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `required Type Type`
+          - `JsonElement Type = "xhigh"`
 
         - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `required Type Type`
+          - `JsonElement Type = "max"`
 
       - `string InferenceGeo`
 
@@ -15230,7 +15230,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         A resolved Anthropic-managed skill.
 
-        - `required Type Type`
+        - `JsonElement Type = "anthropic"`
 
         - `required string SkillID`
 
@@ -15240,7 +15240,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         A resolved user-created custom skill.
 
-        - `required Type Type`
+        - `JsonElement Type = "custom"`
 
         - `required string SkillID`
 
@@ -15252,7 +15252,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       - `class BetaManagedAgentsAgentToolset20260401`
 
-        - `required Type Type`
+        - `JsonElement Type = "agent_toolset_20260401"`
 
         - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -15274,13 +15274,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
                 Tool calls are automatically approved without user confirmation.
 
-                - `required Type Type`
+                - `JsonElement Type = "always_allow"`
 
               - `class BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-                - `required Type Type`
+                - `JsonElement Type = "always_ask"`
 
               - `class BetaManagedAgentsAutoPolicy`
 
@@ -15612,7 +15612,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       - `class BetaManagedAgentsMcpToolset`
 
-        - `required Type Type`
+        - `JsonElement Type = "mcp_toolset"`
 
         - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -15664,7 +15664,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         A custom tool as returned in API responses.
 
-        - `required Type Type`
+        - `JsonElement Type = "custom"`
 
         - `required string Description`
 
@@ -15716,7 +15716,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -15744,7 +15744,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -15836,31 +15836,31 @@ Console.WriteLine(betaManagedAgentsSession);
 
             Low effort. Favors latency over reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "low"`
 
           - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "medium"`
 
           - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "high"`
 
           - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
-            - `required Type Type`
+            - `JsonElement Type = "xhigh"`
 
           - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
-            - `required Type Type`
+            - `JsonElement Type = "max"`
 
         - `string InferenceGeo`
 
@@ -15882,7 +15882,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           A resolved Anthropic-managed skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "anthropic"`
 
           - `required string SkillID`
 
@@ -15892,7 +15892,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           A resolved user-created custom skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string SkillID`
 
@@ -15904,7 +15904,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_toolset_20260401"`
 
           - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -15926,13 +15926,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_allow"`
 
                 - `class BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_ask"`
 
                 - `class BetaManagedAgentsAutoPolicy`
 
@@ -16264,7 +16264,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         - `class BetaManagedAgentsMcpToolset`
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_toolset"`
 
           - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -16316,7 +16316,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           A custom tool as returned in API responses.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string Description`
 
@@ -16370,7 +16370,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -16398,7 +16398,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-      - `required Type Type`
+      - `JsonElement Type = "url"`
 
       - `required string Name`
 
@@ -16490,31 +16490,31 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Low effort. Favors latency over reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "low"`
 
         - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "medium"`
 
         - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "high"`
 
         - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `required Type Type`
+          - `JsonElement Type = "xhigh"`
 
         - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `required Type Type`
+          - `JsonElement Type = "max"`
 
       - `string InferenceGeo`
 
@@ -16536,7 +16536,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         A resolved Anthropic-managed skill.
 
-        - `required Type Type`
+        - `JsonElement Type = "anthropic"`
 
         - `required string SkillID`
 
@@ -16546,7 +16546,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         A resolved user-created custom skill.
 
-        - `required Type Type`
+        - `JsonElement Type = "custom"`
 
         - `required string SkillID`
 
@@ -16558,7 +16558,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       - `class BetaManagedAgentsAgentToolset20260401`
 
-        - `required Type Type`
+        - `JsonElement Type = "agent_toolset_20260401"`
 
         - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -16580,13 +16580,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
                 Tool calls are automatically approved without user confirmation.
 
-                - `required Type Type`
+                - `JsonElement Type = "always_allow"`
 
               - `class BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-                - `required Type Type`
+                - `JsonElement Type = "always_ask"`
 
               - `class BetaManagedAgentsAutoPolicy`
 
@@ -16918,7 +16918,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       - `class BetaManagedAgentsMcpToolset`
 
-        - `required Type Type`
+        - `JsonElement Type = "mcp_toolset"`
 
         - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -16970,7 +16970,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         A custom tool as returned in API responses.
 
-        - `required Type Type`
+        - `JsonElement Type = "custom"`
 
         - `required string Description`
 
@@ -17048,7 +17048,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-        - `required Type Type`
+        - `JsonElement Type = "agent"`
 
         - `required string ID`
 
@@ -17076,7 +17076,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-          - `required Type Type`
+          - `JsonElement Type = "url"`
 
           - `required string Name`
 
@@ -17168,31 +17168,31 @@ Console.WriteLine(betaManagedAgentsSession);
 
               Low effort. Favors latency over reasoning depth.
 
-              - `required Type Type`
+              - `JsonElement Type = "low"`
 
             - `class BetaManagedAgentsEffortMedium`
 
               Medium effort. Balances latency and reasoning depth.
 
-              - `required Type Type`
+              - `JsonElement Type = "medium"`
 
             - `class BetaManagedAgentsEffortHigh`
 
               High effort. Favors reasoning depth.
 
-              - `required Type Type`
+              - `JsonElement Type = "high"`
 
             - `class BetaManagedAgentsEffortXhigh`
 
               Extra-high effort. Not all models accept this level.
 
-              - `required Type Type`
+              - `JsonElement Type = "xhigh"`
 
             - `class BetaManagedAgentsEffortMax`
 
               Maximum effort. Favors reasoning depth over latency.
 
-              - `required Type Type`
+              - `JsonElement Type = "max"`
 
           - `string InferenceGeo`
 
@@ -17214,7 +17214,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             A resolved Anthropic-managed skill.
 
-            - `required Type Type`
+            - `JsonElement Type = "anthropic"`
 
             - `required string SkillID`
 
@@ -17224,7 +17224,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             A resolved user-created custom skill.
 
-            - `required Type Type`
+            - `JsonElement Type = "custom"`
 
             - `required string SkillID`
 
@@ -17236,7 +17236,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           - `class BetaManagedAgentsAgentToolset20260401`
 
-            - `required Type Type`
+            - `JsonElement Type = "agent_toolset_20260401"`
 
             - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -17258,13 +17258,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
                     Tool calls are automatically approved without user confirmation.
 
-                    - `required Type Type`
+                    - `JsonElement Type = "always_allow"`
 
                   - `class BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                    - `required Type Type`
+                    - `JsonElement Type = "always_ask"`
 
                   - `class BetaManagedAgentsAutoPolicy`
 
@@ -17596,7 +17596,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           - `class BetaManagedAgentsMcpToolset`
 
-            - `required Type Type`
+            - `JsonElement Type = "mcp_toolset"`
 
             - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -17648,7 +17648,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             A custom tool as returned in API responses.
 
-            - `required Type Type`
+            - `JsonElement Type = "custom"`
 
             - `required string Description`
 
@@ -17692,7 +17692,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-        - `required Type Type`
+        - `JsonElement Type = "agent"`
 
         - `required string ID`
 
@@ -17750,7 +17750,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
-  - `required Type Type`
+  - `JsonElement Type = "session.updated"`
 
   - `required string ID`
 
@@ -17766,7 +17766,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -17794,7 +17794,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-      - `required Type Type`
+      - `JsonElement Type = "url"`
 
       - `required string Name`
 
@@ -17886,31 +17886,31 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Low effort. Favors latency over reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "low"`
 
         - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "medium"`
 
         - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "high"`
 
         - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `required Type Type`
+          - `JsonElement Type = "xhigh"`
 
         - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `required Type Type`
+          - `JsonElement Type = "max"`
 
       - `string InferenceGeo`
 
@@ -17932,7 +17932,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
-        - `required Type Type`
+        - `JsonElement Type = "coordinator"`
 
         - `required IReadOnlyList<Agent> Agents`
 
@@ -17942,7 +17942,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -17954,7 +17954,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Name`
 
@@ -17972,7 +17972,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
                 A resolved Anthropic-managed skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "anthropic"`
 
                 - `required string SkillID`
 
@@ -17982,7 +17982,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
                 A resolved user-created custom skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string SkillID`
 
@@ -17994,7 +17994,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
-                - `required Type Type`
+                - `JsonElement Type = "agent_toolset_20260401"`
 
                 - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -18016,13 +18016,13 @@ Console.WriteLine(betaManagedAgentsSession);
 
                         Tool calls are automatically approved without user confirmation.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_allow"`
 
                       - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_ask"`
 
                       - `class BetaManagedAgentsAutoPolicy`
 
@@ -18354,7 +18354,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
               - `class BetaManagedAgentsMcpToolset`
 
-                - `required Type Type`
+                - `JsonElement Type = "mcp_toolset"`
 
                 - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -18406,7 +18406,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
                 A custom tool as returned in API responses.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string Description`
 
@@ -18430,7 +18430,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-            - `required Type Type`
+            - `JsonElement Type = "advisor"`
 
             - `required string Model`
 
@@ -18492,7 +18492,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
               Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -18544,7 +18544,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
               Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -18610,7 +18610,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -18712,7 +18712,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Periodic snapshot of the session's cumulative usage and tracked list cost.
 
-  - `required Type Type`
+  - `JsonElement Type = "session.usage"`
 
   - `required string ID`
 
@@ -18800,7 +18800,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     The session's configured budget at the snapshot time, or null when the session has no budget.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -18812,7 +18812,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
-  - `required Type Type`
+  - `JsonElement Type = "event_start"`
 
   - `required BetaManagedAgentsStartEventPreview Event`
 
@@ -18820,7 +18820,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     - `class BetaManagedAgentsAgentMessagePreview`
 
-      - `required Type Type`
+      - `JsonElement Type = "agent.message"`
 
       - `required string ID`
 
@@ -18828,7 +18828,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     - `class BetaManagedAgentsAgentThinkingPreview`
 
-      - `required Type Type`
+      - `JsonElement Type = "agent.thinking"`
 
       - `required string ID`
 
@@ -18840,7 +18840,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   - `class BetaManagedAgentsAgentMessagePreview`
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.message"`
 
     - `required string ID`
 
@@ -18848,7 +18848,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   - `class BetaManagedAgentsAgentThinkingPreview`
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thinking"`
 
     - `required string ID`
 
@@ -18860,7 +18860,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Content block in a mid-conversation system message. Text-only.
 
-  - `required Type Type`
+  - `JsonElement Type = "text"`
 
   - `required string Text`
 
@@ -18874,7 +18874,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
-  - `required Type Type`
+  - `JsonElement Type = "system.message"`
 
   - `required string ID`
 
@@ -18884,7 +18884,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
     System content blocks. Text-only.
 
-    - `required Type Type`
+    - `JsonElement Type = "text"`
 
     - `required string Text`
 
@@ -18904,7 +18904,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
   Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-  - `required Type Type`
+  - `JsonElement Type = "user.tool_result"`
 
   - `required string ID`
 
@@ -18922,7 +18922,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       Regular text content.
 
-      - `required Type Type`
+      - `JsonElement Type = "text"`
 
       - `required string Text`
 
@@ -18934,7 +18934,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       Image content specified directly as base64 data or as a reference via a URL.
 
-      - `required Type Type`
+      - `JsonElement Type = "image"`
 
       - `required Source Source`
 
@@ -18944,7 +18944,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Base64-encoded image data.
 
-          - `required Type Type`
+          - `JsonElement Type = "base64"`
 
           - `required string Data`
 
@@ -18962,7 +18962,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Image referenced by URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "url"`
 
           - `required string Url`
 
@@ -18974,7 +18974,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Image referenced by file ID.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -18986,7 +18986,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `required Type Type`
+      - `JsonElement Type = "document"`
 
       - `required Source Source`
 
@@ -18996,7 +18996,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Base64-encoded document data.
 
-          - `required Type Type`
+          - `JsonElement Type = "base64"`
 
           - `required string Data`
 
@@ -19014,7 +19014,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Plain text document content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Data`
 
@@ -19022,7 +19022,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
             minLength: 1
 
-          - `required MediaType MediaType`
+          - `JsonElement MediaType = "text/plain"`
 
             MIME type of the text content. Must be "text/plain".
 
@@ -19030,7 +19030,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Document referenced by URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "url"`
 
           - `required string Url`
 
@@ -19042,7 +19042,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
           Document referenced by file ID.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -19062,7 +19062,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
       A block containing a web search result.
 
-      - `required Type Type`
+      - `JsonElement Type = "search_result"`
 
       - `required BetaManagedAgentsSearchResultCitations Citations`
 
@@ -19076,7 +19076,7 @@ Console.WriteLine(betaManagedAgentsSession);
 
         Array of text content blocks from the search result.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -19376,7 +19376,7 @@ List Events
 
     A user message event in the session conversation.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.message"`
 
     - `required string ID`
 
@@ -19390,7 +19390,7 @@ List Events
 
         Regular text content.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -19402,7 +19402,7 @@ List Events
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `required Type Type`
+        - `JsonElement Type = "image"`
 
         - `required Source Source`
 
@@ -19412,7 +19412,7 @@ List Events
 
             Base64-encoded image data.
 
-            - `required Type Type`
+            - `JsonElement Type = "base64"`
 
             - `required string Data`
 
@@ -19430,7 +19430,7 @@ List Events
 
             Image referenced by URL.
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Url`
 
@@ -19442,7 +19442,7 @@ List Events
 
             Image referenced by file ID.
 
-            - `required Type Type`
+            - `JsonElement Type = "file"`
 
             - `required string FileID`
 
@@ -19454,7 +19454,7 @@ List Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `required Type Type`
+        - `JsonElement Type = "document"`
 
         - `required Source Source`
 
@@ -19464,7 +19464,7 @@ List Events
 
             Base64-encoded document data.
 
-            - `required Type Type`
+            - `JsonElement Type = "base64"`
 
             - `required string Data`
 
@@ -19482,7 +19482,7 @@ List Events
 
             Plain text document content.
 
-            - `required Type Type`
+            - `JsonElement Type = "text"`
 
             - `required string Data`
 
@@ -19490,7 +19490,7 @@ List Events
 
               minLength: 1
 
-            - `required MediaType MediaType`
+            - `JsonElement MediaType = "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
@@ -19498,7 +19498,7 @@ List Events
 
             Document referenced by URL.
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Url`
 
@@ -19510,7 +19510,7 @@ List Events
 
             Document referenced by file ID.
 
-            - `required Type Type`
+            - `JsonElement Type = "file"`
 
             - `required string FileID`
 
@@ -19530,7 +19530,7 @@ List Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-        - `required Type Type`
+        - `JsonElement Type = "redacted"`
 
     - `DateTimeOffset? ProcessedAt`
 
@@ -19542,7 +19542,7 @@ List Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.interrupt"`
 
     - `required string ID`
 
@@ -19562,7 +19562,7 @@ List Events
 
     A tool confirmation event that approves or denies a pending tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.tool_confirmation"`
 
     - `required string ID`
 
@@ -19600,7 +19600,7 @@ List Events
 
     Event sent by the client providing the result of a custom tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.custom_tool_result"`
 
     - `required string ID`
 
@@ -19630,7 +19630,7 @@ List Events
 
         A block containing a web search result.
 
-        - `required Type Type`
+        - `JsonElement Type = "search_result"`
 
         - `required BetaManagedAgentsSearchResultCitations Citations`
 
@@ -19644,7 +19644,7 @@ List Events
 
           Array of text content blocks from the search result.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -19682,7 +19682,7 @@ List Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result. The client can send it as soon as this event arrives, without waiting for `session.status_idle`.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.custom_tool_use"`
 
     - `required string ID`
 
@@ -19710,7 +19710,7 @@ List Events
 
     An agent response event in the session conversation.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.message"`
 
     - `required string ID`
 
@@ -19738,7 +19738,7 @@ List Events
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thinking"`
 
     - `required string ID`
 
@@ -19754,7 +19754,7 @@ List Events
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.mcp_tool_use"`
 
     - `required string ID`
 
@@ -19852,7 +19852,7 @@ List Events
 
     Event representing the result of an MCP tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.mcp_tool_result"`
 
     - `required string ID`
 
@@ -19896,7 +19896,7 @@ List Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.tool_use"`
 
     - `required string ID`
 
@@ -19932,7 +19932,7 @@ List Events
 
     Event representing the result of an agent tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.tool_result"`
 
     - `required string ID`
 
@@ -19976,7 +19976,7 @@ List Events
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_message_received"`
 
     - `required string ID`
 
@@ -20020,7 +20020,7 @@ List Events
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_message_sent"`
 
     - `required string ID`
 
@@ -20064,7 +20064,7 @@ List Events
 
     Indicates that context compaction (summarization) occurred during the session.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_context_compacted"`
 
     - `required string ID`
 
@@ -20080,7 +20080,7 @@ List Events
 
     An error event indicating a problem occurred during session execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.error"`
 
     - `required string ID`
 
@@ -20092,7 +20092,7 @@ List Events
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-        - `required Type Type`
+        - `JsonElement Type = "unknown_error"`
 
         - `required string Message`
 
@@ -20106,25 +20106,25 @@ List Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `required Type Type`
+            - `JsonElement Type = "retrying"`
 
           - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `required Type Type`
+            - `JsonElement Type = "exhausted"`
 
           - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-            - `required Type Type`
+            - `JsonElement Type = "terminal"`
 
       - `class BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_overloaded_error"`
 
         - `required string Message`
 
@@ -20150,7 +20150,7 @@ List Events
 
         The model request was rate-limited.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_rate_limited_error"`
 
         - `required string Message`
 
@@ -20176,7 +20176,7 @@ List Events
 
         A model request failed for a reason other than overload or rate-limiting.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_request_failed_error"`
 
         - `required string Message`
 
@@ -20202,7 +20202,7 @@ List Events
 
         Failed to connect to an MCP server.
 
-        - `required Type Type`
+        - `JsonElement Type = "mcp_connection_failed_error"`
 
         - `required string McpServerName`
 
@@ -20232,7 +20232,7 @@ List Events
 
         Authentication to an MCP server failed.
 
-        - `required Type Type`
+        - `JsonElement Type = "mcp_authentication_failed_error"`
 
         - `required string McpServerName`
 
@@ -20262,7 +20262,7 @@ List Events
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
-        - `required Type Type`
+        - `JsonElement Type = "billing_error"`
 
         - `required string Message`
 
@@ -20288,7 +20288,7 @@ List Events
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
-        - `required Type Type`
+        - `JsonElement Type = "credential_host_unreachable_error"`
 
         - `required string CredentialID`
 
@@ -20478,7 +20478,7 @@ List Events
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_rescheduled"`
 
     - `required string ID`
 
@@ -20494,7 +20494,7 @@ List Events
 
     Indicates the session is actively running and the agent is working.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_running"`
 
     - `required string ID`
 
@@ -20510,7 +20510,7 @@ List Events
 
     Indicates the agent has paused and is awaiting user input.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_idle"`
 
     - `required string ID`
 
@@ -20552,13 +20552,13 @@ List Events
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `required Type Type`
+        - `JsonElement Type = "end_turn"`
 
       - `class BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `required Type Type`
+        - `JsonElement Type = "requires_action"`
 
         - `required IReadOnlyList<string> EventIds`
 
@@ -20568,13 +20568,13 @@ List Events
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-        - `required Type Type`
+        - `JsonElement Type = "retries_exhausted"`
 
       - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-        - `required Type Type`
+        - `JsonElement Type = "budget_reached"`
 
       - `class BetaManagedAgentsSessionRefusal`
 
@@ -20586,7 +20586,7 @@ List Events
 
     Indicates the session has terminated, either due to an error or completion.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_terminated"`
 
     - `required string ID`
 
@@ -20602,7 +20602,7 @@ List Events
 
     Emitted when a child thread is created. Written to the parent thread's output stream so clients observing the session see child creation.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_created"`
 
     - `required string ID`
 
@@ -20630,7 +20630,7 @@ List Events
 
     Emitted when an outcome evaluation cycle begins.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_start"`
 
     - `required string ID`
 
@@ -20656,7 +20656,7 @@ List Events
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_end"`
 
     - `required string ID`
 
@@ -20730,7 +20730,7 @@ List Events
 
     Emitted when a model request is initiated by the agent.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.model_request_start"`
 
     - `required string ID`
 
@@ -20746,7 +20746,7 @@ List Events
 
     Emitted when a model request completes.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.model_request_end"`
 
     - `required string ID`
 
@@ -20774,7 +20774,7 @@ List Events
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_ongoing"`
 
     - `required string ID`
 
@@ -20800,7 +20800,7 @@ List Events
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.define_outcome"`
 
     - `required string ID`
 
@@ -20834,7 +20834,7 @@ List Events
 
         Rubric referenced by a file uploaded via the Files API.
 
-        - `required Type Type`
+        - `JsonElement Type = "file"`
 
         - `required string FileID`
 
@@ -20844,7 +20844,7 @@ List Events
 
         Rubric content provided inline as text.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Content`
 
@@ -20854,7 +20854,7 @@ List Events
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.deleted"`
 
     - `required string ID`
 
@@ -20870,7 +20870,7 @@ List Events
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_running"`
 
     - `required string ID`
 
@@ -20894,7 +20894,7 @@ List Events
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_idle"`
 
     - `required string ID`
 
@@ -20944,7 +20944,7 @@ List Events
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_terminated"`
 
     - `required string ID`
 
@@ -20968,7 +20968,7 @@ List Events
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.tool_result"`
 
     - `required string ID`
 
@@ -21016,7 +21016,7 @@ List Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_rescheduled"`
 
     - `required string ID`
 
@@ -21040,7 +21040,7 @@ List Events
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.updated"`
 
     - `required string ID`
 
@@ -21056,7 +21056,7 @@ List Events
 
       The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -21084,7 +21084,7 @@ List Events
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -21176,31 +21176,31 @@ List Events
 
             Low effort. Favors latency over reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "low"`
 
           - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "medium"`
 
           - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "high"`
 
           - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
-            - `required Type Type`
+            - `JsonElement Type = "xhigh"`
 
           - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
-            - `required Type Type`
+            - `JsonElement Type = "max"`
 
         - `string InferenceGeo`
 
@@ -21222,7 +21222,7 @@ List Events
 
           Resolved coordinator topology with full agent definitions for each roster member.
 
-          - `required Type Type`
+          - `JsonElement Type = "coordinator"`
 
           - `required IReadOnlyList<Agent> Agents`
 
@@ -21232,7 +21232,7 @@ List Events
 
               Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -21244,7 +21244,7 @@ List Events
 
               - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-                - `required Type Type`
+                - `JsonElement Type = "url"`
 
                 - `required string Name`
 
@@ -21262,7 +21262,7 @@ List Events
 
                   A resolved Anthropic-managed skill.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "anthropic"`
 
                   - `required string SkillID`
 
@@ -21272,7 +21272,7 @@ List Events
 
                   A resolved user-created custom skill.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "custom"`
 
                   - `required string SkillID`
 
@@ -21284,7 +21284,7 @@ List Events
 
                 - `class BetaManagedAgentsAgentToolset20260401`
 
-                  - `required Type Type`
+                  - `JsonElement Type = "agent_toolset_20260401"`
 
                   - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -21306,13 +21306,13 @@ List Events
 
                           Tool calls are automatically approved without user confirmation.
 
-                          - `required Type Type`
+                          - `JsonElement Type = "always_allow"`
 
                         - `class BetaManagedAgentsAlwaysAskPolicy`
 
                           Tool calls require user confirmation before execution.
 
-                          - `required Type Type`
+                          - `JsonElement Type = "always_ask"`
 
                         - `class BetaManagedAgentsAutoPolicy`
 
@@ -21644,7 +21644,7 @@ List Events
 
                 - `class BetaManagedAgentsMcpToolset`
 
-                  - `required Type Type`
+                  - `JsonElement Type = "mcp_toolset"`
 
                   - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -21696,7 +21696,7 @@ List Events
 
                   A custom tool as returned in API responses.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "custom"`
 
                   - `required string Description`
 
@@ -21720,7 +21720,7 @@ List Events
 
               Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-              - `required Type Type`
+              - `JsonElement Type = "advisor"`
 
               - `required string Model`
 
@@ -21782,7 +21782,7 @@ List Events
 
                 Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-                - `required Type Type`
+                - `JsonElement Type = "agent"`
 
                 - `required string ID`
 
@@ -21834,7 +21834,7 @@ List Events
 
                 Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-                - `required Type Type`
+                - `JsonElement Type = "agent"`
 
                 - `required string ID`
 
@@ -21900,7 +21900,7 @@ List Events
 
       The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
-      - `required Type Type`
+      - `JsonElement Type = "limit"`
 
       - `required BetaMonetaryAmount MaxListCost`
 
@@ -21926,7 +21926,7 @@ List Events
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
-    - `required Type Type`
+    - `JsonElement Type = "system.message"`
 
     - `required string ID`
 
@@ -21936,7 +21936,7 @@ List Events
 
       System content blocks. Text-only.
 
-      - `required Type Type`
+      - `JsonElement Type = "text"`
 
       - `required string Text`
 
@@ -21954,7 +21954,7 @@ List Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.usage"`
 
     - `required string ID`
 
@@ -22362,7 +22362,7 @@ Send Events
 
       Parameters for sending a user message to the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.message"`
 
       - `required IReadOnlyList<Content> Content`
 
@@ -22372,7 +22372,7 @@ Send Events
 
           Regular text content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -22384,7 +22384,7 @@ Send Events
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "image"`
 
           - `required Source Source`
 
@@ -22394,7 +22394,7 @@ Send Events
 
               Base64-encoded image data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -22412,7 +22412,7 @@ Send Events
 
               Image referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -22424,7 +22424,7 @@ Send Events
 
               Image referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -22436,7 +22436,7 @@ Send Events
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "document"`
 
           - `required Source Source`
 
@@ -22446,7 +22446,7 @@ Send Events
 
               Base64-encoded document data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -22464,7 +22464,7 @@ Send Events
 
               Plain text document content.
 
-              - `required Type Type`
+              - `JsonElement Type = "text"`
 
               - `required string Data`
 
@@ -22472,7 +22472,7 @@ Send Events
 
                 minLength: 1
 
-              - `required MediaType MediaType`
+              - `JsonElement MediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -22480,7 +22480,7 @@ Send Events
 
               Document referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -22492,7 +22492,7 @@ Send Events
 
               Document referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -22512,13 +22512,13 @@ Send Events
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "redacted"`
 
     - `class BetaManagedAgentsUserInterruptEventParams`
 
       Parameters for sending an interrupt to pause the agent.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.interrupt"`
 
       - `string? SessionThreadID`
 
@@ -22528,7 +22528,7 @@ Send Events
 
       Parameters for confirming or denying a tool execution request.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.tool_confirmation"`
 
       - `required Result Result`
 
@@ -22554,7 +22554,7 @@ Send Events
 
       Parameters for providing the result of a custom tool execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.custom_tool_result"`
 
       - `required string CustomToolUseID`
 
@@ -22582,7 +22582,7 @@ Send Events
 
           A block containing a web search result.
 
-          - `required Type Type`
+          - `JsonElement Type = "search_result"`
 
           - `required BetaManagedAgentsSearchResultCitations Citations`
 
@@ -22596,7 +22596,7 @@ Send Events
 
             Array of text content blocks from the search result.
 
-            - `required Type Type`
+            - `JsonElement Type = "text"`
 
             - `required string Text`
 
@@ -22624,7 +22624,7 @@ Send Events
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.define_outcome"`
 
       - `required string Description`
 
@@ -22638,7 +22638,7 @@ Send Events
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -22648,7 +22648,7 @@ Send Events
 
           Rubric content provided inline as text.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Content`
 
@@ -22666,7 +22666,7 @@ Send Events
 
       Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.tool_result"`
 
       - `required string ToolUseID`
 
@@ -22702,13 +22702,13 @@ Send Events
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
-      - `required Type Type`
+      - `JsonElement Type = "system.message"`
 
       - `required IReadOnlyList<BetaManagedAgentsSystemContentBlock> Content`
 
         System content blocks to append. Text-only.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -22844,7 +22844,7 @@ Send Events
 
       A user message event in the session conversation.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.message"`
 
       - `required string ID`
 
@@ -22858,7 +22858,7 @@ Send Events
 
           Regular text content.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -22870,7 +22870,7 @@ Send Events
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "image"`
 
           - `required Source Source`
 
@@ -22880,7 +22880,7 @@ Send Events
 
               Base64-encoded image data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -22898,7 +22898,7 @@ Send Events
 
               Image referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -22910,7 +22910,7 @@ Send Events
 
               Image referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -22922,7 +22922,7 @@ Send Events
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `required Type Type`
+          - `JsonElement Type = "document"`
 
           - `required Source Source`
 
@@ -22932,7 +22932,7 @@ Send Events
 
               Base64-encoded document data.
 
-              - `required Type Type`
+              - `JsonElement Type = "base64"`
 
               - `required string Data`
 
@@ -22950,7 +22950,7 @@ Send Events
 
               Plain text document content.
 
-              - `required Type Type`
+              - `JsonElement Type = "text"`
 
               - `required string Data`
 
@@ -22958,7 +22958,7 @@ Send Events
 
                 minLength: 1
 
-              - `required MediaType MediaType`
+              - `JsonElement MediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -22966,7 +22966,7 @@ Send Events
 
               Document referenced by URL.
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Url`
 
@@ -22978,7 +22978,7 @@ Send Events
 
               Document referenced by file ID.
 
-              - `required Type Type`
+              - `JsonElement Type = "file"`
 
               - `required string FileID`
 
@@ -22998,7 +22998,7 @@ Send Events
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `required Type Type`
+          - `JsonElement Type = "redacted"`
 
       - `DateTimeOffset? ProcessedAt`
 
@@ -23010,7 +23010,7 @@ Send Events
 
       An interrupt event that pauses agent execution and returns control to the user.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.interrupt"`
 
       - `required string ID`
 
@@ -23030,7 +23030,7 @@ Send Events
 
       A tool confirmation event that approves or denies a pending tool execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.tool_confirmation"`
 
       - `required string ID`
 
@@ -23068,7 +23068,7 @@ Send Events
 
       Event sent by the client providing the result of a custom tool execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.custom_tool_result"`
 
       - `required string ID`
 
@@ -23098,7 +23098,7 @@ Send Events
 
           A block containing a web search result.
 
-          - `required Type Type`
+          - `JsonElement Type = "search_result"`
 
           - `required BetaManagedAgentsSearchResultCitations Citations`
 
@@ -23112,7 +23112,7 @@ Send Events
 
             Array of text content blocks from the search result.
 
-            - `required Type Type`
+            - `JsonElement Type = "text"`
 
             - `required string Text`
 
@@ -23150,7 +23150,7 @@ Send Events
 
       Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.define_outcome"`
 
       - `required string ID`
 
@@ -23184,7 +23184,7 @@ Send Events
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `required Type Type`
+          - `JsonElement Type = "file"`
 
           - `required string FileID`
 
@@ -23194,7 +23194,7 @@ Send Events
 
           Rubric content provided inline as text.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Content`
 
@@ -23204,7 +23204,7 @@ Send Events
 
       Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-      - `required Type Type`
+      - `JsonElement Type = "user.tool_result"`
 
       - `required string ID`
 
@@ -23252,7 +23252,7 @@ Send Events
 
       A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
-      - `required Type Type`
+      - `JsonElement Type = "system.message"`
 
       - `required string ID`
 
@@ -23262,7 +23262,7 @@ Send Events
 
         System content blocks. Text-only.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -23287,18 +23287,12 @@ EventSendParams parameters = new()
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
     Events =
     [
-        new BetaManagedAgentsUserMessageEventParams()
-        {
-            Content =
+        new BetaManagedAgentsUserMessageEventParams(
+
             [
-                new BetaManagedAgentsTextBlock()
-                {
-                    Text = "Where is my order #1234?",
-                    Type = BetaManagedAgentsTextBlockType.Text,
-                },
-            ],
-            Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
-        },
+                new BetaManagedAgentsTextBlock("Where is my order #1234?")
+            ]
+        ),
     ],
 };
 
@@ -23473,7 +23467,7 @@ Stream Events
 
     A user message event in the session conversation.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.message"`
 
     - `required string ID`
 
@@ -23487,7 +23481,7 @@ Stream Events
 
         Regular text content.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -23499,7 +23493,7 @@ Stream Events
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `required Type Type`
+        - `JsonElement Type = "image"`
 
         - `required Source Source`
 
@@ -23509,7 +23503,7 @@ Stream Events
 
             Base64-encoded image data.
 
-            - `required Type Type`
+            - `JsonElement Type = "base64"`
 
             - `required string Data`
 
@@ -23527,7 +23521,7 @@ Stream Events
 
             Image referenced by URL.
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Url`
 
@@ -23539,7 +23533,7 @@ Stream Events
 
             Image referenced by file ID.
 
-            - `required Type Type`
+            - `JsonElement Type = "file"`
 
             - `required string FileID`
 
@@ -23551,7 +23545,7 @@ Stream Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `required Type Type`
+        - `JsonElement Type = "document"`
 
         - `required Source Source`
 
@@ -23561,7 +23555,7 @@ Stream Events
 
             Base64-encoded document data.
 
-            - `required Type Type`
+            - `JsonElement Type = "base64"`
 
             - `required string Data`
 
@@ -23579,7 +23573,7 @@ Stream Events
 
             Plain text document content.
 
-            - `required Type Type`
+            - `JsonElement Type = "text"`
 
             - `required string Data`
 
@@ -23587,7 +23581,7 @@ Stream Events
 
               minLength: 1
 
-            - `required MediaType MediaType`
+            - `JsonElement MediaType = "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
@@ -23595,7 +23589,7 @@ Stream Events
 
             Document referenced by URL.
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Url`
 
@@ -23607,7 +23601,7 @@ Stream Events
 
             Document referenced by file ID.
 
-            - `required Type Type`
+            - `JsonElement Type = "file"`
 
             - `required string FileID`
 
@@ -23627,7 +23621,7 @@ Stream Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-        - `required Type Type`
+        - `JsonElement Type = "redacted"`
 
     - `DateTimeOffset? ProcessedAt`
 
@@ -23639,7 +23633,7 @@ Stream Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.interrupt"`
 
     - `required string ID`
 
@@ -23659,7 +23653,7 @@ Stream Events
 
     A tool confirmation event that approves or denies a pending tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.tool_confirmation"`
 
     - `required string ID`
 
@@ -23697,7 +23691,7 @@ Stream Events
 
     Event sent by the client providing the result of a custom tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.custom_tool_result"`
 
     - `required string ID`
 
@@ -23727,7 +23721,7 @@ Stream Events
 
         A block containing a web search result.
 
-        - `required Type Type`
+        - `JsonElement Type = "search_result"`
 
         - `required BetaManagedAgentsSearchResultCitations Citations`
 
@@ -23741,7 +23735,7 @@ Stream Events
 
           Array of text content blocks from the search result.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -23779,7 +23773,7 @@ Stream Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result. The client can send it as soon as this event arrives, without waiting for `session.status_idle`.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.custom_tool_use"`
 
     - `required string ID`
 
@@ -23807,7 +23801,7 @@ Stream Events
 
     An agent response event in the session conversation.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.message"`
 
     - `required string ID`
 
@@ -23835,7 +23829,7 @@ Stream Events
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thinking"`
 
     - `required string ID`
 
@@ -23851,7 +23845,7 @@ Stream Events
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.mcp_tool_use"`
 
     - `required string ID`
 
@@ -23949,7 +23943,7 @@ Stream Events
 
     Event representing the result of an MCP tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.mcp_tool_result"`
 
     - `required string ID`
 
@@ -23993,7 +23987,7 @@ Stream Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.tool_use"`
 
     - `required string ID`
 
@@ -24029,7 +24023,7 @@ Stream Events
 
     Event representing the result of an agent tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.tool_result"`
 
     - `required string ID`
 
@@ -24073,7 +24067,7 @@ Stream Events
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_message_received"`
 
     - `required string ID`
 
@@ -24117,7 +24111,7 @@ Stream Events
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_message_sent"`
 
     - `required string ID`
 
@@ -24161,7 +24155,7 @@ Stream Events
 
     Indicates that context compaction (summarization) occurred during the session.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_context_compacted"`
 
     - `required string ID`
 
@@ -24177,7 +24171,7 @@ Stream Events
 
     An error event indicating a problem occurred during session execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.error"`
 
     - `required string ID`
 
@@ -24189,7 +24183,7 @@ Stream Events
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-        - `required Type Type`
+        - `JsonElement Type = "unknown_error"`
 
         - `required string Message`
 
@@ -24203,25 +24197,25 @@ Stream Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `required Type Type`
+            - `JsonElement Type = "retrying"`
 
           - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `required Type Type`
+            - `JsonElement Type = "exhausted"`
 
           - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-            - `required Type Type`
+            - `JsonElement Type = "terminal"`
 
       - `class BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_overloaded_error"`
 
         - `required string Message`
 
@@ -24247,7 +24241,7 @@ Stream Events
 
         The model request was rate-limited.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_rate_limited_error"`
 
         - `required string Message`
 
@@ -24273,7 +24267,7 @@ Stream Events
 
         A model request failed for a reason other than overload or rate-limiting.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_request_failed_error"`
 
         - `required string Message`
 
@@ -24299,7 +24293,7 @@ Stream Events
 
         Failed to connect to an MCP server.
 
-        - `required Type Type`
+        - `JsonElement Type = "mcp_connection_failed_error"`
 
         - `required string McpServerName`
 
@@ -24329,7 +24323,7 @@ Stream Events
 
         Authentication to an MCP server failed.
 
-        - `required Type Type`
+        - `JsonElement Type = "mcp_authentication_failed_error"`
 
         - `required string McpServerName`
 
@@ -24359,7 +24353,7 @@ Stream Events
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
-        - `required Type Type`
+        - `JsonElement Type = "billing_error"`
 
         - `required string Message`
 
@@ -24385,7 +24379,7 @@ Stream Events
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
-        - `required Type Type`
+        - `JsonElement Type = "credential_host_unreachable_error"`
 
         - `required string CredentialID`
 
@@ -24575,7 +24569,7 @@ Stream Events
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_rescheduled"`
 
     - `required string ID`
 
@@ -24591,7 +24585,7 @@ Stream Events
 
     Indicates the session is actively running and the agent is working.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_running"`
 
     - `required string ID`
 
@@ -24607,7 +24601,7 @@ Stream Events
 
     Indicates the agent has paused and is awaiting user input.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_idle"`
 
     - `required string ID`
 
@@ -24649,13 +24643,13 @@ Stream Events
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `required Type Type`
+        - `JsonElement Type = "end_turn"`
 
       - `class BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `required Type Type`
+        - `JsonElement Type = "requires_action"`
 
         - `required IReadOnlyList<string> EventIds`
 
@@ -24665,13 +24659,13 @@ Stream Events
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-        - `required Type Type`
+        - `JsonElement Type = "retries_exhausted"`
 
       - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-        - `required Type Type`
+        - `JsonElement Type = "budget_reached"`
 
       - `class BetaManagedAgentsSessionRefusal`
 
@@ -24683,7 +24677,7 @@ Stream Events
 
     Indicates the session has terminated, either due to an error or completion.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_terminated"`
 
     - `required string ID`
 
@@ -24699,7 +24693,7 @@ Stream Events
 
     Emitted when a child thread is created. Written to the parent thread's output stream so clients observing the session see child creation.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_created"`
 
     - `required string ID`
 
@@ -24727,7 +24721,7 @@ Stream Events
 
     Emitted when an outcome evaluation cycle begins.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_start"`
 
     - `required string ID`
 
@@ -24753,7 +24747,7 @@ Stream Events
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_end"`
 
     - `required string ID`
 
@@ -24827,7 +24821,7 @@ Stream Events
 
     Emitted when a model request is initiated by the agent.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.model_request_start"`
 
     - `required string ID`
 
@@ -24843,7 +24837,7 @@ Stream Events
 
     Emitted when a model request completes.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.model_request_end"`
 
     - `required string ID`
 
@@ -24871,7 +24865,7 @@ Stream Events
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_ongoing"`
 
     - `required string ID`
 
@@ -24897,7 +24891,7 @@ Stream Events
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.define_outcome"`
 
     - `required string ID`
 
@@ -24931,7 +24925,7 @@ Stream Events
 
         Rubric referenced by a file uploaded via the Files API.
 
-        - `required Type Type`
+        - `JsonElement Type = "file"`
 
         - `required string FileID`
 
@@ -24941,7 +24935,7 @@ Stream Events
 
         Rubric content provided inline as text.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Content`
 
@@ -24951,7 +24945,7 @@ Stream Events
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.deleted"`
 
     - `required string ID`
 
@@ -24967,7 +24961,7 @@ Stream Events
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_running"`
 
     - `required string ID`
 
@@ -24991,7 +24985,7 @@ Stream Events
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_idle"`
 
     - `required string ID`
 
@@ -25041,7 +25035,7 @@ Stream Events
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_terminated"`
 
     - `required string ID`
 
@@ -25065,7 +25059,7 @@ Stream Events
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.tool_result"`
 
     - `required string ID`
 
@@ -25113,7 +25107,7 @@ Stream Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_rescheduled"`
 
     - `required string ID`
 
@@ -25137,7 +25131,7 @@ Stream Events
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.updated"`
 
     - `required string ID`
 
@@ -25153,7 +25147,7 @@ Stream Events
 
       The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -25181,7 +25175,7 @@ Stream Events
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -25273,31 +25267,31 @@ Stream Events
 
             Low effort. Favors latency over reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "low"`
 
           - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "medium"`
 
           - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "high"`
 
           - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
-            - `required Type Type`
+            - `JsonElement Type = "xhigh"`
 
           - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
-            - `required Type Type`
+            - `JsonElement Type = "max"`
 
         - `string InferenceGeo`
 
@@ -25319,7 +25313,7 @@ Stream Events
 
           Resolved coordinator topology with full agent definitions for each roster member.
 
-          - `required Type Type`
+          - `JsonElement Type = "coordinator"`
 
           - `required IReadOnlyList<Agent> Agents`
 
@@ -25329,7 +25323,7 @@ Stream Events
 
               Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -25341,7 +25335,7 @@ Stream Events
 
               - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-                - `required Type Type`
+                - `JsonElement Type = "url"`
 
                 - `required string Name`
 
@@ -25359,7 +25353,7 @@ Stream Events
 
                   A resolved Anthropic-managed skill.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "anthropic"`
 
                   - `required string SkillID`
 
@@ -25369,7 +25363,7 @@ Stream Events
 
                   A resolved user-created custom skill.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "custom"`
 
                   - `required string SkillID`
 
@@ -25381,7 +25375,7 @@ Stream Events
 
                 - `class BetaManagedAgentsAgentToolset20260401`
 
-                  - `required Type Type`
+                  - `JsonElement Type = "agent_toolset_20260401"`
 
                   - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -25403,13 +25397,13 @@ Stream Events
 
                           Tool calls are automatically approved without user confirmation.
 
-                          - `required Type Type`
+                          - `JsonElement Type = "always_allow"`
 
                         - `class BetaManagedAgentsAlwaysAskPolicy`
 
                           Tool calls require user confirmation before execution.
 
-                          - `required Type Type`
+                          - `JsonElement Type = "always_ask"`
 
                         - `class BetaManagedAgentsAutoPolicy`
 
@@ -25741,7 +25735,7 @@ Stream Events
 
                 - `class BetaManagedAgentsMcpToolset`
 
-                  - `required Type Type`
+                  - `JsonElement Type = "mcp_toolset"`
 
                   - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -25793,7 +25787,7 @@ Stream Events
 
                   A custom tool as returned in API responses.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "custom"`
 
                   - `required string Description`
 
@@ -25817,7 +25811,7 @@ Stream Events
 
               Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-              - `required Type Type`
+              - `JsonElement Type = "advisor"`
 
               - `required string Model`
 
@@ -25879,7 +25873,7 @@ Stream Events
 
                 Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-                - `required Type Type`
+                - `JsonElement Type = "agent"`
 
                 - `required string ID`
 
@@ -25931,7 +25925,7 @@ Stream Events
 
                 Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-                - `required Type Type`
+                - `JsonElement Type = "agent"`
 
                 - `required string ID`
 
@@ -25997,7 +25991,7 @@ Stream Events
 
       The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
-      - `required Type Type`
+      - `JsonElement Type = "limit"`
 
       - `required BetaMonetaryAmount MaxListCost`
 
@@ -26023,7 +26017,7 @@ Stream Events
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
-    - `required Type Type`
+    - `JsonElement Type = "event_start"`
 
     - `required BetaManagedAgentsStartEventPreview Event`
 
@@ -26031,7 +26025,7 @@ Stream Events
 
       - `class BetaManagedAgentsAgentMessagePreview`
 
-        - `required Type Type`
+        - `JsonElement Type = "agent.message"`
 
         - `required string ID`
 
@@ -26039,7 +26033,7 @@ Stream Events
 
       - `class BetaManagedAgentsAgentThinkingPreview`
 
-        - `required Type Type`
+        - `JsonElement Type = "agent.thinking"`
 
         - `required string ID`
 
@@ -26049,13 +26043,13 @@ Stream Events
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
-    - `required Type Type`
+    - `JsonElement Type = "event_delta"`
 
     - `required BetaManagedAgentsDeltaContent Delta`
 
       One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
 
-      - `required Type Type`
+      - `JsonElement Type = "content_delta"`
 
       - `required BetaManagedAgentsTextBlock Content`
 
@@ -26073,7 +26067,7 @@ Stream Events
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
-    - `required Type Type`
+    - `JsonElement Type = "system.message"`
 
     - `required string ID`
 
@@ -26083,7 +26077,7 @@ Stream Events
 
       System content blocks. Text-only.
 
-      - `required Type Type`
+      - `JsonElement Type = "text"`
 
       - `required string Text`
 
@@ -26101,7 +26095,7 @@ Stream Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.usage"`
 
     - `required string ID`
 
@@ -26484,9 +26478,7 @@ Add Session Resource
 
 - `ResourceAddParams parameters`
 
-  - `required Type type`
-
-    - `File("file")`
+  - `JsonElement type = "file"`
 
   - `required string sessionID` (path parameter)
 
@@ -26620,7 +26612,7 @@ Add Session Resource
 
 - `class BetaManagedAgentsFileResource`
 
-  - `required BetaManagedAgentsFileResourceType Type`
+  - `JsonElement Type = "file"`
 
   - `required string ID`
 
@@ -26644,13 +26636,14 @@ Add Session Resource
 
 ```csharp
 using System;
-using Resources = Anthropic.Models.Beta.Sessions.Resources;
+using System.Text.Json;
+using Anthropic.Models.Beta.Sessions.Resources;
 
-Resources::ResourceAddParams parameters = new()
+ResourceAddParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
     FileID = "file_011CNha8iCJcU1wXNR6q4V8w",
-    Type = Resources::Type.File,
+    Type = JsonSerializer.SerializeToElement("file"),
 };
 
 var betaManagedAgentsFileResource = await client.Beta.Sessions.Resources.Add(parameters);
@@ -26815,7 +26808,7 @@ List Session Resources
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
-    - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
+    - `JsonElement Type = "github_repository"`
 
     - `required string ID`
 
@@ -26839,7 +26832,7 @@ List Session Resources
 
       - `class BetaManagedAgentsBranchCheckout`
 
-        - `required Type Type`
+        - `JsonElement Type = "branch"`
 
         - `required string Name`
 
@@ -26849,7 +26842,7 @@ List Session Resources
 
       - `class BetaManagedAgentsCommitCheckout`
 
-        - `required Type Type`
+        - `JsonElement Type = "commit"`
 
         - `required string Sha`
 
@@ -26859,7 +26852,7 @@ List Session Resources
 
   - `class BetaManagedAgentsFileResource`
 
-    - `required BetaManagedAgentsFileResourceType Type`
+    - `JsonElement Type = "file"`
 
     - `required string ID`
 
@@ -26883,7 +26876,7 @@ List Session Resources
 
     A memory store attached to an agent session.
 
-    - `required BetaManagedAgentsMemoryStoreResourceType Type`
+    - `JsonElement Type = "memory_store"`
 
     - `required string MemoryStoreID`
 
@@ -27101,7 +27094,7 @@ Get Session Resource
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
-    - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
+    - `JsonElement Type = "github_repository"`
 
     - `required string ID`
 
@@ -27125,7 +27118,7 @@ Get Session Resource
 
       - `class BetaManagedAgentsBranchCheckout`
 
-        - `required Type Type`
+        - `JsonElement Type = "branch"`
 
         - `required string Name`
 
@@ -27135,7 +27128,7 @@ Get Session Resource
 
       - `class BetaManagedAgentsCommitCheckout`
 
-        - `required Type Type`
+        - `JsonElement Type = "commit"`
 
         - `required string Sha`
 
@@ -27145,7 +27138,7 @@ Get Session Resource
 
   - `class BetaManagedAgentsFileResource`
 
-    - `required BetaManagedAgentsFileResourceType Type`
+    - `JsonElement Type = "file"`
 
     - `required string ID`
 
@@ -27169,7 +27162,7 @@ Get Session Resource
 
     A memory store attached to an agent session.
 
-    - `required BetaManagedAgentsMemoryStoreResourceType Type`
+    - `JsonElement Type = "memory_store"`
 
     - `required string MemoryStoreID`
 
@@ -27379,7 +27372,7 @@ Update Session Resource
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
-    - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
+    - `JsonElement Type = "github_repository"`
 
     - `required string ID`
 
@@ -27403,7 +27396,7 @@ Update Session Resource
 
       - `class BetaManagedAgentsBranchCheckout`
 
-        - `required Type Type`
+        - `JsonElement Type = "branch"`
 
         - `required string Name`
 
@@ -27413,7 +27406,7 @@ Update Session Resource
 
       - `class BetaManagedAgentsCommitCheckout`
 
-        - `required Type Type`
+        - `JsonElement Type = "commit"`
 
         - `required string Sha`
 
@@ -27423,7 +27416,7 @@ Update Session Resource
 
   - `class BetaManagedAgentsFileResource`
 
-    - `required BetaManagedAgentsFileResourceType Type`
+    - `JsonElement Type = "file"`
 
     - `required string ID`
 
@@ -27447,7 +27440,7 @@ Update Session Resource
 
     A memory store attached to an agent session.
 
-    - `required BetaManagedAgentsMemoryStoreResourceType Type`
+    - `JsonElement Type = "memory_store"`
 
     - `required string MemoryStoreID`
 
@@ -27650,7 +27643,7 @@ Delete Session Resource
 
   Confirmation of resource deletion.
 
-  - `required BetaManagedAgentsDeleteSessionResourceType Type`
+  - `JsonElement Type = "session_resource_deleted"`
 
   - `required string ID`
 
@@ -27840,7 +27833,7 @@ List Session Threads
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads.
 
-  - `required Type Type`
+  - `JsonElement Type = "session_thread"`
 
   - `required string ID`
 
@@ -27854,7 +27847,7 @@ List Session Threads
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -27882,7 +27875,7 @@ List Session Threads
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -27974,31 +27967,31 @@ List Session Threads
 
             Low effort. Favors latency over reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "low"`
 
           - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "medium"`
 
           - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "high"`
 
           - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
-            - `required Type Type`
+            - `JsonElement Type = "xhigh"`
 
           - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
-            - `required Type Type`
+            - `JsonElement Type = "max"`
 
         - `string InferenceGeo`
 
@@ -28020,7 +28013,7 @@ List Session Threads
 
           A resolved Anthropic-managed skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "anthropic"`
 
           - `required string SkillID`
 
@@ -28030,7 +28023,7 @@ List Session Threads
 
           A resolved user-created custom skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string SkillID`
 
@@ -28042,7 +28035,7 @@ List Session Threads
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_toolset_20260401"`
 
           - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -28064,13 +28057,13 @@ List Session Threads
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_allow"`
 
                 - `class BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_ask"`
 
                 - `class BetaManagedAgentsAutoPolicy`
 
@@ -28402,7 +28395,7 @@ List Session Threads
 
         - `class BetaManagedAgentsMcpToolset`
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_toolset"`
 
           - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -28454,7 +28447,7 @@ List Session Threads
 
           A custom tool as returned in API responses.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string Description`
 
@@ -28478,7 +28471,7 @@ List Session Threads
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-      - `required Type Type`
+      - `JsonElement Type = "advisor"`
 
       - `required string Model`
 
@@ -28498,7 +28491,7 @@ List Session Threads
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -28922,7 +28915,7 @@ Get Session Thread
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads.
 
-  - `required Type Type`
+  - `JsonElement Type = "session_thread"`
 
   - `required string ID`
 
@@ -28936,7 +28929,7 @@ Get Session Thread
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -28964,7 +28957,7 @@ Get Session Thread
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -29056,31 +29049,31 @@ Get Session Thread
 
             Low effort. Favors latency over reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "low"`
 
           - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "medium"`
 
           - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "high"`
 
           - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
-            - `required Type Type`
+            - `JsonElement Type = "xhigh"`
 
           - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
-            - `required Type Type`
+            - `JsonElement Type = "max"`
 
         - `string InferenceGeo`
 
@@ -29102,7 +29095,7 @@ Get Session Thread
 
           A resolved Anthropic-managed skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "anthropic"`
 
           - `required string SkillID`
 
@@ -29112,7 +29105,7 @@ Get Session Thread
 
           A resolved user-created custom skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string SkillID`
 
@@ -29124,7 +29117,7 @@ Get Session Thread
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_toolset_20260401"`
 
           - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -29146,13 +29139,13 @@ Get Session Thread
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_allow"`
 
                 - `class BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_ask"`
 
                 - `class BetaManagedAgentsAutoPolicy`
 
@@ -29484,7 +29477,7 @@ Get Session Thread
 
         - `class BetaManagedAgentsMcpToolset`
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_toolset"`
 
           - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -29536,7 +29529,7 @@ Get Session Thread
 
           A custom tool as returned in API responses.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string Description`
 
@@ -29560,7 +29553,7 @@ Get Session Thread
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-      - `required Type Type`
+      - `JsonElement Type = "advisor"`
 
       - `required string Model`
 
@@ -29580,7 +29573,7 @@ Get Session Thread
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -29998,7 +29991,7 @@ Archive Session Thread
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads.
 
-  - `required Type Type`
+  - `JsonElement Type = "session_thread"`
 
   - `required string ID`
 
@@ -30012,7 +30005,7 @@ Archive Session Thread
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -30040,7 +30033,7 @@ Archive Session Thread
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -30132,31 +30125,31 @@ Archive Session Thread
 
             Low effort. Favors latency over reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "low"`
 
           - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "medium"`
 
           - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "high"`
 
           - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
-            - `required Type Type`
+            - `JsonElement Type = "xhigh"`
 
           - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
-            - `required Type Type`
+            - `JsonElement Type = "max"`
 
         - `string InferenceGeo`
 
@@ -30178,7 +30171,7 @@ Archive Session Thread
 
           A resolved Anthropic-managed skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "anthropic"`
 
           - `required string SkillID`
 
@@ -30188,7 +30181,7 @@ Archive Session Thread
 
           A resolved user-created custom skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string SkillID`
 
@@ -30200,7 +30193,7 @@ Archive Session Thread
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_toolset_20260401"`
 
           - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -30222,13 +30215,13 @@ Archive Session Thread
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_allow"`
 
                 - `class BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_ask"`
 
                 - `class BetaManagedAgentsAutoPolicy`
 
@@ -30560,7 +30553,7 @@ Archive Session Thread
 
         - `class BetaManagedAgentsMcpToolset`
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_toolset"`
 
           - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -30612,7 +30605,7 @@ Archive Session Thread
 
           A custom tool as returned in API responses.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string Description`
 
@@ -30636,7 +30629,7 @@ Archive Session Thread
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-      - `required Type Type`
+      - `JsonElement Type = "advisor"`
 
       - `required string Model`
 
@@ -30656,7 +30649,7 @@ Archive Session Thread
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -31086,7 +31079,7 @@ List Session Thread Events
 
     A user message event in the session conversation.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.message"`
 
     - `required string ID`
 
@@ -31100,7 +31093,7 @@ List Session Thread Events
 
         Regular text content.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -31112,7 +31105,7 @@ List Session Thread Events
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `required Type Type`
+        - `JsonElement Type = "image"`
 
         - `required Source Source`
 
@@ -31122,7 +31115,7 @@ List Session Thread Events
 
             Base64-encoded image data.
 
-            - `required Type Type`
+            - `JsonElement Type = "base64"`
 
             - `required string Data`
 
@@ -31140,7 +31133,7 @@ List Session Thread Events
 
             Image referenced by URL.
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Url`
 
@@ -31152,7 +31145,7 @@ List Session Thread Events
 
             Image referenced by file ID.
 
-            - `required Type Type`
+            - `JsonElement Type = "file"`
 
             - `required string FileID`
 
@@ -31164,7 +31157,7 @@ List Session Thread Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `required Type Type`
+        - `JsonElement Type = "document"`
 
         - `required Source Source`
 
@@ -31174,7 +31167,7 @@ List Session Thread Events
 
             Base64-encoded document data.
 
-            - `required Type Type`
+            - `JsonElement Type = "base64"`
 
             - `required string Data`
 
@@ -31192,7 +31185,7 @@ List Session Thread Events
 
             Plain text document content.
 
-            - `required Type Type`
+            - `JsonElement Type = "text"`
 
             - `required string Data`
 
@@ -31200,7 +31193,7 @@ List Session Thread Events
 
               minLength: 1
 
-            - `required MediaType MediaType`
+            - `JsonElement MediaType = "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
@@ -31208,7 +31201,7 @@ List Session Thread Events
 
             Document referenced by URL.
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Url`
 
@@ -31220,7 +31213,7 @@ List Session Thread Events
 
             Document referenced by file ID.
 
-            - `required Type Type`
+            - `JsonElement Type = "file"`
 
             - `required string FileID`
 
@@ -31240,7 +31233,7 @@ List Session Thread Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-        - `required Type Type`
+        - `JsonElement Type = "redacted"`
 
     - `DateTimeOffset? ProcessedAt`
 
@@ -31252,7 +31245,7 @@ List Session Thread Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.interrupt"`
 
     - `required string ID`
 
@@ -31272,7 +31265,7 @@ List Session Thread Events
 
     A tool confirmation event that approves or denies a pending tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.tool_confirmation"`
 
     - `required string ID`
 
@@ -31310,7 +31303,7 @@ List Session Thread Events
 
     Event sent by the client providing the result of a custom tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.custom_tool_result"`
 
     - `required string ID`
 
@@ -31340,7 +31333,7 @@ List Session Thread Events
 
         A block containing a web search result.
 
-        - `required Type Type`
+        - `JsonElement Type = "search_result"`
 
         - `required BetaManagedAgentsSearchResultCitations Citations`
 
@@ -31354,7 +31347,7 @@ List Session Thread Events
 
           Array of text content blocks from the search result.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -31392,7 +31385,7 @@ List Session Thread Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result. The client can send it as soon as this event arrives, without waiting for `session.status_idle`.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.custom_tool_use"`
 
     - `required string ID`
 
@@ -31420,7 +31413,7 @@ List Session Thread Events
 
     An agent response event in the session conversation.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.message"`
 
     - `required string ID`
 
@@ -31448,7 +31441,7 @@ List Session Thread Events
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thinking"`
 
     - `required string ID`
 
@@ -31464,7 +31457,7 @@ List Session Thread Events
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.mcp_tool_use"`
 
     - `required string ID`
 
@@ -31562,7 +31555,7 @@ List Session Thread Events
 
     Event representing the result of an MCP tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.mcp_tool_result"`
 
     - `required string ID`
 
@@ -31606,7 +31599,7 @@ List Session Thread Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.tool_use"`
 
     - `required string ID`
 
@@ -31642,7 +31635,7 @@ List Session Thread Events
 
     Event representing the result of an agent tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.tool_result"`
 
     - `required string ID`
 
@@ -31686,7 +31679,7 @@ List Session Thread Events
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_message_received"`
 
     - `required string ID`
 
@@ -31730,7 +31723,7 @@ List Session Thread Events
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_message_sent"`
 
     - `required string ID`
 
@@ -31774,7 +31767,7 @@ List Session Thread Events
 
     Indicates that context compaction (summarization) occurred during the session.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_context_compacted"`
 
     - `required string ID`
 
@@ -31790,7 +31783,7 @@ List Session Thread Events
 
     An error event indicating a problem occurred during session execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.error"`
 
     - `required string ID`
 
@@ -31802,7 +31795,7 @@ List Session Thread Events
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-        - `required Type Type`
+        - `JsonElement Type = "unknown_error"`
 
         - `required string Message`
 
@@ -31816,25 +31809,25 @@ List Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `required Type Type`
+            - `JsonElement Type = "retrying"`
 
           - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `required Type Type`
+            - `JsonElement Type = "exhausted"`
 
           - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-            - `required Type Type`
+            - `JsonElement Type = "terminal"`
 
       - `class BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_overloaded_error"`
 
         - `required string Message`
 
@@ -31860,7 +31853,7 @@ List Session Thread Events
 
         The model request was rate-limited.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_rate_limited_error"`
 
         - `required string Message`
 
@@ -31886,7 +31879,7 @@ List Session Thread Events
 
         A model request failed for a reason other than overload or rate-limiting.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_request_failed_error"`
 
         - `required string Message`
 
@@ -31912,7 +31905,7 @@ List Session Thread Events
 
         Failed to connect to an MCP server.
 
-        - `required Type Type`
+        - `JsonElement Type = "mcp_connection_failed_error"`
 
         - `required string McpServerName`
 
@@ -31942,7 +31935,7 @@ List Session Thread Events
 
         Authentication to an MCP server failed.
 
-        - `required Type Type`
+        - `JsonElement Type = "mcp_authentication_failed_error"`
 
         - `required string McpServerName`
 
@@ -31972,7 +31965,7 @@ List Session Thread Events
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
-        - `required Type Type`
+        - `JsonElement Type = "billing_error"`
 
         - `required string Message`
 
@@ -31998,7 +31991,7 @@ List Session Thread Events
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
-        - `required Type Type`
+        - `JsonElement Type = "credential_host_unreachable_error"`
 
         - `required string CredentialID`
 
@@ -32188,7 +32181,7 @@ List Session Thread Events
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_rescheduled"`
 
     - `required string ID`
 
@@ -32204,7 +32197,7 @@ List Session Thread Events
 
     Indicates the session is actively running and the agent is working.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_running"`
 
     - `required string ID`
 
@@ -32220,7 +32213,7 @@ List Session Thread Events
 
     Indicates the agent has paused and is awaiting user input.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_idle"`
 
     - `required string ID`
 
@@ -32262,13 +32255,13 @@ List Session Thread Events
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `required Type Type`
+        - `JsonElement Type = "end_turn"`
 
       - `class BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `required Type Type`
+        - `JsonElement Type = "requires_action"`
 
         - `required IReadOnlyList<string> EventIds`
 
@@ -32278,13 +32271,13 @@ List Session Thread Events
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-        - `required Type Type`
+        - `JsonElement Type = "retries_exhausted"`
 
       - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-        - `required Type Type`
+        - `JsonElement Type = "budget_reached"`
 
       - `class BetaManagedAgentsSessionRefusal`
 
@@ -32296,7 +32289,7 @@ List Session Thread Events
 
     Indicates the session has terminated, either due to an error or completion.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_terminated"`
 
     - `required string ID`
 
@@ -32312,7 +32305,7 @@ List Session Thread Events
 
     Emitted when a child thread is created. Written to the parent thread's output stream so clients observing the session see child creation.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_created"`
 
     - `required string ID`
 
@@ -32340,7 +32333,7 @@ List Session Thread Events
 
     Emitted when an outcome evaluation cycle begins.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_start"`
 
     - `required string ID`
 
@@ -32366,7 +32359,7 @@ List Session Thread Events
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_end"`
 
     - `required string ID`
 
@@ -32440,7 +32433,7 @@ List Session Thread Events
 
     Emitted when a model request is initiated by the agent.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.model_request_start"`
 
     - `required string ID`
 
@@ -32456,7 +32449,7 @@ List Session Thread Events
 
     Emitted when a model request completes.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.model_request_end"`
 
     - `required string ID`
 
@@ -32484,7 +32477,7 @@ List Session Thread Events
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_ongoing"`
 
     - `required string ID`
 
@@ -32510,7 +32503,7 @@ List Session Thread Events
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.define_outcome"`
 
     - `required string ID`
 
@@ -32544,7 +32537,7 @@ List Session Thread Events
 
         Rubric referenced by a file uploaded via the Files API.
 
-        - `required Type Type`
+        - `JsonElement Type = "file"`
 
         - `required string FileID`
 
@@ -32554,7 +32547,7 @@ List Session Thread Events
 
         Rubric content provided inline as text.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Content`
 
@@ -32564,7 +32557,7 @@ List Session Thread Events
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.deleted"`
 
     - `required string ID`
 
@@ -32580,7 +32573,7 @@ List Session Thread Events
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_running"`
 
     - `required string ID`
 
@@ -32604,7 +32597,7 @@ List Session Thread Events
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_idle"`
 
     - `required string ID`
 
@@ -32654,7 +32647,7 @@ List Session Thread Events
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_terminated"`
 
     - `required string ID`
 
@@ -32678,7 +32671,7 @@ List Session Thread Events
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.tool_result"`
 
     - `required string ID`
 
@@ -32726,7 +32719,7 @@ List Session Thread Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_rescheduled"`
 
     - `required string ID`
 
@@ -32750,7 +32743,7 @@ List Session Thread Events
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.updated"`
 
     - `required string ID`
 
@@ -32766,7 +32759,7 @@ List Session Thread Events
 
       The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -32794,7 +32787,7 @@ List Session Thread Events
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -32886,31 +32879,31 @@ List Session Thread Events
 
             Low effort. Favors latency over reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "low"`
 
           - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "medium"`
 
           - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "high"`
 
           - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
-            - `required Type Type`
+            - `JsonElement Type = "xhigh"`
 
           - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
-            - `required Type Type`
+            - `JsonElement Type = "max"`
 
         - `string InferenceGeo`
 
@@ -32932,7 +32925,7 @@ List Session Thread Events
 
           Resolved coordinator topology with full agent definitions for each roster member.
 
-          - `required Type Type`
+          - `JsonElement Type = "coordinator"`
 
           - `required IReadOnlyList<Agent> Agents`
 
@@ -32942,7 +32935,7 @@ List Session Thread Events
 
               Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -32954,7 +32947,7 @@ List Session Thread Events
 
               - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-                - `required Type Type`
+                - `JsonElement Type = "url"`
 
                 - `required string Name`
 
@@ -32972,7 +32965,7 @@ List Session Thread Events
 
                   A resolved Anthropic-managed skill.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "anthropic"`
 
                   - `required string SkillID`
 
@@ -32982,7 +32975,7 @@ List Session Thread Events
 
                   A resolved user-created custom skill.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "custom"`
 
                   - `required string SkillID`
 
@@ -32994,7 +32987,7 @@ List Session Thread Events
 
                 - `class BetaManagedAgentsAgentToolset20260401`
 
-                  - `required Type Type`
+                  - `JsonElement Type = "agent_toolset_20260401"`
 
                   - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -33016,13 +33009,13 @@ List Session Thread Events
 
                           Tool calls are automatically approved without user confirmation.
 
-                          - `required Type Type`
+                          - `JsonElement Type = "always_allow"`
 
                         - `class BetaManagedAgentsAlwaysAskPolicy`
 
                           Tool calls require user confirmation before execution.
 
-                          - `required Type Type`
+                          - `JsonElement Type = "always_ask"`
 
                         - `class BetaManagedAgentsAutoPolicy`
 
@@ -33354,7 +33347,7 @@ List Session Thread Events
 
                 - `class BetaManagedAgentsMcpToolset`
 
-                  - `required Type Type`
+                  - `JsonElement Type = "mcp_toolset"`
 
                   - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -33406,7 +33399,7 @@ List Session Thread Events
 
                   A custom tool as returned in API responses.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "custom"`
 
                   - `required string Description`
 
@@ -33430,7 +33423,7 @@ List Session Thread Events
 
               Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-              - `required Type Type`
+              - `JsonElement Type = "advisor"`
 
               - `required string Model`
 
@@ -33492,7 +33485,7 @@ List Session Thread Events
 
                 Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-                - `required Type Type`
+                - `JsonElement Type = "agent"`
 
                 - `required string ID`
 
@@ -33544,7 +33537,7 @@ List Session Thread Events
 
                 Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-                - `required Type Type`
+                - `JsonElement Type = "agent"`
 
                 - `required string ID`
 
@@ -33610,7 +33603,7 @@ List Session Thread Events
 
       The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
-      - `required Type Type`
+      - `JsonElement Type = "limit"`
 
       - `required BetaMonetaryAmount MaxListCost`
 
@@ -33636,7 +33629,7 @@ List Session Thread Events
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
-    - `required Type Type`
+    - `JsonElement Type = "system.message"`
 
     - `required string ID`
 
@@ -33646,7 +33639,7 @@ List Session Thread Events
 
       System content blocks. Text-only.
 
-      - `required Type Type`
+      - `JsonElement Type = "text"`
 
       - `required string Text`
 
@@ -33664,7 +33657,7 @@ List Session Thread Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.usage"`
 
     - `required string ID`
 
@@ -34199,7 +34192,7 @@ Stream Session Thread Events
 
     A user message event in the session conversation.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.message"`
 
     - `required string ID`
 
@@ -34213,7 +34206,7 @@ Stream Session Thread Events
 
         Regular text content.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -34225,7 +34218,7 @@ Stream Session Thread Events
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `required Type Type`
+        - `JsonElement Type = "image"`
 
         - `required Source Source`
 
@@ -34235,7 +34228,7 @@ Stream Session Thread Events
 
             Base64-encoded image data.
 
-            - `required Type Type`
+            - `JsonElement Type = "base64"`
 
             - `required string Data`
 
@@ -34253,7 +34246,7 @@ Stream Session Thread Events
 
             Image referenced by URL.
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Url`
 
@@ -34265,7 +34258,7 @@ Stream Session Thread Events
 
             Image referenced by file ID.
 
-            - `required Type Type`
+            - `JsonElement Type = "file"`
 
             - `required string FileID`
 
@@ -34277,7 +34270,7 @@ Stream Session Thread Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `required Type Type`
+        - `JsonElement Type = "document"`
 
         - `required Source Source`
 
@@ -34287,7 +34280,7 @@ Stream Session Thread Events
 
             Base64-encoded document data.
 
-            - `required Type Type`
+            - `JsonElement Type = "base64"`
 
             - `required string Data`
 
@@ -34305,7 +34298,7 @@ Stream Session Thread Events
 
             Plain text document content.
 
-            - `required Type Type`
+            - `JsonElement Type = "text"`
 
             - `required string Data`
 
@@ -34313,7 +34306,7 @@ Stream Session Thread Events
 
               minLength: 1
 
-            - `required MediaType MediaType`
+            - `JsonElement MediaType = "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
@@ -34321,7 +34314,7 @@ Stream Session Thread Events
 
             Document referenced by URL.
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Url`
 
@@ -34333,7 +34326,7 @@ Stream Session Thread Events
 
             Document referenced by file ID.
 
-            - `required Type Type`
+            - `JsonElement Type = "file"`
 
             - `required string FileID`
 
@@ -34353,7 +34346,7 @@ Stream Session Thread Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-        - `required Type Type`
+        - `JsonElement Type = "redacted"`
 
     - `DateTimeOffset? ProcessedAt`
 
@@ -34365,7 +34358,7 @@ Stream Session Thread Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.interrupt"`
 
     - `required string ID`
 
@@ -34385,7 +34378,7 @@ Stream Session Thread Events
 
     A tool confirmation event that approves or denies a pending tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.tool_confirmation"`
 
     - `required string ID`
 
@@ -34423,7 +34416,7 @@ Stream Session Thread Events
 
     Event sent by the client providing the result of a custom tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.custom_tool_result"`
 
     - `required string ID`
 
@@ -34453,7 +34446,7 @@ Stream Session Thread Events
 
         A block containing a web search result.
 
-        - `required Type Type`
+        - `JsonElement Type = "search_result"`
 
         - `required BetaManagedAgentsSearchResultCitations Citations`
 
@@ -34467,7 +34460,7 @@ Stream Session Thread Events
 
           Array of text content blocks from the search result.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -34505,7 +34498,7 @@ Stream Session Thread Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result. The client can send it as soon as this event arrives, without waiting for `session.status_idle`.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.custom_tool_use"`
 
     - `required string ID`
 
@@ -34533,7 +34526,7 @@ Stream Session Thread Events
 
     An agent response event in the session conversation.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.message"`
 
     - `required string ID`
 
@@ -34561,7 +34554,7 @@ Stream Session Thread Events
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thinking"`
 
     - `required string ID`
 
@@ -34577,7 +34570,7 @@ Stream Session Thread Events
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.mcp_tool_use"`
 
     - `required string ID`
 
@@ -34675,7 +34668,7 @@ Stream Session Thread Events
 
     Event representing the result of an MCP tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.mcp_tool_result"`
 
     - `required string ID`
 
@@ -34719,7 +34712,7 @@ Stream Session Thread Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.tool_use"`
 
     - `required string ID`
 
@@ -34755,7 +34748,7 @@ Stream Session Thread Events
 
     Event representing the result of an agent tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.tool_result"`
 
     - `required string ID`
 
@@ -34799,7 +34792,7 @@ Stream Session Thread Events
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_message_received"`
 
     - `required string ID`
 
@@ -34843,7 +34836,7 @@ Stream Session Thread Events
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_message_sent"`
 
     - `required string ID`
 
@@ -34887,7 +34880,7 @@ Stream Session Thread Events
 
     Indicates that context compaction (summarization) occurred during the session.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_context_compacted"`
 
     - `required string ID`
 
@@ -34903,7 +34896,7 @@ Stream Session Thread Events
 
     An error event indicating a problem occurred during session execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.error"`
 
     - `required string ID`
 
@@ -34915,7 +34908,7 @@ Stream Session Thread Events
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-        - `required Type Type`
+        - `JsonElement Type = "unknown_error"`
 
         - `required string Message`
 
@@ -34929,25 +34922,25 @@ Stream Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `required Type Type`
+            - `JsonElement Type = "retrying"`
 
           - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `required Type Type`
+            - `JsonElement Type = "exhausted"`
 
           - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-            - `required Type Type`
+            - `JsonElement Type = "terminal"`
 
       - `class BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_overloaded_error"`
 
         - `required string Message`
 
@@ -34973,7 +34966,7 @@ Stream Session Thread Events
 
         The model request was rate-limited.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_rate_limited_error"`
 
         - `required string Message`
 
@@ -34999,7 +34992,7 @@ Stream Session Thread Events
 
         A model request failed for a reason other than overload or rate-limiting.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_request_failed_error"`
 
         - `required string Message`
 
@@ -35025,7 +35018,7 @@ Stream Session Thread Events
 
         Failed to connect to an MCP server.
 
-        - `required Type Type`
+        - `JsonElement Type = "mcp_connection_failed_error"`
 
         - `required string McpServerName`
 
@@ -35055,7 +35048,7 @@ Stream Session Thread Events
 
         Authentication to an MCP server failed.
 
-        - `required Type Type`
+        - `JsonElement Type = "mcp_authentication_failed_error"`
 
         - `required string McpServerName`
 
@@ -35085,7 +35078,7 @@ Stream Session Thread Events
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
-        - `required Type Type`
+        - `JsonElement Type = "billing_error"`
 
         - `required string Message`
 
@@ -35111,7 +35104,7 @@ Stream Session Thread Events
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
-        - `required Type Type`
+        - `JsonElement Type = "credential_host_unreachable_error"`
 
         - `required string CredentialID`
 
@@ -35301,7 +35294,7 @@ Stream Session Thread Events
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_rescheduled"`
 
     - `required string ID`
 
@@ -35317,7 +35310,7 @@ Stream Session Thread Events
 
     Indicates the session is actively running and the agent is working.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_running"`
 
     - `required string ID`
 
@@ -35333,7 +35326,7 @@ Stream Session Thread Events
 
     Indicates the agent has paused and is awaiting user input.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_idle"`
 
     - `required string ID`
 
@@ -35375,13 +35368,13 @@ Stream Session Thread Events
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `required Type Type`
+        - `JsonElement Type = "end_turn"`
 
       - `class BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `required Type Type`
+        - `JsonElement Type = "requires_action"`
 
         - `required IReadOnlyList<string> EventIds`
 
@@ -35391,13 +35384,13 @@ Stream Session Thread Events
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-        - `required Type Type`
+        - `JsonElement Type = "retries_exhausted"`
 
       - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-        - `required Type Type`
+        - `JsonElement Type = "budget_reached"`
 
       - `class BetaManagedAgentsSessionRefusal`
 
@@ -35409,7 +35402,7 @@ Stream Session Thread Events
 
     Indicates the session has terminated, either due to an error or completion.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_terminated"`
 
     - `required string ID`
 
@@ -35425,7 +35418,7 @@ Stream Session Thread Events
 
     Emitted when a child thread is created. Written to the parent thread's output stream so clients observing the session see child creation.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_created"`
 
     - `required string ID`
 
@@ -35453,7 +35446,7 @@ Stream Session Thread Events
 
     Emitted when an outcome evaluation cycle begins.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_start"`
 
     - `required string ID`
 
@@ -35479,7 +35472,7 @@ Stream Session Thread Events
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_end"`
 
     - `required string ID`
 
@@ -35553,7 +35546,7 @@ Stream Session Thread Events
 
     Emitted when a model request is initiated by the agent.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.model_request_start"`
 
     - `required string ID`
 
@@ -35569,7 +35562,7 @@ Stream Session Thread Events
 
     Emitted when a model request completes.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.model_request_end"`
 
     - `required string ID`
 
@@ -35597,7 +35590,7 @@ Stream Session Thread Events
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_ongoing"`
 
     - `required string ID`
 
@@ -35623,7 +35616,7 @@ Stream Session Thread Events
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.define_outcome"`
 
     - `required string ID`
 
@@ -35657,7 +35650,7 @@ Stream Session Thread Events
 
         Rubric referenced by a file uploaded via the Files API.
 
-        - `required Type Type`
+        - `JsonElement Type = "file"`
 
         - `required string FileID`
 
@@ -35667,7 +35660,7 @@ Stream Session Thread Events
 
         Rubric content provided inline as text.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Content`
 
@@ -35677,7 +35670,7 @@ Stream Session Thread Events
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.deleted"`
 
     - `required string ID`
 
@@ -35693,7 +35686,7 @@ Stream Session Thread Events
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_running"`
 
     - `required string ID`
 
@@ -35717,7 +35710,7 @@ Stream Session Thread Events
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_idle"`
 
     - `required string ID`
 
@@ -35767,7 +35760,7 @@ Stream Session Thread Events
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_terminated"`
 
     - `required string ID`
 
@@ -35791,7 +35784,7 @@ Stream Session Thread Events
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.tool_result"`
 
     - `required string ID`
 
@@ -35839,7 +35832,7 @@ Stream Session Thread Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_rescheduled"`
 
     - `required string ID`
 
@@ -35863,7 +35856,7 @@ Stream Session Thread Events
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.updated"`
 
     - `required string ID`
 
@@ -35879,7 +35872,7 @@ Stream Session Thread Events
 
       The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -35907,7 +35900,7 @@ Stream Session Thread Events
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -35999,31 +35992,31 @@ Stream Session Thread Events
 
             Low effort. Favors latency over reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "low"`
 
           - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "medium"`
 
           - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "high"`
 
           - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
-            - `required Type Type`
+            - `JsonElement Type = "xhigh"`
 
           - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
-            - `required Type Type`
+            - `JsonElement Type = "max"`
 
         - `string InferenceGeo`
 
@@ -36045,7 +36038,7 @@ Stream Session Thread Events
 
           Resolved coordinator topology with full agent definitions for each roster member.
 
-          - `required Type Type`
+          - `JsonElement Type = "coordinator"`
 
           - `required IReadOnlyList<Agent> Agents`
 
@@ -36055,7 +36048,7 @@ Stream Session Thread Events
 
               Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -36067,7 +36060,7 @@ Stream Session Thread Events
 
               - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-                - `required Type Type`
+                - `JsonElement Type = "url"`
 
                 - `required string Name`
 
@@ -36085,7 +36078,7 @@ Stream Session Thread Events
 
                   A resolved Anthropic-managed skill.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "anthropic"`
 
                   - `required string SkillID`
 
@@ -36095,7 +36088,7 @@ Stream Session Thread Events
 
                   A resolved user-created custom skill.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "custom"`
 
                   - `required string SkillID`
 
@@ -36107,7 +36100,7 @@ Stream Session Thread Events
 
                 - `class BetaManagedAgentsAgentToolset20260401`
 
-                  - `required Type Type`
+                  - `JsonElement Type = "agent_toolset_20260401"`
 
                   - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -36129,13 +36122,13 @@ Stream Session Thread Events
 
                           Tool calls are automatically approved without user confirmation.
 
-                          - `required Type Type`
+                          - `JsonElement Type = "always_allow"`
 
                         - `class BetaManagedAgentsAlwaysAskPolicy`
 
                           Tool calls require user confirmation before execution.
 
-                          - `required Type Type`
+                          - `JsonElement Type = "always_ask"`
 
                         - `class BetaManagedAgentsAutoPolicy`
 
@@ -36467,7 +36460,7 @@ Stream Session Thread Events
 
                 - `class BetaManagedAgentsMcpToolset`
 
-                  - `required Type Type`
+                  - `JsonElement Type = "mcp_toolset"`
 
                   - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -36519,7 +36512,7 @@ Stream Session Thread Events
 
                   A custom tool as returned in API responses.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "custom"`
 
                   - `required string Description`
 
@@ -36543,7 +36536,7 @@ Stream Session Thread Events
 
               Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-              - `required Type Type`
+              - `JsonElement Type = "advisor"`
 
               - `required string Model`
 
@@ -36605,7 +36598,7 @@ Stream Session Thread Events
 
                 Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-                - `required Type Type`
+                - `JsonElement Type = "agent"`
 
                 - `required string ID`
 
@@ -36657,7 +36650,7 @@ Stream Session Thread Events
 
                 Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-                - `required Type Type`
+                - `JsonElement Type = "agent"`
 
                 - `required string ID`
 
@@ -36723,7 +36716,7 @@ Stream Session Thread Events
 
       The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
-      - `required Type Type`
+      - `JsonElement Type = "limit"`
 
       - `required BetaMonetaryAmount MaxListCost`
 
@@ -36749,7 +36742,7 @@ Stream Session Thread Events
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
-    - `required Type Type`
+    - `JsonElement Type = "event_start"`
 
     - `required BetaManagedAgentsStartEventPreview Event`
 
@@ -36757,7 +36750,7 @@ Stream Session Thread Events
 
       - `class BetaManagedAgentsAgentMessagePreview`
 
-        - `required Type Type`
+        - `JsonElement Type = "agent.message"`
 
         - `required string ID`
 
@@ -36765,7 +36758,7 @@ Stream Session Thread Events
 
       - `class BetaManagedAgentsAgentThinkingPreview`
 
-        - `required Type Type`
+        - `JsonElement Type = "agent.thinking"`
 
         - `required string ID`
 
@@ -36775,13 +36768,13 @@ Stream Session Thread Events
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
-    - `required Type Type`
+    - `JsonElement Type = "event_delta"`
 
     - `required BetaManagedAgentsDeltaContent Delta`
 
       One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
 
-      - `required Type Type`
+      - `JsonElement Type = "content_delta"`
 
       - `required BetaManagedAgentsTextBlock Content`
 
@@ -36799,7 +36792,7 @@ Stream Session Thread Events
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
-    - `required Type Type`
+    - `JsonElement Type = "system.message"`
 
     - `required string ID`
 
@@ -36809,7 +36802,7 @@ Stream Session Thread Events
 
       System content blocks. Text-only.
 
-      - `required Type Type`
+      - `JsonElement Type = "text"`
 
       - `required string Text`
 
@@ -36827,7 +36820,7 @@ Stream Session Thread Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.usage"`
 
     - `required string ID`
 

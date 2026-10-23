@@ -188,8 +188,7 @@ Create User Profile
 ## Example
 
 ```bash
-ant beta:user-profiles create \
-  --api-key my-anthropic-api-key
+ant beta:user-profiles create
 ```
 
 ### Response (200)

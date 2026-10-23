@@ -145,7 +145,7 @@ Get Session Thread
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads.
 
-  - `Type type`
+  - `JsonValue type = "session_thread"`
 
   - `String id`
 
@@ -159,7 +159,7 @@ Get Session Thread
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-      - `Type type`
+      - `JsonValue type = "agent"`
 
       - `String id`
 
@@ -187,7 +187,7 @@ Get Session Thread
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-        - `Type type`
+        - `JsonValue type = "url"`
 
         - `String name`
 
@@ -279,31 +279,31 @@ Get Session Thread
 
             Low effort. Favors latency over reasoning depth.
 
-            - `Type type`
+            - `JsonValue type = "low"`
 
           - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
-            - `Type type`
+            - `JsonValue type = "medium"`
 
           - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
-            - `Type type`
+            - `JsonValue type = "high"`
 
           - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
-            - `Type type`
+            - `JsonValue type = "xhigh"`
 
           - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
-            - `Type type`
+            - `JsonValue type = "max"`
 
         - `Optional<String> inferenceGeo`
 
@@ -325,7 +325,7 @@ Get Session Thread
 
           A resolved Anthropic-managed skill.
 
-          - `Type type`
+          - `JsonValue type = "anthropic"`
 
           - `String skillId`
 
@@ -335,7 +335,7 @@ Get Session Thread
 
           A resolved user-created custom skill.
 
-          - `Type type`
+          - `JsonValue type = "custom"`
 
           - `String skillId`
 
@@ -347,7 +347,7 @@ Get Session Thread
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
-          - `Type type`
+          - `JsonValue type = "agent_toolset_20260401"`
 
           - `List<BetaManagedAgentsAgentToolConfig> configs`
 
@@ -369,13 +369,13 @@ Get Session Thread
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `Type type`
+                  - `JsonValue type = "always_allow"`
 
                 - `class BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                  - `Type type`
+                  - `JsonValue type = "always_ask"`
 
                 - `class BetaManagedAgentsAutoPolicy`
 
@@ -707,7 +707,7 @@ Get Session Thread
 
         - `class BetaManagedAgentsMcpToolset`
 
-          - `Type type`
+          - `JsonValue type = "mcp_toolset"`
 
           - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -759,7 +759,7 @@ Get Session Thread
 
           A custom tool as returned in API responses.
 
-          - `Type type`
+          - `JsonValue type = "custom"`
 
           - `String description`
 
@@ -783,7 +783,7 @@ Get Session Thread
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-      - `Type type`
+      - `JsonValue type = "advisor"`
 
       - `String model`
 
@@ -803,7 +803,7 @@ Get Session Thread
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-        - `Type type`
+        - `JsonValue type = "url"`
 
         - `String name`
 

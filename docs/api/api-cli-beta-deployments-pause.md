@@ -557,7 +557,6 @@ Pause Deployment
 
 ```bash
 ant beta:deployments pause \
-  --api-key my-anthropic-api-key \
   --deployment-id depl_011CZkZcDH3vPqd7xnEfwTai
 ```
 

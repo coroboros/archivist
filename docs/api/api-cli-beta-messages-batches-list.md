@@ -162,8 +162,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 ## Example
 
 ```bash
-ant beta:messages:batches list \
-  --api-key my-anthropic-api-key
+ant beta:messages:batches list
 ```
 
 ### Response (200)

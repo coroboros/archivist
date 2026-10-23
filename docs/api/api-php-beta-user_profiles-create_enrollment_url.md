@@ -37,7 +37,7 @@ Create Enrollment URL
 
 - `class BetaUserProfileEnrollmentURL`
 
-  - `Type type`
+  - `"enrollment_url" type`
 
     Object type. Always `enrollment_url`.
 

@@ -279,7 +279,6 @@ To get the same behavior with a self-hosted sandbox, you can run your own proxy 
       	DisplayName: anthropic.String("Alice's Slack"),
       	Auth: anthropic.BetaVaultCredentialNewParamsAuthUnion{
       		OfMCPOAuth: &anthropic.BetaManagedAgentsMCPOAuthCreateParams{
-      			Type:         anthropic.BetaManagedAgentsMCPOAuthCreateParamsTypeMCPOAuth,
       			MCPServerURL: "https://mcp.slack.com/mcp",
       			AccessToken:  "xoxp-...",
       			ExpiresAt:    anthropic.Time(time.Date(2099, time.December, 31, 23, 59, 59, 0, time.UTC)),
@@ -290,7 +289,6 @@ To get the same behavior with a self-hosted sandbox, you can run your own proxy 
       				RefreshToken:  "xoxe-1-...",
       				TokenEndpointAuth: anthropic.BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnion{
       					OfClientSecretPost: &anthropic.BetaManagedAgentsTokenEndpointAuthPostParam{
-      						Type:         anthropic.BetaManagedAgentsTokenEndpointAuthPostParamTypeClientSecretPost,
       						ClientSecret: "abc123...",
       					},
       				},
@@ -442,7 +440,6 @@ To get the same behavior with a self-hosted sandbox, you can run your own proxy 
       	DisplayName: anthropic.String("Linear API key"),
       	Auth: anthropic.BetaVaultCredentialNewParamsAuthUnion{
       		OfStaticBearer: &anthropic.BetaManagedAgentsStaticBearerCreateParams{
-      			Type:         anthropic.BetaManagedAgentsStaticBearerCreateParamsTypeStaticBearer,
       			MCPServerURL: "https://mcp.linear.app/mcp",
       			Token:        "lin_api_your_linear_key",
       		},
@@ -610,12 +607,10 @@ To get the same behavior with a self-hosted sandbox, you can run your own proxy 
       	DisplayName: anthropic.String("Notion API key for sandbox"),
       	Auth: anthropic.BetaVaultCredentialNewParamsAuthUnion{
       		OfEnvironmentVariable: &anthropic.BetaManagedAgentsEnvironmentVariableCreateParams{
-      			Type:        anthropic.BetaManagedAgentsEnvironmentVariableCreateParamsTypeEnvironmentVariable,
       			SecretName:  "NOTION_API_KEY",
       			SecretValue: "ntn_your-secret-here",
       			Networking: anthropic.BetaManagedAgentsCredentialNetworkingParamsUnion{
       				OfLimited: &anthropic.BetaManagedAgentsLimitedCredentialNetworkingParams{
-      					Type:         anthropic.BetaManagedAgentsLimitedCredentialNetworkingParamsTypeLimited,
       					AllowedHosts: []string{"api.notion.com"},
       				},
       			},
@@ -917,7 +912,6 @@ Secret values, `display_name` (java, php: `displayName`; csharp, go: `DisplayNam
   	VaultID: vault.ID,
   	Auth: anthropic.BetaVaultCredentialUpdateParamsAuthUnion{
   		OfMCPOAuth: &anthropic.BetaManagedAgentsMCPOAuthUpdateParams{
-  			Type:        anthropic.BetaManagedAgentsMCPOAuthUpdateParamsTypeMCPOAuth,
   			AccessToken: anthropic.String("xoxp-new-..."),
   			ExpiresAt:   anthropic.Time(time.Date(2099, time.December, 31, 23, 59, 59, 0, time.UTC)),
   			Refresh: anthropic.BetaManagedAgentsMCPOAuthRefreshUpdateParams{

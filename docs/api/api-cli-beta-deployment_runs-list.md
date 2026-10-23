@@ -310,8 +310,7 @@ List Deployment Runs
 ## Example
 
 ```bash
-ant beta:deployment-runs list \
-  --api-key my-anthropic-api-key
+ant beta:deployment-runs list
 ```
 
 ### Response (200)

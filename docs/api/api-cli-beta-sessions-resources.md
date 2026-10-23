@@ -75,7 +75,6 @@ Add Session Resource
 
 ```bash
 ant beta:sessions:resources add \
-  --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7 \
   --file-id file_011CNha8iCJcU1wXNR6q4V8w \
   --type file
@@ -246,7 +245,6 @@ List Session Resources
 
 ```bash
 ant beta:sessions:resources list \
-  --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7
 ```
 
@@ -416,7 +414,6 @@ Get Session Resource
 
 ```bash
 ant beta:sessions:resources retrieve \
-  --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7 \
   --resource-id sesrsc_011CZkZBJq5dWxk9fVLNcPht
 ```
@@ -580,7 +577,6 @@ Update Session Resource
 
 ```bash
 ant beta:sessions:resources update \
-  --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7 \
   --resource-id sesrsc_011CZkZBJq5dWxk9fVLNcPht \
   --authorization-token ghp_exampletoken
@@ -641,7 +637,6 @@ Delete Session Resource
 
 ```bash
 ant beta:sessions:resources delete \
-  --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7 \
   --resource-id sesrsc_011CZkZBJq5dWxk9fVLNcPht
 ```

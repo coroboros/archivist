@@ -59,7 +59,7 @@ Create User Profile
 
 - `class BetaUserProfile`
 
-  - `Type type`
+  - `"user_profile" type`
 
     Object type. Always `user_profile`.
 
@@ -209,7 +209,7 @@ List User Profiles
 
 - `class BetaUserProfile`
 
-  - `Type type`
+  - `"user_profile" type`
 
     Object type. Always `user_profile`.
 
@@ -340,7 +340,7 @@ Get User Profile
 
 - `class BetaUserProfile`
 
-  - `Type type`
+  - `"user_profile" type`
 
     Object type. Always `user_profile`.
 
@@ -487,7 +487,7 @@ Update User Profile
 
 - `class BetaUserProfile`
 
-  - `Type type`
+  - `"user_profile" type`
 
     Object type. Always `user_profile`.
 
@@ -690,7 +690,7 @@ Create Enrollment URL
 
 - `class BetaUserProfileEnrollmentURL`
 
-  - `Type type`
+  - `"enrollment_url" type`
 
     Object type. Always `enrollment_url`.
 
@@ -754,7 +754,7 @@ var_dump($betaUserProfileEnrollmentURL);
 
 - `class BetaUserProfile`
 
-  - `Type type`
+  - `"user_profile" type`
 
     Object type. Always `user_profile`.
 
@@ -802,7 +802,7 @@ var_dump($betaUserProfileEnrollmentURL);
 
 - `class BetaUserProfileEnrollmentURL`
 
-  - `Type type`
+  - `"enrollment_url" type`
 
     Object type. Always `enrollment_url`.
 

@@ -1237,7 +1237,6 @@ Get Session
 
 ```bash
 ant beta:sessions retrieve \
-  --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7
 ```
 

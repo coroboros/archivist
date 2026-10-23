@@ -895,7 +895,6 @@ Create Agent
 
 ```bash
 ant beta:agents create \
-  --api-key my-anthropic-api-key \
   --model claude-opus-5-5 \
   --name 'My First Agent'
 ```
@@ -1873,8 +1872,7 @@ List Agents
 ### Example
 
 ```bash
-ant beta:agents list \
-  --api-key my-anthropic-api-key
+ant beta:agents list
 ```
 
 #### Response (200)
@@ -2832,7 +2830,6 @@ Get Agent
 
 ```bash
 ant beta:agents retrieve \
-  --api-key my-anthropic-api-key \
   --agent-id agent_011CZkYpogX7uDKUyvBTophP
 ```
 
@@ -3832,7 +3829,6 @@ Update Agent
 
 ```bash
 ant beta:agents update \
-  --api-key my-anthropic-api-key \
   --agent-id agent_011CZkYpogX7uDKUyvBTophP
 ```
 
@@ -4780,7 +4776,6 @@ Archive Agent
 
 ```bash
 ant beta:agents archive \
-  --api-key my-anthropic-api-key \
   --agent-id agent_011CZkYpogX7uDKUyvBTophP
 ```
 
@@ -12256,7 +12251,6 @@ List Agent Versions
 
 ```bash
 ant beta:agents:versions list \
-  --api-key my-anthropic-api-key \
   --agent-id agent_011CZkYpogX7uDKUyvBTophP
 ```
 

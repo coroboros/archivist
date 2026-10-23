@@ -189,7 +189,7 @@ List Deployment Runs
 
   A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
 
-  - `Type type`
+  - `JsonValue type = "deployment_run"`
 
   - `String id`
 
@@ -199,7 +199,7 @@ List Deployment Runs
 
     Snapshot of the agent at fire time. Always fully resolved — deployments pin agent + version.
 
-    - `Type type`
+    - `JsonValue type = "agent"`
 
     - `String id`
 
@@ -225,7 +225,7 @@ List Deployment Runs
 
       The deployment's environment was archived.
 
-      - `Type type`
+      - `JsonValue type = "environment_archived_error"`
 
       - `String message`
 
@@ -235,7 +235,7 @@ List Deployment Runs
 
       The deployment's agent was archived.
 
-      - `Type type`
+      - `JsonValue type = "agent_archived_error"`
 
       - `String message`
 
@@ -245,7 +245,7 @@ List Deployment Runs
 
       The deployment's environment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "environment_not_found_error"`
 
       - `String message`
 
@@ -255,7 +255,7 @@ List Deployment Runs
 
       A vault referenced by the deployment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "vault_not_found_error"`
 
       - `String message`
 
@@ -265,7 +265,7 @@ List Deployment Runs
 
       A vault referenced by the deployment is archived.
 
-      - `Type type`
+      - `JsonValue type = "vault_archived_error"`
 
       - `String message`
 
@@ -275,7 +275,7 @@ List Deployment Runs
 
       A file resource referenced by the deployment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "file_not_found_error"`
 
       - `String message`
 
@@ -285,7 +285,7 @@ List Deployment Runs
 
       A memory store referenced by the deployment is archived.
 
-      - `Type type`
+      - `JsonValue type = "memory_store_archived_error"`
 
       - `String message`
 
@@ -295,7 +295,7 @@ List Deployment Runs
 
       A skill referenced by the deployment's agent no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "skill_not_found_error"`
 
       - `String message`
 
@@ -305,7 +305,7 @@ List Deployment Runs
 
       A referenced resource no longer exists and its kind was not reported.
 
-      - `Type type`
+      - `JsonValue type = "session_resource_not_found_error"`
 
       - `String message`
 
@@ -315,7 +315,7 @@ List Deployment Runs
 
       The deployment's workspace was archived.
 
-      - `Type type`
+      - `JsonValue type = "workspace_archived_error"`
 
       - `String message`
 
@@ -325,7 +325,7 @@ List Deployment Runs
 
       The deployment's organization is disabled.
 
-      - `Type type`
+      - `JsonValue type = "organization_disabled_error"`
 
       - `String message`
 
@@ -335,7 +335,7 @@ List Deployment Runs
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
-      - `Type type`
+      - `JsonValue type = "session_rate_limited_error"`
 
       - `String message`
 
@@ -345,7 +345,7 @@ List Deployment Runs
 
       The session create request was rejected with a non-retryable validation error.
 
-      - `Type type`
+      - `JsonValue type = "session_creation_rejected_error"`
 
       - `String message`
 
@@ -355,7 +355,7 @@ List Deployment Runs
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
-      - `Type type`
+      - `JsonValue type = "unknown_error"`
 
       - `String message`
 
@@ -365,7 +365,7 @@ List Deployment Runs
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-      - `Type type`
+      - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
       - `String message`
 
@@ -375,7 +375,7 @@ List Deployment Runs
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-      - `Type type`
+      - `JsonValue type = "mcp_egress_blocked_error"`
 
       - `String message`
 
@@ -393,7 +393,7 @@ List Deployment Runs
 
       The run was fired by the deployment's cron schedule.
 
-      - `Type type`
+      - `JsonValue type = "schedule"`
 
       - `LocalDateTime scheduledAt`
 
@@ -405,7 +405,7 @@ List Deployment Runs
 
       The run was started manually by creating a session directly against the deployment.
 
-      - `Type type`
+      - `JsonValue type = "manual"`
 
 ### Example
 
@@ -594,7 +594,7 @@ Get Deployment Run
 
   A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
 
-  - `Type type`
+  - `JsonValue type = "deployment_run"`
 
   - `String id`
 
@@ -604,7 +604,7 @@ Get Deployment Run
 
     Snapshot of the agent at fire time. Always fully resolved — deployments pin agent + version.
 
-    - `Type type`
+    - `JsonValue type = "agent"`
 
     - `String id`
 
@@ -630,7 +630,7 @@ Get Deployment Run
 
       The deployment's environment was archived.
 
-      - `Type type`
+      - `JsonValue type = "environment_archived_error"`
 
       - `String message`
 
@@ -640,7 +640,7 @@ Get Deployment Run
 
       The deployment's agent was archived.
 
-      - `Type type`
+      - `JsonValue type = "agent_archived_error"`
 
       - `String message`
 
@@ -650,7 +650,7 @@ Get Deployment Run
 
       The deployment's environment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "environment_not_found_error"`
 
       - `String message`
 
@@ -660,7 +660,7 @@ Get Deployment Run
 
       A vault referenced by the deployment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "vault_not_found_error"`
 
       - `String message`
 
@@ -670,7 +670,7 @@ Get Deployment Run
 
       A vault referenced by the deployment is archived.
 
-      - `Type type`
+      - `JsonValue type = "vault_archived_error"`
 
       - `String message`
 
@@ -680,7 +680,7 @@ Get Deployment Run
 
       A file resource referenced by the deployment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "file_not_found_error"`
 
       - `String message`
 
@@ -690,7 +690,7 @@ Get Deployment Run
 
       A memory store referenced by the deployment is archived.
 
-      - `Type type`
+      - `JsonValue type = "memory_store_archived_error"`
 
       - `String message`
 
@@ -700,7 +700,7 @@ Get Deployment Run
 
       A skill referenced by the deployment's agent no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "skill_not_found_error"`
 
       - `String message`
 
@@ -710,7 +710,7 @@ Get Deployment Run
 
       A referenced resource no longer exists and its kind was not reported.
 
-      - `Type type`
+      - `JsonValue type = "session_resource_not_found_error"`
 
       - `String message`
 
@@ -720,7 +720,7 @@ Get Deployment Run
 
       The deployment's workspace was archived.
 
-      - `Type type`
+      - `JsonValue type = "workspace_archived_error"`
 
       - `String message`
 
@@ -730,7 +730,7 @@ Get Deployment Run
 
       The deployment's organization is disabled.
 
-      - `Type type`
+      - `JsonValue type = "organization_disabled_error"`
 
       - `String message`
 
@@ -740,7 +740,7 @@ Get Deployment Run
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
-      - `Type type`
+      - `JsonValue type = "session_rate_limited_error"`
 
       - `String message`
 
@@ -750,7 +750,7 @@ Get Deployment Run
 
       The session create request was rejected with a non-retryable validation error.
 
-      - `Type type`
+      - `JsonValue type = "session_creation_rejected_error"`
 
       - `String message`
 
@@ -760,7 +760,7 @@ Get Deployment Run
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
-      - `Type type`
+      - `JsonValue type = "unknown_error"`
 
       - `String message`
 
@@ -770,7 +770,7 @@ Get Deployment Run
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-      - `Type type`
+      - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
       - `String message`
 
@@ -780,7 +780,7 @@ Get Deployment Run
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-      - `Type type`
+      - `JsonValue type = "mcp_egress_blocked_error"`
 
       - `String message`
 
@@ -798,7 +798,7 @@ Get Deployment Run
 
       The run was fired by the deployment's cron schedule.
 
-      - `Type type`
+      - `JsonValue type = "schedule"`
 
       - `LocalDateTime scheduledAt`
 
@@ -810,7 +810,7 @@ Get Deployment Run
 
       The run was started manually by creating a session directly against the deployment.
 
-      - `Type type`
+      - `JsonValue type = "manual"`
 
 ### Example
 
@@ -866,7 +866,7 @@ public final class Main {
 
   The deployment's agent was archived.
 
-  - `Type type`
+  - `JsonValue type = "agent_archived_error"`
 
   - `String message`
 
@@ -878,7 +878,7 @@ public final class Main {
 
   A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
 
-  - `Type type`
+  - `JsonValue type = "deployment_run"`
 
   - `String id`
 
@@ -888,7 +888,7 @@ public final class Main {
 
     Snapshot of the agent at fire time. Always fully resolved — deployments pin agent + version.
 
-    - `Type type`
+    - `JsonValue type = "agent"`
 
     - `String id`
 
@@ -914,7 +914,7 @@ public final class Main {
 
       The deployment's environment was archived.
 
-      - `Type type`
+      - `JsonValue type = "environment_archived_error"`
 
       - `String message`
 
@@ -924,7 +924,7 @@ public final class Main {
 
       The deployment's agent was archived.
 
-      - `Type type`
+      - `JsonValue type = "agent_archived_error"`
 
       - `String message`
 
@@ -934,7 +934,7 @@ public final class Main {
 
       The deployment's environment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "environment_not_found_error"`
 
       - `String message`
 
@@ -944,7 +944,7 @@ public final class Main {
 
       A vault referenced by the deployment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "vault_not_found_error"`
 
       - `String message`
 
@@ -954,7 +954,7 @@ public final class Main {
 
       A vault referenced by the deployment is archived.
 
-      - `Type type`
+      - `JsonValue type = "vault_archived_error"`
 
       - `String message`
 
@@ -964,7 +964,7 @@ public final class Main {
 
       A file resource referenced by the deployment no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "file_not_found_error"`
 
       - `String message`
 
@@ -974,7 +974,7 @@ public final class Main {
 
       A memory store referenced by the deployment is archived.
 
-      - `Type type`
+      - `JsonValue type = "memory_store_archived_error"`
 
       - `String message`
 
@@ -984,7 +984,7 @@ public final class Main {
 
       A skill referenced by the deployment's agent no longer exists.
 
-      - `Type type`
+      - `JsonValue type = "skill_not_found_error"`
 
       - `String message`
 
@@ -994,7 +994,7 @@ public final class Main {
 
       A referenced resource no longer exists and its kind was not reported.
 
-      - `Type type`
+      - `JsonValue type = "session_resource_not_found_error"`
 
       - `String message`
 
@@ -1004,7 +1004,7 @@ public final class Main {
 
       The deployment's workspace was archived.
 
-      - `Type type`
+      - `JsonValue type = "workspace_archived_error"`
 
       - `String message`
 
@@ -1014,7 +1014,7 @@ public final class Main {
 
       The deployment's organization is disabled.
 
-      - `Type type`
+      - `JsonValue type = "organization_disabled_error"`
 
       - `String message`
 
@@ -1024,7 +1024,7 @@ public final class Main {
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
-      - `Type type`
+      - `JsonValue type = "session_rate_limited_error"`
 
       - `String message`
 
@@ -1034,7 +1034,7 @@ public final class Main {
 
       The session create request was rejected with a non-retryable validation error.
 
-      - `Type type`
+      - `JsonValue type = "session_creation_rejected_error"`
 
       - `String message`
 
@@ -1044,7 +1044,7 @@ public final class Main {
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
-      - `Type type`
+      - `JsonValue type = "unknown_error"`
 
       - `String message`
 
@@ -1054,7 +1054,7 @@ public final class Main {
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-      - `Type type`
+      - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
       - `String message`
 
@@ -1064,7 +1064,7 @@ public final class Main {
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-      - `Type type`
+      - `JsonValue type = "mcp_egress_blocked_error"`
 
       - `String message`
 
@@ -1082,7 +1082,7 @@ public final class Main {
 
       The run was fired by the deployment's cron schedule.
 
-      - `Type type`
+      - `JsonValue type = "schedule"`
 
       - `LocalDateTime scheduledAt`
 
@@ -1094,7 +1094,7 @@ public final class Main {
 
       The run was started manually by creating a session directly against the deployment.
 
-      - `Type type`
+      - `JsonValue type = "manual"`
 
 ### Beta Managed Agents Environment Archived Run Error
 
@@ -1102,7 +1102,7 @@ public final class Main {
 
   The deployment's environment was archived.
 
-  - `Type type`
+  - `JsonValue type = "environment_archived_error"`
 
   - `String message`
 
@@ -1114,7 +1114,7 @@ public final class Main {
 
   The deployment's environment no longer exists.
 
-  - `Type type`
+  - `JsonValue type = "environment_not_found_error"`
 
   - `String message`
 
@@ -1126,7 +1126,7 @@ public final class Main {
 
   A file resource referenced by the deployment no longer exists.
 
-  - `Type type`
+  - `JsonValue type = "file_not_found_error"`
 
   - `String message`
 
@@ -1138,7 +1138,7 @@ public final class Main {
 
   The run was started manually by creating a session directly against the deployment.
 
-  - `Type type`
+  - `JsonValue type = "manual"`
 
 ### Beta Managed Agents MCP Egress Blocked Run Error
 
@@ -1146,7 +1146,7 @@ public final class Main {
 
   An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-  - `Type type`
+  - `JsonValue type = "mcp_egress_blocked_error"`
 
   - `String message`
 
@@ -1158,7 +1158,7 @@ public final class Main {
 
   A memory store referenced by the deployment is archived.
 
-  - `Type type`
+  - `JsonValue type = "memory_store_archived_error"`
 
   - `String message`
 
@@ -1170,7 +1170,7 @@ public final class Main {
 
   The deployment's organization is disabled.
 
-  - `Type type`
+  - `JsonValue type = "organization_disabled_error"`
 
   - `String message`
 
@@ -1182,7 +1182,7 @@ public final class Main {
 
   The run was fired by the deployment's cron schedule.
 
-  - `Type type`
+  - `JsonValue type = "schedule"`
 
   - `LocalDateTime scheduledAt`
 
@@ -1196,7 +1196,7 @@ public final class Main {
 
   The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-  - `Type type`
+  - `JsonValue type = "self_hosted_resources_unsupported_error"`
 
   - `String message`
 
@@ -1208,7 +1208,7 @@ public final class Main {
 
   The session create request was rejected with a non-retryable validation error.
 
-  - `Type type`
+  - `JsonValue type = "session_creation_rejected_error"`
 
   - `String message`
 
@@ -1220,7 +1220,7 @@ public final class Main {
 
   Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
-  - `Type type`
+  - `JsonValue type = "session_rate_limited_error"`
 
   - `String message`
 
@@ -1232,7 +1232,7 @@ public final class Main {
 
   A referenced resource no longer exists and its kind was not reported.
 
-  - `Type type`
+  - `JsonValue type = "session_resource_not_found_error"`
 
   - `String message`
 
@@ -1244,7 +1244,7 @@ public final class Main {
 
   A skill referenced by the deployment's agent no longer exists.
 
-  - `Type type`
+  - `JsonValue type = "skill_not_found_error"`
 
   - `String message`
 
@@ -1260,7 +1260,7 @@ public final class Main {
 
     The run was fired by the deployment's cron schedule.
 
-    - `Type type`
+    - `JsonValue type = "schedule"`
 
     - `LocalDateTime scheduledAt`
 
@@ -1272,7 +1272,7 @@ public final class Main {
 
     The run was started manually by creating a session directly against the deployment.
 
-    - `Type type`
+    - `JsonValue type = "manual"`
 
 ### Beta Managed Agents Trigger Type
 
@@ -1294,7 +1294,7 @@ public final class Main {
 
   An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
-  - `Type type`
+  - `JsonValue type = "unknown_error"`
 
   - `String message`
 
@@ -1306,7 +1306,7 @@ public final class Main {
 
   A vault referenced by the deployment is archived.
 
-  - `Type type`
+  - `JsonValue type = "vault_archived_error"`
 
   - `String message`
 
@@ -1318,7 +1318,7 @@ public final class Main {
 
   A vault referenced by the deployment no longer exists.
 
-  - `Type type`
+  - `JsonValue type = "vault_not_found_error"`
 
   - `String message`
 
@@ -1330,7 +1330,7 @@ public final class Main {
 
   The deployment's workspace was archived.
 
-  - `Type type`
+  - `JsonValue type = "workspace_archived_error"`
 
   - `String message`
 

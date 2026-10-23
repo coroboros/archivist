@@ -903,7 +903,6 @@ Update Agent
 
 ```bash
 ant beta:agents update \
-  --api-key my-anthropic-api-key \
   --agent-id agent_011CZkYpogX7uDKUyvBTophP
 ```
 

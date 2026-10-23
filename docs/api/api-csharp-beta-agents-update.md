@@ -39,7 +39,7 @@ Update Agent
 
     MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](../managed-agents/managed-agents-mcp-connector.md).
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -245,31 +245,31 @@ Update Agent
 
           Low effort. Favors latency over reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "low"`
 
         - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "medium"`
 
         - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "high"`
 
         - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `required Type Type`
+          - `JsonElement Type = "xhigh"`
 
         - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `required Type Type`
+          - `JsonElement Type = "max"`
 
       - `string? InferenceGeo`
 
@@ -301,7 +301,7 @@ Update Agent
 
       An Anthropic-managed skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "anthropic"`
 
       - `required string SkillID`
 
@@ -319,7 +319,7 @@ Update Agent
 
       A user-created custom skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string SkillID`
 
@@ -347,7 +347,7 @@ Update Agent
 
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_toolset_20260401"`
 
       - `IReadOnlyList<BetaManagedAgentsAgentToolConfigParams> Configs`
 
@@ -375,13 +375,13 @@ Update Agent
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -775,7 +775,7 @@ Update Agent
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `required string McpServerName`
 
@@ -841,7 +841,7 @@ Update Agent
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string Description`
 
@@ -991,7 +991,7 @@ Update Agent
 
   A Managed Agents `agent`.
 
-  - `required Type Type`
+  - `JsonElement Type = "agent"`
 
   - `required string ID`
 
@@ -1031,7 +1031,7 @@ Update Agent
 
   - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -1125,31 +1125,31 @@ Update Agent
 
         Low effort. Favors latency over reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "low"`
 
       - `class BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "medium"`
 
       - `class BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "high"`
 
       - `class BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
-        - `required Type Type`
+        - `JsonElement Type = "xhigh"`
 
       - `class BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
-        - `required Type Type`
+        - `JsonElement Type = "max"`
 
     - `string InferenceGeo`
 
@@ -1171,7 +1171,7 @@ Update Agent
 
       Resolved coordinator topology with a concrete agent roster.
 
-      - `required Type Type`
+      - `JsonElement Type = "coordinator"`
 
       - `required IReadOnlyList<Agent> Agents`
 
@@ -1181,7 +1181,7 @@ Update Agent
 
           A resolved agent reference with a concrete version.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent"`
 
           - `required string ID`
 
@@ -1193,7 +1193,7 @@ Update Agent
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-          - `required Type Type`
+          - `JsonElement Type = "advisor"`
 
           - `required string Model`
 
@@ -1255,7 +1255,7 @@ Update Agent
 
             Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -1287,7 +1287,7 @@ Update Agent
 
             Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -1309,7 +1309,7 @@ Update Agent
 
       A resolved Anthropic-managed skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "anthropic"`
 
       - `required string SkillID`
 
@@ -1319,7 +1319,7 @@ Update Agent
 
       A resolved user-created custom skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string SkillID`
 
@@ -1331,7 +1331,7 @@ Update Agent
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_toolset_20260401"`
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -1353,13 +1353,13 @@ Update Agent
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -1691,7 +1691,7 @@ Update Agent
 
     - `class BetaManagedAgentsMcpToolset`
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -1743,7 +1743,7 @@ Update Agent
 
       A custom tool as returned in API responses.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string Description`
 

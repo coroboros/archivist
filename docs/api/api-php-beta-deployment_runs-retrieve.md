@@ -37,7 +37,7 @@ Get Deployment Run
 
 - `class BetaManagedAgentsDeploymentRun`
 
-  - `Type type`
+  - `"deployment_run" type`
 
   - `string id`
 

@@ -773,18 +773,22 @@ const response = await client.beta.messages.create({
   * [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md)
   * [Amazon Bedrock (Opus 4.6 and earlier)](../build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md)
   * [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md)
-  * [Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)
+  * [Claude Models on Google Cloud (Google managed)](../build-with-claude/build-with-claude-claude-models-on-google-cloud-google-managed.md)
   * [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md)
+
+  See also [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/build-with-claude-claude-models-on-google-cloud-anthropic-managed.md).
 </Note>
 
 The TypeScript SDK supports the following platforms:
 
-* **Agent Platform:** `npm install @anthropic-ai/vertex-sdk`: Provides `AnthropicVertex` client
+* **Claude Models on Google Cloud (Google managed):** `npm install @anthropic-ai/vertex-sdk`: Provides `AnthropicVertex` client
 * **Bedrock:** `npm install @anthropic-ai/bedrock-sdk`: Provides `AnthropicBedrockMantle` client, and `AnthropicBedrock` for the `bedrock-runtime` path
 * **Claude Platform on AWS:** `npm install @anthropic-ai/aws-sdk`: Provides `AnthropicAws` client. Pass `workspaceId` to the constructor or set the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable. Available in beta.
 * **Foundry:** `npm install @anthropic-ai/foundry-sdk`: Provides `AnthropicFoundry` client
 
 Use `AnthropicBedrockMantle` for new projects; `AnthropicBedrock` remains for existing applications using the Bedrock `InvokeModel` API.
+
+The TypeScript SDK also supports Claude Models on Google Cloud (Anthropic managed) through the `AnthropicGoogleCloud` client. This client is in beta. To install it, run `npm install @anthropic-ai/google-cloud-sdk`. Pass `workspaceId` to the constructor or set the `ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID` environment variable. See [Project, location, and workspace resolution](../build-with-claude/build-with-claude-claude-models-on-google-cloud-anthropic-managed.md#project-location-and-workspace-resolution) for how the client resolves the workspace ID.
 
 ## Semantic versioning
 

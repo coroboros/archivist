@@ -87,7 +87,7 @@ You can control which service tiers can be used for a request by setting the `se
   messages:
     - role: user
       content: Hello, Claude!
-  service_tier: auto  # Automatically use Priority Tier when available, fallback to standard
+  service_tier: auto  # Automatically use Priority Tier when available, fall back to standard
   YAML
   ```
 
@@ -98,7 +98,7 @@ You can control which service tiers can be used for a request by setting the `se
       model="claude-opus-4-8",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello, Claude!"}],
-      service_tier="auto",  # Automatically use Priority Tier when available, fallback to standard
+      service_tier="auto",  # Automatically use Priority Tier when available, fall back to standard
   )
   print(message.usage.service_tier)
   ```
@@ -110,7 +110,7 @@ You can control which service tiers can be used for a request by setting the `se
     model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude!" }],
-    service_tier: "auto" // Automatically use Priority Tier when available, fallback to standard
+    service_tier: "auto" // Automatically use Priority Tier when available, fall back to standard
   });
   console.log(message.usage.service_tier);
   ```
@@ -123,7 +123,7 @@ You can control which service tiers can be used for a request by setting the `se
       Model = Model.ClaudeOpus4_8,
       MaxTokens = 1024,
       Messages = [new UserMessageParam { Content = "Hello, Claude!" }],
-      ServiceTier = ServiceTier.Auto, // Automatically use Priority Tier when available, fallback to standard
+      ServiceTier = ServiceTier.Auto, // Automatically use Priority Tier when available, fall back to standard
   });
   Console.WriteLine(message.Usage.ServiceTier);
   ```
@@ -137,7 +137,7 @@ You can control which service tiers can be used for a request by setting the `se
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude!")),
   	},
-  	// Automatically use Priority Tier when available, fallback to standard
+  	// Automatically use Priority Tier when available, fall back to standard
   	ServiceTier: anthropic.MessageNewParamsServiceTierAuto,
   })
   if err != nil {
@@ -153,7 +153,7 @@ You can control which service tiers can be used for a request by setting the `se
       .model(Model.CLAUDE_OPUS_4_8)
       .maxTokens(1024L)
       .addUserMessage("Hello, Claude!")
-      // Automatically use Priority Tier when available, fallback to standard
+      // Automatically use Priority Tier when available, fall back to standard
       .serviceTier(MessageCreateParams.ServiceTier.AUTO)
       .build();
 
@@ -165,10 +165,10 @@ You can control which service tiers can be used for a request by setting the `se
   $client = new Client();
 
   $message = $client->messages->create(
-      model: 'claude-opus-4-8',
+      model: Model::CLAUDE_OPUS_4_8,
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello, Claude!']],
-      serviceTier: 'auto', // Automatically use Priority Tier when available, fallback to standard
+      serviceTier: 'auto', // Automatically use Priority Tier when available, fall back to standard
   );
   echo $message->usage->serviceTier;
   ```
@@ -180,7 +180,7 @@ You can control which service tiers can be used for a request by setting the `se
     model: Anthropic::Model::CLAUDE_OPUS_4_8,
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude!" }],
-    service_tier: :auto # Automatically use Priority Tier when available, fallback to standard
+    service_tier: :auto # Automatically use Priority Tier when available, fall back to standard
   )
   puts(message.usage.service_tier)
   ```

@@ -97,7 +97,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
           },
       }
 
-      # First request - Claude responds with thinking and tool request
+      # First request: Claude responds with thinking and tool request
       response = client.messages.create(
           model="claude-opus-5-5",
           max_tokens=16000,
@@ -123,7 +123,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
         }
       };
 
-      // First request - Claude responds with thinking and tool request
+      // First request: Claude responds with thinking and tool request
       const response = await client.messages.create({
         model: "claude-opus-5-5",
         max_tokens: 16000,
@@ -248,7 +248,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
           messages: [
               ['role' => 'user', 'content' => "What's the weather in Paris?"]
           ],
-          model: 'claude-opus-5-5',
+          model: Model::CLAUDE_OPUS_5_5,
           thinking: ['type' => 'adaptive'],
           tools: [$weatherTool],
       );
@@ -354,7 +354,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
       # Pretend this is what the weather API returns
       weather_data = {"temperature": 88}
 
-      # Second request - Include the assistant turn and the tool result
+      # Second request: include the assistant turn and the tool result
       continuation = client.messages.create(
           model="claude-opus-5-5",
           max_tokens=16000,
@@ -413,7 +413,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
       const weatherData = { temperature: 88 };
 
       if (toolUseBlock) {
-        // Second request - Include the assistant turn and the tool result
+        // Second request: include the assistant turn and the tool result
         const continuation = await client.messages.create({
           model: "claude-opus-5-5",
           max_tokens: 16000,
@@ -494,14 +494,17 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
               new UserMessageParam { Content = "What's the weather in Paris?" },
               // response.Content includes the thinking blocks; passing them back is required
               new AssistantMessageParam { Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList() },
-              new UserMessageParam { Content = new List<ContentBlockParam>
+              new UserMessageParam
               {
-                  new ContentBlockParam(new ToolResultBlockParam()
+                  Content = new List<ContentBlockParam>
                   {
-                      ToolUseID = toolUseBlock?.ID ?? "",
-                      Content = $"Current temperature: {weatherData.temperature}°F"
-                  })
-              }}
+                      new ContentBlockParam(new ToolResultBlockParam()
+                      {
+                          ToolUseID = toolUseBlock?.ID ?? "",
+                          Content = $"Current temperature: {weatherData.temperature}°F"
+                      })
+                  }
+              }
           ]
       };
 

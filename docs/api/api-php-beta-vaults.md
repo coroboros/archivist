@@ -43,7 +43,7 @@ Create a Vault
 
 - `class BetaManagedAgentsVault`
 
-  - `Type type`
+  - `"vault" type`
 
   - `string id`
 
@@ -143,7 +143,7 @@ List Vaults
 
 - `class BetaManagedAgentsVault`
 
-  - `Type type`
+  - `"vault" type`
 
   - `string id`
 
@@ -241,7 +241,7 @@ Retrieve a Vault
 
 - `class BetaManagedAgentsVault`
 
-  - `Type type`
+  - `"vault" type`
 
   - `string id`
 
@@ -340,7 +340,7 @@ Update a Vault
 
 - `class BetaManagedAgentsVault`
 
-  - `Type type`
+  - `"vault" type`
 
   - `string id`
 
@@ -433,7 +433,7 @@ Delete a Vault
 
 - `class BetaManagedAgentsDeletedVault`
 
-  - `Type type`
+  - `"vault_deleted" type`
 
   - `string id`
 
@@ -497,7 +497,7 @@ Archive a Vault
 
 - `class BetaManagedAgentsVault`
 
-  - `Type type`
+  - `"vault" type`
 
   - `string id`
 
@@ -566,7 +566,7 @@ var_dump($betaManagedAgentsVault);
 
 - `class BetaManagedAgentsDeletedVault`
 
-  - `Type type`
+  - `"vault_deleted" type`
 
   - `string id`
 
@@ -576,7 +576,7 @@ var_dump($betaManagedAgentsVault);
 
 - `class BetaManagedAgentsVault`
 
-  - `Type type`
+  - `"vault" type`
 
   - `string id`
 
@@ -644,7 +644,7 @@ Create a Credential
 
 - `class ManagedAgentsCredential`
 
-  - `Type type`
+  - `"vault_credential" type`
 
   - `string id`
 
@@ -767,7 +767,7 @@ List Credentials
 
 - `class ManagedAgentsCredential`
 
-  - `Type type`
+  - `"vault_credential" type`
 
   - `string id`
 
@@ -883,7 +883,7 @@ Retrieve a Credential
 
 - `class ManagedAgentsCredential`
 
-  - `Type type`
+  - `"vault_credential" type`
 
   - `string id`
 
@@ -1004,7 +1004,7 @@ Update a Credential
 
 - `class ManagedAgentsCredential`
 
-  - `Type type`
+  - `"vault_credential" type`
 
   - `string id`
 
@@ -1127,7 +1127,7 @@ Delete a Credential
 
 - `class ManagedAgentsDeletedCredential`
 
-  - `Type type`
+  - `"vault_credential_deleted" type`
 
   - `string id`
 
@@ -1200,7 +1200,7 @@ Archive a Credential
 
 - `class ManagedAgentsCredential`
 
-  - `Type type`
+  - `"vault_credential" type`
 
   - `string id`
 
@@ -1309,7 +1309,7 @@ Validate an MCP OAuth Credential
 
 - `class ManagedAgentsCredentialValidation`
 
-  - `Type type`
+  - `"vault_credential_validation" type`
 
   - `string credentialID`
 

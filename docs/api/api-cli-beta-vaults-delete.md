@@ -49,7 +49,6 @@ Delete a Vault
 
 ```bash
 ant beta:vaults delete \
-  --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv
 ```
 

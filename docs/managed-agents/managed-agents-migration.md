@@ -355,9 +355,7 @@ If you built an agent by calling `client.messages.create()` (csharp: `client.Mes
   			ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
   		},
   		Tools: []anthropic.BetaAgentNewParamsToolUnion{{
-  			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-  				Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
-  			},
+  			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
   		}},
   	})
   	if err != nil {
@@ -367,7 +365,6 @@ If you built an agent by calling `client.messages.create()` (csharp: `client.Mes
   	session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
   		Agent: anthropic.BetaSessionNewParamsAgentUnion{
   			OfBetaManagedAgentsAgents: &anthropic.BetaManagedAgentsAgentParams{
-  				Type:    anthropic.BetaManagedAgentsAgentParamsTypeAgent,
   				ID:      agent.ID,
   				Version: anthropic.Int(agent.Version),
   			},
@@ -384,10 +381,8 @@ If you built an agent by calling `client.messages.create()` (csharp: `client.Mes
   	_, err = client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   		Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
   			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-  				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
   				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
   					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-  						Type: anthropic.BetaManagedAgentsTextBlockTypeText,
   						Text: task,
   					},
   				}},
@@ -859,7 +854,6 @@ If you built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-s
   	System: anthropic.String("You are a concise weather assistant."),
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
   		OfCustom: &anthropic.BetaManagedAgentsCustomToolParams{
-  			Type:        anthropic.BetaManagedAgentsCustomToolParamsTypeCustom,
   			Name:        "get_weather",
   			Description: "Get the current weather for a city.",
   			InputSchema: anthropic.BetaManagedAgentsCustomToolInputSchemaParam{
@@ -893,7 +887,6 @@ If you built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-s
   session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
   	Agent: anthropic.BetaSessionNewParamsAgentUnion{
   		OfBetaManagedAgentsAgents: &anthropic.BetaManagedAgentsAgentParams{
-  			Type:    anthropic.BetaManagedAgentsAgentParamsTypeAgent,
   			ID:      agent.ID,
   			Version: anthropic.Int(agent.Version),
   		},
@@ -914,10 +907,8 @@ If you built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-s
   _, err = client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
   		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-  			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
   			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
   				OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-  					Type: anthropic.BetaManagedAgentsTextBlockTypeText,
   					Text: "What's the weather in Tokyo?",
   				},
   			}},
@@ -944,11 +935,9 @@ If you built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-s
   		if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   			Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
   				OfUserCustomToolResult: &anthropic.BetaManagedAgentsUserCustomToolResultEventParams{
-  					Type:            anthropic.BetaManagedAgentsUserCustomToolResultEventParamsTypeUserCustomToolResult,
   					CustomToolUseID: toolUse.ID,
   					Content: []anthropic.BetaManagedAgentsUserCustomToolResultEventParamsContentUnion{{
   						OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-  							Type: anthropic.BetaManagedAgentsTextBlockTypeText,
   							Text: result,
   						},
   					}},

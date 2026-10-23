@@ -155,7 +155,7 @@ Update a Vault
 
   A vault that stores credentials for use by agents during sessions.
 
-  - `required Type Type`
+  - `JsonElement Type = "vault"`
 
   - `required string ID`
 

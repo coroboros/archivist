@@ -157,7 +157,6 @@ List Memories
 
 ```bash
 ant beta:memory-stores:memories list \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 

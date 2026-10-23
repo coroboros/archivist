@@ -57,7 +57,7 @@ Create a Memory
 
 - `class ManagedAgentsMemory`
 
-  - `Type type`
+  - `"memory" type`
 
   - `string id`
 
@@ -205,7 +205,7 @@ List Memories
 
   - `class ManagedAgentsMemory`
 
-    - `Type type`
+    - `"memory" type`
 
     - `string id`
 
@@ -255,7 +255,7 @@ List Memories
 
   - `class ManagedAgentsMemoryPrefix`
 
-    - `Type type`
+    - `"memory_prefix" type`
 
     - `string path`
 
@@ -348,7 +348,7 @@ Retrieve a Memory
 
 - `class ManagedAgentsMemory`
 
-  - `Type type`
+  - `"memory" type`
 
   - `string id`
 
@@ -491,7 +491,7 @@ Update a Memory
 
 - `class ManagedAgentsMemory`
 
-  - `Type type`
+  - `"memory" type`
 
   - `string id`
 
@@ -623,7 +623,7 @@ Delete a Memory
 
 - `class ManagedAgentsDeletedMemory`
 
-  - `Type type`
+  - `"memory_deleted" type`
 
   - `string id`
 
@@ -667,7 +667,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 - `class ManagedAgentsConflictError`
 
-  - `Type type`
+  - `"conflict_error" type`
 
   - `?string message`
 
@@ -675,7 +675,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 - `class ManagedAgentsContentSha256Precondition`
 
-  - `Type type`
+  - `"content_sha256" type`
 
   - `?string contentSha256`
 
@@ -685,7 +685,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 - `class ManagedAgentsDeletedMemory`
 
-  - `Type type`
+  - `"memory_deleted" type`
 
   - `string id`
 
@@ -751,7 +751,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
   - `class ManagedAgentsMemoryPreconditionFailedError`
 
-    - `Type type`
+    - `"memory_precondition_failed_error" type`
 
     - `?string message`
 
@@ -759,7 +759,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
   - `class ManagedAgentsMemoryPathConflictError`
 
-    - `Type type`
+    - `"memory_path_conflict_error" type`
 
     - `?string conflictingMemoryID`
 
@@ -777,7 +777,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
   - `class ManagedAgentsConflictError`
 
-    - `Type type`
+    - `"conflict_error" type`
 
     - `?string message`
 
@@ -785,7 +785,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 - `class ManagedAgentsMemory`
 
-  - `Type type`
+  - `"memory" type`
 
   - `string id`
 
@@ -839,7 +839,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
   - `class ManagedAgentsMemory`
 
-    - `Type type`
+    - `"memory" type`
 
     - `string id`
 
@@ -889,7 +889,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
   - `class ManagedAgentsMemoryPrefix`
 
-    - `Type type`
+    - `"memory_prefix" type`
 
     - `string path`
 
@@ -899,7 +899,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 - `class ManagedAgentsMemoryPathConflictError`
 
-  - `Type type`
+  - `"memory_path_conflict_error" type`
 
   - `?string conflictingMemoryID`
 
@@ -919,7 +919,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 - `class ManagedAgentsMemoryPreconditionFailedError`
 
-  - `Type type`
+  - `"memory_precondition_failed_error" type`
 
   - `?string message`
 
@@ -929,7 +929,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 - `class ManagedAgentsMemoryPrefix`
 
-  - `Type type`
+  - `"memory_prefix" type`
 
   - `string path`
 
@@ -951,7 +951,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 - `class ManagedAgentsPrecondition`
 
-  - `Type type`
+  - `"content_sha256" type`
 
   - `?string contentSha256`
 

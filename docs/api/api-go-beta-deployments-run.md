@@ -145,7 +145,7 @@ Run Deployment Now
 
   A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
 
-  - `Type BetaManagedAgentsDeploymentRunType`
+  - `Type DeploymentRun`
 
   - `ID string`
 
@@ -155,7 +155,7 @@ Run Deployment Now
 
     Snapshot of the agent at fire time. Always fully resolved — deployments pin agent + version.
 
-    - `Type BetaManagedAgentsAgentReferenceType`
+    - `Type Agent`
 
     - `ID string`
 
@@ -181,7 +181,7 @@ Run Deployment Now
 
       The deployment's environment was archived.
 
-      - `Type BetaManagedAgentsEnvironmentArchivedRunErrorType`
+      - `Type EnvironmentArchivedError`
 
       - `Message string`
 
@@ -191,7 +191,7 @@ Run Deployment Now
 
       The deployment's agent was archived.
 
-      - `Type BetaManagedAgentsAgentArchivedRunErrorType`
+      - `Type AgentArchivedError`
 
       - `Message string`
 
@@ -201,7 +201,7 @@ Run Deployment Now
 
       The deployment's environment no longer exists.
 
-      - `Type BetaManagedAgentsEnvironmentNotFoundRunErrorType`
+      - `Type EnvironmentNotFoundError`
 
       - `Message string`
 
@@ -211,7 +211,7 @@ Run Deployment Now
 
       A vault referenced by the deployment no longer exists.
 
-      - `Type BetaManagedAgentsVaultNotFoundRunErrorType`
+      - `Type VaultNotFoundError`
 
       - `Message string`
 
@@ -221,7 +221,7 @@ Run Deployment Now
 
       A vault referenced by the deployment is archived.
 
-      - `Type BetaManagedAgentsVaultArchivedRunErrorType`
+      - `Type VaultArchivedError`
 
       - `Message string`
 
@@ -231,7 +231,7 @@ Run Deployment Now
 
       A file resource referenced by the deployment no longer exists.
 
-      - `Type BetaManagedAgentsFileNotFoundRunErrorType`
+      - `Type FileNotFoundError`
 
       - `Message string`
 
@@ -241,7 +241,7 @@ Run Deployment Now
 
       A memory store referenced by the deployment is archived.
 
-      - `Type BetaManagedAgentsMemoryStoreArchivedRunErrorType`
+      - `Type MemoryStoreArchivedError`
 
       - `Message string`
 
@@ -251,7 +251,7 @@ Run Deployment Now
 
       A skill referenced by the deployment's agent no longer exists.
 
-      - `Type BetaManagedAgentsSkillNotFoundRunErrorType`
+      - `Type SkillNotFoundError`
 
       - `Message string`
 
@@ -261,7 +261,7 @@ Run Deployment Now
 
       A referenced resource no longer exists and its kind was not reported.
 
-      - `Type BetaManagedAgentsSessionResourceNotFoundRunErrorType`
+      - `Type SessionResourceNotFoundError`
 
       - `Message string`
 
@@ -271,7 +271,7 @@ Run Deployment Now
 
       The deployment's workspace was archived.
 
-      - `Type BetaManagedAgentsWorkspaceArchivedRunErrorType`
+      - `Type WorkspaceArchivedError`
 
       - `Message string`
 
@@ -281,7 +281,7 @@ Run Deployment Now
 
       The deployment's organization is disabled.
 
-      - `Type BetaManagedAgentsOrganizationDisabledRunErrorType`
+      - `Type OrganizationDisabledError`
 
       - `Message string`
 
@@ -291,7 +291,7 @@ Run Deployment Now
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
-      - `Type BetaManagedAgentsSessionRateLimitedRunErrorType`
+      - `Type SessionRateLimitedError`
 
       - `Message string`
 
@@ -301,7 +301,7 @@ Run Deployment Now
 
       The session create request was rejected with a non-retryable validation error.
 
-      - `Type BetaManagedAgentsSessionCreationRejectedRunErrorType`
+      - `Type SessionCreationRejectedError`
 
       - `Message string`
 
@@ -311,7 +311,7 @@ Run Deployment Now
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
-      - `Type BetaManagedAgentsUnknownRunErrorType`
+      - `Type UnknownError`
 
       - `Message string`
 
@@ -321,7 +321,7 @@ Run Deployment Now
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
-      - `Type BetaManagedAgentsSelfHostedResourcesUnsupportedRunErrorType`
+      - `Type SelfHostedResourcesUnsupportedError`
 
       - `Message string`
 
@@ -331,7 +331,7 @@ Run Deployment Now
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
-      - `Type BetaManagedAgentsMCPEgressBlockedRunErrorType`
+      - `Type MCPEgressBlockedError`
 
       - `Message string`
 
@@ -349,7 +349,7 @@ Run Deployment Now
 
       The run was fired by the deployment's cron schedule.
 
-      - `Type BetaManagedAgentsScheduleTriggerContextType`
+      - `Type Schedule`
 
       - `ScheduledAt Time`
 
@@ -361,7 +361,7 @@ Run Deployment Now
 
       The run was started manually by creating a session directly against the deployment.
 
-      - `Type BetaManagedAgentsManualTriggerContextType`
+      - `Type Manual`
 
 ## Example
 
@@ -372,8 +372,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {

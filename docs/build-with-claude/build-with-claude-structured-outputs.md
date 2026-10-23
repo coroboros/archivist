@@ -35,7 +35,7 @@ featureMetadata:
     Claude API: ga
     Claude Platform on AWS: ga
     Amazon Bedrock: ga
-    Google Cloud: ga
+    Claude Models on Google Cloud (Google managed): ga
     Microsoft Foundry: ga
 ---
 
@@ -266,11 +266,14 @@ Structured outputs guarantee schema-compliant responses through constrained deco
     {
         Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
-        Messages = [new UserMessageParam {
-            Content = "Extract the key information from this email: "
-                + "John Smith (john@example.com) is interested in our Enterprise plan "
-                + "and wants to schedule a demo for next Tuesday at 2pm."
-        }],
+        Messages = [
+            new UserMessageParam
+            {
+                Content = "Extract the key information from this email: "
+                    + "John Smith (john@example.com) is interested in our Enterprise plan "
+                    + "and wants to schedule a demo for next Tuesday at 2pm."
+            }
+        ],
     });
 
     if (response.Content.Select(block => block.Parsed()).OfType<ContactInfo>().FirstOrDefault() is { } contact)
@@ -398,7 +401,7 @@ Structured outputs guarantee schema-compliant responses through constrained deco
 
       * **Local validation** occurs without sending requests to the remote AI model.
       * **Remote validation** is also performed by the AI model upon receiving the JSON schema.
-      * **Version compatibility:** Local validation might fail while remote validation succeeds if the SDK version is outdated.
+      * **Version compatibility:** If the SDK version is outdated, local validation might reject a schema that remote validation accepts.
       * **Disabling local validation:** Pass `JsonSchemaLocalValidation.NO` if you encounter compatibility issues:
 
       ```java
@@ -466,7 +469,7 @@ Structured outputs guarantee schema-compliant responses through constrained deco
 
       The JSON output has this nested structure:
 
-      ```json
+      ```text Output wrap
       {
         "composedA": { "a": "hello" },
         "composedB": { "b": "world" }
@@ -487,7 +490,7 @@ Structured outputs guarantee schema-compliant responses through constrained deco
 
       The JSON output has this flat structure:
 
-      ```json
+      ```text Output wrap
       {
         "a": "hello",
         "b": "world"
@@ -505,30 +508,30 @@ Structured outputs guarantee schema-compliant responses through constrained deco
 
       static class Person {
 
-        @JsonPropertyDescription("The first name and surname of the person")
-        public String name;
+          @JsonPropertyDescription("The first name and surname of the person")
+          public String name;
 
-        public int birthYear;
+          public int birthYear;
 
-        @JsonPropertyDescription("The year the person died, or 'present' if the person is living.")
-        public String deathYear;
+          @JsonPropertyDescription("The year the person died, or 'present' if the person is living.")
+          public String deathYear;
       }
 
       @JsonClassDescription("The details of one published book")
       static class Book {
 
-        public String title;
-        public Person author;
+          public String title;
+          public Person author;
 
-        @JsonPropertyDescription("The year in which the book was first published.")
-        public int publicationYear;
+          @JsonPropertyDescription("The year in which the book was first published.")
+          public int publicationYear;
 
-        @JsonIgnore
-        public String genre;
+          @JsonIgnore
+          public String genre;
       }
 
       static class BookList {
-        public List<Book> books;
+          public List<Book> books;
       }
       ```
 
@@ -549,15 +552,15 @@ Structured outputs guarantee schema-compliant responses through constrained deco
 
       static class Article {
 
-        @ArraySchema(minItems = 1)
-        public List<String> authors;
+          @ArraySchema(minItems = 1)
+          public List<String> authors;
 
-        public String title;
+          public String title;
 
-        @Schema(format = "date")
-        public String publicationDate;
+          @Schema(format = "date")
+          public String publicationDate;
 
-        public int pageCount;
+          public int pageCount;
       }
       ```
 
@@ -946,11 +949,14 @@ To use a JSON schema from a file, an OpenAPI spec, or code that builds it at run
     {
         Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
-        Messages = [new UserMessageParam {
-            Content = "Extract the key information from this email: "
-                + "John Smith (john@example.com) is interested in our Enterprise plan "
-                + "and wants to schedule a demo for next Tuesday at 2pm."
-        }],
+        Messages = [
+            new UserMessageParam
+            {
+                Content = "Extract the key information from this email: "
+                    + "John Smith (john@example.com) is interested in our Enterprise plan "
+                    + "and wants to schedule a demo for next Tuesday at 2pm."
+            }
+        ],
         OutputConfig = new OutputConfig
         {
             Format = new JsonOutputFormat
@@ -973,7 +979,7 @@ To use a JSON schema from a file, an OpenAPI spec, or code that builds it at run
         },
     });
 
-    if (response.Content.Select(b => b.Value).OfType<TextBlock>().FirstOrDefault() is { } textBlock)
+    if (response.Content.Select(block => block.Value).OfType<TextBlock>().FirstOrDefault() is { } textBlock)
     {
         // JSON is guaranteed to match the schema
         var contact = JsonSerializer.Deserialize<JsonElement>(textBlock.Text);
@@ -981,7 +987,7 @@ To use a JSON schema from a file, an OpenAPI spec, or code that builds it at run
     }
     ```
 
-    The example above outputs:
+    The previous example outputs:
 
     ```text Output wrap
     {"name":"John Smith","email":"john@example.com","plan_interest":"Enterprise","demo_requested":true}
@@ -1071,7 +1077,9 @@ To use a JSON schema from a file, an OpenAPI spec, or code that builds it at run
             .build();
 
         OutputConfig outputConfig = OutputConfig.builder()
-            .format(JsonOutputFormat.builder().schema(schema).build())
+            .format(JsonOutputFormat.builder()
+                .schema(schema)
+                .build())
             .build();
 
         MessageCreateParams createParams = MessageCreateParams.builder()
@@ -1776,7 +1784,7 @@ To use a JSON schema from a file, an OpenAPI spec, or code that builds it at run
           public string $sentiment;
       }
 
-      $feedbackText = "Great product, fast shipping!";
+      $feedbackText = 'Great product, fast shipping!';
 
       $message = $client->messages->create(
           maxTokens: 1024,
@@ -2346,7 +2354,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
     ]
   });
 
-  // Claude may call the tool first (tool_use) or respond with JSON (text)
+  // Claude might call the tool first (tool_use) or respond with JSON (text)
   console.log("Stop reason:", response.stop_reason);
   for (const block of response.content) {
     switch (block.type) {
@@ -2484,7 +2492,9 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
       .maxTokens(1024L)
       .addUserMessage("Help me plan a trip to Paris departing May 15, 2026")
       .outputConfig(OutputConfig.builder()
-          .format(JsonOutputFormat.builder().schema(outputSchema).build())
+          .format(JsonOutputFormat.builder()
+              .schema(outputSchema)
+              .build())
           .build())
       .addTool(Tool.builder()
           .name("search_flights")
@@ -2539,7 +2549,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
       ],
   );
 
-  // Claude may call the tool first (tool_use) or respond with JSON (text)
+  // Claude might call the tool first (tool_use) or respond with JSON (text)
   $plan = $message->parsedOutput();
   if ($plan instanceof TripPlan) {
       echo $plan->summary, "\n";

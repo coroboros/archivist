@@ -143,7 +143,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ```bash
 ant messages:batches create \
-  --api-key my-anthropic-api-key \
   --request '{custom_id: my-custom-id-1, params: {max_tokens: 1024, messages: [{content: [{text: x, type: text}], role: user}], model: claude-opus-5-5}}'
 ```
 
@@ -294,7 +293,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ```bash
 ant messages:batches retrieve \
-  --api-key my-anthropic-api-key \
   --message-batch-id message_batch_id
 ```
 
@@ -470,8 +468,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 ### Example
 
 ```bash
-ant messages:batches list \
-  --api-key my-anthropic-api-key
+ant messages:batches list
 ```
 
 #### Response (200)
@@ -630,7 +627,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ```bash
 ant messages:batches cancel \
-  --api-key my-anthropic-api-key \
   --message-batch-id message_batch_id
 ```
 
@@ -699,7 +695,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ```bash
 ant messages:batches delete \
-  --api-key my-anthropic-api-key \
   --message-batch-id message_batch_id
 ```
 
@@ -1879,7 +1874,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
 ```bash
 ant messages:batches results \
-  --api-key my-anthropic-api-key \
   --message-batch-id message_batch_id
 ```
 

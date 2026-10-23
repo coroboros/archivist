@@ -104,8 +104,8 @@ The [Python SDK](https://github.com/anthropics/anthropic-sdk-python) and [TypeSc
   try (var streamResponse = client.messages().createStreaming(params)) {
       streamResponse.stream().forEach(event -> {
           event.contentBlockDelta().ifPresent(deltaEvent ->
-              deltaEvent.delta().text().ifPresent(td ->
-                  System.out.print(td.text())
+              deltaEvent.delta().text().ifPresent(textDelta ->
+                  System.out.print(textDelta.text())
               )
           );
       });
@@ -120,7 +120,7 @@ The [Python SDK](https://github.com/anthropics/anthropic-sdk-python) and [TypeSc
       messages: [
           ['role' => 'user', 'content' => 'Hello']
       ],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
   );
 
   foreach ($stream as $message) {
@@ -499,8 +499,8 @@ There might be `ping` events dispersed throughout the response as well. See [Eve
   try (var streamResponse = client.messages().createStreaming(params)) {
       streamResponse.stream().forEach(event -> {
           event.contentBlockDelta().ifPresent(deltaEvent ->
-              deltaEvent.delta().text().ifPresent(td ->
-                  System.out.print(td.text())
+              deltaEvent.delta().text().ifPresent(textDelta ->
+                  System.out.print(textDelta.text())
               )
           );
       });
@@ -515,7 +515,7 @@ There might be `ping` events dispersed throughout the response as well. See [Eve
       messages: [
           ['role' => 'user', 'content' => 'Hello']
       ],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
   );
 
   foreach ($stream as $message) {
@@ -803,8 +803,8 @@ This request asks Claude to use a tool to report the weather.
   try (var streamResponse = client.messages().createStreaming(params)) {
       streamResponse.stream().forEach(event -> {
           event.contentBlockDelta().ifPresent(deltaEvent ->
-              deltaEvent.delta().text().ifPresent(td ->
-                  System.out.print(td.text())
+              deltaEvent.delta().text().ifPresent(textDelta ->
+                  System.out.print(textDelta.text())
               )
           );
       });
@@ -819,7 +819,7 @@ This request asks Claude to use a tool to report the weather.
       messages: [
           ['role' => 'user', 'content' => 'What is the weather like in San Francisco?']
       ],
-      model: 'claude-opus-5',
+      model: Model::CLAUDE_OPUS_5,
       toolChoice: ['type' => 'any'],
       tools: [
           [
@@ -1117,11 +1117,11 @@ This request enables thinking with streaming. The `display: "summarized"` settin
   try (var streamResponse = client.messages().createStreaming(params)) {
       streamResponse.stream().forEach(event -> {
           event.contentBlockDelta().ifPresent(deltaEvent -> {
-              deltaEvent.delta().thinking().ifPresent(td ->
-                  IO.print(td.thinking())
+              deltaEvent.delta().thinking().ifPresent(thinkingDelta ->
+                  IO.print(thinkingDelta.thinking())
               );
-              deltaEvent.delta().text().ifPresent(td ->
-                  IO.print(td.text())
+              deltaEvent.delta().text().ifPresent(textDelta ->
+                  IO.print(textDelta.text())
               );
           });
       });
@@ -1136,7 +1136,7 @@ This request enables thinking with streaming. The `display: "summarized"` settin
       messages: [
           ['role' => 'user', 'content' => 'What is the greatest common divisor of 1071 and 462?']
       ],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
       thinking: ['type' => 'adaptive', 'display' => 'summarized'],
   );
 
@@ -1350,8 +1350,8 @@ This request asks Claude to search the web for current weather information.
   try (var streamResponse = client.messages().createStreaming(params)) {
       streamResponse.stream().forEach(event -> {
           event.contentBlockDelta().ifPresent(deltaEvent ->
-              deltaEvent.delta().text().ifPresent(td ->
-                  System.out.print(td.text())
+              deltaEvent.delta().text().ifPresent(textDelta ->
+                  System.out.print(textDelta.text())
               )
           );
       });

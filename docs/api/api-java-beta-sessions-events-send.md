@@ -145,7 +145,7 @@ Send Events
 
       Parameters for sending a user message to the session.
 
-      - `Type type`
+      - `JsonValue type = "user.message"`
 
       - `List<Content> content`
 
@@ -155,7 +155,7 @@ Send Events
 
           Regular text content.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String text`
 
@@ -167,7 +167,7 @@ Send Events
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "image"`
 
           - `Source source`
 
@@ -177,7 +177,7 @@ Send Events
 
               Base64-encoded image data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -195,7 +195,7 @@ Send Events
 
               Image referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -207,7 +207,7 @@ Send Events
 
               Image referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -219,7 +219,7 @@ Send Events
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "document"`
 
           - `Source source`
 
@@ -229,7 +229,7 @@ Send Events
 
               Base64-encoded document data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -247,7 +247,7 @@ Send Events
 
               Plain text document content.
 
-              - `Type type`
+              - `JsonValue type = "text"`
 
               - `String data`
 
@@ -255,7 +255,7 @@ Send Events
 
                 minLength: 1
 
-              - `MediaType mediaType`
+              - `JsonValue mediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -263,7 +263,7 @@ Send Events
 
               Document referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -275,7 +275,7 @@ Send Events
 
               Document referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -295,13 +295,13 @@ Send Events
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type type`
+          - `JsonValue type = "redacted"`
 
     - `class BetaManagedAgentsUserInterruptEventParams`
 
       Parameters for sending an interrupt to pause the agent.
 
-      - `Type type`
+      - `JsonValue type = "user.interrupt"`
 
       - `Optional<String> sessionThreadId`
 
@@ -311,7 +311,7 @@ Send Events
 
       Parameters for confirming or denying a tool execution request.
 
-      - `Type type`
+      - `JsonValue type = "user.tool_confirmation"`
 
       - `Result result`
 
@@ -337,7 +337,7 @@ Send Events
 
       Parameters for providing the result of a custom tool execution.
 
-      - `Type type`
+      - `JsonValue type = "user.custom_tool_result"`
 
       - `String customToolUseId`
 
@@ -365,7 +365,7 @@ Send Events
 
           A block containing a web search result.
 
-          - `Type type`
+          - `JsonValue type = "search_result"`
 
           - `BetaManagedAgentsSearchResultCitations citations`
 
@@ -379,7 +379,7 @@ Send Events
 
             Array of text content blocks from the search result.
 
-            - `Type type`
+            - `JsonValue type = "text"`
 
             - `String text`
 
@@ -407,7 +407,7 @@ Send Events
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
-      - `Type type`
+      - `JsonValue type = "user.define_outcome"`
 
       - `String description`
 
@@ -421,7 +421,7 @@ Send Events
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type type`
+          - `JsonValue type = "file"`
 
           - `String fileId`
 
@@ -431,7 +431,7 @@ Send Events
 
           Rubric content provided inline as text.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String content`
 
@@ -449,7 +449,7 @@ Send Events
 
       Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-      - `Type type`
+      - `JsonValue type = "user.tool_result"`
 
       - `String toolUseId`
 
@@ -485,13 +485,13 @@ Send Events
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
-      - `Type type`
+      - `JsonValue type = "system.message"`
 
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String text`
 
@@ -513,7 +513,7 @@ Send Events
 
       A user message event in the session conversation.
 
-      - `Type type`
+      - `JsonValue type = "user.message"`
 
       - `String id`
 
@@ -527,7 +527,7 @@ Send Events
 
           Regular text content.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String text`
 
@@ -539,7 +539,7 @@ Send Events
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "image"`
 
           - `Source source`
 
@@ -549,7 +549,7 @@ Send Events
 
               Base64-encoded image data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -567,7 +567,7 @@ Send Events
 
               Image referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -579,7 +579,7 @@ Send Events
 
               Image referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -591,7 +591,7 @@ Send Events
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type type`
+          - `JsonValue type = "document"`
 
           - `Source source`
 
@@ -601,7 +601,7 @@ Send Events
 
               Base64-encoded document data.
 
-              - `Type type`
+              - `JsonValue type = "base64"`
 
               - `String data`
 
@@ -619,7 +619,7 @@ Send Events
 
               Plain text document content.
 
-              - `Type type`
+              - `JsonValue type = "text"`
 
               - `String data`
 
@@ -627,7 +627,7 @@ Send Events
 
                 minLength: 1
 
-              - `MediaType mediaType`
+              - `JsonValue mediaType = "text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -635,7 +635,7 @@ Send Events
 
               Document referenced by URL.
 
-              - `Type type`
+              - `JsonValue type = "url"`
 
               - `String url`
 
@@ -647,7 +647,7 @@ Send Events
 
               Document referenced by file ID.
 
-              - `Type type`
+              - `JsonValue type = "file"`
 
               - `String fileId`
 
@@ -667,7 +667,7 @@ Send Events
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type type`
+          - `JsonValue type = "redacted"`
 
       - `Optional<LocalDateTime> processedAt`
 
@@ -679,7 +679,7 @@ Send Events
 
       An interrupt event that pauses agent execution and returns control to the user.
 
-      - `Type type`
+      - `JsonValue type = "user.interrupt"`
 
       - `String id`
 
@@ -699,7 +699,7 @@ Send Events
 
       A tool confirmation event that approves or denies a pending tool execution.
 
-      - `Type type`
+      - `JsonValue type = "user.tool_confirmation"`
 
       - `String id`
 
@@ -737,7 +737,7 @@ Send Events
 
       Event sent by the client providing the result of a custom tool execution.
 
-      - `Type type`
+      - `JsonValue type = "user.custom_tool_result"`
 
       - `String id`
 
@@ -767,7 +767,7 @@ Send Events
 
           A block containing a web search result.
 
-          - `Type type`
+          - `JsonValue type = "search_result"`
 
           - `BetaManagedAgentsSearchResultCitations citations`
 
@@ -781,7 +781,7 @@ Send Events
 
             Array of text content blocks from the search result.
 
-            - `Type type`
+            - `JsonValue type = "text"`
 
             - `String text`
 
@@ -819,7 +819,7 @@ Send Events
 
       Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
-      - `Type type`
+      - `JsonValue type = "user.define_outcome"`
 
       - `String id`
 
@@ -853,7 +853,7 @@ Send Events
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type type`
+          - `JsonValue type = "file"`
 
           - `String fileId`
 
@@ -863,7 +863,7 @@ Send Events
 
           Rubric content provided inline as text.
 
-          - `Type type`
+          - `JsonValue type = "text"`
 
           - `String content`
 
@@ -873,7 +873,7 @@ Send Events
 
       Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-      - `Type type`
+      - `JsonValue type = "user.tool_result"`
 
       - `String id`
 
@@ -921,7 +921,7 @@ Send Events
 
       A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
-      - `Type type`
+      - `JsonValue type = "system.message"`
 
       - `String id`
 
@@ -931,7 +931,7 @@ Send Events
 
         System content blocks. Text-only.
 
-        - `Type type`
+        - `JsonValue type = "text"`
 
         - `String text`
 
@@ -953,7 +953,6 @@ package com.anthropic.example;
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.sessions.events.BetaManagedAgentsSendSessionEvents;
-import com.anthropic.models.beta.sessions.events.BetaManagedAgentsTextBlock;
 import com.anthropic.models.beta.sessions.events.BetaManagedAgentsUserMessageEventParams;
 import com.anthropic.models.beta.sessions.events.EventSendParams;
 import java.util.List;
@@ -966,10 +965,7 @@ public final class Main {
 
         EventSendParams params = EventSendParams.builder()
             .sessionId("sesn_011CZkZAtmR3yMPDzynEDxu7")
-            .addUserMessageEvent(List.of(BetaManagedAgentsUserMessageEventParams.Content.ofText(BetaManagedAgentsTextBlock.builder()
-                .text("Where is my order #1234?")
-                .type(BetaManagedAgentsTextBlock.Type.TEXT)
-                .build())))
+            .addUserMessageEvent(List.of(BetaManagedAgentsUserMessageEventParams.Content.ofText("Where is my order #1234?")))
             .build();
         BetaManagedAgentsSendSessionEvents betaManagedAgentsSendSessionEvents = client.beta().sessions().events().send(params);
     }

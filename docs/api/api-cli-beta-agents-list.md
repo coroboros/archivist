@@ -880,8 +880,7 @@ List Agents
 ## Example
 
 ```bash
-ant beta:agents list \
-  --api-key my-anthropic-api-key
+ant beta:agents list
 ```
 
 ### Response (200)

@@ -1271,7 +1271,6 @@ Create Session
 
 ```bash
 ant beta:sessions create \
-  --api-key my-anthropic-api-key \
   --agent agent_011CZkYpogX7uDKUyvBTophP \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
 ```
