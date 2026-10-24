@@ -16,7 +16,7 @@ The [Admin API](../api/api-organization.md) lets you manage your organization's 
 
 The Admin API is unavailable for individual accounts. To collaborate with teammates and add members, set up your organization on the [Organization](https://platform.claude.com/settings/organization) page (`platform.claude.com/settings/organization`) in the Claude Console.
 
-Claude Enterprise (claude.ai) organizations call the Admin API with a scoped API key created in claude.ai. From this page, only the members and invites endpoints apply to them. They also get Enterprise-only endpoints: group and custom-role reads, and [spend limits](../manage-claude/manage-claude-spend-limits-api.md). The [Plugins API](../manage-claude/manage-claude-plugins-api.md), also Enterprise-only, is in beta. See [User management](../manage-claude/manage-claude-user-management.md).
+Claude Enterprise (claude.ai) organizations call the Admin API with a scoped API key created in claude.ai. From this page, only the members and invites endpoints apply to them. They also get Enterprise-only endpoints: group and custom-role reads, and [spend limits](../manage-claude/manage-claude-spend-limits-api.md). The [Plugins API](../manage-claude/manage-claude-plugins-api.md), also Enterprise-only, is in beta. So is the [Claude Tag API](../manage-claude/manage-claude-claude-tag-api.md). See [User management](../manage-claude/manage-claude-user-management.md).
 
 On [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), only these Admin API endpoints are available:
 

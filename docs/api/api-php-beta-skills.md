@@ -13,7 +13,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/skills
 
 ## Create Skill
 
-`$client->beta->skills->create(list<string> files, ?string displayName, ?list<AnthropicBeta> betas, ?string workspaceID): BetaSkill`
+`$client->beta->skills->create(list<FileParam | string> files, ?string displayName, ?list<AnthropicBeta> betas, ?string workspaceID): BetaSkill`
 
 **POST** `/v1/skills`
 
@@ -21,7 +21,7 @@ Create Skill
 
 ### Parameters
 
-- `files: list<string>`
+- `files: list<FileParam | string>`
 
   Files to upload for the skill.
 
@@ -523,7 +523,7 @@ var_dump($betaDeletedSkill);
 
 ### Create Skill Version
 
-`$client->beta->skills->versions->create(string skillID, list<string> files, ?list<AnthropicBeta> betas, ?string workspaceID): SkillVersion`
+`$client->beta->skills->versions->create(string skillID, list<FileParam | string> files, ?list<AnthropicBeta> betas, ?string workspaceID): SkillVersion`
 
 **POST** `/v1/skills/{skill_id}/versions`
 
@@ -537,7 +537,7 @@ Create Skill Version
 
   The format and length of IDs may change over time.
 
-- `files: list<string>`
+- `files: list<FileParam | string>`
 
   Files to upload for the skill.
 

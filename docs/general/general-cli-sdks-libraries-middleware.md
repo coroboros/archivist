@@ -136,22 +136,26 @@ Each middleware is a function that receives the outgoing request and the next ha
       .build();
   ```
 
-  ```php PHP
-  $loggingMiddleware = function (RequestInterface $request, callable $next): ResponseInterface {
-      // Before the request
-      error_log("-> {$request->getMethod()} {$request->getUri()}");
+  <CodeGroupItem>
+    ```php PHP
+    $loggingMiddleware = function (RequestInterface $request, callable $next): ResponseInterface {
+        // Before the request
+        error_log("-> {$request->getMethod()} {$request->getUri()}");
 
-      // Forward the request to the rest of the chain
-      $response = $next($request);
+        // Forward the request to the rest of the chain
+        $response = $next($request);
 
-      // After the request
-      error_log("<- {$response->getStatusCode()}");
+        // After the request
+        error_log("<- {$response->getStatusCode()}");
 
-      return $response;
-  };
+        return $response;
+    };
 
-  $client = new Client(requestOptions: ['middleware' => [$loggingMiddleware]]);
-  ```
+    $client = new Client(requestOptions: ['middleware' => [$loggingMiddleware]]);
+    ```
+
+    For middleware classes, the request options argument, and how middleware interacts with retries, errors, and request signing, see [Middleware in the PHP SDK](./general-cli-sdks-libraries-sdks-php.md#middleware).
+  </CodeGroupItem>
 
   ```ruby Ruby
   logging_middleware = lambda do |request, call_next|

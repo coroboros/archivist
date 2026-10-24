@@ -16,7 +16,7 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-Use the session viewer in the Claude Console to inspect what an agent did in a session, without writing any code. Use the session's `usage` (csharp, go: `Usage`) totals to see what that work consumed.
+Use the session viewer in the Claude Console to inspect what an agent did in a session, without writing any code. Use the session's `usage` (csharp, go: `Usage`) totals to see what that work consumed. To see a session's turns, model requests, and tool uses in your observability platform, set up [OpenTelemetry tracing](../manage-claude/manage-claude-opentelemetry.md).
 
 ## Inspect a session in the Console
 

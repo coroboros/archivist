@@ -21,7 +21,7 @@ Create Skill
 
 - `SkillCreateParams parameters`
 
-  - `required IReadOnlyList<string> files`
+  - `required IReadOnlyList<BinaryContent> files`
 
     Files to upload for the skill.
 
