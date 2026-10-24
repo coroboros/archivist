@@ -1,5 +1,29 @@
 # Changelog
 
+## 🤖 v1.5.249 - 24/10/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-create.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-self-hosted-environments-configuration.md`
+- Modified: `docs/code/code-self-hosted-environments-reference.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-troubleshoot.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-ultrareview.md`
+- Modified: `docs/code/code-vs-code.md`
+
+
 ## 🤖 v1.5.248 - 24/10/2026
 
 File Changes:

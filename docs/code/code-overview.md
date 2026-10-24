@@ -1,6 +1,6 @@
 ---
-title: "Agent SDK overview"
-source: "https://code.claude.com/docs/en/agent-sdk/overview"
+title: "Overview"
+source: "https://code.claude.com/docs/en/overview"
 category: "code"
 generated: true
 ---
@@ -8,91 +8,243 @@ generated: true
 > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# Agent SDK overview
+# Overview
 
-> Build production AI agents with Claude Code as a library
+> Claude Code is an agentic coding tool that reads your codebase, edits files, runs commands, and integrates with your development tools. Available in your terminal, IDE, desktop app, and browser.
 
-An agent is an application that completes a task by planning its own steps and calling tools that read files, run commands, or edit code. The Agent SDK gives you the same tools, [agent loop](https://code.claude.com/docs/en/agent-sdk/agent-loop.md), and context management that power Claude Code, programmable in Python and TypeScript.
-
-## Compare the Agent SDK to other Claude tools
-
-The Agent SDK, the CLI, the Client SDK, and Managed Agents differ in who runs the agent, what comes built in, and how you reach it. Find the row that matches how you want to build and run yours.
-
-| You want to | Use | What you get |
-| - | - | - |
-| Embed Claude Code's agent in your own Python or TypeScript application, in a process you operate | **Agent SDK** | A library that runs the Claude Code binary, with Claude Code's [capabilities](#capabilities), such as built-in tools, permissions, sessions, and hooks. |
-| Do interactive development or run one-off tasks from a terminal | [**Claude Code CLI**](https://code.claude.com/docs/en/overview.md) | The terminal interface, built for daily interactive use. |
-| Call the Claude API directly from your own code | [**Client SDK**](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) | Direct access to the Claude API from any of the client SDK languages. You write the tool loop yourself, or let the client SDK's beta [tool runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner) drive it. |
-| Have Anthropic host the agent, configured through the Claude API | [**Managed Agents**](https://platform.claude.com/docs/en/managed-agents/overview) | A hosted agent harness that runs the agent loop, with sessions in an Anthropic-managed cloud sandbox or a [self-hosted sandbox](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes) on your own infrastructure. Use it from the [SDK for your language](https://platform.claude.com/docs/en/managed-agents/quickstart#install-the-sdk), the `ant` CLI, or the REST API. |
-
-To drive the same agent loop from a language other than Python or TypeScript, [run the CLI as a subprocess](https://code.claude.com/docs/en/headless.md) with the `-p` flag and `--output-format json`.
-
-## Capabilities
-
-These Claude Code capabilities are available in the SDK:
-
-| Capability | What it does | Learn more |
-| - | - | - |
-| Built-in tools | Read, write, edit files, run commands, and search the web | [Tools reference](https://code.claude.com/docs/en/tools-reference.md) |
-| Hooks | Run custom code at key points in the agent lifecycle | [Hooks](https://code.claude.com/docs/en/agent-sdk/hooks.md) |
-| Subagents | Spawn specialized agents for focused subtasks | [Subagents](https://code.claude.com/docs/en/agent-sdk/subagents.md) |
-| MCP | Connect external tools and data sources via the Model Context Protocol | [MCP](https://code.claude.com/docs/en/agent-sdk/mcp.md) |
-| Permissions | Control which tools run automatically, which need approval | [Permissions](https://code.claude.com/docs/en/agent-sdk/permissions.md) |
-| Sessions | Maintain context across exchanges, resume or fork later | [Sessions](https://code.claude.com/docs/en/agent-sdk/sessions.md) |
-| Skills, commands, and memory | Load automatically from your project's `.claude/` and from `~/.claude/`, same as Claude Code | [Skills](https://code.claude.com/docs/en/agent-sdk/skills.md), [Commands](https://code.claude.com/docs/en/agent-sdk/skills.md#commands-in-agent-sdk-sessions), [Memory](https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts.md), [Configuration loading](https://code.claude.com/docs/en/agent-sdk/claude-code-features.md) |
-| Plugins | Package skills, agents, hooks, and MCP servers, and load them by local path | [Plugins](https://code.claude.com/docs/en/agent-sdk/plugins.md) |
+Claude Code is an AI-powered coding assistant that helps you build features, fix bugs, and automate development tasks. It understands your entire codebase and can work across multiple files and tools to get things done.
 
 ## Get started
 
-Follow the [Quickstart](https://code.claude.com/docs/en/agent-sdk/quickstart.md) to install the SDK, set your API key, and build your first agent, one that finds and fixes bugs in existing code.
+Claude Code runs on several surfaces: the terminal, IDE extensions, a desktop app, and the web. Choose one from the tabs below to get started. Most surfaces require a [Claude subscription](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=overview_pricing) or [Anthropic Console](https://platform.claude.com/) account. The Terminal CLI, VS Code, and JetBrains also support [third-party providers](https://code.claude.com/docs/en/third-party-integrations.md).
+
+**Terminal**
+
+The full-featured CLI for working with Claude Code directly in your terminal. Edit files, run commands, and manage your entire project from the command line.
+
+To install Claude Code, open a terminal and run the command for your system. If you haven't used a terminal before, the [terminal guide](https://code.claude.com/docs/en/terminal-guide) shows how to open one and paste the command.
+
+**Native Install (Recommended)**
+
+**macOS, Linux, WSL:**
+
+```bash theme={null}
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+On Windows, your prompt shows `PS C:\` when you're in PowerShell and `C:\` without the `PS` when you're in CMD.
+
+**Windows PowerShell:**
+
+```powershell theme={null}
+irm https://claude.ai/install.ps1 | iex
+```
+
+**Windows CMD:**
+
+```batch theme={null}
+curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
+```
+
+The install command shows no progress while it downloads Claude Code. When the installer finishes, open a new terminal window and run `claude --version`. A working installation prints a version number. If your shell says `claude` isn't found or isn't recognized, the install directory isn't on your PATH yet: see [Fix your PATH](https://code.claude.com/docs/en/troubleshoot-install.md#command-not-found-claude-after-installation).
+
+If you see `The token '&&' is not a valid statement separator`, you're in PowerShell, not CMD. If you see `'irm' is not recognized as an internal or external command`, you're in CMD, not PowerShell.
+
+If the install command fails with `syntax error near unexpected token '<'`, a `403`, or any other error, see [Troubleshoot installation](https://code.claude.com/docs/en/troubleshoot-install.md#find-your-error) to match the error to a fix and for alternative install methods.
+
+[Git for Windows](https://git-scm.com/downloads/win) is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.
 
 > [!NOTE]
 >
-> Unless previously approved, Anthropic does not allow third party developers to offer claude.ai login or rate limits for their products, including agents built on the Claude Agent SDK. Use the API key authentication methods described in the [Quickstart](https://code.claude.com/docs/en/agent-sdk/quickstart.md) instead.
+> Native installations automatically update in the background to keep you on the latest version.
 
-## Changelog
+**Homebrew**
 
-View the full changelog for SDK updates, bug fixes, and new features:
+```bash theme={null}
+brew install --cask claude-code
+```
 
-* **TypeScript SDK**: [view CHANGELOG.md](https://github.com/anthropics/claude-agent-sdk-typescript/blob/main/CHANGELOG.md)
-* **Python SDK**: [view CHANGELOG.md](https://github.com/anthropics/claude-agent-sdk-python/blob/main/CHANGELOG.md)
+Homebrew offers two casks. `claude-code` tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. `claude-code@latest` tracks the latest channel and receives new versions as soon as they ship.
 
-## Report bugs
+> [!NOTE]
+>
+> Homebrew installations do not auto-update. Run `brew upgrade claude-code` or `brew upgrade claude-code@latest`, depending on which cask you installed, to get the latest features and security fixes.
 
-If you encounter bugs or issues with the Agent SDK:
+**WinGet**
 
-* **TypeScript SDK**: [report issues on GitHub](https://github.com/anthropics/claude-agent-sdk-typescript/issues)
-* **Python SDK**: [report issues on GitHub](https://github.com/anthropics/claude-agent-sdk-python/issues)
+```powershell theme={null}
+winget install Anthropic.ClaudeCode
+```
 
-## Branding guidelines
+> [!NOTE]
+>
+> WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCode` periodically to get the latest features and security fixes.
 
-For partners integrating the Claude Agent SDK, use of Claude branding is optional. When referencing Claude in your product:
+You can also install with [apt, dnf, or apk](https://code.claude.com/docs/en/setup.md#install-with-linux-package-managers) on Debian, Fedora, RHEL, and Alpine.
 
-**Allowed:**
+Then start Claude Code in any project. Replace `your-project` with the path to a project directory on your machine:
 
-* "Claude Agent", preferred for dropdown menus
-* "Claude", when within a menu already labeled "Agents"
-* "\{YourAgentName} Powered by Claude", if you have an existing agent name
+```bash theme={null}
+cd your-project
+claude
+```
 
-**Not permitted:**
+Claude Code prompts you to log in on first use. If you've set the `ANTHROPIC_API_KEY` environment variable and you approve the key when Claude Code asks whether to use it, Claude Code skips the login prompt. [Continue with the Quickstart →](https://code.claude.com/docs/en/quickstart.md)
 
-* "Claude Code" or "Claude Code Agent"
-* Claude Code-branded ASCII art or visual elements that mimic Claude Code
+> [!TIP]
+>
+> See [advanced setup](https://code.claude.com/docs/en/setup.md) for installation options, manual updates, or uninstallation instructions. Visit [installation troubleshooting](https://code.claude.com/docs/en/troubleshoot-install.md) if you hit issues.
 
-Your product should maintain its own branding and not appear to be Claude Code or any Anthropic product. For questions about branding compliance, contact the Anthropic [sales team](https://www.anthropic.com/contact-sales).
+**VS Code**
 
-## License and terms
+The VS Code extension provides inline diffs, @-mentions, plan review, and conversation history directly in your editor.
 
-Use of the Claude Agent SDK is governed by [Anthropic's Commercial Terms of Service](https://www.anthropic.com/legal/commercial-terms), including when you use it to power products and services that you make available to your own customers and end users, except to the extent a specific component or dependency is covered by a different license as indicated in that component's LICENSE file.
+* [Install for VS Code](vscode:extension/anthropic.claude-code)
+* [Install for Cursor](cursor:extension/anthropic.claude-code)
+
+Or search for "Claude Code" in the Extensions view (`Cmd+Shift+X` on Mac, `Ctrl+Shift+X` on Windows/Linux). After installing, open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`), type "Claude Code", and select **Open in New Tab**.
+
+[Get started with VS Code →](https://code.claude.com/docs/en/vs-code.md#get-started)
+
+**Desktop app**
+
+A standalone app for running Claude Code outside your IDE or terminal. Review diffs visually, run multiple sessions side by side, schedule recurring tasks, and start cloud sessions.
+
+Download and install:
+
+* [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs) (Intel and Apple Silicon)
+* [Windows](https://claude.ai/api/desktop/win32/x64/setup/latest/redirect?utm_source=claude_code\&utm_medium=docs) (x64)
+* [Windows ARM64](https://claude.ai/api/desktop/win32/arm64/setup/latest/redirect?utm_source=claude_code\&utm_medium=docs)
+* On Ubuntu or Debian, where the app is in beta, install it with apt by following the [Linux install instructions](https://code.claude.com/docs/en/desktop-linux.md)
+
+After installing, launch Claude, sign in, and click the **Code** tab to start coding. The app includes Claude Code, so you don't need to install the CLI separately. A [paid subscription](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=overview_desktop_pricing) is required.
+
+[Learn more about the desktop app →](https://code.claude.com/docs/en/desktop-quickstart.md)
+
+**Web**
+
+Run Claude Code in your browser with no local setup. Kick off long-running tasks and check back when they're done, work on repos you don't have locally, or run multiple tasks in parallel. For a longer body of work, create a [project](https://code.claude.com/docs/en/claude-projects.md) and let Claude coordinate the parallel sessions for you. Available on desktop browsers and [the Claude app for iOS and Android](https://code.claude.com/docs/en/mobile.md).
+
+Start coding at [claude.ai/code](https://claude.ai/code).
+
+[Get started →](https://code.claude.com/docs/en/web-quickstart.md)
+
+**JetBrains**
+
+A plugin for IntelliJ IDEA, PyCharm, WebStorm, and other JetBrains IDEs with interactive diff viewing and selection context sharing.
+
+Install the [Claude Code plugin](https://plugins.jetbrains.com/plugin/27310-claude-code-beta-) from the JetBrains Marketplace and restart your IDE. The plugin requires the Claude Code CLI, installed separately; see the [JetBrains setup steps](https://code.claude.com/docs/en/jetbrains.md#installation).
+
+[Get started with JetBrains →](https://code.claude.com/docs/en/jetbrains.md)
+
+## What you can do
+
+Here are some of the ways you can use Claude Code:
+
+> **Automate the work you keep putting off**
+>
+> Claude Code handles the tedious tasks that eat up your day: writing tests for untested code, fixing lint errors across a project, resolving merge conflicts, updating dependencies, and writing release notes.
+>
+> ```bash theme={null}
+> claude "write tests for the auth module, run them, and fix any failures"
+> ```
+
+> **Build features and fix bugs**
+>
+> Describe what you want in plain language. Claude Code plans the approach, writes the code across multiple files, and verifies it works.
+>
+> For bugs, paste an error message or describe the symptom. Claude Code traces the issue through your codebase, identifies the root cause, and implements a fix. See [common workflows](https://code.claude.com/docs/en/common-workflows.md) for more examples.
+
+> **Create commits and pull requests**
+>
+> Claude Code works directly with git. It stages changes, writes commit messages, creates branches, and opens pull requests.
+>
+> ```bash theme={null}
+> claude "commit my changes with a descriptive message"
+> ```
+>
+> In CI, you can automate code review and issue triage with [GitHub Actions](https://code.claude.com/docs/en/github-actions.md) or [GitLab CI/CD](https://code.claude.com/docs/en/gitlab-ci-cd.md).
+
+> **Connect your tools with MCP**
+>
+> The [Model Context Protocol (MCP)](https://code.claude.com/docs/en/mcp.md) is an open standard for connecting AI tools to external data sources. With MCP, Claude Code can read your design docs in Google Drive, update tickets in Jira, pull data from Slack, or use your own custom tooling. The [MCP quickstart](https://code.claude.com/docs/en/mcp-quickstart.md) connects your first server end to end.
+
+> **Customize with instructions, skills, and hooks**
+>
+> [`CLAUDE.md`](https://code.claude.com/docs/en/memory) is a markdown file you add to your project root that Claude Code reads at the start of every session. Use it to set coding standards, architecture decisions, preferred libraries, and review checklists. If your repository already has an `AGENTS.md` for other coding agents, Claude Code [can read that](https://code.claude.com/docs/en/memory.md#agents-md) in place of a `CLAUDE.md`. Claude also builds [auto memory](https://code.claude.com/docs/en/memory.md#auto-memory) as it works, saving learnings across sessions without you writing anything.
+>
+> Create [skills](https://code.claude.com/docs/en/skills.md) to package repeatable workflows your team can share, like `/review-pr` or `/deploy-staging`.
+>
+> [Hooks](https://code.claude.com/docs/en/hooks.md) let you run shell commands before or after Claude Code actions, like auto-formatting after every file edit or running lint before a commit.
+
+> **Run agents in parallel and build custom agents**
+>
+> Spawn [multiple Claude Code agents](https://code.claude.com/docs/en/sub-agents.md) that work on different parts of a task simultaneously. A lead agent coordinates the work, assigns subtasks, and merges results.
+>
+> To run several full sessions in parallel and watch them from one screen, use [background agents](https://code.claude.com/docs/en/agent-view.md). For fully custom workflows, the [Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview.md) lets you build your own agents powered by Claude Code's tools and capabilities, with full control over orchestration, tool access, and permissions.
+
+> **Pipe, script, and automate with the CLI**
+>
+> Claude Code is composable and follows the Unix philosophy. Pipe logs into it, run it in CI, or chain it with other tools:
+>
+> ```bash theme={null}
+> # Analyze recent log output
+> tail -200 app.log | claude -p "Slack me if you see any anomalies"
+>
+> # Automate translations in CI
+> claude -p "translate new strings into French and raise a PR for review"
+>
+> # Bulk operations across files
+> git diff main --name-only | claude -p "review these changed files for security issues"
+> ```
+>
+> See the [CLI reference](https://code.claude.com/docs/en/cli-reference.md) for the full set of commands and flags.
+
+> **Schedule recurring tasks**
+>
+> Run Claude on a schedule to automate work that repeats: morning PR reviews, overnight CI failure analysis, weekly dependency audits, or syncing docs after PRs merge.
+>
+> * [Cloud scheduled tasks](https://code.claude.com/docs/en/routines.md), formerly routines, run in the cloud, so they keep running even when your computer is off. They can also trigger on API calls or GitHub events. Create them from the web, the Desktop app, or by running `/schedule` in the CLI.
+> * [Desktop scheduled tasks](https://code.claude.com/docs/en/desktop-scheduled-tasks.md) run on your machine, with direct access to your local files and tools
+> * [`/loop`](https://code.claude.com/docs/en/scheduled-tasks) repeats a prompt within a CLI session for quick polling
+
+> **Work from anywhere**
+>
+> Sessions aren't tied to a single surface. Move work between them as your context changes:
+>
+> * Step away from your desk and keep working from your phone or any browser with [Remote Control](https://code.claude.com/docs/en/remote-control.md)
+> * Message [Dispatch](https://code.claude.com/docs/en/desktop.md#sessions-from-dispatch) a task from your phone and open the Desktop session it creates
+> * Start a long-running task on the [web](https://code.claude.com/docs/en/claude-code-on-the-web.md) or the [Claude mobile app](https://code.claude.com/docs/en/mobile.md), then pull it into your terminal with `claude --teleport`. Teleport requires a claude.ai subscription.
+> * Run `/desktop` to continue your current terminal session in the [Desktop app](https://code.claude.com/docs/en/desktop.md), where you can review diffs visually. The `/desktop` handoff requires a claude.ai subscription. Available on macOS and x64 Windows.
+> * Route tasks from team chat: mention `@Claude` in [Slack](https://code.claude.com/docs/en/slack.md) with a bug report and get a pull request back
+
+## Use Claude Code everywhere
+
+Each [surface](https://code.claude.com/docs/en/glossary.md#surface) connects to the same underlying Claude Code engine, so your repo's CLAUDE.md files, settings, and MCP servers work across all of them.
+
+Beyond the [Terminal](https://code.claude.com/docs/en/quickstart.md), [VS Code](https://code.claude.com/docs/en/vs-code.md), [JetBrains](https://code.claude.com/docs/en/jetbrains.md), [Desktop](https://code.claude.com/docs/en/desktop.md), and [Web](https://code.claude.com/docs/en/claude-code-on-the-web.md) surfaces above, Claude Code integrates with CI/CD, chat, and browser workflows:
+
+| What I want to do | Best option |
+| - | - |
+| Continue a local session from my phone or another device | [Remote Control](https://code.claude.com/docs/en/remote-control.md) |
+| Push events from Telegram, Discord, iMessage, or my own webhooks into a session | [Channels](https://code.claude.com/docs/en/channels.md) |
+| Start a task locally, continue on mobile | [`claude --cloud`](https://code.claude.com/docs/en/claude-code-on-the-web#from-terminal-to-cloud), then the [Claude mobile app](https://code.claude.com/docs/en/mobile.md) |
+| Run Claude on a recurring schedule | [Cloud scheduled tasks](https://code.claude.com/docs/en/routines.md) or [Desktop scheduled tasks](https://code.claude.com/docs/en/desktop-scheduled-tasks.md) |
+| Automate PR reviews and issue triage | [GitHub Actions](https://code.claude.com/docs/en/github-actions.md) or [GitLab CI/CD](https://code.claude.com/docs/en/gitlab-ci-cd.md) |
+| Get automatic code review on every PR | [GitHub Code Review](https://code.claude.com/docs/en/code-review.md) |
+| Route bug reports from Slack to pull requests | [Slack](https://code.claude.com/docs/en/slack.md) |
+| Debug live web applications | [Chrome](https://code.claude.com/docs/en/chrome.md) |
+| Build custom agents for your own workflows | [Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview.md) |
 
 ## Next steps
 
-These resources cover deeper technical detail and example projects for building with the Agent SDK.
+Once you've installed Claude Code, these guides help you go deeper.
 
-* [Quickstart](https://code.claude.com/docs/en/agent-sdk/quickstart.md): build your first agent that finds and fixes bugs
-* [Migration guide](https://code.claude.com/docs/en/agent-sdk/migration-guide.md): migrate from the Claude Code SDK packages to the Agent SDK
-* [Agent loop](https://code.claude.com/docs/en/agent-sdk/agent-loop.md): how Claude plans, calls tools, and decides when a task is done
-* [Example agents](https://github.com/anthropics/claude-agent-sdk-demos): demo apps for local development
-* [TypeScript SDK](https://code.claude.com/docs/en/agent-sdk/typescript.md): full TypeScript API reference and examples
-* [Python SDK](https://code.claude.com/docs/en/agent-sdk/python.md): full Python API reference and examples
-* [Agent harness design](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code): how the Claude Code team uses dynamic workflows to orchestrate many subagents at once
+* [Quickstart](https://code.claude.com/docs/en/quickstart.md): walk through your first real task, from exploring a codebase to committing a fix
+* [Store instructions and memories](https://code.claude.com/docs/en/memory.md): give Claude persistent instructions with CLAUDE.md files and auto memory
+* [Common workflows](https://code.claude.com/docs/en/common-workflows.md) and [best practices](https://code.claude.com/docs/en/best-practices.md): patterns for getting the most out of Claude Code
+* [Claude Academy](https://academy.claude.com/): free self-paced courses, including [Claude Code 101](https://academy.claude.com/courses/claude-code-101) and [Claude Code in Action](https://academy.claude.com/courses/claude-code-in-action)
+* [A harness for every task](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code): how the Claude Code team uses [dynamic workflows](https://code.claude.com/docs/en/workflows.md) to orchestrate many subagents at once
+* [Settings](https://code.claude.com/docs/en/settings.md): customize Claude Code for your workflow
+* [Troubleshooting](https://code.claude.com/docs/en/troubleshooting.md): solutions for common issues
+* [code.claude.com](https://code.claude.com/): demos, pricing, and product details
